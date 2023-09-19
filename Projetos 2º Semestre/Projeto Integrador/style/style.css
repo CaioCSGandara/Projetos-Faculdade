@@ -15,12 +15,15 @@ p{
     left: 10px;
 }
 
+#home{
+    height: 90%;
+}
+
 #cadastro{
     border: 1px solid black;
-    margin: 10%;
-    height: auto;
     width: 500px;
     padding: 10px;
+    height: 90%;
 }
 
 
@@ -30,15 +33,15 @@ p{
     justify-content: center;
     align-items: center;
     width: auto;
-    height: 1000px;
+    height: 1700px;
 }
 
 #botao{
-    height: 250px;
-    position: absolute;
-    top: 200px;
-    left: 1450px;
+    height: 30px;
+    width: 95px;
+    margin-left: 91.7%;
 }
+
 
 #cadastros{
     text-align: center;
@@ -55,6 +58,7 @@ img{
     height: auto;
 }
 
+
 .titulo{
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
@@ -67,6 +71,7 @@ img{
     padding: 5px 20px;
     color: black;
     background-color: green;
+    width: 100%;
 }
 
 .adicionar:hover{
