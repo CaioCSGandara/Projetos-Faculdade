@@ -1,0 +1,2 @@
+- dar npm install na pasta AIRPUC-BACKEND
+- criar arquivo .env com suas infos de login
