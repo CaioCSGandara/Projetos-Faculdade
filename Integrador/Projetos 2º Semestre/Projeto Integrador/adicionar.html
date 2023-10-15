@@ -1,140 +1,191 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Adicionar Cadastro</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="style/style.css">
-    </head>
-    <body>
-        <div id="principal">
-            <div class="navbar">
-                <a href="index.html">Home</a>
-            </div>
-            <div id="cadastro">
-                <p class="titulo">Cadastro Aeroporto Origem</p>
-                <p>Nome: </p>
-                <form action="">
-                    <input type="text">
-                </form>
-                <p>Cidade: </p>
-                <form action="">
-                    <input type="text">
-                </form>
-                <p>Estado: </p>
-                <form action="">
-                    <select id="estado" name="estado">
-                        <option value="AC">AC</option>
-                        <option value="AL">AL</option>
-                        <option value="AP">AP</option>
-                        <option value="AM">AM</option>
-                        <option value="BA">BA</option>
-                        <option value="CE">CE</option>
-                        <option value="DF">DF</option>
-                        <option value="ES">ES</option>
-                        <option value="GO">GO</option>
-                        <option value="MA">MA</option>
-                        <option value="MT">MT</option>
-                        <option value="MS">MS</option>
-                        <option value="MG">MG</option>
-                        <option value="PA">PA</option>
-                        <option value="PB">PB</option>
-                        <option value="PR">PR</option>
-                        <option value="PE">PE</option>
-                        <option value="PI">PI</option>
-                        <option value="RJ">RJ</option>
-                        <option value="RN">RN</option>
-                        <option value="RS">RS</option>
-                        <option value="RO">RO</option>
-                        <option value="RR">RR</option>
-                        <option value="SC">SC</option>
-                        <option value="SP">SP</option>
-                        <option value="SE">SE</option>
-                        <option value="TO">TO</option>
-                    </select>
-                <hr>
-                <p class="titulo">Cadastro Aeroporto Destino</p>
-                <p>Nome: </p>
-                <form action="">
-                    <input type="text">
-                </form>
-                <p>Cidade: </p>
-                <form action="">
-                    <input type="text">
-                </form>
-                <p>Estado: </p>
-                <form action="">
-                    <select id="estado" name="estado">
-                        <option value="AC">AC</option>
-                        <option value="AL">AL</option>
-                        <option value="AP">AP</option>
-                        <option value="AM">AM</option>
-                        <option value="BA">BA</option>
-                        <option value="CE">CE</option>
-                        <option value="DF">DF</option>
-                        <option value="ES">ES</option>
-                        <option value="GO">GO</option>
-                        <option value="MA">MA</option>
-                        <option value="MT">MT</option>
-                        <option value="MS">MS</option>
-                        <option value="MG">MG</option>
-                        <option value="PA">PA</option>
-                        <option value="PB">PB</option>
-                        <option value="PR">PR</option>
-                        <option value="PE">PE</option>
-                        <option value="PI">PI</option>
-                        <option value="RJ">RJ</option>
-                        <option value="RN">RN</option>
-                        <option value="RS">RS</option>
-                        <option value="RO">RO</option>
-                        <option value="RR">RR</option>
-                        <option value="SC">SC</option>
-                        <option value="SP">SP</option>
-                        <option value="SE">SE</option>
-                        <option value="TO">TO</option>
-                    </select>
-                <hr>
-                <p class="titulo">Cadastro Aeronave</p>
-                <p>Modelo: </p>
-                <form action="">
-                    <input type="text">
-                </form>
-                <p>Numero de Identificação: </p>
-                <form action="">
-                    <input type="number">
-                </form>
-                <p>Fabricante: </p>
-                <form action="">
-                    <input type="text">
-                </form>
-                <p>Ano de Fabricação: </p>
-                <form action="">
-                    <input type="number">
-                </form>
-                <p>Quantidade de Assentos: </p>
-                <form action="">
-                    <input type="number">
-                </form>
-                <hr>
-                <p class="titulo">Informações Voo</p>
-                <p>Data: </p>
-                <form action="">
-                    <input type="date">
-                </form>
-                <p>Horário de Partida: </p>
-                <form action="">
-                    <input type="time">
-                </form>
-                <p>Horário de Chegada: </p>
-                <form action="">
-                    <input type="time">
-                </form>
-                <p>Valor: </p>
-                <form action="">
-                    <input type="number">
-                </form>
-                <br>
-                <input class="enviar" type="submit">
-            </div>
-        </div>
-    </body>
+  <head>
+    <title>Aeronaves - Cadastrar</title>
+    <script>
+
+      function anoValido(){
+        let resultado = false;
+        var strAno = document.getElementById("anoFab").value;
+        const ano = parseInt(strAno);
+        console.log("Ano aeronave: " + ano.toString());
+        if (ano >= 1990 && ano <= 2026){
+          resultado = true;
+        }
+        return resultado; 
+      }
+
+      function totalAssentosValido(){
+        let resultado = false;
+        const strAssentos = document.getElementById("totalAssentos").value;
+        const assentos = parseInt(strAssentos);
+        if (assentos > 0){
+          resultado = true;
+        }
+        return resultado; 
+      }
+
+      function selecionouFabricante(){
+        let resultado = false; 
+        var listaFabricantes = document.getElementById("comboFabricantes");
+        var valorSelecionado = listaFabricantes.value;
+        if (valorSelecionado !== "0"){
+          resultado = true;
+        }
+        return resultado;
+      }
+
+      function preencheuModelo(){
+        let resultado = false;
+        const modeloInformado = document.getElementById("modelo").value;
+        if(modeloInformado.length > 0){
+          resultado = true;
+        }
+        return resultado;
+      }
+
+      function preencheuRegistro(){
+        let resultado = false;
+        const registroReferencia = document.getElementById("referencia").value;
+        if(registroReferencia.length > 0){
+          resultado = true;
+        }
+        return resultado;
+      }
+
+      // Função que puxa o método HTTP PUT do backend 
+      function fetchInserir(body) {
+        const requestOptions = {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        };
+
+        return fetch('http://localhost:3000/inserirAeronave', requestOptions)
+        .then(response => response.json())
+      }
+
+      function inserirAeronave(){
+
+        if(!selecionouFabricante()){
+          showStatusMessage("Selecione o fabricante...", true);  
+          return;
+        }
+
+        if(!preencheuModelo()){
+          showStatusMessage("Preencha o modelo...", true);
+          return;
+        }
+
+        if(!preencheuRegistro()){
+          showStatusMessage("Preencha o registro da aeronave...", true);
+          return;
+        }
+
+        if(!anoValido()){
+          showStatusMessage("Ano deve ser de 1990 até 2026...", true);
+          return;
+        }
+
+        if(!totalAssentosValido()){
+          showStatusMessage("Preencha corretamente o total de assentos.", true);
+          return;
+        }
+
+        // Corrigido para obter o valor selecionado do combobox
+        const fabricante = document.getElementById("comboFabricantes").options[document.getElementById("comboFabricantes").selectedIndex].value;
+        const modelo = document.getElementById("modelo").value;
+        const anoFab = document.getElementById("anoFab").value;
+        const referencia = document.getElementById("referencia").value;
+        const totalAssentos = document.getElementById("totalAssentos").value;
+
+        fetchInserir({
+            fabricante: fabricante, 
+            modelo: modelo, 
+            totalAssentos: totalAssentos,
+            anoFabricacao: anoFab,
+            referencia: referencia 
+        })
+        .then(customResponse => {
+          if(customResponse.status === "SUCCESS"){
+            showStatusMessage("Aeronave cadastrada... ", false);
+          } else {
+            showStatusMessage("Erro ao cadastrar aeronave...: " + customResponse.message, true);
+            console.log(customResponse.message);
+          }
+        })
+        .catch((e)=>{
+          showStatusMessage("Erro técnico ao cadastrar... Contate o suporte.", true);
+          console.log("Falha grave ao cadastrar." + e)
+        });
+      }
+
+      function showStatusMessage(msg, error){
+        var pStatus = document.getElementById("status");
+        if (error === true){
+          pStatus.className = "statusError";
+        } else {
+          pStatus.className = "statusSuccess";
+        }
+        pStatus.textContent = msg;
+      }
+
+    </script>
+    <style>
+      .statusError {
+         color: red;
+      }
+      .statusSuccess {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Nova Aeronave</h1>
+    <p>
+      Preencha todos os campos para cadastrar uma aeronave.
+    </p>
+    <form>
+      <p>
+        <label for="comboFabricantes">Fabricante da aeronave:</label><br/>
+        <select name="comboFabricantes" id="comboFabricantes">
+          <option value="0" selected>Selecione o fabricante</option>
+          <option value="Airbus">Airbus</option>
+          <option value="Boeing">Boeing</option>
+          <option value="Embraer">Embraer</option>
+        </select>
+      </p>
+      <p>
+        <label for="modelo">Modelo da aeronave:</label><br/>
+        <input type="text" id="modelo" name="modelo"/>
+      </p>
+      <p>
+        <label for="referencia">Registro referência:</label><br/>
+        <input type="text" id="referencia" name="referencia"/>
+      </p>
+      <p>
+        <label for="anoFab">Ano de fabricação:</label><br/>
+        <input type="text" id="anoFab" name="anoFab" maxlength="4" size="5"/>
+      </p>
+      <p>
+        <label for="qtdeAssentos">
+          Total de assentos (passageiros):
+        </label><br/>
+        <input type="text" id="totalAssentos" name="totalAssentos" maxlength="4" size="5"/>
+      </p>
+      <p>
+        <button 
+          type="button" 
+          onclick="inserirAeronave();"
+          id="btnCadastrar"
+          name="btnCadastrar">Cadastrar</button>
+        <button type="reset">Limpar</button>
+        <button 
+          type="button"
+          id="btnSair"
+          name="btnSair">Sair</button>
+      </p>
+      <p id="status" class="statusError"></p>
+    </form>
+  </body>
 </html>
