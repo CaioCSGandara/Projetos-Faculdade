@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Aeroportos - Cadastrar</title>
+    <script type="text/javascript" src="/TELAS HTML/TELAS HTML/scripts/cadastrarAeroporto.js"></script>
+    <style>
+      .statusError {
+         color: red;
+      }
+      .statusSuccess {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Novo Aeroporto</h1>
+    <p>
+      Preencha todos os campos para cadastrar um aeroporto.
+    </p>
+    <form>
+      <p>
+        <label for="nome">Nome do aeroporto:</label><br/>
+        <input type="text" id="nome" name="nome"/>
+      </p>
+      <p>
+        <label for="sigla">Sigla do aeroporto:</label><br/>
+        <input type="text" id="sigla" name="sigla"/>
+      </p>
+      <p>
+        <label for="cidade">Cidade do aeroporto:</label><br/>
+        <select name="cidades" id="cidade">
+          <script>
+            exibirCidades();
+          </script>
+        </select>
+      </p>
+      <p>
+        <button 
+          type="button" 
+          onclick="inserirAeroporto();"
+          id="btnCadastrar"
+          name="btnCadastrar">Cadastrar</button>
+        <button type="reset">Limpar</button>
+        <button 
+          type="button"
+          id="btnNext"
+          name="btnNext"><a href="/TELAS HTML/TELAS HTML/INSERT/CadastrarTrecho.html">Next</a></button>
+      </p>
+      <p id="status" class="statusError"></p>
+    </form>
+  </body>
+</html>

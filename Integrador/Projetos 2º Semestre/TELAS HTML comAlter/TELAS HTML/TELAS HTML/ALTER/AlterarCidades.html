@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Cidade</title>
+
+    <script>
+        function nomePreenchido() {
+            const nome = document.getElementById("nome").value.trim();
+            return nome.length > 0;
+        }
+
+        function paisPreenchido() {
+            const pais = document.getElementById("pais").value.trim();
+            return pais.length > 0;
+        }
+
+        function ufValida(){
+            let resultado = false; 
+            var listaEstados = document.getElementById("uf");
+            var valorSelecionado = listaEstados.value;
+            if (valorSelecionado !== "0"){
+              resultado = true;
+            }
+            return resultado;
+        }
+
+        function fetchAlterar(body) {
+            const requestOptions = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            };
+
+            return fetch('http://localhost:3000/alterarCidade', requestOptions)
+                .then(response => response.json());
+        }
+
+        function alterarCidade() {
+
+            if (!nomePreenchido()) {
+                showStatusMessage("Preencha o nome da cidade.", true);
+                return;
+            }
+
+            if (!paisPreenchido()) {
+                showStatusMessage("Preencha o país.", true);
+                return;
+            }
+
+            if (!ufValida()) {
+                showStatusMessage("Selecione um Estado.", true);
+                return;
+            }
+
+            const nome = document.getElementById("nome").value;
+            const uf = document.getElementById("uf").options[document.getElementById("uf").selectedIndex].value;
+            const pais = document.getElementById("pais").value;
+            const codigo = document.getElementById("codigo").value;
+
+            fetchAlterar({
+                nome: nome,
+                uf: uf,
+                pais: pais,
+                codigo: codigo
+            })
+            .then(customResponse => {
+                if (customResponse.status === "SUCCESS") {
+                    showStatusMessage("Cidade alterada com sucesso.", false);
+                } else {
+                    showStatusMessage("Erro ao alterar cidade: " + customResponse.message, true);
+                    console.log(customResponse.message);
+                }
+            })
+            .catch((e) => {
+                showStatusMessage("Erro técnico ao alterar... Contate o suporte.", true);
+                console.log("Falha grave ao cadastrar." + e);
+            });
+        }
+
+        function showStatusMessage(msg, error) {
+            var pStatus = document.getElementById("status");
+            if (error === true) {
+                pStatus.className = "statusError";
+            } else {
+                pStatus.className = "statusSuccess";
+            }
+            pStatus.textContent = msg;
+        }
+
+    </script>
+    <style>
+        .statusError {
+            color: red;
+        }
+
+        .statusSuccess {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Atualizar Cidade</h1>
+    <label for="codigo">Código da Cidade:
+    </label><br>
+    <input type="number" id="codigo" name="codigo" required> 
+    <p>
+        <label for="nome">Nome da cidade:</label><br/>
+        <input type="text" id="nome" name="nomeCidade"/>
+    </p>
+</form>
+<form>
+    <p>
+        <label for="uf">Estado:</label>
+        <select id="uf" name="estado">
+            <option value="0" selected>Selecione um estado</option>
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+            <option value="EX">Estrangeiro</option>
+        </select>
+    </p>
+</form>
+<form>
+    <p>
+        <label for="pais">País:</label>
+        <input type="text" id="pais" name="pais">
+    </p>
+    <p>
+        <button 
+          type="button" 
+          onclick="alterarCidade();"
+          id="btnAlterar"
+          name="btnAlterar">Alterar Cidade</button>
+        <button type="reset">Limpar</button>
+          <button 
+            type="button"
+            id="btnNext"
+            name="btnNext"><a href="/TELAS HTML/TELAS HTML/ALTER/AlterarTrecho.html">Next</a></button>
+      </p>
+      <p id="status" class="statusError"></p>
+</form>
+</body>
+</html>
