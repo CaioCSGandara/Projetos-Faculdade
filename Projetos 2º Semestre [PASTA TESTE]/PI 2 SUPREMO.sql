@@ -1,0 +1,24 @@
+
+select * from CIDADES;
+SELECT * FROM AERONAVES;
+SELECT * FROM AEROPORTOS;
+SELECT * FROM TRECHOS;
+SELECT * FROM VOOS;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

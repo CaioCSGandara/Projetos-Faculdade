@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voos - Cadastrar</title>
+    <script type="text/javascript" src="/TELAS HTML/TELAS HTML/scripts/cadastrarVoo.js"></script>
+    <style>
+        .statusError {
+            color: red;
+        }
+        .statusSuccess {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+<h1>Novo Voo</h1>
+<p>
+    Preencha todos os campos para cadastrar um voo.
+</p>
+<form>
+    <p>
+        <label for="codigo">Código do voo:</label><br/>
+        <input type="number" id="codigo" name="codigo"/>
+    </p>
+    <p>
+        <label for="dataVoo">Data:</label><br/>
+        <input type="date" id="dataVoo" name="dataVoo"/>
+    </p>
+    <p>
+        <label for="hrSaida">Hora de Saída:</label><br/>
+        <input type="text" id="hrSaida" name="hrSaida"/>
+    </p>
+    <p>
+        <label for="hrChegada">Hora de Chegada:</label><br/>
+        <input type="text" id="hrChegada" name="hrChegada"/>
+    </p>
+    <p>
+        <label for="valor">Valor:</label><br/>
+        <input type="text" id="valor" name="valor"/>
+    </p>
+    <p>
+        <label for="trecho">Trecho:</label><br/>
+        <select name="trechos" id="trecho">
+            <option value="0">Selecione o Trecho</option>
+            <script>
+                exibirTrechos();
+            </script>
+        </select>
+    </p>
+    <p>  
+        <button 
+            type="button" 
+            onclick="inserirVoo();"
+            id="btnCadastrar"
+            name="btnCadastrar">Cadastrar</button>
+        <button type="reset">Limpar</button>
+        <button 
+            type="button"
+            id="btnNext"
+            name="btnNext"><a href="/TELAS HTML/TELAS HTML/SELECT/TabelaInicial.html">Sair</a></button>
+    </p>
+    <p id="status" class="statusError"></p>
+</form>
+</body>
+</html>
