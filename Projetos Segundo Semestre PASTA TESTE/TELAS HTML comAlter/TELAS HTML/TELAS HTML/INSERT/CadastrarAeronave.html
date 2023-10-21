@@ -3,61 +3,68 @@
   <head>
     <title>Aeronaves - Cadastrar</title>
     <script type="text/javascript" src="../scripts/cadastrarAeronave.js"></script>
-    <style>
-      .statusError {
-         color: red;
-      }
-      .statusSuccess {
-        color: blue;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
   </head>
   <body>
-    <h1>Nova Aeronave</h1>
-    <p>
-      Preencha todos os campos para cadastrar uma aeronave.
-    </p>
-    <form>
-      <p>
-        <label for="comboFabricantes">Fabricante da aeronave:</label><br/>
-        <select name="comboFabricantes" id="comboFabricantes">
-          <option value="0" selected>Selecione o fabricante</option>
-          <option value="Airbus">Airbus</option>
-          <option value="Boeing">Boeing</option>
-          <option value="Embraer">Embraer</option>
-        </select>
+    <div class="titulo">
+      <h1>NOVA AERONAVE</h1>
+
+        <p class="subtitulo">Preencha todos os campos</p>
       </p>
-      <p>
-        <label for="modelo">Modelo da aeronave:</label><br/>
-        <input type="text" id="modelo" name="modelo"/>
-      </p>
-      <p>
-        <label for="referencia">Registro referência:</label><br/>
-        <input type="text" id="referencia" name="referencia"/>
-      </p>
-      <p>
-        <label for="anoFab">Ano de fabricação:</label><br/>
-        <input type="text" id="anoFab" name="anoFab" maxlength="4" size="5"/>
-      </p>
-      <p>
-        <label for="qtdeAssentos">
-          Total de assentos (passageiros):
-        </label><br/>
-        <input type="text" id="totalAssentos" name="totalAssentos" maxlength="4" size="5"/>
-      </p>
-      <p>
-        <button 
-          type="button" 
-          onclick="inserirAeronave();"
-          id="btnCadastrar"
-          name="btnCadastrar">Cadastrar</button>
-        <button type="reset">Limpar</button>
-        <button 
-          type="button"
-          id="btnNext"
-          name="btnNext"><a href="../INSERT/CadastrarCidades.html">Next</a></button>
-      </p>
-      <p id="status" class="statusError"></p>
-    </form>
+    </div>
+      <div class="formulario">
+        <form>
+          <p>
+            <label for="comboFabricantes">Fabricante da aeronave:</label><br/>
+            <select name="comboFabricantes" id="comboFabricantes" class="alteracao">
+              <option value="0" selected>Selecione o fabricante</option>
+              <option value="Airbus">Airbus</option>
+              <option value="Boeing">Boeing</option>
+              <option value="Embraer">Embraer</option>
+            </select>
+          </p>
+          <br>
+          <p>
+            <label for="modelo">Modelo da aeronave:</label><br/>
+            <input type="text" id="modelo" name="modelo" class="alteracao"/>
+          </p>
+          <br>
+          <p>
+            <label for="referencia">Registro referência:</label><br/>
+            <input type="text" id="referencia" name="referencia" class="alteracao"/>
+          </p>
+          <br>
+          <p>
+            <label for="anoFab">Ano de fabricação:</label><br/>
+            <input type="text" id="anoFab" name="anoFab" maxlength="4" size="5" class="alteracao"/>
+          </p>
+          <br>
+          <p>
+            <label for="qtdeAssentos">
+              Total de assentos (passageiros):
+            </label><br/>
+            <input type="text" id="totalAssentos" name="totalAssentos" maxlength="4" size="5" class="alteracao"/>
+          </p>
+          <br>
+          <p>
+            <button 
+              type="button"
+              class="botaoPrincipal"
+              onclick="inserirAeronave();"
+              id="btnCadastrar"
+              name="btnCadastrar">Cadastrar</button>
+            <button class="outrosBotoes" type="reset">Limpar</button>
+            <button 
+              type="button"
+              class="outrosBotoes"
+              id="btnNext"
+              name="btnNext"><a href="../INSERT/CadastrarCidades.html">Next</a></button>
+          </p>
+          <p id="status" class="statusError"></p>
+        </form>
+    </div>
+    <div class="footer">
+      <p class="copyright">©️ Copyright - AIR PUC 2023</p>
+    </div>
   </body>
 </html>

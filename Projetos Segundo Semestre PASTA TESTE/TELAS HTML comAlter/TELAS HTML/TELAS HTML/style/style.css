@@ -1,0 +1,80 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family:Arial, Helvetica, sans-serif;
+    color: white;
+    justify-content: center;
+    background-color: black;
+    text-align: center;
+}
+
+.titulo {
+    background-color: #a99941;
+    width: 20%;
+    padding: 10px 30px;
+    border-radius:50px 50px 0 0;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.formulario{
+    background-color: #212529;
+    width: 20%;
+    padding: 30px;
+    border-radius: 0 0 50px 50px;
+    margin: auto;
+    margin-bottom: 300px;
+}
+
+.alteracao {
+    margin-top: 10px;
+}
+
+label {
+    color: #b9b9b9;
+    
+}
+
+input, select{
+    color: white;
+    background-color: #ffffff;
+    border-radius: 50px;
+}
+
+h1 {
+    font-size: 30px;
+    color: #212529;
+}
+
+.botaoPrincipal {
+    font-weight: 600;
+    background-color: #a99941;
+    color: #212529;
+    font-size: 12px;
+    border-radius: 50px;
+    margin: 0px 5px;
+    padding: 5px 20px;
+}
+
+.outrosBotoes {
+    font-weight: 600;
+    background-color: #b9b9b9;
+    color: #212529;
+    font-size: 12px;
+    border-radius: 50px;
+    margin: 0px 5px;
+    padding: 5px 20px;
+}
+
+.subtitulo {
+    color: #212529;
+}
+
+.footer {
+    font-size: 12px;
+    display: flex;
+    padding-top: 7px;
+    justify-content: center;
+    background-color: #212529;
+    height: 50px;
+}
