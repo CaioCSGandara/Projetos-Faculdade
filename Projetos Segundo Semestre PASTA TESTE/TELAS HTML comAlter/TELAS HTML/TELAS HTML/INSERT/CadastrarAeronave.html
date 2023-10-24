@@ -5,66 +5,96 @@
     <script type="text/javascript" src="../scripts/cadastrarAeronave.js"></script>
     <link rel="stylesheet" type="text/css" href="../style/style.css">
   </head>
+  <header>
+    <div class="navMenu">
+      <h2 class="Logo">Logo</h2>
+      <li class="menuOption">
+          <a class="menuText" href="../SELECT/TabelaInicial.html">Painel Principal</a>
+      </li>
+      <li class="menuOption">
+        <a class="menuText" href="#">Cadastrar</a>
+        <ul class="dropdown">
+            <li class="dropOption"><a class="dropText" href="../INSERT/CadastrarCidades.html">Cadastrar Cidade</a></li>
+            <li class="dropOption"><a class="dropText" href="../INSERT/CadastrarAeroporto.html">Cadastrar Aeroporto</a></li>
+            <li class="dropOption"><a class="dropText" href="../INSERT/CadastrarAeronave.html">Cadastrar Aeronave</a></li>
+            <li class="dropOption"><a class="dropText" href="../INSERT/CadastrarTrecho.html">Cadastrar Trecho</a></li>
+            <li class="dropOption"><a class="dropText" href="../INSERT/CadastrarVoos.html">Cadastrar Voo</a></li>
+        </ul>
+      <li class="menuOption">
+          <a class="menuText" href="#">Alterar</a>
+          <ul class="dropdown">
+            <li class="dropOption"><a class="dropText" href="../ALTER/AlterarCidades.html">Alterar Cidade</a></li>
+            <li class="dropOption"><a class="dropText"  href="../ALTER/AlterarAeroporto.html">Alterar Aeroporto</a></li>
+            <li class="dropOption"><a class="dropText" href="../ALTER/AlterarAeronave.html">Alterar Aeronave</a></li>
+            <li class="dropOption"><a class="dropText" href="../ALTER/AlterarTrecho.html">Alterar Trecho</a></li>
+            <li class="dropOption"><a class="dropText" href="../ALTER/AlterarVoos.html">Alterar Voo</a></li>
+            <li class="dropOption"><a class="dropText" href="../ALTER/AlterarAssentos.html">Alterar Assentos</a></li>
+          </ul>
+      </li>
+    </div>
+  </header>
   <body>
-    <div class="titulo">
-      <h1>NOVA AERONAVE</h1>
+    <div class="content">
+      <div class="titulo">
+        <h1>NOVA AERONAVE</h1>
 
-        <p class="subtitulo">Preencha todos os campos</p>
-      </p>
-    </div>
-      <div class="formulario">
-        <form>
-          <p>
-            <label for="comboFabricantes">Fabricante da aeronave:</label><br/>
-            <select name="comboFabricantes" id="comboFabricantes" class="alteracao">
-              <option value="0" selected>Selecione o fabricante</option>
-              <option value="Airbus">Airbus</option>
-              <option value="Boeing">Boeing</option>
-              <option value="Embraer">Embraer</option>
-            </select>
-          </p>
-          <br>
-          <p>
-            <label for="modelo">Modelo da aeronave:</label><br/>
-            <input type="text" id="modelo" name="modelo" class="alteracao"/>
-          </p>
-          <br>
-          <p>
-            <label for="referencia">Registro referência:</label><br/>
-            <input type="text" id="referencia" name="referencia" class="alteracao"/>
-          </p>
-          <br>
-          <p>
-            <label for="anoFab">Ano de fabricação:</label><br/>
-            <input type="text" id="anoFab" name="anoFab" maxlength="4" size="5" class="alteracao"/>
-          </p>
-          <br>
-          <p>
-            <label for="qtdeAssentos">
-              Total de assentos (passageiros):
-            </label><br/>
-            <input type="text" id="totalAssentos" name="totalAssentos" maxlength="4" size="5" class="alteracao"/>
-          </p>
-          <br>
-          <p>
-            <button 
-              type="button"
-              class="botaoPrincipal"
-              onclick="inserirAeronave();"
-              id="btnCadastrar"
-              name="btnCadastrar">Cadastrar</button>
-            <button class="outrosBotoes" type="reset">Limpar</button>
-            <button 
-              type="button"
-              class="outrosBotoes"
-              id="btnNext"
-              name="btnNext"><a href="../INSERT/CadastrarCidades.html">Next</a></button>
-          </p>
-          <p id="status" class="statusError"></p>
-        </form>
-    </div>
-    <div class="footer">
-      <p class="copyright">©️ Copyright - AIR PUC 2023</p>
+          <p class="subtitulo">Preencha todos os campos</p>
+        </p>
+      </div>
+        <div class="formulario">
+          <form>
+            <p>
+              <label for="comboFabricantes">Fabricante da aeronave:</label><br/>
+              <select name="comboFabricantes" id="comboFabricantes" class="alteracao">
+                <option value="0" selected>Selecione o fabricante</option>
+                <option value="Airbus">Airbus</option>
+                <option value="Boeing">Boeing</option>
+                <option value="Embraer">Embraer</option>
+              </select>
+            </p>
+            <br>
+            <p>
+              <label for="modelo">Modelo da aeronave:</label><br/>
+              <input type="text" id="modelo" name="modelo" class="alteracao"/>
+            </p>
+            <br>
+            <p>
+              <label for="referencia">Registro referência:</label><br/>
+              <input type="text" id="referencia" name="referencia" class="alteracao"/>
+            </p>
+            <br>
+            <p>
+              <label for="anoFab">Ano de fabricação:</label><br/>
+              <input type="text" id="anoFab" name="anoFab" maxlength="4" size="5" class="alteracao"/>
+            </p>
+            <br>
+            <p>
+              <label for="qtdeAssentos">
+                Total de assentos (passageiros):
+              </label><br/>
+              <input type="text" id="totalAssentos" name="totalAssentos" maxlength="4" size="5" class="alteracao"/>
+            </p>
+            <br>
+            <p>
+              <button 
+                type="button"
+                class="botaoPrincipal"
+                onclick="inserirAeronave();"
+                id="btnCadastrar"
+                name="btnCadastrar">Cadastrar</button>
+              <button class="outrosBotoes" type="reset">Limpar</button>
+              <button 
+                type="button"
+                class="outrosBotoes"
+                id="btnNext"
+                name="btnNext"><a href="../INSERT/CadastrarCidades.html">Next</a></button>
+            </p>
+            <p id="status" class="statusError"></p>
+          </form>
+      </div>
+      <div class="footer">
+        <p class="copyright">©️ Copyright - AIR PUC 2023</p>
+      </div>
     </div>
   </body>
 </html>
