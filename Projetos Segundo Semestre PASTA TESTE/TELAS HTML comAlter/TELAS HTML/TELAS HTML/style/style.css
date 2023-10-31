@@ -2,10 +2,15 @@ body { /* Corpo geral da página*/
     width: 100%;
     padding: 0;
     margin: 0;
-    font-family:Arial, Helvetica, sans-serif;
-    color: white;
+
     background-color: rgb(0, 0, 0);
 
+}
+.statusError {
+   color: red;
+}
+.statusSuccess {
+  color: blue;
 }
 
 .content { /* div de conteúdo dentro do body */
@@ -13,9 +18,9 @@ body { /* Corpo geral da página*/
 }
 
 .titulo { /* div do título do formulário */
-    background-color: #a99941;
-    width: 20%;
-    padding: 10px 30px;
+    background-color: #FFC107;
+    width: 500px;
+    padding: 20px 30px;
     border-radius:50px 50px 0 0;
     margin: auto;
     margin-top: 100px;
@@ -23,7 +28,7 @@ body { /* Corpo geral da página*/
 
 .formulario{ /* div do corpo do formulário */
     background-color: #212529;
-    width: 20%;
+    width: 500px;
     padding: 30px;
     border-radius: 0 0 50px 50px;
     margin: auto;
@@ -44,97 +49,53 @@ input, select{ /* configurações do label */
     color: rgb(0, 0, 0);
     background-color: #ffffff;
     border-radius: 50px;
+    padding: 3px;
 }
 
 h1 { /* título do formulário */
-    font-size: 30px;
+    margin: 0 5%;
+    font-weight: bold;
+    font-size: 40px;
 }
 
-.botaoPrincipal { /* botão com a função principal da página */
-    font-weight: 600;
-    background-color: #a99941;
-    color: #212529;
-    font-size: 12px;
-    border-radius: 50px;
-    margin: 0px 5px;
-    padding: 5px 20px;
+.espacoTitulo {
+    width: 80%;
 }
 
-.outrosBotoes { /* demais botões */
-    font-weight: 600;
-    background-color: #b9b9b9;
-    color: #212529;
-    font-size: 12px;
-    border-radius: 50px;
-    margin: 0px 5px;
-    padding: 5px 20px;
+.espacoSetas {
+    width: 5%;
 }
+
 
 
 .footer { /* rodapé */
-    font-weight: bold;
-    color:#a99941;
+    color:#ECCA56;
     font-size: 12px;
     display: flex;
-    padding-top: 7px;
+    padding-top: 15px;
     justify-content: center;
     background-color: #212529;
     width: 100%;
     height: 50px;
 }
 
-.navMenu { /* div destinada ao menu */
-    padding: 10px 0;
-    width: 100%;
-    height: 80px;
-    background-color: #212529;
-    display: flex;
-    align-items: center;
-}
-
-.dropdown { /* display do dropdown, para nao aparecer por padrão */
-    display: none;
-}
 
 .Logo { /* logo (vai ser adicionado ainda) */
-    width: 200px;
+    width: 80px;
     height: auto;
-    margin-right: 800px;
+
 }
 
-.menuText{ /* textos do menu */
-    font-family: Arial, Helvetica, sans-serif;
-    color:#a99941;
-    text-decoration: none;
-    padding: 0 30px;
+
+.imgSetas:hover {
+    background-color: #edda9b;
+    border-radius: 5px;
 }
 
-.menuOption:hover .dropdown { /* hover do dropdown*/
-    display: block;
-    margin-top: 150px;
+.btn {
+    margin: 10px;
 }
 
-.dropOption, .menuOption { /* tirar o sublinhado dos links*/
-    list-style-type: none;
+.tamanhoInputNomeTrecho {
+    width: 250px;
 }
-
-.dropOption { /* personalizando as opções dentro do dropdown */
-    padding: 5px;
-    background-color: #a99941;
-    border: 2px solid black;
-}
-
-.dropOption:hover { /* hover das opções do dropdown */
-    background-color: black;
-}
-
-.dropText { /* texto das opções do dropdown */
-    text-decoration: none;
-    color: black;
-}
-
-.dropText:hover { /* hover das letras dentro do dropdown */
-    font-weight: bold;
-    color: #a99941;
-}
-
