@@ -4,207 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alterar Voo</title>
-
-    <script>
-
-        function RequisiçãoGETtrecho() {
-            const requestOptions = {
-              method: 'GET',
-              headers: { 'Content-Type': 'application/json' },
-            };
-            return fetch('http://localhost:3000/listarTrechos', requestOptions)
-              .then(T => T.json());
-          }
-        
-        function preencherSelectTrechos(options) {
-          const trechoSelect = document.getElementById('trecho');
-        
-          options.forEach(optionValue => {
-            console.log("Código Trecho: " + JSON.stringify(optionValue));
-            const option = document.createElement('option');
-            option.value = optionValue.codigo;  // Definindo o valor corretamente
-            option.innerHTML = optionValue.nome;  // Definindo o texto do option
-            trechoSelect.appendChild(option);
-          });
-        }
-        
-        function exibirTrechos() {
-          console.log('Entrou no exibir...');
-          RequisiçãoGETtrecho()
-            .then(customResponse => {
-              if (customResponse.status === "SUCCESS") {
-                console.log("Deu certo a busca de dados");
-                console.log('Payload:' + JSON.stringify(customResponse.payload));
-                preencherSelectTrechos(customResponse.payload); // Removido o parse redundante
-              } else {
-                console.log(customResponse.message);
-              }
-            })
-            .catch((e) => {
-              console.log("Não foi possível exibir." + e);
-            });
-        }
-        
-        function codigoValido() {
-          let resultado = false;
-          var strCodigo = document.getElementById("codigo").value;
-          const codigo = parseInt(strCodigo);
-        
-          if (!isNaN(codigo) && codigo > 0) {
-              resultado = true;
-          }
-          return resultado;
-        }
-        
-        
-        function valorValido() {
-          let resultado = false;
-          var strValor = document.getElementById("valor").value;
-          const valor = parseInt(strValor);
-        
-          if (!isNaN(valor) && valor > 0) {
-              resultado = true;
-          }
-          return resultado;
-        }
-        
-        function trechoValido(){
-          let resultado = false; 
-          var listaTrechos = document.getElementById("trecho");
-          var valorSelecionado = listaTrechos.value;
-          if (valorSelecionado !== "0"){
-            resultado = true;
-          }
-          return resultado;
-        }
-        
-        function fetchAlterar(body) {
-          const requestOptions = {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(body)
-          };
-        
-          return fetch('http://localhost:3000/alterarVoo', requestOptions)
-              .then(response => response.json());
-        }
-        
-        function alterarVoo() {
-        
-          if (!codigoValido()) {
-              showStatusMessage("O código do voo deve ser um número válido.", true);
-              return;
-          }
-        
-          if(!valorValido()) {
-            showStatusMessage("Digite um Valor maior que zero.")
-            return;
-          }
-        
-          if(!trechoValido()) {
-            showStatusMessage("Digite um Valor maior que zero.")
-            return;
-          }
-        
-        
-          const hrSaida = document.getElementById("hrSaida").value;
-          const hrChegada = document.getElementById("hrChegada").value;
-          const dataVoo = document.getElementById("dataVoo").value;
-          const valor = document.getElementById("valor").value;
-          const trecho = document.getElementById("trecho").options[document.getElementById("trecho").selectedIndex].value;
-          const codigo = document.getElementById("codigo").value;        
-          
-          fetchAlterar({
-              dataVoo: dataVoo,
-              hrChegada: hrChegada,
-              hrSaida: hrSaida,
-              valor: valor,
-              trecho: trecho,
-              codigo: codigo
-          })
-              .then(customResponse => {
-                  if (customResponse.status === "SUCCESS") {
-                      showStatusMessage("Voo cadastrado com sucesso.", false);
-                  } else {
-                      showStatusMessage("Erro ao cadastrar voo: " + customResponse.message, true);
-                      console.log(customResponse.message);
-                  }
-              })
-              .catch((e) => {
-                  showStatusMessage("Erro técnico ao cadastrar... Contate o suporte.", true);
-                  console.log("Falha grave ao cadastrar." + e);
-              });
-        
-        }
-        
-        function showStatusMessage(msg, error) {
-          var pStatus = document.getElementById("status");
-          if (error === true) {
-              pStatus.className = "statusError";
-          } else {
-              pStatus.className = "statusSuccess";
-          }
-          pStatus.textContent = msg;
-        }
-
-    </script>
-    <style>
-        .statusError {
-            color: red;
-        }
-        .statusSuccess {
-            color: blue;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
 </head>
+
+<header>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../SELECT/TabelaInicial.html"><img class="Logo" src="../images/Logo Transparente.png"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="../SELECT/TabelaInicial.html">Painel Principal</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Cadastrar
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../INSERT/CadastrarAeronave.html">Cadastrar Aeronave</a></li>
+              <li><a class="dropdown-item" href="../INSERT/CadastrarAeroporto.html">Cadastrar Aeroporto</a></li>
+              <li><a class="dropdown-item" href="../INSERT/CadastrarCidades.html">Cadastrar Cidade</a></li>
+              <li><a class="dropdown-item" href="../INSERT/CadastrarTrecho.html">Cadastrar Trecho</a></li>
+              <li><a class="dropdown-item" href="../INSERT/CadastrarVoos.html">Cadastrar Voo</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Alterar
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../ALTER/AlterarAeronave.html">Alterar Aeronave</a></li>
+              <li><a class="dropdown-item" href="../ALTER/AlterarAeroporto.html">Alterar Aeroporto</a></li>
+              <li><a class="dropdown-item" href="../ALTER/AlterarCidades.html">Alterar Cidade</a></li>
+              <li><a class="dropdown-item" href="../ALTER/AlterarTrecho.html">Alterar Trecho</a></li>
+              <li><a class="dropdown-item" href="../ALTER/AlterarVoos.html">Another Voo</a></li>
+              <li><a class="dropdown-item" href="../ALTER/AlterarAssentos.html">Alterar Assento</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Ex: Cadastrar Cidade" aria-label="Search">
+          <button class="btn btn-outline-warning" type="submit">Pesquisar</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+
 <body>
-    <h1>Alterar Voo</h1>
-    <p>
-        Preencha todos os campos para alterar um voo.
-    </p>
-    <form>
-        <p>
-            <label for="codigo">Código do voo:</label><br/>
-            <input type="number" id="codigo" name="codigo"/>
-        </p>
-        <p>
-            <label for="dataVoo">Data:</label><br/>
-            <input type="date" id="dataVoo" name="dataVoo"/>
-        </p>
-        <p>
-            <label for="hrSaida">Hora de Saída:</label><br/>
-            <input type="text" id="hrSaida" name="hrSaida"/>
-        </p>
-        <p>
-            <label for="hrChegada">Hora de Chegada:</label><br/>
-            <input type="text" id="hrChegada" name="hrChegada"/>
-        </p>
-        <p>
-            <label for="valor">Valor:</label><br/>
-            <input type="text" id="valor" name="valor"/>
-        </p>
-        <p>
-            <label for="trecho">Trecho:</label><br/>
-            <select name="trechos" id="trecho">
-                <option value="0">Selecione o Trecho</option>
-                <script>
-                    exibirTrechos();
-                </script>
-            </select>
-        </p>
-        <p>  
-            <button 
-                type="button" 
-                onclick="alterarVoo();"
-                id="btnAlterar"
-                name="btnAlterar">Alterar</button>
-            <button type="reset">Limpar</button>
-            <button 
-                type="button"
-                id="btnNext"
-                name="btnNext"><a href="../SELECT/TabelaInicial.html">Sair</a></button>
-        </p>
-        <p id="status" class="statusError"></p>
-    </form>
+  <div class="content">
+    <div class="titulo">
+      <table>
+        <thead>
+            <tr>
+              <td class="espacoSetas"><a href="../ALTER/AlterarTrecho.html"><img class="imgSetas" src="../images/left-arrow.png"></a></td>
+              <td class="espacoTitulo"><h1>Alterar Voo</h1></td>
+              <td class="espacoSetas"><a href="../ALTER/AlterarAssentos.html"><img class="imgSetas" src="../images/right-arrow.png"></a></td>
+            </tr>
+        </thead>
+      </table>
+      <br>
+      <p>Preencha todos os campos abaixo:</p>
+    </div>
+
+    <div class="formulario">
+      <form>
+          <p>
+              <label for="codigo">Código do voo:</label><br>
+              <input type="number" id="codigo" name="codigo" class="alteracao" placeholder="Ex: 1234">
+          </p>
+          <br>
+          <p>
+              <label for="dataVoo">Data:</label><br>
+              <input type="date" id="dataVoo" name="dataVoo" class="alteracao">
+          </p>
+          <br>
+          <p>
+              <label for="hrSaida">Hora de Saída:</label><br>
+              <input type="text" id="hrSaida" name="hrSaida" class="alteracao" placeholder="Ex: 12:45:00">
+          </p>
+          <br>
+          <p>
+              <label for="hrChegada">Hora de Chegada:</label><br>
+              <input type="text" id="hrChegada" name="hrChegada" class="alteracao" placeholder="Ex: 22:00:00">
+          </p>
+          <br>
+          <p>
+              <label for="valor">Valor em R$:</label><br>
+              <input type="text" id="valor" name="valor" class="alteracao" placeholder="Ex: 850">
+          </p>
+          <p>
+              <label for="trecho">Trecho:</label><br/>
+              <select name="trechos" id="trecho" class="alteracao">
+                  <option value="0">Selecione o Trecho</option>
+                  <script>
+                      exibirTrechos();
+                  </script>
+              </select>
+          </p>
+          <br>
+          <p>  
+              <button 
+                  type="button" 
+                  class="btn btn-warning"
+                  onclick="alterarVoo();"
+                  id="btnAlterar"
+                  name="btnAlterar">Alterar</button>
+                  <button type="reset" 
+                  class="btn btn-secondary" 
+                  id="btnCinza"
+                  name="btnCinza">Limpar</button>
+          </p>
+          <p id="status" class="statusError"></p>
+      </form>
+      </div> 
+  </div>
+  <div class="footer">
+    <p class="copyright">©️ Copyright - AIR PUC 2023</p>
+  </div>
+  <script type="text/javascript" src="../scripts/alterarVoo.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
 </html>
