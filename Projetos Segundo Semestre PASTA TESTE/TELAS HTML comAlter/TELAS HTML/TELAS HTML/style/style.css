@@ -99,23 +99,15 @@ h1 { /* título do formulário */
 }
 
 .tableVoos {
+    width: 100;
     font-size: 11px;
-    color: white;
+
+
 }
 
-.table-dark tbody tr:hover {
-    background-color: red;
-}
 
 .row {
     margin-top: 100px;
+    padding: 0 50px;
 }
 
-.col-md-5, .col-md-7 {
-    padding: 0 70px;
-}
-
-.cabecalhoTabela {
-    background-color: #FFC107;
-    width: 100%;
-}
