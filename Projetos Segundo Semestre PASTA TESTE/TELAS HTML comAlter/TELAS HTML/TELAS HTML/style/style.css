@@ -35,6 +35,15 @@ body { /* Corpo geral da página*/
     margin-bottom: 100px;
 }
 
+.TabelaSelect {
+    margin-top: 100px;
+    color: white;
+}
+
+.TESTE {
+    color: white;
+}
+
 .alteracao {
     margin-top: 10px; /* margem do título do item (fabricante, modelo, etc) até o label */
 }
@@ -55,7 +64,7 @@ input, select{ /* configurações do label */
 h1 { /* título do formulário */
     margin: 0 5%;
     font-weight: bold;
-    font-size: 38px;
+    font-size: 32px;
 }
 
 .espacoTitulo {
@@ -87,7 +96,7 @@ h1 { /* título do formulário */
 }
 
 
-.imgSetas:hover {
+.imgSetas:hover { /* botoes de seta para melhor navegação */
     background-color: #edda9b;
     border-radius: 5px;
 }
@@ -98,4 +107,9 @@ h1 { /* título do formulário */
 
 .tamanhoInputNomeTrecho {
     width: 250px;
+}
+
+.tableVoos {
+    border: 3px solid red;
+    color: white;
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aeronaves - Cadastrar</title>
+    <title>Área - Aeronaves</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../style/style.css">
   </head>
@@ -56,76 +56,104 @@
   </header>
 
   <body>
-    <div class="content">
-      <div class="titulo">
-        <table>
-          <thead>
-              <tr>
-                <td class="espacoSetas"><a href="../SELECT/TabelaInicial.html"><img class="imgSetas" src="../images/left-arrow.png"></a></td>
-                <td class="espacoTitulo"><h1>Nova Aeronave</h1></td>
-                <td class="espacoSetas"><a href="../INSERT/CadastrarCidades.html"><img class="imgSetas" src="../images/right-arrow.png"></a></td>
-          
-              </tr>
-          </thead>
-        </table>
-          <br>
-          <p>Preencha todos os campos abaixo:</p>
-      </div>
-        <div class="formulario">
-          <form>
-            <p>
-              <label for="comboFabricantes">Fabricante da aeronave:</label><br>
-              <select name="comboFabricantes" id="comboFabricantes" class="alteracao">
-                <option value="0" selected>Selecione o fabricante</option>
-                <option value="Airbus">Airbus</option>
-                <option value="Boeing">Boeing</option>
-                <option value="Embraer">Embraer</option>
-              </select>
-            </p>
-            <br>
-            <p>
-              <label for="modelo">Modelo da aeronave:</label><br>
-              <input type="text" id="modelo" name="modelo" class="alteracao" placeholder="Ex: Boeing 747"/>
-            </p>
-            <br>
-            <p>
-              <label for="referencia">Registro referência:</label><br>
-              <input type="text" id="referencia" name="referencia" class="alteracao" placeholder="Ex: BR-09238H22"/>
-            </p>
-            <br>
-            <p>
-              <label for="anoFab">Ano de fabricação:</label><br/>
-              <input type="text" id="anoFab" name="anoFab" maxlength="4" size="5" class="alteracao" placeholder="Ex: 2008"/>
-            </p>
-            <br>
-            <p>
-              <label for="qtdeAssentos">
-                Total de assentos (passageiros):
-              </label><br/>
-              <input type="text" id="totalAssentos" name="totalAssentos" maxlength="4" size="5" class="alteracao" placeholder="Ex: 100"/>
-            </p>
-            <br>
-            <p>
-              <button type="button"
-                class="btn btn-warning"
-                onclick="inserirAeronave();"
-                id="btnCadastrar"
-                name="btnCadastrar">Cadastrar</button>
+    <div class="row">
+      <div class="col">
+        <div class="content">
+          <div class="titulo">
+            <table>
+              <thead>
+                  <tr>
+                    <td class="espacoSetas"><a href="../SELECT/TabelaInicial.html"><img class="imgSetas" src="../images/left-arrow.png"></a></td>
+                    <td class="espacoTitulo"><h1>AERONAVES</h1></td>
+                    <td class="espacoSetas"><a href="../INSERT/CadastrarCidades.html"><img class="imgSetas" src="../images/right-arrow.png"></a></td>
+                  </tr>
+              </thead>
+            </table>
+              <br>
+              <p>Preencha todos os campos abaixo:</p>
+          </div>
+            <div class="formulario">
+              <form>
+                <p>
+                  <label for="comboFabricantes">Fabricante da aeronave:</label><br>
+                  <select name="comboFabricantes" id="comboFabricantes" class="alteracao">
+                    <option value="0" selected>Selecione o fabricante</option>
+                    <option value="Airbus">Airbus</option>
+                    <option value="Boeing">Boeing</option>
+                    <option value="Embraer">Embraer</option>
+                  </select>
+                </p>
+                <br>
+                <p>
+                  <label for="modelo">Modelo da aeronave:</label><br>
+                  <input type="text" id="modelo" name="modelo" class="alteracao" placeholder="Ex: Boeing 747"/>
+                </p>
+                <br>
+                <p>
+                  <label for="referencia">Registro referência:</label><br>
+                  <input type="text" id="referencia" name="referencia" class="alteracao" placeholder="Ex: BR-09238H22"/>
+                </p>
+                <br>
+                <p>
+                  <label for="anoFab">Ano de fabricação:</label><br/>
+                  <input type="text" id="anoFab" name="anoFab" maxlength="4" size="5" class="alteracao" placeholder="Ex: 2008"/>
+                </p>
+                <br>
+                <p>
+                  <label for="qtdeAssentos">
+                    Total de assentos (passageiros):
+                  </label><br/>
+                  <input type="text" id="totalAssentos" name="totalAssentos" maxlength="4" size="5" class="alteracao" placeholder="Ex: 100"/>
+                </p>
+                <br>
+                <p>
+                  <button type="button"
+                    class="btn btn-warning"
+                    onclick="inserirAeronave();"
+                    id="btnCadastrar"
+                    name="btnCadastrar">Inserir</button>
 
-              <button type="reset" 
-              class="btn btn-secondary" 
-              id="btnCinza"
-              name="btnCinza">Limpar</button>
-            </p>
-            <p id="status" class="statusError"></p>
-          </form>
+                  <button type="reset" 
+                  class="btn btn-secondary" 
+                  id="btnCinza"
+                  name="btnCinza">Limpar</button>
+                </p>
+                <p id="status" class="statusError"></p>
+              </form>
+          </div>
+          </div>
       </div>
-    </div>
-    <div class="footer">
-      <p class="copyright">©️ Copyright - AIR PUC 2023</p>
-    </div>
+      <div class="col">
+        <h1 class="TabelaSelect">Voos</h1>
+        <div id="principal">
+            <div id="cadastros">
+              <table class="tableVoos" cellpadding="5" cellspacing="5">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Data</th>
+                    <th>Trecho</th>
+                    <th>Horário Partida</th>
+                    <th>Horário Chegada</th>
+                    <th>Aeroporto Origem</th>
+                    <th>Aeroporto Destino</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <p class="copyright">©️ Copyright - AIR PUC 2023</p>
+      </div>
     <script type="text/javascript" src="../scripts/cadastrarAeronave.js"></script>
+    <script type="text/javascript" src="../scripts/listarDados.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script>
+      exibirTabela();
+    </script>
   </body>
 </html>

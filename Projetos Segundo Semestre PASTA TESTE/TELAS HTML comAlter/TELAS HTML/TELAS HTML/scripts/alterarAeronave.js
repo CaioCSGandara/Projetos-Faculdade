@@ -140,3 +140,10 @@ function anoValido(){
     }
     pStatus.textContent = msg;
   }
+
+
+  function PreencheFormulario(){
+
+
+    
+  }
