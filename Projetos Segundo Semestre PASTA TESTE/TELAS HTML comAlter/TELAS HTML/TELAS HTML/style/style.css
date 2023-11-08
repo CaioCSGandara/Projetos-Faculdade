@@ -2,7 +2,6 @@ body { /* Corpo geral da página*/
     width: 100%;
     padding: 0;
     margin: 0;
-
     background-color: rgb(0, 0, 0);
 
 }
@@ -13,9 +12,6 @@ body { /* Corpo geral da página*/
   color: blue;
 }
 
-.content { /* div de conteúdo dentro do body */
-    text-align: center;
-}
 
 .titulo { /* div do título do formulário */
     background-color: #FFC107;
@@ -23,7 +19,8 @@ body { /* Corpo geral da página*/
     padding: 20px 30px;
     border-radius:50px 50px 0 0;
     margin: auto;
-    margin-top: 100px;
+    
+    text-align: center;
 }
 
 .formulario{ /* div do corpo do formulário */
@@ -33,15 +30,7 @@ body { /* Corpo geral da página*/
     border-radius: 0 0 50px 50px;
     margin: auto;
     margin-bottom: 100px;
-}
-
-.TabelaSelect {
-    margin-top: 100px;
-    color: white;
-}
-
-.TESTE {
-    color: white;
+    text-align: center;
 }
 
 .alteracao {
@@ -110,6 +99,23 @@ h1 { /* título do formulário */
 }
 
 .tableVoos {
-    border: 3px solid red;
+    font-size: 11px;
     color: white;
+}
+
+.table-dark tbody tr:hover {
+    background-color: red;
+}
+
+.row {
+    margin-top: 100px;
+}
+
+.col-md-5, .col-md-7 {
+    padding: 0 70px;
+}
+
+.cabecalhoTabela {
+    background-color: #FFC107;
+    width: 100%;
 }
