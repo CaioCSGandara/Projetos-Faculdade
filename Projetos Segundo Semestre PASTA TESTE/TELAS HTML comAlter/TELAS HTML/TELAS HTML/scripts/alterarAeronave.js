@@ -147,3 +147,18 @@ function anoValido(){
 
     
   }
+
+  function alternarDivs() {
+    var divEditar = document.getElementById('divEditar');
+    var divSalvar = document.getElementById('divSalvar');
+  
+    if (divEditar.style.display === 'block') {
+      // Se a primeira div estiver visível, oculte-a e mostre a segunda div
+      divEditar.style.display = 'none';
+      divSalvar.style.display = 'block';
+    } else {
+      // Caso contrário, mostre a primeira div e oculte a segunda div
+      divEditar.style.display = 'block';
+      divSalvar.style.display = 'none';
+    }
+  }

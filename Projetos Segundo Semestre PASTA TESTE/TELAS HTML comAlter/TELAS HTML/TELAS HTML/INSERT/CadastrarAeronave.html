@@ -58,19 +58,91 @@
   <body>
     <div class="row">
       <div class="col">
-        <div class="content">
+
+        <div class="content" id="divEditar">
+          <div class="content" >
+            <div class="titulo">
+              <table>
+                <thead>
+                    <tr>
+                      <td class="espacoSetas"><a href="../SELECT/TabelaInicial.html"><img class="imgSetas" src="../images/left-arrow.png"></a></td>
+                      <td class="espacoTitulo"><h1>AERONAVES</h1></td>
+                      <td class="espacoSetas"><a href="../INSERT/CadastrarCidades.html"><img class="imgSetas" src="../images/right-arrow.png"></a></td>
+                    </tr>
+                </thead>
+              </table>
+                <br>
+                <p>Preencha todos os campos abaixo:</p>
+            </div>
+              <div class="formulario">
+                <form>
+                  <p>
+                    <label for="comboFabricantes">Fabricante da aeronave:</label><br>
+                    <select name="comboFabricantes" id="comboFabricantes" class="alteracao">
+                      <option value="0" selected>Selecione o fabricante</option>
+                      <option value="Airbus">Airbus</option>
+                      <option value="Boeing">Boeing</option>
+                      <option value="Embraer">Embraer</option>
+                    </select>
+                  </p>
+                  <br>
+                  <p>
+                    <label for="modelo">Modelo da aeronave:</label><br>
+                    <input type="text" id="modelo" name="modelo" class="alteracao" placeholder="Ex: Boeing 747"/>
+                  </p>
+                  <br>
+                  <p>
+                    <label for="referencia">Registro referência:</label><br>
+                    <input type="text" id="referencia" name="referencia" class="alteracao" placeholder="Ex: BR-09238H22"/>
+                  </p>
+                  <br>
+                  <p>
+                    <label for="anoFab">Ano de fabricação:</label><br/>
+                    <input type="text" id="anoFab" name="anoFab" maxlength="4" size="5" class="alteracao" placeholder="Ex: 2008"/>
+                  </p>
+                  <br>
+                  <p>
+                    <label for="qtdeAssentos">
+                      Total de assentos (passageiros):
+                    </label><br/>
+                    <input type="text" id="totalAssentos" name="totalAssentos" maxlength="4" size="5" class="alteracao" placeholder="Ex: 100"/>
+                  </p>
+                  <br>
+                  <p>
+                    <button type="button"
+                      class="btn btn-warning"
+                      onclick="inserirAeronave();"
+                      id="btnCadastrar"
+                      name="btnCadastrar">Inserir</button>
+
+                    <button type="reset" 
+                    class="btn btn-secondary" 
+                    id="btnCinza"
+                    name="btnCinza">Limpar</button>
+                  </p>
+                  <p id="status" class="statusError"></p>
+                </form>
+            </div>
+            </div>
+        </div>
+      </div>
+
+
+      <div class="content" id="divSalvar" style="display: none;">
+
+        <div class="content" style="">
           <div class="titulo">
             <table>
               <thead>
                   <tr>
                     <td class="espacoSetas"><a href="../SELECT/TabelaInicial.html"><img class="imgSetas" src="../images/left-arrow.png"></a></td>
-                    <td class="espacoTitulo"><h1>AERONAVES</h1></td>
+                    <td class="espacoTitulo"><h1>EDITAR AERONAVES</h1></td>
                     <td class="espacoSetas"><a href="../INSERT/CadastrarCidades.html"><img class="imgSetas" src="../images/right-arrow.png"></a></td>
                   </tr>
               </thead>
             </table>
               <br>
-              <p>Preencha todos os campos abaixo:</p>
+              <p>Mude o que desejar alterar sobre essa aeronave:</p>
           </div>
             <div class="formulario">
               <form>
@@ -122,7 +194,12 @@
               </form>
           </div>
           </div>
-      </div>
+          <button onclick="alternarDivs()">Salvar</button>
+
+        </div>
+
+
+
       <div class="col">
         <h1 class="TabelaSelect">Voos</h1>
         <div id="principal">

@@ -19,7 +19,7 @@ function RequisiçãoGETlistar() {
             <td class="rightText">${voo.hrChegada}</td>
             <td class="rightText">${voo.origem}</td>
             <td class="rightText">${voo.destino}</td>
-            <td><a href="/SELECT/TabelaInicial.html" onclick="alterarVoo('${voo.codigo}')"><button type='alter'>Alterar</button></a></td>
+            <td><a href="/SELECT/TabelaInicial.html" onclick="alternarDivs('${voo.codigo}')"><button type='alter'>Alterar</button></a></td>
             <td><a href="/SELECT/TabelaInicial.html" onclick="deletarVoo('${voo.codigo}')"><button type='delete'>Delete</button></a></td>
             
         `;
