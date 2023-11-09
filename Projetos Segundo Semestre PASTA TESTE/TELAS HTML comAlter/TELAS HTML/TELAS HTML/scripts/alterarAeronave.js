@@ -1,6 +1,6 @@
 function preencheuCodigo(){
     let resultado = false;
-    var strCodigo = document.getElementById("codigo").value;
+    var strCodigo = document.getElementById("codigoAlterar").value;
     const codigo = parseInt(strCodigo);
     console.log("Código aeronave: " + codigo.toString());
     if (codigo > 0){
@@ -11,7 +11,7 @@ function preencheuCodigo(){
 
 function anoValido(){
     let resultado = false;
-    var strAno = document.getElementById("anoFab").value;
+    var strAno = document.getElementById("anoFabAlterar").value;
     const ano = parseInt(strAno);
     console.log("Ano aeronave: " + ano.toString());
     if (ano >= 1990 && ano <= 2026){
@@ -22,7 +22,7 @@ function anoValido(){
 
   function totalAssentosValido(){
     let resultado = false;
-    const strAssentos = document.getElementById("totalAssentos").value;
+    const strAssentos = document.getElementById("totalAssentosAlterar").value;
     const assentos = parseInt(strAssentos);
     if (assentos > 0){
       resultado = true;
@@ -32,7 +32,7 @@ function anoValido(){
 
   function selecionouFabricante(){
     let resultado = false; 
-    var listaFabricantes = document.getElementById("comboFabricantes");
+    var listaFabricantes = document.getElementById("comboFabricantesAlterar");
     var valorSelecionado = listaFabricantes.value;
     if (valorSelecionado !== "0"){
       resultado = true;
@@ -42,7 +42,7 @@ function anoValido(){
 
   function preencheuModelo(){
     let resultado = false;
-    const modeloInformado = document.getElementById("modelo").value;
+    const modeloInformado = document.getElementById("modeloAlterar").value;
     if(modeloInformado.length > 0){
       resultado = true;
     }
@@ -51,7 +51,7 @@ function anoValido(){
 
   function preencheuRegistro(){
     let resultado = false;
-    const registroReferencia = document.getElementById("referencia").value;
+    const registroReferencia = document.getElementById("referenciaAlterar").value;
     if(registroReferencia.length > 0){
       resultado = true;
     }
@@ -102,12 +102,12 @@ function anoValido(){
     }
 
     // Corrigido para obter o valor selecionado do combobox
-    const fabricante = document.getElementById("comboFabricantes").options[document.getElementById("comboFabricantes").selectedIndex].value;
-    const modelo = document.getElementById("modelo").value;
-    const anoFab = document.getElementById("anoFab").value;
-    const referencia = document.getElementById("referencia").value;
-    const totalAssentos = document.getElementById("totalAssentos").value;
-    const codigo = document.getElementById("codigo").value; 
+    const fabricante = document.getElementById("comboFabricantesAlterar").options[document.getElementById("comboFabricantesAlterar").selectedIndex].value;
+    const modelo = document.getElementById("modeloAlterar").value;
+    const anoFab = document.getElementById("anoFabAlterar").value;
+    const referencia = document.getElementById("referenciaAlterar").value;
+    const totalAssentos = document.getElementById("totalAssentosAlterar").value;
+    const codigo = document.getElementById("codigoAlterar").value; 
 
     fetchAlterar({
         fabricante: fabricante, 
@@ -132,7 +132,7 @@ function anoValido(){
   }
 
   function showStatusMessage(msg, error){
-    var pStatus = document.getElementById("status");
+    var pStatus = document.getElementById("statusAlterar");
     if (error === true){
       pStatus.className = "statusError";
     } else {
@@ -164,4 +164,12 @@ function anoValido(){
         console.log("Erro ao obter dados." + e);
       });
   }
+}
+
+function limparStatus() {
+  const stsCadastrar = document.getElementById('status');
+  const stsAlterar = document.getElementById('statusAlterar');
+
+  stsCadastrar.textContent = ' ';
+  stsAlterar.textContent = ' ';
 }
