@@ -27,7 +27,7 @@ function preencherFormulario(voo) {
             <td class="text-center align-middle">${voo.hrChegada}</td>
             <td class="align-middle"">${voo.origem}</td>
             <td class="align-middle"">${voo.destino}</td>
-            <td class="align-middle"><a onclick="alternarDivs('${voo.codigo}')"><button type='alter'>Alterar</button></a></td>
+            <td class="align-middle"><a onclick="botaoAlterar('${voo.codigo}')"><button type='alter'>Alterar</button></a></td>
             <td class="align-middle"><a href="/SELECT/TabelaInicial.html" onclick="deletarVoo('${voo.codigo}')"><button type='delete'>Delete</button></a></td>
             
         `;

@@ -101,13 +101,39 @@ h1 { /* título do formulário */
 .tableVoos {
     width: 100;
     font-size: 11px;
-
-
 }
 
 
 .row {
     margin-top: 100px;
-    padding: 0 50px;
+    padding: 0 5%;
 }
 
+.menu {
+
+    text-align: center;
+    height: 80px;
+    padding: 0 5%;
+    background-color: #212529;
+}
+
+
+
+
+.tdLogo {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    vertical-align: center;
+    color: white;
+    width: 10%;
+}
+
+.tdSpace {
+    width: 80%;
+}
+
+.tdDropdown {
+    color: white;
+    width: 10%;
+}

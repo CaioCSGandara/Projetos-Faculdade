@@ -1,63 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+ <!-- INICIO DOS METADADOS-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Área - Aeronaves</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../style/style.css">
   </head>
+   <!-- FIM DOS METADADOS-->
 
+
+
+    <!-- INICIO DA HEADER COM MENU-->
   <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="../SELECT/TabelaInicial.html"><img class="Logo" src="../images/Logo Transparente.png"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="../SELECT/TabelaInicial.html">Painel Principal</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Cadastrar
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../INSERT/CadastrarAeronave.html">Cadastrar Aeronave</a></li>
-                <li><a class="dropdown-item" href="../INSERT/CadastrarAeroporto.html">Cadastrar Aeroporto</a></li>
-                <li><a class="dropdown-item" href="../INSERT/CadastrarCidades.html">Cadastrar Cidade</a></li>
-                <li><a class="dropdown-item" href="../INSERT/CadastrarTrecho.html">Cadastrar Trecho</a></li>
-                <li><a class="dropdown-item" href="../INSERT/CadastrarVoos.html">Cadastrar Voo</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Alterar
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../ALTER/AlterarAeronave.html">Alterar Aeronave</a></li>
-                <li><a class="dropdown-item" href="../ALTER/AlterarAeroporto.html">Alterar Aeroporto</a></li>
-                <li><a class="dropdown-item" href="../ALTER/AlterarCidades.html">Alterar Cidade</a></li>
-                <li><a class="dropdown-item" href="../ALTER/AlterarTrecho.html">Alterar Trecho</a></li>
-                <li><a class="dropdown-item" href="../ALTER/AlterarVoos.html">Another Voo</a></li>
-                <li><a class="dropdown-item" href="../ALTER/AlterarAssentos.html">Alterar Assento</a></li>
-              </ul>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Ex: Cadastrar Cidade" aria-label="Search">
-            <button class="btn btn-outline-warning" type="submit">Pesquisar</button>
-          </form>
-        </div>
-      </div>
+    <nav class="menu">
+      <table class="menuTable">
+        <thead>
+          <tr>
+            <td class="tdLogo"><img class="Logo" src="../images/Logo Transparente.png"></td>
+            <td class="tdSpace"></td>
+            <td class="tdDropdown">Aqui vai o dropdown</td>
+          </tr>
+        </thead>
+      </table>
     </nav>
   </header>
+   <!-- FINAL DA HEADER COM MENU -->
 
   <body>
     <div class="row">
-      <div class="col-md-5" id="divEditar">
+      <!-- INÍCIO DA DIV DE CADASTRAR -->
+      <div class="col-md-5" id="divCadastrar">
             <div class="titulo">
             <table>
               <thead>
@@ -73,8 +48,8 @@
           </div>
           <div class="formulario">
               <p>
-                <label for="comboFabricantes">Fabricante da aeronave:</label><br>
-                <select name="comboFabricantes" id="comboFabricantes" class="alteracao">
+                <label for="comboFabricantesCadastrar">Fabricante da aeronave:</label><br>
+                <select name="comboFabricantesCadastrar" id="comboFabricantesCadastrar" class="alteracao">
                   <option value="0" selected>Selecione o fabricante</option>
                   <option value="Airbus">Airbus</option>
                   <option value="Boeing">Boeing</option>
@@ -83,25 +58,25 @@
               </p>
               <br>
               <p>
-                <label for="modelo">Modelo da aeronave:</label><br>
-                <input type="text" id="modelo" name="modelo" class="alteracao" placeholder="Ex: Boeing 747"/>
+                <label for="modeloCadastrar">Modelo da aeronave:</label><br>
+                <input type="text" id="modeloCadastrar" name="modeloCadastrar" class="alteracao" placeholder="Ex: Boeing 747"/>
               </p>
               <br>
               <p>
-                <label for="referencia">Registro referência:</label><br>
-                <input type="text" id="referencia" name="referencia" maxlength="15" class="alteracao" placeholder="Ex: BR-09238H22"/>
+                <label for="referenciaCadastrar">Registro referência:</label><br>
+                <input type="text" id="referenciaCadastrar" name="referenciaCadastrar" maxlength="15" class="alteracao" placeholder="Ex: BR-09238H22"/>
               </p>
               <br>
               <p>
-                <label for="anoFab">Ano de fabricação:</label><br/>
-                <input type="text" id="anoFab" name="anoFab" maxlength="4" size="5" class="alteracao" placeholder="Ex: 2008"/>
+                <label for="anoFabCadastrar">Ano de fabricação:</label><br/>
+                <input type="text" id="anoFabCadastrar" name="anoFabCadastrar" maxlength="4" size="5" class="alteracao" placeholder="Ex: 2008"/>
               </p>
               <br>
               <p>
-                <label for="qtdeAssentos">
+                <label for="totalAssentosCadastrar">
                   Total de assentos (passageiros):
                 </label><br/>
-                <input type="text" id="totalAssentos" name="totalAssentos" maxlength="4" size="5" class="alteracao" placeholder="Ex: 100"/>
+                <input type="text" id="totalAssentosCadastrar" name="totalAssentosCadastrar" maxlength="4" size="5" class="alteracao" placeholder="Ex: 100"/>
               </p>
               <br>
               <p>
@@ -122,9 +97,12 @@
         </div>
             </div>
 
-      
+      <!-- FIM DA DIV DE CADASTRAR -->
 
-      <div class="col-md-5" id="divSalvar" style="display: none;">
+
+
+      <!-- INÍCIO DA DIV DE ALTERAR -->
+      <div class="col-md-5" id="divAlterar" style="display: none;">
 
         <div class="titulo">
           <table>
@@ -141,10 +119,10 @@
         </div>
   
         <div class="formulario">
-          <form id="alterarAeronaveForm" method="PUT" action="/alterarAeronave">
+          <form>
             <p>
-            <label for="codigo">Código da Aeronave:</label><br>
-            <input type="number" id="codigoAlterar" name="codigo" class="alteracao" placeholder="Ex: 1234" required>   
+            <label for="codigoAlterar">Código da Aeronave:</label><br>
+            <input type="number" id="codigoAlterar" name="codigoAlterar" class="alteracao" placeholder="Ex: 1234" required>   
             </p>
             <br>
               <p>
@@ -158,46 +136,55 @@
               </p>
               <br>
               <p>
-                <label for="modelo">Modelo da aeronave:</label><br/>
-                <input type="text" id="modeloAlterar" name="modelo" class="alteracao" placeholder="Ex: Boeing 747">
+                <label for="modeloAlterar">Modelo da aeronave:</label><br/>
+                <input type="text" id="modeloAlterar" name="modeloAlterar" class="alteracao" placeholder="Ex: Boeing 747">
               </p>
               <br>
               <p>
-                <label for="anoFab">Ano de fabricação:</label><br/>
-                <input type="text" id="anoFabAlterar" name="anoFab" maxlength="4" size="5" class="alteracao" placeholder="Ex: 1987">
+                <label for="anoFabAlterar">Ano de fabricação:</label><br/>
+                <input type="text" id="anoFabAlterar" name="anoFabAlterar" maxlength="4" size="5" class="alteracao" placeholder="Ex: 1987">
               </p>
               <br>
               <p>
-                <label for="referencia">Registro referência:</label><br/>
-                <input type="text" id="referenciaAlterar" name="referencia" maxlength="15" class="alteracao" placeholder="BR-12394H90">
+                <label for="referenciaAlterar">Registro referência:</label><br/>
+                <input type="text" id="referenciaAlterar" name="referenciaAlterar" maxlength="15" class="alteracao" placeholder="BR-12394H90">
               </p>
               <br>
               <p>
-                <label for="qtdeAssentos">
+                <label for="totalAssentosAlterar">
                   Total de assentos (passageiros):
                 </label><br/>
-                <input type="text" id="totalAssentosAlterar" name="totalAssentos" maxlength="4" size="5" class="alteracao" placeholder="Ex: 200">
+                <input type="text" id="totalAssentosAlterar" name="totalAssentosAlterar" maxlength="4" size="5" class="alteracao" placeholder="Ex: 200">
               </p>
               <br>
               <p>
-              <button 
-              type="button" 
+              <button type="button" 
               class="btn btn-warning"
               onclick="alterarAeronave();"
               id="btnAlterar"
               name="btnAlterar">Alterar</button>
+
               <button type="reset" 
               class="btn btn-secondary"
               onclick="limparStatus();" 
               id="btnCinzaAlterar"
               name="btnCinza">Limpar</button>
+
+              <button type="button"
+              class="btn btn-secondary"
+              onclick="botaoCancelar();">Cancelar</button>           
           </p>
           <p id="statusAlterar" class="statusError"></p>
           </form>
           </div>
 
         </div>
+      
+        <!-- FINAL DA DIV DE ALTERAR -->
 
+
+
+        <!-- INÍCIO DA DIV DE MOSTRAR DADOS -->
       <div class="col-md-7">
         <div id="principal">
             <div id="cadastros">
@@ -221,16 +208,26 @@
           </div>
         </div>
       </div>
+      <!-- INÍCIO DA DIV DE MOSTRAR DADOS -->
+
+
+
+      <!-- INÍCIO DA DIV DE FOOTER -->
       <div class="footer">
         <p class="copyright">©️ Copyright - AIR PUC 2023</p>
       </div>
-    <script type="text/javascript" src="../scripts/cadastrarAeronave.js"></script>
+      <!-- FIM DA DIV DE FOOTER -->
+
+
+
+      <!-- INÍCIO DOS SCRIPTS -->
+    <script type="text/javascript" src="../scripts/Aeronave.js"></script>
     <script type="text/javascript" src="../scripts/listarDados.js"></script>
-    <script type="text/javascript" src="../scripts/alterarAeronave.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script>
       exibirTabela();
     </script>
+    <!-- FIM DOS SCRIPTS -->
   </body>
 </html>
