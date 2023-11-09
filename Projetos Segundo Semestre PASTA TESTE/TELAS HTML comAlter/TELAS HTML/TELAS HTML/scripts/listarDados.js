@@ -12,15 +12,15 @@ function RequisiçãoGETlistar() {
     dados.forEach((voo) => {
         const row = document.createElement("tr");
         row.innerHTML = `
-            <td class="leftText" id="codigo">${voo.codigo}</td>
-            <td class="leftText">${voo.data}</td>
-            <td class="leftText">${voo.trecho}</td>
-            <td class="centerText">${voo.hrSaida}</td>
-            <td class="rightText">${voo.hrChegada}</td>
-            <td class="rightText">${voo.origem}</td>
-            <td class="rightText">${voo.destino}</td>
-            <td><a href="/SELECT/TabelaInicial.html" onclick="alternarDivs('${voo.codigo}')"><button type='alter'>Alterar</button></a></td>
-            <td><a href="/SELECT/TabelaInicial.html" onclick="deletarVoo('${voo.codigo}')"><button type='delete'>Delete</button></a></td>
+            <td class="text-center align-middle padLeft" id="codigo">${voo.codigo}</td>
+            <td class="text-center align-middle">${voo.data}</td>
+            <td class="text-center align-middle">${voo.trecho}</td>
+            <td class="text-center align-middle">${voo.hrSaida}</td>
+            <td class="text-center align-middle">${voo.hrChegada}</td>
+            <td class="align-middle"">${voo.origem}</td>
+            <td class="align-middle"">${voo.destino}</td>
+            <td class="align-middle"><a href="/SELECT/TabelaInicial.html" onclick="alternarDivs('${voo.codigo}')"><button type='alter'>Alterar</button></a></td>
+            <td class="align-middle padRight"><a href="/SELECT/TabelaInicial.html" onclick="deletarVoo('${voo.codigo}')"><button type='delete'>Delete</button></a></td>
             
         `;
         tblBody.appendChild(row);
