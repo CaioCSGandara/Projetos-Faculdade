@@ -142,13 +142,7 @@ function anoValido(){
   }
 
 
-  function PreencheFormulario(){
-
-
-    
-  }
-
-  function alternarDivs() {
+  function alternarDivs(codigo) {
     var divEditar = document.getElementById('divEditar');
     var divSalvar = document.getElementById('divSalvar');
   
@@ -160,5 +154,14 @@ function anoValido(){
       // Caso contrário, mostre a primeira div e oculte a segunda div
       divEditar.style.display = 'block';
       divSalvar.style.display = 'none';
-    }
+
+      RequisiçãoGETlistar()
+      .then(dados => {
+        const voo = dados.find(v => v.codigo === codigo);
+        preencherFormulario(voo);
+      })
+      .catch((e) => {
+        console.log("Erro ao obter dados." + e);
+      });
   }
+}

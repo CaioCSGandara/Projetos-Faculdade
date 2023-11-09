@@ -6,7 +6,15 @@ function RequisiçãoGETlistar() {
     return fetch('http://localhost:3000/listarDados', requestOptions)
       .then(T => T.json());
   }
+
+function preencherFormulario(voo) {
+  const divPar = document.getElementById("addPar");
+  const paragrafo = document.createElement("p");
+  paragrafo.textContent = `Você está editando a aeronave de código:${voo.codigo}`;
+  divPar.appendChild(paragrafo);
+}
   
+    
   function preencherTabela(dados) {
     const tblBody = document.querySelector("tbody");
     dados.forEach((voo) => {
@@ -19,13 +27,14 @@ function RequisiçãoGETlistar() {
             <td class="text-center align-middle">${voo.hrChegada}</td>
             <td class="align-middle"">${voo.origem}</td>
             <td class="align-middle"">${voo.destino}</td>
-            <td class="align-middle"><a href="/SELECT/TabelaInicial.html" onclick="alternarDivs('${voo.codigo}')"><button type='alter'>Alterar</button></a></td>
-            <td class="align-middle padRight"><a href="/SELECT/TabelaInicial.html" onclick="deletarVoo('${voo.codigo}')"><button type='delete'>Delete</button></a></td>
+            <td class="align-middle"><a onclick="alternarDivs('${voo.codigo}')"><button type='alter'>Alterar</button></a></td>
+            <td class="align-middle"><a href="/SELECT/TabelaInicial.html" onclick="deletarVoo('${voo.codigo}')"><button type='delete'>Delete</button></a></td>
             
         `;
         tblBody.appendChild(row);
     });
 }
+
 
   function exibirTabela() {
     console.log('Entrou no exibir...');
@@ -89,5 +98,9 @@ function deletarVoo(codigo) {
         });
 }
 
-
-
+function preencherFormulario(voo) {
+  const divPar = document.getElementById("addPar");
+  const paragrafo = document.createElement("p");
+  paragrafo.textContent = `Você está editando a aeronave de código:${voo.codigo}`;
+  divPar.appendChild(paragrafo);
+}
