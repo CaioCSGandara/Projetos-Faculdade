@@ -302,9 +302,34 @@ function limparStatus() {
   const stsCadastrar = document.getElementById('status');
   const stsAlterar = document.getElementById('statusAlterar');
 
-  stsCadastrar.textContent = ' ';
-  stsAlterar.textContent = ' ';
+  stsCadastrar.textContent = '';
+  stsAlterar.textContent = '';
+}
+  
+function preencherSelectAeronaves(options) {
+  const aeroSelect = document.getElementById('selectAeronave');
+  options.forEach(optionValue => {
+    console.log("Código Aeronave: " + JSON.stringify(optionValue));
+    const option = document.createElement('option');
+    option.value = optionValue.codigo;  // Definindo o valor corretamente
+    option.innerHTML = optionValue.codigo;  // Definindo o texto do option
+    aeroSelect.appendChild(option);
+  });
 }
 
-  
-
+function exibirAeronave() {
+  console.log('Entrou no exibir...');
+  RequisiçãoGETaeronave()
+    .then(customResponse => {
+      if (customResponse.status === "SUCCESS") {
+        console.log("Deu certo a busca de dados");
+        console.log('Payload:' + JSON.stringify(customResponse.payload));
+        preencherSelectAeronaves(customResponse.payload); 
+      } else {
+        console.log(customResponse.message);
+      }
+    })
+    .catch((e) => {
+      console.log("Não foi possível exibir." + e);
+    });
+}
