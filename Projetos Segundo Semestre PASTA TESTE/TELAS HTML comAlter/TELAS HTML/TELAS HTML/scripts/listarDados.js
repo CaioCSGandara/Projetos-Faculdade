@@ -24,10 +24,10 @@ function preencherFormulario(voo) {
             <td class="text-center align-middle">${voo.trecho}</td>
             <td class="text-center align-middle">${voo.hrSaida}</td>
             <td class="text-center align-middle">${voo.hrChegada}</td>
-            <td class="align-middle"">${voo.origem}</td>
-            <td class="align-middle"">${voo.destino}</td>
-            <td class="align-middle"><a onclick="botaoAlterar('${voo.codigo}')"><button type='alter'>Alterar</button></a></td>
-            <td class="align-middle"><a href="/SELECT/TabelaInicial.html" onclick="deletarVoo('${voo.codigo}')"><button type='delete'>Delete</button></a></td>
+            <td class="align-middle">${voo.origem}</td>
+            <td class="align-middle">${voo.destino}</td>
+            <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick="botaoAlterar('${voo.codigo}')" ></td>
+            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick="deletarVoo('${voo.codigo}')" ></td>
             
         `;
         tblBody.appendChild(row);

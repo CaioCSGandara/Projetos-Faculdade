@@ -16,15 +16,21 @@
     <!-- INICIO DA HEADER COM MENU-->
   <header>
     <nav class="menu">
-      <table class="menuTable">
-        <thead>
-          <tr>
-            <td class="tdLogo"><img class="Logo" src="../images/Logo Transparente.png"></td>
-            <td class="tdSpace"></td>
-            <td class="tdDropdown">Aqui vai o dropdown</td>
-          </tr>
-        </thead>
-      </table>
+    <div class="divLogo">
+      <img class="Logo" src="../images/Logo Transparente.png">
+    </div>
+    <div class="divDropdown">
+      <button class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        Gerenciar
+      </button>
+      <ul class="dropdown-menu dropdown-menu-dark">
+        <li><a class="dropdown-item" href="#">Aeronaves</a></li>
+        <li><a class="dropdown-item" href="#">Aeroportos</a></li>
+        <li><a class="dropdown-item" href="#">Cidades</a></li>
+        <li><a class="dropdown-item" href="#">Trechos</a></li>
+        <li><a class="dropdown-item" href="#">Voos</a></li>
+        <li><a class="dropdown-item" href="#">Assentos</a></li>
+    </div>
     </nav>
   </header>
    <!-- FINAL DA HEADER COM MENU -->
@@ -36,6 +42,7 @@
             <div class="titulo">
             <table>
               <thead>
+
                   <tr>
                     <td class="espacoSetas"><a href="../SELECT/TabelaInicial.html"><img class="imgSetas" src="../images/left-arrow.png"></a></td>
                     <td class="espacoTitulo"><h1>AERONAVES</h1></td>
