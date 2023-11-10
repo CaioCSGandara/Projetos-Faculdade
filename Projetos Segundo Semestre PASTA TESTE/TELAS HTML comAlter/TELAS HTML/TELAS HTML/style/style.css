@@ -61,8 +61,6 @@ h1 { /* título do formulário */
     width: 5%;
 }
 
-
-
 .footer { /* rodapé */
     color:#ECCA56;
     font-size: 12px;
@@ -72,8 +70,9 @@ h1 { /* título do formulário */
     background-color: #212529;
     width: 100%;
     height: 50px;
+    position: fixed;
+    bottom: 0;
 }
-
 
 .Logo { /* logo (vai ser adicionado ainda) */
     width: 110px;
@@ -137,4 +136,49 @@ h1 { /* título do formulário */
 .iconList:hover {
     filter: brightness(0) invert(1);
   }
-  
+
+.LogoPrincipal{
+    width: 500px;
+    height: auto;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin: 0;
+    align-items: center;
+    justify-content: center;  
+}
+
+.TextPrincipal{
+    color:white;
+    font-size:30px;
+    padding-top: 150px;
+    display:block;
+}
+
+.TextPrinci{
+    color:white;
+    font-size: 30px;
+    margin-top: 180px;
+    font-size: 30px;
+}
+
+.LogoHeader {
+    align-items: center;
+    justify-content: center;    
+    width: 200px;
+    padding-top: 15px;
+    margin: 0 auto; /* Adicionado para centralizar a imagem horizontalmente */
+}
+
+.fundadores{
+    color:white;
+    font-size: 16px;
+    position: fixed;
+    bottom: 35px;
+}
+
+.fundadoresT{
+    color: white;
+    font-size: 19px;
+    position: fixed;
+    bottom: 80px;
+}
