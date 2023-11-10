@@ -25,7 +25,7 @@ function RequisiçãoGETlistarAeronaves() {
     });
 }
 
-function exibirAeronvaes() {
+function Formulario() {
     console.log('Entrou no exibir...');
     RequisiçãoGETlistarAeronvaes()
       .then(customResponse => {
