@@ -128,3 +128,13 @@ h1 { /* título do formulário */
     align-items: center; 
     width: 50%;
 }
+
+.iconList {
+    width: 15px;
+    height: auto;
+}
+
+.iconList:hover {
+    filter: brightness(0) invert(1);
+  }
+  
