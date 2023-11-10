@@ -7,7 +7,7 @@ function RequisiçãoGETaeroporto() {
       .then(T => T.json());
   }
 
-  function preencherSelectAeroportosOrigem(options) {
+  function preencherSelectAeroportosOrigem(options, dados) {
     const aeroportoSelect = document.getElementById('selectOrigemAeroporto');
 
     options.forEach(optionValue => {
@@ -82,7 +82,7 @@ function RequisiçãoGETaeroporto() {
       console.log("Código Aeronave: " + JSON.stringify(optionValue));
       const option = document.createElement('option');
       option.value = optionValue.codigo;  // Definindo o valor corretamente
-      option.innerHTML = optionValue.modelo;  // Definindo o texto do option
+      option.innerHTML = optionValue.registro;  // Definindo o texto do option
       aeroSelect.appendChild(option);
     });
   }
