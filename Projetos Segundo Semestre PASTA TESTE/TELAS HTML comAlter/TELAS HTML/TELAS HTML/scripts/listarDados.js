@@ -13,8 +13,7 @@ function preencherFormulario(voo) {
   paragrafo.textContent = `Você está editando a aeronave de código:${voo.codigo}`;
   divPar.appendChild(paragrafo);
 }
-  
-    
+
   function preencherTabela(dados) {
     const tblBody = document.querySelector("tbody");
     dados.forEach((voo) => {
@@ -64,7 +63,6 @@ function preencherFormulario(voo) {
     return fetch('http://localhost:3000/excluirVoo', requestOptions)
         .then(response => response.json());
 }
-
 
 function deletarVoo(codigo) {
     const requestOptions = {
