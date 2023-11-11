@@ -27,13 +27,12 @@ function preencherFormulario(voo) {
             <td class="align-middle">${voo.origem}</td>
             <td class="align-middle">${voo.destino}</td>
             <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick="botaoAlterar('${voo.codigo}')" ></td>
-            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick="deletarVoo('${voo.codigo}')" ></td>
+            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick="popUpDeletar()"></td>
             
         `;
         tblBody.appendChild(row);
     });
 }
-
 
   function exibirTabela() {
     console.log('Entrou no exibir...');
@@ -64,6 +63,16 @@ function preencherFormulario(voo) {
         .then(response => response.json());
 }
 
+function popUpDeletar() {
+  const popup = document.getElementById('popUpDelete');
+  popup.showModal();
+}
+
+function fechaPopUpDeletar() {
+  const popup = document.getElementById('popUpDelete');
+  popup.close();
+}
+
 function deletarVoo(codigo) {
     const requestOptions = {
         method: 'DELETE',
@@ -81,19 +90,29 @@ function deletarVoo(codigo) {
                 if (rowToRemove) {
                     row.remove();
                     rowToRemove.remove();
-                    showStatusMessage("Voo Deletado com sucesso.", false);
+                    showStatusMessageDelete("Voo Deletado com sucesso.", false);
                 } else {
-                    showStatusMessage("Erro ao encontrar a linha da tabela para remoção.", true);
+                    showStatusMessageDelete("Erro ao encontrar a linha da tabela para remoção.", true);
                 }
             } else {
-                showStatusMessage("Erro ao deletar Voo: " + customResponse.message, true);
+                showStatusMessageDelete("Erro ao deletar Voo: " + customResponse.message, true);
                 console.log(customResponse.message);
             }
         })
         .catch((e) => {
-            showStatusMessage("Erro técnico ao deletar... Contate o suporte.", true);
+            showStatusMessageDelete("Erro técnico ao deletar... Contate o suporte.", true);
             console.log("Falha grave ao deletar." + e);
         });
+}
+
+function showStatusMessageDelete(msg, error) {
+  var pStatus = document.getElementById("statusDelete");
+  if (error === true){
+    pStatus.className = "statusError";
+  } else {
+    pStatus.className = "statusSuccess";
+  }
+  pStatus.textContent = msg;
 }
 
 function preencherFormulario(voo) {

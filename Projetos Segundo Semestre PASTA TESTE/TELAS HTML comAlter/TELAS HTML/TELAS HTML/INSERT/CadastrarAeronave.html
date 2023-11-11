@@ -36,6 +36,30 @@
    <!-- FINAL DA HEADER COM MENU -->
 
   <body>
+    <dialog class="popUpDelete" id="popUpDelete">
+      <div class="popUpHeader">
+        <table>
+          <thead>
+            <tr>
+              <td class class="titlePopUp"><h1>ATENÇÃO</h1></td>
+              <td class="xPopUp"><img class="iconList" src="../images/closeicon.png" onclick="fechaPopUpDeletar(); limparStatus();" ></td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="popUpBody">
+        <p>Tem certeza que deseja mesmo excluir este voo?
+          <br>
+          A ação não poderá ser desfeita.
+        </p>
+        <button class="btn btn-warning botaoExcluirPopUp"
+        onclick="deletarVoo('${voo.codigo}');">Excluir</button>
+        <button class="btn btn-secondary"
+        onclick="fechaPopUpDeletar(); limparStatus();">Cancelar</button>
+        <br>
+        <p id="statusDelete" class="statusError"></p>
+      </div>
+    </dialog>
     <div class="row">
       <!-- INÍCIO DA DIV DE CADASTRAR -->
       <div class="col-md-5" id="divCadastrar">
@@ -91,7 +115,7 @@
     
                 <button type="reset" class="btn btn-secondary" onclick="limparStatus();" id="btnCinza" name="btnCinza">Limpar</button>
               </p>
-              <p id="status" class="statusError"></p>
+              <p id="statusCadastrar" class="statusError"></p>
             </form>
         </div>
             </div>
@@ -165,7 +189,7 @@
               
               <button type="reset" 
               class="btn btn-secondary"
-              onclick="limparStatus(); AlterarAeronave();" 
+              onclick="limparStatus(); alterarAeronave();" 
               id="btnCinzaAlterar"
               name="btnCinza">Limpa</button>
 

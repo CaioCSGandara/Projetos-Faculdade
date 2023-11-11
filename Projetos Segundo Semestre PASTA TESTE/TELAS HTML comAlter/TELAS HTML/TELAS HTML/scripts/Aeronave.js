@@ -116,10 +116,9 @@ function anoValido(){
     });
   }
 
-  
 
   function showStatusMessageCadastrar(msg, error){
-    var pStatus = document.getElementById("status");
+    var pStatus = document.getElementById("statusCadastrar");
     if (error === true){
       pStatus.className = "statusError";
     } else {
@@ -127,8 +126,6 @@ function anoValido(){
     }
     pStatus.textContent = msg;
   }
-
-
 
 
 // FUNÇÕES PARA ALTERAÇÃO DE AERONAVE
@@ -299,11 +296,13 @@ function botaoCancelar() {
 }
 
 function limparStatus() {
-  const stsCadastrar = document.getElementById('status');
+  const stsCadastrar = document.getElementById('statusCadastrar');
   const stsAlterar = document.getElementById('statusAlterar');
+  const stsDelete = document.getElementById('statusDelete');
 
   stsCadastrar.textContent = '';
   stsAlterar.textContent = '';
+  stsDelete.textContent = '';
 }
   
 function preencherSelectAeronaves(options) {
