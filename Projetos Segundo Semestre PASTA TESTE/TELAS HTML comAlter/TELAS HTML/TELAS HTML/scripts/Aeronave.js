@@ -274,36 +274,33 @@ function anoValidoAlterar(){
   }
 
 
-  function botaoAlterar() {
-    var divCadastrar = document.getElementById('divCadastrar');
-    var divAlterar = document.getElementById('divAlterar');
+
+function alternarDivs(divVisivel, divOculta) {
+  var divOne = document.getElementById(divVisivel);
+  var divTwo = document.getElementById(divOculta);
+
+  if (divOne.style.display != 'none') {
+    divOne.style.display = 'none';
+    divTwo.style.display = 'block';
+  }
+
+}
+
+function limparStatus(statusToClean) {
+  const statusClean = document.getElementById(statusToClean);
+  statusClean.textContent = '';
+}
   
-    if (divCadastrar.style.display != 'none') {
-      // Se a primeira div estiver visível, oculte-a e mostre a segunda div
-      divCadastrar.style.display = 'none';
-      divAlterar.style.display = 'block';
-    } 
-}
 
-function botaoCancelar() {
-    var divCadastrar = document.getElementById('divCadastrar');
-    var divAlterar = document.getElementById('divAlterar');
+// function limparStatus() {
+//   const stsCadastrar = document.getElementById('statusCadastrar');
+//   const stsAlterar = document.getElementById('statusAlterar');
+//   const stsDelete = document.getElementById('statusDelete');
 
-    if(divAlterar.style.display != 'none') {
-        divCadastrar.style.display = 'block';
-        divAlterar.style.display = 'none';
-    }
-}
-
-function limparStatus() {
-  const stsCadastrar = document.getElementById('statusCadastrar');
-  const stsAlterar = document.getElementById('statusAlterar');
-  const stsDelete = document.getElementById('statusDelete');
-
-  stsCadastrar.textContent = '';
-  stsAlterar.textContent = '';
-  stsDelete.textContent = '';
-}
+//   stsCadastrar.textContent = '';
+//   stsAlterar.textContent = '';
+//   stsDelete.textContent = '';
+// }
   
 function preencherSelectAeronaves(options) {
   const aeroSelect = document.getElementById('selectAeronave');

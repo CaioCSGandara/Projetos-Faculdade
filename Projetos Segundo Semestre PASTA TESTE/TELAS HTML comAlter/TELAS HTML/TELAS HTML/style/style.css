@@ -7,9 +7,11 @@ body { /* Corpo geral da página*/
 }
 .statusError {
    color: red;
+   font-weight: bold;
 }
 .statusSuccess {
   color: blue;
+  font-weight: bold;
 }
 
 
@@ -184,6 +186,7 @@ h1 { /* título do formulário */
 }
 
 .popUpDelete {
+    width: 500px;
     padding: 0;
     border-radius: 20px;
     
@@ -198,7 +201,7 @@ h1 { /* título do formulário */
     width: 100%;
 }
 
-.popUpBody {
+#popUpBody, #popUpDone {
     color: white;
     padding: 20px;
     background-color: #212529;
@@ -217,3 +220,15 @@ h1 { /* título do formulário */
     text-align: right;
 }
 
+#divAlterar, #popUpDone {
+    display: none;
+}
+
+.codStyle {
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.pInline {
+    display: inline;
+}
