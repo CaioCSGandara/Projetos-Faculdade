@@ -10,7 +10,7 @@ body { /* Corpo geral da página*/
     font-size: 50px;
     color: white;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 30px;
     margin-bottom: 120px; 
 }
 
@@ -30,6 +30,61 @@ body { /* Corpo geral da página*/
     display: flex;
     padding-top: 15px;
     justify-content: center;
+    background-color: #212529;
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+}
+
+header {
+    background-color: #343A40;
+    color: #343A40;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    color: #ECCA56;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #212529;
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    bottom: 0;
+}
+
+/* Estilos específicos para AIR-PUC */
+.container {
+    width: 100000px;
+}
+
+/* Estilos para PAGAMENTO */
+.tituloPagamento {
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 120px;
+}
+
+.tipoPagamento {
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 70px;
+}
+
+.footer {
+    color: #ECCA56;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #212529;
     width: 100%;
     height: 50px;
