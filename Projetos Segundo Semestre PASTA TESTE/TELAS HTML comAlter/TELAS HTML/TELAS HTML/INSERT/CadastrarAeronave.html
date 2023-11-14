@@ -47,18 +47,25 @@
           </thead>
         </table>
       </div>
-      <div class="popUpBody">
-        <p>Tem certeza que deseja mesmo excluir este voo?
+      <div id="popUpBody">
+        <p class="pInline">Tem certeza que deseja mesmo excluir o voo de código <p class=" pInline codStyle" id="pcodDelete"></p><p class="pInline"> ?</p>
+          <br>
           <br>
           A ação não poderá ser desfeita.
         </p>
         <button class="btn btn-warning botaoExcluirPopUp"
-        onclick="deletarVoo('${voo.codigo}');">Excluir</button>
+        onclick="deletarVoo(codigoToUse); alternarDivs('popUpBody', 'popUpDone')">Excluir</button>
         <button class="btn btn-secondary"
-        onclick="fechaPopUpDeletar(); limparStatus();">Cancelar</button>
+        onclick="fechaPopUpDeletar(); limparStatus('statusDelete');">Cancelar</button>
         <br>
-        <p id="statusDelete" class="statusError"></p>
       </div>
+      
+      <div id="popUpDone">
+        <p id="statusDelete" class="statusError"></p>
+        <button class="btn btn-warning"
+        onclick="fechaPopUpDeletar(); limparStatus('statusDelete'); alternarDivs('popUpDone', 'popUpBody')">Sair</button>
+      </div>
+
     </dialog>
     <div class="row">
       <!-- INÍCIO DA DIV DE CADASTRAR -->
@@ -113,7 +120,7 @@
               <p>
                 <button type="button" class="btn btn-warning" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Inserir</button>
     
-                <button type="reset" class="btn btn-secondary" onclick="limparStatus();" id="btnCinza" name="btnCinza">Limpar</button>
+                <button type="reset" class="btn btn-secondary" onclick="limparStatus('statusCadastrar');" id="btnCinza" name="btnCinza">Limpar</button>
               </p>
               <p id="statusCadastrar" class="statusError"></p>
             </form>
@@ -125,7 +132,7 @@
 
 
       <!-- INÍCIO DA DIV DE ALTERAR -->
-      <div class="col-md-5" id="divAlterar" style="display: none;">
+      <div class="col-md-5" id="divAlterar">
 
         <div class="titulo">
           <table>
@@ -138,7 +145,7 @@
             </thead>
           </table>
           <br>
-          <p>Preencha todos os campos abaixo:</p>
+          <p class="pInline">Você está alterando o voo de código: </p> <p class="codStyle pInline" id="pcodAlter"></p>
         </div>
   
         <div class="formulario">
@@ -189,13 +196,13 @@
               
               <button type="reset" 
               class="btn btn-secondary"
-              onclick="limparStatus(); alterarAeronave();" 
+              onclick="limparStatus('statusAlterar');" 
               id="btnCinzaAlterar"
               name="btnCinza">Limpa</button>
 
               <button type="button"
               class="btn btn-secondary"
-              onclick="botaoCancelar();">Cancelar</button>           
+              onclick="alternarDivs('divAlterar', 'divCadastrar');">Cancelar</button>           
           </p>
           <p id="statusAlterar" class="statusError"></p>
           </form>

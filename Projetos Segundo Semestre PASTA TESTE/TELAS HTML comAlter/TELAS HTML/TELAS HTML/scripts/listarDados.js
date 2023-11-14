@@ -26,10 +26,11 @@ function preencherFormulario(voo) {
             <td class="text-center align-middle">${voo.hrChegada}</td>
             <td class="align-middle">${voo.origem}</td>
             <td class="align-middle">${voo.destino}</td>
-            <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick="botaoAlterar('${voo.codigo}')" ></td>
-            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick="popUpDeletar()"></td>
+            <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" exibeCodigo('${voo.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${voo.codigo}', 'pcodDelete'); popUpDeletar('${voo.codigo}')"></td>
             
         `;
+        //<td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick="botaoAlterar('${voo.codigo}')" ></td>
         tblBody.appendChild(row);
     });
 }
@@ -63,7 +64,10 @@ function preencherFormulario(voo) {
         .then(response => response.json());
 }
 
-function popUpDeletar() {
+let codigoToUse = null;
+
+function popUpDeletar(codigoCapturado) {
+  codigoToUse = codigoCapturado;
   const popup = document.getElementById('popUpDelete');
   popup.showModal();
 }
@@ -74,35 +78,26 @@ function fechaPopUpDeletar() {
 }
 
 function deletarVoo(codigo) {
-    const requestOptions = {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ codigo: codigo })
-    };
+  const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ codigo: codigo })
+  };
 
-    fetch('http://localhost:3000/excluirVoo', requestOptions)
-        .then(response => response.json())
-        .then(customResponse => {
-            if (customResponse.status === "SUCCESS") {
-                // Remove the corresponding table row from the UI
-                const row = codigo.parentNode.parentNode;
-                const rowToRemove = document.getElementById(`codigo-${codigo}`);
-                if (rowToRemove) {
-                    row.remove();
-                    rowToRemove.remove();
-                    showStatusMessageDelete("Voo Deletado com sucesso.", false);
-                } else {
-                    showStatusMessageDelete("Erro ao encontrar a linha da tabela para remoção.", true);
-                }
-            } else {
-                showStatusMessageDelete("Erro ao deletar Voo: " + customResponse.message, true);
-                console.log(customResponse.message);
-            }
-        })
-        .catch((e) => {
-            showStatusMessageDelete("Erro técnico ao deletar... Contate o suporte.", true);
-            console.log("Falha grave ao deletar." + e);
-        });
+  fetch('http://localhost:3000/excluirVoo', requestOptions)
+      .then(response => response.json())
+      .then(customResponse => {
+          if (customResponse.status === "SUCCESS") {
+              showStatusMessageDelete("Voo deletado com sucesso.", false);
+          } else {
+              showStatusMessageDelete("Erro ao deletar Voo: " + customResponse.message, true);
+              console.log(customResponse.message);
+          }
+      })
+      .catch((e) => {
+          showStatusMessageDelete("Erro técnico ao deletar... Contate o suporte.", true);
+          console.log("Falha grave ao deletar." + e);
+      });
 }
 
 function showStatusMessageDelete(msg, error) {
@@ -115,9 +110,8 @@ function showStatusMessageDelete(msg, error) {
   pStatus.textContent = msg;
 }
 
-function preencherFormulario(voo) {
-  const divPar = document.getElementById("addPar");
-  const paragrafo = document.createElement("p");
-  paragrafo.textContent = `Você está editando a aeronave de código:${voo.codigo}`;
-  divPar.appendChild(paragrafo);
+function exibeCodigo(codigoCapturado, idP) {
+  codigoToUse=codigoCapturado;
+    var pCodigo = document.getElementById(idP);
+    pCodigo.textContent = `${codigoToUse}`;
 }
