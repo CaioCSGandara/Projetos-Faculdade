@@ -7,12 +7,6 @@ function RequisiçãoGETlistar() {
       .then(T => T.json());
   }
 
-function preencherFormulario(voo) {
-  const divPar = document.getElementById("addPar");
-  const paragrafo = document.createElement("p");
-  paragrafo.textContent = `Você está editando a aeronave de código:${voo.codigo}`;
-  divPar.appendChild(paragrafo);
-}
 
   function preencherTabela(dados) {
     const tblBody = document.querySelector("tbody");
@@ -26,7 +20,7 @@ function preencherFormulario(voo) {
             <td class="text-center align-middle">${voo.hrChegada}</td>
             <td class="align-middle">${voo.origem}</td>
             <td class="align-middle">${voo.destino}</td>
-            <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" exibeCodigo('${voo.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+            <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick="  exibeCodigo('${voo.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
             <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${voo.codigo}', 'pcodDelete'); popUpDeletar('${voo.codigo}')"></td>
             
         `;
@@ -115,3 +109,8 @@ function exibeCodigo(codigoCapturado, idP) {
     var pCodigo = document.getElementById(idP);
     pCodigo.textContent = `${codigoToUse}`;
 }
+
+// function preencherAlterar(dados) {
+//   var testing = document.getElementById("codigoAlterar");
+//   testing.value = dados;
+// }

@@ -287,31 +287,10 @@ function alternarDivs(divVisivel, divOculta) {
 }
 
 function limparStatus(statusToClean) {
-  const statusClean = document.getElementById(statusToClean);
+  var statusClean = document.getElementById(statusToClean);
   statusClean.textContent = '';
 }
   
-
-// function limparStatus() {
-//   const stsCadastrar = document.getElementById('statusCadastrar');
-//   const stsAlterar = document.getElementById('statusAlterar');
-//   const stsDelete = document.getElementById('statusDelete');
-
-//   stsCadastrar.textContent = '';
-//   stsAlterar.textContent = '';
-//   stsDelete.textContent = '';
-// }
-  
-function preencherSelectAeronaves(options) {
-  const aeroSelect = document.getElementById('selectAeronave');
-  options.forEach(optionValue => {
-    console.log("Código Aeronave: " + JSON.stringify(optionValue));
-    const option = document.createElement('option');
-    option.value = optionValue.codigo;  // Definindo o valor corretamente
-    option.innerHTML = optionValue.codigo;  // Definindo o texto do option
-    aeroSelect.appendChild(option);
-  });
-}
 
 function exibirAeronave() {
   console.log('Entrou no exibir...');
