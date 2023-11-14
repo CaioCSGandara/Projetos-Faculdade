@@ -8,8 +8,7 @@
     <link rel="stylesheet" type="text/css" href="../style/stylePG.css">
 </head>
 
-
-<header style="background-color: #343A40; color: #343A40; height: 50px;"></header>
+<header style="background-color: #343A40; color: #343A40; height: 50px;";></header>
 
 <body>
     <div class="container text-center" style="width: 10000px;">
@@ -17,82 +16,66 @@
             <div class="d-flex flex-column" style="align-items: center;justify-content: center; font-size: 25px;">
                 
                 <h1 class="tituloPagamento">Realize seu pagamento</h1>
-                <img src="../images/Logo Transparente.png" class="LogoPrincipal">
+                <img src="../images/Logo Transparente.png" class="LogoPrincipal" style="width: 300px;">
 
-                <p class="tipoPagamento" style="margin-top: 150px;">SELECIONE A FORMA DE PAGAMENTO</p>
+                <p class="tipoPagamento" style="margin-top: 30px;">SELECIONE A FORMA DE PAGAMENTO</p>
                 <div style="display: flex;">
-                 <div>
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="PIX" checked>
-                    <label class="form-check-label text-white"  for="exampleRadios1" style="padding-right: 50px;">
-                      PIX
-                    </label>
-                  </div>
-                  <div>
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                    <label class="form-check-label text-white" for="exampleRadios2" style="padding-right: 10px;">
-                      Cartao de Crédito
-                    </label>
-                   </div>
-
+                    <div>
+                        <input class="form-check-input" type="radio" name="payment" id="pix" value="pix" checked>
+                        <label class="form-check-label text-white" for="pix" style="padding-right: 50px;">
+                            PIX
+                        </label>
+                    </div>
+                    <div>
+                        <input class="form-check-input" type="radio" name="payment" id="credit" value="credit">
+                        <label class="form-check-label text-white" for="credit" style="padding-right: 10px;">
+                            Cartao de Crédito
+                        </label>
+                    </div>
                 </div>
 
-                <div style="display: flex; gap: 0px;" >
-                    <input style="margin-top: 5px; width: 250px;" type="text" id="full-name" placeholder="Nome Completo" >
-                    <input style="margin-top: 5px; width: 250px;" type="text" id="email" placeholder="Email">
+                <div style="display: flex; gap: 10px;" >
+                    <input style="margin-top: 5px; width: 200px;" type="text" id="full-name" placeholder="Nome Completo" >
+                    <input style="margin-top: 5px; width: 200px;" type="text" id="email" placeholder="Email">
                 </div>
 
-                <button class="btn btn-outline-warning btn-lg" style="margin-top: 50px;" onclick="processPayment()">Realizar Pagamento</button>
-                <p id="payment-message"></p>
-                
-
+                <button class="btn btn-outline-warning btn-lg" style="margin-top: 20px; margin-bottom: 20px; font-size: small;" onclick="processPayment()">Realizar Pagamento</button>
+                <p id="payment-message" style="margin-bottom: 20px; margin-top: -15px;"></p>
             </div>
         </div>
     </div>
 
-
     <script>
+        function processPayment() {
+            const paymentType = document.querySelector('input[name="payment"]:checked').value;
+            const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const paymentMessage = document.getElementById('payment-message');
 
-    function processPayment() {
-        const paymentType = document.querySelector('input[name="payment"]:checked').value;
-        const fullName = document.getElementById('full-name').value;
-        const email = document.getElementById('email').value;
-        const paymentMessage = document.getElementById('payment-message');
+            if (fullName === '' || email === '') {
+                paymentMessage.textContent = 'Por favor, preencha seu nome completo e e-mail.';
+                paymentMessage.classList.add('error-message');  // Adiciona a classe de estilo de erro
+                return;
+            }
 
-        if (fullName === '' || email === '') {
-            paymentMessage.textContent = 'Por favor, preencha seu nome completo e e-mail.';
-            return;
+            if (paymentType === 'pix') {
+                paymentMessage.textContent = 'Pagamento não aprovado. Tente novamente.';
+                paymentMessage.classList.add('error-message');  // Adiciona a classe de estilo de erro
+            } else if (paymentType === 'credit') {
+                paymentMessage.textContent = 'Pagamento aprovado. Voucher enviado por email.';
+                paymentMessage.classList.remove('error-message');  // Remove a classe de estilo de erro, se presente
+                paymentMessage.classList.add('payment-message');  // Adiciona a classe de estilo de pagamento
+                sendVoucherByEmail(email);
+            }
         }
-
-        if (paymentType === 'pix') {
-            paymentMessage.textContent = 'Pagamento não aprovado. Tente novamente.';
-        } else if (paymentType === 'credit') {
-            paymentMessage.textContent = 'Pagamento aprovado. Voucher enviado por email.';
-            sendVoucherByEmail(email);
-        }
-    }
-
-    function sendVoucherByEmail(email) {
-        console.log(`Voucher enviado para: ${email}`);
-    } 
     </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <Footer class="footer">
+    <footer class="footer">
         <p class="copyright">©️ Copyright - AIR PUC 2023</p>
-    </Footer>
-
+    </footer>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
