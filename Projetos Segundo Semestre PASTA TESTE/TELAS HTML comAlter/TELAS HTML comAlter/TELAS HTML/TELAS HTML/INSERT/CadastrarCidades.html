@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área - Cidades</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../style/style.css">
+
+</head>
+
+<header>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../SELECT/TabelaInicial.html"><img class="Logo" src="../images/Logo Transparente.png"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="../SELECT/TabelaInicial.html">Painel Principal</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Cadastrar
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="../INSERT/CadastrarAeronave.html">Cadastrar Aeronave</a></li>
+                <li><a class="dropdown-item" href="../INSERT/CadastrarAeroporto.html">Cadastrar Aeroporto</a></li>
+                <li><a class="dropdown-item" href="../INSERT/CadastrarCidades.html">Cadastrar Cidade</a></li>
+                <li><a class="dropdown-item" href="../INSERT/CadastrarTrecho.html">Cadastrar Trecho</a></li>
+                <li><a class="dropdown-item" href="../INSERT/CadastrarVoos.html">Cadastrar Voo</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Alterar
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="../ALTER/AlterarAeronave.html">Alterar Aeronave</a></li>
+                <li><a class="dropdown-item" href="../ALTER/AlterarAeroporto.html">Alterar Aeroporto</a></li>
+                <li><a class="dropdown-item" href="../ALTER/AlterarCidades.html">Alterar Cidade</a></li>
+                <li><a class="dropdown-item" href="../ALTER/AlterarTrecho.html">Alterar Trecho</a></li>
+                <li><a class="dropdown-item" href="../ALTER/AlterarVoos.html">Another Voo</a></li>
+                <li><a class="dropdown-item" href="../ALTER/AlterarAssentos.html">Alterar Assento</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Ex: Cadastrar Cidade" aria-label="Search">
+            <button class="btn btn-outline-warning" type="submit">Pesquisar</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+<body>
+    <div class="content">
+        <div class="titulo">
+        <table>
+          <thead>
+              <tr>
+                <td class="espacoSetas"><a href="../INSERT/CadastrarAeronave.html"><img class="imgSetas" src="../images/left-arrow.png"></a></td>
+                <td class="espacoTitulo"><h1>CIDADES</h1></td>
+                <td class="espacoSetas"><a href="../INSERT/CadastrarAeroporto.html"><img class="imgSetas" src="../images/right-arrow.png"></a></td>
+          
+              </tr>
+          </thead>
+        </table>
+        <br>
+        <p>Preencha todos os campos abaixo:</p>
+        </div>
+        <div class="formulario">
+            <form>
+                <p>
+                    <label for="nome">Nome da cidade:</label><br/>
+                    <input type="text" id="nome" name="nomeCidade" class="alteracao" placeholder="Ex: Campinas">
+                </p>
+                <br>
+                <p>
+                    <label for="uf">Estado:</label><br>
+                    <select id="uf" name="estado" class="alteracao">
+                        <option value="0" selected>Selecione um estado</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                        <option value="EX">Estrangeiro</option>
+                    </select>
+                </p>
+                <br>
+                <p>
+                    <label for="pais">País:</label><br>
+                    <input type="text" id="pais" name="pais" class="alteracao" placeholder="Ex: Brasil"> 
+                </p>
+                <br>
+                <p>
+                    <button 
+                    type="button"
+                    class="btn btn-warning"
+                    onclick="inserirCidade();"
+                    id="btnCadastrar"
+                    name="btnCadastrar">Inserir</button>
+
+                    <button type="reset" 
+                    class="btn btn-secondary" 
+                    id="btnCinza"
+                    name="btnCinza">Limpar</button>
+                    
+                </p>
+                <p id="status" class="statusError"></p>
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+      <p class="copyright">©️ Copyright - AIR PUC 2023</p>
+    </div>
+    <script type="text/javascript" src="../scripts/cadastrarCidades.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>
+   
