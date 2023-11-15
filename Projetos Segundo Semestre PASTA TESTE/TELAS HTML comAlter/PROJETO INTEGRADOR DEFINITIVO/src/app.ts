@@ -126,7 +126,7 @@ app.get("/listarAeronaves", async(req,res)=>{
     // atenção: mudamos a saída para que o oracle entregue um objeto puro em JS no rows.
     // não mais um array dentro de array.
     let resultadoConsulta = await connection.execute(`
-    SELECT CODIGO, MODELO FROM AERONAVES`);
+    SELECT CODIGO, FABRICANTE, MODELO, ANO_FABRICACAO, TOTAL_ASSENTOS, REFERENCIA FROM AERONAVES`);
   
     cr.status = "SUCCESS"; 
     cr.message = "Dados obtidos";

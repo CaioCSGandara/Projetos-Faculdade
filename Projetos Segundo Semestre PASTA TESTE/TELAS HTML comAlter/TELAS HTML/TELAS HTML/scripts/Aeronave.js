@@ -292,19 +292,11 @@ function limparStatus(statusToClean) {
 }
   
 
-function exibirAeronave() {
-  console.log('Entrou no exibir...');
-  RequisiçãoGETaeronave()
-    .then(customResponse => {
-      if (customResponse.status === "SUCCESS") {
-        console.log("Deu certo a busca de dados");
-        console.log('Payload:' + JSON.stringify(customResponse.payload));
-        preencherSelectAeronaves(customResponse.payload); 
-      } else {
-        console.log(customResponse.message);
-      }
-    })
-    .catch((e) => {
-      console.log("Não foi possível exibir." + e);
-    });
-}
+// export type Aeronave = {
+//   codigo?: number, 
+//   fabricante?: string, 
+//   modelo?: string,
+//   anoFabricacao?: number, 
+//   totalAssentos?: number,
+//   referencia?: string
+// }
