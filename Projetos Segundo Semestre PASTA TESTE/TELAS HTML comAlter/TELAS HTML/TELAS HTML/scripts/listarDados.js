@@ -20,11 +20,11 @@ function RequisiçãoGETlistar() {
             <td class="text-center align-middle">${voo.hrChegada}</td>
             <td class="align-middle">${voo.origem}</td>
             <td class="align-middle">${voo.destino}</td>
-            <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick="  exibeCodigo('${voo.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+            <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" exibeCodigo('${voo.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
             <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${voo.codigo}', 'pcodDelete'); popUpDeletar('${voo.codigo}')"></td>
             
         `;
-        //<td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick="botaoAlterar('${voo.codigo}')" ></td>
+      
         tblBody.appendChild(row);
     });
 }
@@ -109,8 +109,18 @@ function exibeCodigo(codigoCapturado, idP) {
     var pCodigo = document.getElementById(idP);
     pCodigo.textContent = `${codigoToUse}`;
 }
+// A FUNÇÃO ABAIXO FUNCIONA PARA PREENCHER O ALTERAR. É NECESSÁRIO APENAS QUE SEJA USADA COM O SERVIÇO CORRETO.
+// CHAMADA NO ONCLICK DO BOTAO DE ALTERAR: preencherAlterar(this);
 
-// function preencherAlterar(dados) {
-//   var testing = document.getElementById("codigoAlterar");
-//   testing.value = dados;
+// function preencherAlterar(elemento) {
+//   const tdImagem = elemento.parentNode;
+//   const linha = tdImagem.parentNode;
+//   const elementosLinha = linha.querySelectorAll('td');
+  
+//   const codigoAlt = document.getElementById("codigoAlterar");
+//   codigoAlt.value = elementosLinha[0].textContent;
+
+//   const fabricanteAlt = document.getElementById("comboFabricantesAlterar");
+//   fabricanteAlt.option = elementosLinha[1].textContent;
+
 // }

@@ -215,14 +215,15 @@ h1 { /* título do formulário */
     text-align: right;
 }
 
-header {
+/* CODIGO THIAGO PARA O MENU - transferir para o outro css */
+/* header {
     background-color: #343A40;
     color: #343A40;
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .footer {
     color: #ECCA56;
@@ -269,4 +270,12 @@ header {
     height: 50px;
     position: fixed;
     bottom: 0;
+}
+
+#divAlterar, #popUpDone {
+    display: none;
+}
+
+.pInline{
+    display: inline;
 }
