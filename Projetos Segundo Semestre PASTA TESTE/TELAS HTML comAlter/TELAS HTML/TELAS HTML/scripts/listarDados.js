@@ -94,16 +94,16 @@ function exibirAeronave() {
   // }
 
   
-  function fetchDeletar(body) {
-    const requestOptions = {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-    };
+//   function fetchDeletar(body) {
+//     const requestOptions = {
+//         method: 'DELETE',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(body)
+//     };
 
-    return fetch('http://localhost:3000/excluirVoo', requestOptions)
-        .then(response => response.json());
-}
+//     return fetch('http://localhost:3000/excluirVoo', requestOptions)
+//         .then(response => response.json());
+// }
 
 let codigoToUse = null;
 

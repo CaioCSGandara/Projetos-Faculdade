@@ -130,7 +130,6 @@ app.get("/listarAeronaves", (req, res) => __awaiter(void 0, void 0, void 0, func
         if (connection !== undefined) {
             yield connection.close();
         }
-        console.log(cr);
         res.send(cr);
     }
 }));
