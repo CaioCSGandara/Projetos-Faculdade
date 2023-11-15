@@ -24,12 +24,12 @@
         Gerenciar
       </button>
       <ul class="dropdown-menu dropdown-menu-dark">
-        <li><a class="dropdown-item" href="#">Aeronaves</a></li>
-        <li><a class="dropdown-item" href="#">Aeroportos</a></li>
-        <li><a class="dropdown-item" href="#">Cidades</a></li>
-        <li><a class="dropdown-item" href="#">Trechos</a></li>
-        <li><a class="dropdown-item" href="#">Voos</a></li>
-        <li><a class="dropdown-item" href="#">Assentos</a></li>
+        <li><a class="dropdown-item" href="#">codigo</a></li>
+        <li><a class="dropdown-item" href="#">fabricante</a></li>
+        <li><a class="dropdown-item" href="#">modelo</a></li>
+        <li><a class="dropdown-item" href="#">anoFabricacao</a></li>
+        <li><a class="dropdown-item" href="#">totalAssentos</a></li>
+        <li><a class="dropdown-item" href="#">referencia</a></li>
     </div>
     </nav>
   </header>
@@ -54,7 +54,7 @@
           A ação não poderá ser desfeita.
         </p>
         <button class="btn btn-warning botaoExcluirPopUp"
-        onclick="deletarVoo(codigoToUse); alternarDivs('popUpBody', 'popUpDone')">Excluir</button>
+        onclick="deletarAeronave(codigoToUse); alternarDivs('popUpBody', 'popUpDone')">Excluir</button>
         <button class="btn btn-secondary"
         onclick="fechaPopUpDeletar(); limparStatus('statusDelete');">Cancelar</button>
         <br>
@@ -222,11 +222,11 @@
                 <thead class="cabecalhoTabela">
                   <tr>
                     <th class="text-center align-middle">Código</th>
-                    <th class="text-center align-middle">Data</th>
-                    <th class="text-center align-middle">Trecho do voo</th>
-                    <th class="text-center align-middle">Horário Partida</th>
-                    <th class="text-center align-middle">Horário Chegada</th>
-                    <th class="align-middle">Aeroporto Origem</th>
+                    <th class="text-center align-middle">Fabricante</th>
+                    <th class="text-center align-middle">Modelo</th>
+                    <th class="text-center align-middle">Ano </th>
+                    <th class="text-center align-middle">Capacidade</th>
+                    <th class="align-middle">Referência</th>
                     <th> </th>
                     <th> </th>
                   </tr>

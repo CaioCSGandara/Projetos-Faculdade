@@ -104,3 +104,72 @@ function showStatusMessage(msg, error){
   }
   pStatus.textContent = msg;
 }
+
+// Script da tabel de exibição dos Aeroportos
+
+function RequisiçãoGETaeroporto() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+  return fetch('http://localhost:3000/listarAeroportos', requestOptions)
+    .then(T => T.json());
+}
+
+function preencherAeroportos(aeroporto) {
+  const tblBody = document.querySelector("tbody");
+  aeroporto.forEach((aeroporto) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+          <td class="text-center align-middle padLeft" id="codigo">${aeroporto.codigo}</td>
+          <td class="text-center align-middle">${aeroporto.nome}</td>
+          <td class="text-center align-middle">${aeroporto.sigla}</td>
+          <td class="text-center align-middle">${aeroporto.cidade}</td>
+          <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this); exibeCodigo('${aeroporto.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+          <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeronave.codigo}')"></td>
+          
+      `;
+    
+      tblBody.appendChild(row);
+  });
+}
+
+function exibirAeroporto() {
+  console.log('Entrou no exibir...');
+  RequisiçãoGETaeronave()
+    .then(customResponse => {
+      if (customResponse.status === "SUCCESS") {
+        console.log("Deu certo a busca de dados");
+        console.log('Payload:' + JSON.stringify(customResponse.payload));
+        preencherAeronaves(customResponse.payload); 
+      } else {
+        console.log(customResponse.message);
+      }
+    })
+    .catch((e) => {
+      console.log("Não foi possível exibir." + e);
+    });
+}
+
+function deletarAeroporto(codigo) {
+  const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ codigo: codigo })
+  };
+
+  fetch('http://localhost:3000/excluirAeroporto', requestOptions)
+      .then(response => response.json())
+      .then(customResponse => {
+          if (customResponse.status === "SUCCESS") {
+              showStatusMessageDelete("Aeroporto deletada com sucesso.", false);
+          } else {
+              showStatusMessageDelete("Erro ao deletar Aeroporto: " + customResponse.message, true);
+              console.log(customResponse.message);
+          }
+      })
+      .catch((e) => {
+          showStatusMessageDelete("Erro técnico ao deletar... Contate o suporte.", true);
+          console.log("Falha grave ao deletar." + e);
+      });
+}

@@ -79,3 +79,51 @@ function showStatusMessage(msg, error) {
     }
     pStatus.textContent = msg;
 }
+
+// THIAGO MEXENDO NO DIA 15/11/2023 AS 17:16 DURANTE NOSSA CALL DE LOUCO, FAVOR NAO GRITAR, EMOJI DE JOIA
+
+function RequisiçãoGETcidade() {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    return fetch('http://localhost:3000/listarCidades', requestOptions)
+      .then(T => T.json());
+  }
+  
+  
+  function preencherCidade(Cidade) {
+    const tblBody = document.querySelector("tbody");
+    Cidade.forEach((Cidade) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td class="text-center align-middle padLeft" id="codigo">${Cidade.codigo}</td>
+            <td class="text-center align-middle">${Cidade.fabricante}</td>
+            <td class="text-center align-middle">${Cidade.modelo}</td>
+            <td class="text-center align-middle">${Cidade.anoFabricacao}</td>
+            <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" exibeCodigo('${Cidade.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${Cidade.codigo}', 'pcodDelete'); popUpDeletar('${Cidade.codigo}')"></td>
+        `;
+        tblBody.appendChild(row);
+    });
+  }
+  
+  function exibirCidades() {
+    console.log('Entrou no exibir...');
+    RequisiçãoGETcidade()
+      .then(customResponse => {
+        if (customResponse.status === "SUCCESS") {
+          console.log("Deu certo a busca de dados");
+          console.log('Payload:' + JSON.stringify(customResponse.payload));
+          preencherCidade(customResponse.payload); 
+        } else {
+          console.log(customResponse.message);
+        }
+      })
+      .catch((e) => {
+        console.log("Não foi possível exibir." + e);
+      });
+  }
+
+
+  

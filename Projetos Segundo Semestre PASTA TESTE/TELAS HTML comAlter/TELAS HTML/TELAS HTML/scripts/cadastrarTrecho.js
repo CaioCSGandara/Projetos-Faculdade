@@ -163,3 +163,50 @@ function RequisiçãoGETaeroporto() {
     }
     pStatus.textContent = msg;
   }
+
+// Script de exibição da tabela de trechos
+
+function RequisiçãoGETtrechos() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+  return fetch('http://localhost:3000/listarTrechos', requestOptions)
+    .then(T => T.json());
+}
+
+function preencherTrechos(trecho) {
+  const tblBody = document.querySelector("tbody");
+  trecho.forEach((trecho) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+          <td class="text-center align-middle padLeft" id="codigo">${trecho.codigo}</td>
+          <td class="text-center align-middle">${trecho.nome}</td>
+          <td class="text-center align-middle">${trecho.origem}</td>
+          <td class="text-center align-middle">${trecho.destino}</td>
+          <td class="text-center align-middle">${trecho.aeronave}</td>
+          <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this); exibeCodigo('${aeroporto.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+          <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeronave.codigo}')"></td>
+          
+      `;
+    
+      tblBody.appendChild(row);
+  });
+}
+
+function exibirTrecho() {
+  console.log('Entrou no exibir...');
+  RequisiçãoGETtrecho()
+    .then(customResponse => {
+      if (customResponse.status === "SUCCESS") {
+        console.log("Deu certo a busca de dados");
+        console.log('Payload:' + JSON.stringify(customResponse.payload));
+        preencherSelectTrechos(customResponse.payload); // Removido o parse redundante
+      } else {
+        console.log(customResponse.message);
+      }
+    })
+    .catch((e) => {
+      console.log("Não foi possível exibir." + e);
+    });
+}

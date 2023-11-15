@@ -22,6 +22,9 @@ export function rowsToTrechos(oracleRows: unknown[] | undefined) : Array<Trecho>
       trecho = {
         codigo: registro.CODIGO,
         nome: registro.NOME,
+        origem: registro.ORIGEM,
+        destino: registro.DESTINO,
+        aeronave: registro.AERONAVE,
       } as Trecho;
 
       // inserindo o novo Array convertido.
@@ -42,6 +45,9 @@ export function rowsToCidades(oracleRows: unknown[] | undefined) : Array<Cidade>
       cidade = {
         codigo: registro.CODIGO,
         nome: registro.NOME,
+        UF: registro.UF,
+        pais: registro.PAIS,
+
       } as Cidade;
 
       // inserindo o novo Array convertido.
@@ -61,7 +67,9 @@ export function rowsToAeroportos(oracleRows: unknown[] | undefined) : Array<Aero
     oracleRows.forEach((registro: any) => {
       aeroporto = {
         codigo: registro.CODIGO,
+        nome: registro.NOME,
         sigla: registro.SIGLA,
+        cidade: registro.CIDADE,
       } as Aeroporto;
 
       // inserindo o novo Array convertido.

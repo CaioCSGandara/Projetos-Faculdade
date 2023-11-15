@@ -52,7 +52,7 @@ app.get("/listarTrechos", (req, res) => __awaiter(void 0, void 0, void 0, functi
         // atenção: mudamos a saída para que o oracle entregue um objeto puro em JS no rows.
         // não mais um array dentro de array.
         let resultadoConsulta = yield connection.execute(`
-    SELECT CODIGO, NOME FROM TRECHOS`);
+    SELECT CODIGO, NOME, ORIGEM, DESTINO, AERONAVE FROM TRECHOS`);
         cr.status = "SUCCESS";
         cr.message = "Dados obtidos";
         cr.payload = ((0, Conversores_1.rowsToTrechos)(resultadoConsulta.rows));
@@ -82,7 +82,7 @@ app.get("/listarCidades", (req, res) => __awaiter(void 0, void 0, void 0, functi
         // atenção: mudamos a saída para que o oracle entregue um objeto puro em JS no rows.
         // não mais um array dentro de array.
         let resultadoConsulta = yield connection.execute(`
-    SELECT CODIGO, NOME FROM CIDADES`);
+    SELECT CODIGO, NOME, UF, PAIS FROM CIDADES`);
         cr.status = "SUCCESS";
         cr.message = "Dados obtidos";
         cr.payload = ((0, Conversores_1.rowsToCidades)(resultadoConsulta.rows));
@@ -141,7 +141,7 @@ app.get("/listarAeroportos", (req, res) => __awaiter(void 0, void 0, void 0, fun
         // atenção: mudamos a saída para que o oracle entregue um objeto puro em JS no rows.
         // não mais um array dentro de array.
         let resultadoConsulta = yield connection.execute(`
-    SELECT CODIGO, SIGLA FROM AEROPORTOS`);
+    SELECT CODIGO, NOME, SIGLA, CIDADE FROM AEROPORTOS`);
         cr.status = "SUCCESS";
         cr.message = "Dados obtidos";
         cr.payload = ((0, Conversores_1.rowsToAeroportos)(resultadoConsulta.rows));
@@ -447,7 +447,7 @@ app.put("/inserirCidade", (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 }));
 app.delete("/excluirVoo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // excluindo a aeronave pelo código dela:
+    // excluindo o voo pelo código dele:
     const codigo = req.body.codigo;
     console.log('Codigo recebido: ' + codigo);
     // definindo um objeto de resposta.
@@ -474,6 +474,241 @@ app.delete("/excluirVoo", (req, res) => __awaiter(void 0, void 0, void 0, functi
         }
         else {
             cr.message = "Voo não excluído. Verifique se o código informado está correto.";
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            cr.message = e.message;
+            console.log(e.message);
+        }
+        else {
+            cr.message = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        // fechando a conexao
+        if (connection !== undefined)
+            yield connection.close();
+        // devolvendo a resposta da requisição.
+        res.send(cr);
+    }
+}));
+app.delete("/excluirAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // excluindo a aeronave pelo código dela:
+    const codigo = req.body.codigo;
+    console.log('Codigo recebido: ' + codigo);
+    // definindo um objeto de resposta.
+    let cr = {
+        status: "ERROR",
+        message: "",
+        payload: undefined,
+    };
+    // conectando 
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(OracleConnAtribs_1.oraConnAttribs);
+        const cmdDeleteAero = `DELETE AERONAVES WHERE codigo = :1`;
+        const dados = [codigo];
+        let resDelete = yield connection.execute(cmdDeleteAero, dados);
+        // importante: efetuar o commit para gravar no Oracle.
+        yield connection.commit();
+        // obter a informação de quantas linhas foram inseridas. 
+        // neste caso precisa ser exatamente 1
+        const rowsDeleted = resDelete.rowsAffected;
+        if (rowsDeleted !== undefined && rowsDeleted === 1) {
+            cr.status = "SUCCESS";
+            cr.message = "Aeronave excluída.";
+        }
+        else {
+            cr.message = "Aeronave não excluído. Verifique se o código informado está correto.";
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            cr.message = e.message;
+            console.log(e.message);
+        }
+        else {
+            cr.message = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        // fechando a conexao
+        if (connection !== undefined)
+            yield connection.close();
+        // devolvendo a resposta da requisição.
+        res.send(cr);
+    }
+}));
+app.delete("/excluirAeroporto", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // excluindo o aeroporto pelo código dele:
+    const codigo = req.body.codigo;
+    console.log('Codigo recebido: ' + codigo);
+    // definindo um objeto de resposta.
+    let cr = {
+        status: "ERROR",
+        message: "",
+        payload: undefined,
+    };
+    // conectando 
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(OracleConnAtribs_1.oraConnAttribs);
+        const cmdDeleteAeroporto = `DELETE AEROPORTOS WHERE codigo = :1`;
+        const dados = [codigo];
+        let resDelete = yield connection.execute(cmdDeleteAeroporto, dados);
+        // importante: efetuar o commit para gravar no Oracle.
+        yield connection.commit();
+        // obter a informação de quantas linhas foram inseridas. 
+        // neste caso precisa ser exatamente 1
+        const rowsDeleted = resDelete.rowsAffected;
+        if (rowsDeleted !== undefined && rowsDeleted === 1) {
+            cr.status = "SUCCESS";
+            cr.message = "Aeroporto excluído.";
+        }
+        else {
+            cr.message = "Aeroporto não excluído. Verifique se o código informado está correto.";
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            cr.message = e.message;
+            console.log(e.message);
+        }
+        else {
+            cr.message = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        // fechando a conexao
+        if (connection !== undefined)
+            yield connection.close();
+        // devolvendo a resposta da requisição.
+        res.send(cr);
+    }
+}));
+app.delete("/excluirTrecho", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // excluindo o trecho pelo código dele:
+    const codigo = req.body.codigo;
+    console.log('Codigo recebido: ' + codigo);
+    // definindo um objeto de resposta.
+    let cr = {
+        status: "ERROR",
+        message: "",
+        payload: undefined,
+    };
+    // conectando 
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(OracleConnAtribs_1.oraConnAttribs);
+        const cmdDeleteTrecho = `DELETE TRECHOS WHERE codigo = :1`;
+        const dados = [codigo];
+        let resDelete = yield connection.execute(cmdDeleteTrecho, dados);
+        // importante: efetuar o commit para gravar no Oracle.
+        yield connection.commit();
+        // obter a informação de quantas linhas foram inseridas. 
+        // neste caso precisa ser exatamente 1
+        const rowsDeleted = resDelete.rowsAffected;
+        if (rowsDeleted !== undefined && rowsDeleted === 1) {
+            cr.status = "SUCCESS";
+            cr.message = "Trecho excluído.";
+        }
+        else {
+            cr.message = "Trecho não excluído. Verifique se o código informado está correto.";
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            cr.message = e.message;
+            console.log(e.message);
+        }
+        else {
+            cr.message = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        // fechando a conexao
+        if (connection !== undefined)
+            yield connection.close();
+        // devolvendo a resposta da requisição.
+        res.send(cr);
+    }
+}));
+app.delete("/excluirCidade", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // excluindo a cidade pelo código dela:
+    const codigo = req.body.codigo;
+    console.log('Codigo recebido: ' + codigo);
+    // definindo um objeto de resposta.
+    let cr = {
+        status: "ERROR",
+        message: "",
+        payload: undefined,
+    };
+    // conectando 
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(OracleConnAtribs_1.oraConnAttribs);
+        const cmdDeleteCid = `DELETE CIDADES WHERE codigo = :1`;
+        const dados = [codigo];
+        let resDelete = yield connection.execute(cmdDeleteCid, dados);
+        // importante: efetuar o commit para gravar no Oracle.
+        yield connection.commit();
+        // obter a informação de quantas linhas foram inseridas. 
+        // neste caso precisa ser exatamente 1
+        const rowsDeleted = resDelete.rowsAffected;
+        if (rowsDeleted !== undefined && rowsDeleted === 1) {
+            cr.status = "SUCCESS";
+            cr.message = "Cidade excluída.";
+        }
+        else {
+            cr.message = "Cidade não excluída. Verifique se o código informado está correto.";
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            cr.message = e.message;
+            console.log(e.message);
+        }
+        else {
+            cr.message = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        // fechando a conexao
+        if (connection !== undefined)
+            yield connection.close();
+        // devolvendo a resposta da requisição.
+        res.send(cr);
+    }
+}));
+app.delete("/excluirAssento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // excluindo a cidade pelo código dela:
+    const codigo = req.body.codigo;
+    console.log('Codigo recebido: ' + codigo);
+    // definindo um objeto de resposta.
+    let cr = {
+        status: "ERROR",
+        message: "",
+        payload: undefined,
+    };
+    // conectando 
+    let connection;
+    try {
+        connection = yield oracledb_1.default.getConnection(OracleConnAtribs_1.oraConnAttribs);
+        const cmdDeleteAss = `DELETE ASSENTOS WHERE codigo = :1`;
+        const dados = [codigo];
+        let resDelete = yield connection.execute(cmdDeleteAss, dados);
+        // importante: efetuar o commit para gravar no Oracle.
+        yield connection.commit();
+        // obter a informação de quantas linhas foram inseridas. 
+        // neste caso precisa ser exatamente 1
+        const rowsDeleted = resDelete.rowsAffected;
+        if (rowsDeleted !== undefined && rowsDeleted === 1) {
+            cr.status = "SUCCESS";
+            cr.message = "Assento excluído.";
+        }
+        else {
+            cr.message = "Assento não excluído. Verifique se o código informado está correto.";
         }
     }
     catch (e) {

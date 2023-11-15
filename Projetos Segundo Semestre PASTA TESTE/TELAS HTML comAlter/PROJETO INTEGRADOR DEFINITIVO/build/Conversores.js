@@ -16,6 +16,9 @@ function rowsToTrechos(oracleRows) {
             trecho = {
                 codigo: registro.CODIGO,
                 nome: registro.NOME,
+                origem: registro.ORIGEM,
+                destino: registro.DESTINO,
+                aeronave: registro.AERONAVE,
             };
             // inserindo o novo Array convertido.
             trechos.push(trecho);
@@ -34,6 +37,8 @@ function rowsToCidades(oracleRows) {
             cidade = {
                 codigo: registro.CODIGO,
                 nome: registro.NOME,
+                UF: registro.UF,
+                pais: registro.PAIS,
             };
             // inserindo o novo Array convertido.
             cidades.push(cidade);
@@ -51,7 +56,9 @@ function rowsToAeroportos(oracleRows) {
         oracleRows.forEach((registro) => {
             aeroporto = {
                 codigo: registro.CODIGO,
+                nome: registro.NOME,
                 sigla: registro.SIGLA,
+                cidade: registro.CIDADE,
             };
             // inserindo o novo Array convertido.
             aeroportos.push(aeroporto);

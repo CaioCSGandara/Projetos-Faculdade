@@ -7,7 +7,6 @@ function RequisiçãoGETaeronave() {
     .then(T => T.json());
 }
 
-
 function preencherAeronaves(aeronave) {
   const tblBody = document.querySelector("tbody");
   aeronave.forEach((aeronave) => {
@@ -19,7 +18,7 @@ function preencherAeronaves(aeronave) {
           <td class="text-center align-middle">${aeronave.anoFabricacao}</td>
           <td class="text-center align-middle">${aeronave.totalAssentos}</td>
           <td class="align-middle">${aeronave.referencia}</td>
-          <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" exibeCodigo('${aeronave.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+          <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabel); exibeCodigo('${aeronave.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
           <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${aeronave.codigo}', 'pcodDelete'); popUpDeletar('${aeronave.codigo}')"></td>
           
       `;
@@ -141,6 +140,29 @@ function deletarVoo(codigo) {
       });
 }
 
+function deletarAeronave(codigo) {
+  const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ codigo: codigo })
+  };
+
+  fetch('http://localhost:3000/excluirAeronave', requestOptions)
+      .then(response => response.json())
+      .then(customResponse => {
+          if (customResponse.status === "SUCCESS") {
+              showStatusMessageDelete("Aeronave deletada com sucesso.", false);
+          } else {
+              showStatusMessageDelete("Erro ao deletar Aeronave: " + customResponse.message, true);
+              console.log(customResponse.message);
+          }
+      })
+      .catch((e) => {
+          showStatusMessageDelete("Erro técnico ao deletar... Contate o suporte.", true);
+          console.log("Falha grave ao deletar." + e);
+      });
+}
+
 function showStatusMessageDelete(msg, error) {
   var pStatus = document.getElementById("statusDelete");
   if (error === true){
@@ -156,18 +178,19 @@ function exibeCodigo(codigoCapturado, idP) {
     var pCodigo = document.getElementById(idP);
     pCodigo.textContent = `${codigoToUse}`;
 }
-// A FUNÇÃO ABAIXO FUNCIONA PARA PREENCHER O ALTERAR. É NECESSÁRIO APENAS QUE SEJA USADA COM O SERVIÇO CORRETO.
-// CHAMADA NO ONCLICK DO BOTAO DE ALTERAR: preencherAlterar(this);
 
-// function preencherAlterar(elemento) {
-//   const tdImagem = elemento.parentNode;
-//   const linha = tdImagem.parentNode;
-//   const elementosLinha = linha.querySelectorAll('td');
-  
-//   const codigoAlt = document.getElementById("codigoAlterar");
-//   codigoAlt.value = elementosLinha[0].textContent;
 
-//   const fabricanteAlt = document.getElementById("comboFabricantesAlterar");
-//   fabricanteAlt.option = elementosLinha[1].textContent;
+const vetorIdsLabel = ["codigoAlterar", "comboFabricantesAlterar", "modeloAlterar", "anoFabAlterar", "referenciaAlterar", "totalAssentosAlterar"];
 
-// }
+function preencherAlterar(elemento, vetor) {
+  const tdImagem = elemento.parentNode;
+  const linha = tdImagem.parentNode;
+  const tamanhoLinha = linha.cells.length -2 ;
+  console.log(tamanhoLinha);
+  const elementosLinha = linha.querySelectorAll('td')
+  let elementoPreencher = null;
+  for(i=0;i<tamanhoLinha;i++) {
+      elementoPreencher = document.getElementById(vetor[i]);
+      elementoPreencher.value = elementosLinha[i].textContent;
+  }
+}
