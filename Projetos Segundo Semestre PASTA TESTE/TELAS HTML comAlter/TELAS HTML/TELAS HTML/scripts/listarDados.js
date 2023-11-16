@@ -104,18 +104,7 @@ function exibirAeronave() {
 //         .then(response => response.json());
 // }
 
-let codigoToUse = null;
 
-function popUpDeletar(codigoCapturado) {
-  codigoToUse = codigoCapturado;
-  const popup = document.getElementById('popUpDelete');
-  popup.showModal();
-}
-
-function fechaPopUpDeletar() {
-  const popup = document.getElementById('popUpDelete');
-  popup.close();
-}
 
 function deletarVoo(codigo) {
   const requestOptions = {

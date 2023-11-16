@@ -45,7 +45,7 @@ export function rowsToCidades(oracleRows: unknown[] | undefined) : Array<Cidade>
       cidade = {
         codigo: registro.CODIGO,
         nome: registro.NOME,
-        UF: registro.UF,
+        uf: registro.UF,
         pais: registro.PAIS,
 
       } as Cidade;

@@ -141,7 +141,9 @@ app.get("/listarAeroportos", (req, res) => __awaiter(void 0, void 0, void 0, fun
         // atenção: mudamos a saída para que o oracle entregue um objeto puro em JS no rows.
         // não mais um array dentro de array.
         let resultadoConsulta = yield connection.execute(`
-    SELECT CODIGO, NOME, SIGLA, CIDADE FROM AEROPORTOS`);
+    SELECT AEROPORTOS.CODIGO, AEROPORTOS.NOME, AEROPORTOS.SIGLA, CIDADES.NOME AS NOME_CIDADE
+    FROM AEROPORTOS
+    INNER JOIN CIDADES ON AEROPORTOS.CIDADE = CIDADES.CODIGO;`);
         cr.status = "SUCCESS";
         cr.message = "Dados obtidos";
         cr.payload = ((0, Conversores_1.rowsToAeroportos)(resultadoConsulta.rows));

@@ -9,51 +9,24 @@
 </head>
 
 <header>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="../SELECT/TabelaInicial.html"><img class="Logo" src="../images/Logo Transparente.png"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="../SELECT/TabelaInicial.html">Painel Principal</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Cadastrar
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../INSERT/CadastrarAeronave.html">Cadastrar Aeronave</a></li>
-                <li><a class="dropdown-item" href="../INSERT/CadastrarAeroporto.html">Cadastrar Aeroporto</a></li>
-                <li><a class="dropdown-item" href="../INSERT/CadastrarCidades.html">Cadastrar Cidade</a></li>
-                <li><a class="dropdown-item" href="../INSERT/CadastrarTrecho.html">Cadastrar Trecho</a></li>
-                <li><a class="dropdown-item" href="../INSERT/CadastrarVoos.html">Cadastrar Voo</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Alterar
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../ALTER/AlterarAeronave.html">Alterar Aeronave</a></li>
-                <li><a class="dropdown-item" href="../ALTER/AlterarAeroporto.html">Alterar Aeroporto</a></li>
-                <li><a class="dropdown-item" href="../ALTER/AlterarCidades.html">Alterar Cidade</a></li>
-                <li><a class="dropdown-item" href="../ALTER/AlterarTrecho.html">Alterar Trecho</a></li>
-                <li><a class="dropdown-item" href="../ALTER/AlterarVoos.html">Another Voo</a></li>
-                <li><a class="dropdown-item" href="../ALTER/AlterarAssentos.html">Alterar Assento</a></li>
-              </ul>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Ex: Cadastrar Cidade" aria-label="Search">
-            <button class="btn btn-outline-warning" type="submit">Pesquisar</button>
-          </form>
-        </div>
-      </div>
-    </nav>
-  </header>
+  <nav class="menu">
+  <div class="divLogo">
+    <img class="Logo" src="../images/Logo Transparente.png">
+  </div>
+  <div class="divDropdown">
+    <button class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      Gerenciar
+    </button>
+    <ul class="dropdown-menu dropdown-menu-dark">
+      <li><a class="dropdown-item" href="../MANAGEMENT/Aeronave.html">Aeronaves</a></li>
+      <li><a class="dropdown-item" href="../MANAGEMENT/Aeroporto.html">Aeroportos</a></li>
+      <li><a class="dropdown-item" href="../MANAGEMENT/Cidade.html">Cidades</a></li>
+      <li><a class="dropdown-item" href="../MANAGEMENT/Trecho.html">Trechos</a></li>
+      <li><a class="dropdown-item" href="../MANAGEMENT/Voo.html">Voos</a></li>
+      <li><a class="dropdown-item" href="../MANAGEMENT/Assentos.html">Assentos</a></li>
+  </div>
+  </nav>
+</header>
 
 <body>
     <div class="content">

@@ -37,7 +37,7 @@ function rowsToCidades(oracleRows) {
             cidade = {
                 codigo: registro.CODIGO,
                 nome: registro.NOME,
-                UF: registro.UF,
+                uf: registro.UF,
                 pais: registro.PAIS,
             };
             // inserindo o novo Array convertido.

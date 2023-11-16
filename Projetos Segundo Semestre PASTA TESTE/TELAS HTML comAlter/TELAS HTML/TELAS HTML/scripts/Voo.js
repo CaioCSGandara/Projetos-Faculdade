@@ -1,3 +1,64 @@
+// function RequisiçãoGETlistar() {
+//     const requestOptions = {
+//       method: 'GET',
+//       headers: { 'Content-Type': 'application/json' },
+//     };
+//     return fetch('http://localhost:3000/listarDados', requestOptions)
+//       .then(T => T.json());
+//   }
+
+
+//   function preencherTabela(dados) {
+//     const tblBody = document.querySelector("tbody");
+//     dados.forEach((voo) => {
+//         const row = document.createElement("tr");
+//         row.innerHTML = `
+//             <td class="text-center align-middle padLeft" id="codigo">${voo.codigo}</td>
+//             <td class="text-center align-middle">${voo.data}</td>
+//             <td class="text-center align-middle">${voo.trecho}</td>
+//             <td class="text-center align-middle">${voo.hrSaida}</td>
+//             <td class="text-center align-middle">${voo.hrChegada}</td>
+//             <td class="align-middle">${voo.origem}</td>
+//             <td class="align-middle">${voo.destino}</td>
+//             <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" exibeCodigo('${voo.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+//             <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${voo.codigo}', 'pcodDelete'); popUpDeletar('${voo.codigo}')"></td>
+            
+//         `;
+      
+//         tblBody.appendChild(row);
+//     });
+// }
+
+  // function exibirTabela() {
+  //   console.log('Entrou no exibir...');
+  //   RequisiçãoGETlistar()
+  //     .then(customResponse => {
+  //       if (customResponse.status === "SUCCESS") {
+  //         console.log("Deu certo a busca de dados");
+  //         console.log('Payload:' + JSON.stringify(customResponse.payload));
+  //         preencherTabela(customResponse.payload); // Removido o parse redundante
+  //       } else {
+  //         console.log(customResponse.message);
+  //       }
+  //     })
+  //     .catch((e) => {
+  //       console.log("Não foi possível exibir." + e);
+  //     });
+  // }
+
+  
+//   function fetchDeletar(body) {
+//     const requestOptions = {
+//         method: 'DELETE',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(body)
+//     };
+
+//     return fetch('http://localhost:3000/excluirVoo', requestOptions)
+//         .then(response => response.json());
+// }
+
+
 function RequisiçãoGETtrecho() {
     const requestOptions = {
       method: 'GET',
@@ -69,18 +130,18 @@ function trechoValido(){
   return resultado;
 }
 
-function fetchAlterar(body) {
+function fetchInserir(body) {
   const requestOptions = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
   };
 
-  return fetch('http://localhost:3000/alterarVoo', requestOptions)
+  return fetch('http://localhost:3000/inserirVoo', requestOptions)
       .then(response => response.json());
 }
 
-function alterarVoo() {
+function inserirVoo() {
 
   if (!codigoValido()) {
       showStatusMessage("O código do voo deve ser um número válido.", true);
@@ -98,20 +159,20 @@ function alterarVoo() {
   }
 
 
+  const codigo = document.getElementById("codigo").value;
   const hrSaida = document.getElementById("hrSaida").value;
   const hrChegada = document.getElementById("hrChegada").value;
   const dataVoo = document.getElementById("dataVoo").value;
   const valor = document.getElementById("valor").value;
   const trecho = document.getElementById("trecho").options[document.getElementById("trecho").selectedIndex].value;
-  const codigo = document.getElementById("codigo").value;        
-  
-  fetchAlterar({
+
+  fetchInserir({
+      codigo: codigo,
       dataVoo: dataVoo,
       hrChegada: hrChegada,
       hrSaida: hrSaida,
       valor: valor,
       trecho: trecho,
-      codigo: codigo
   })
       .then(customResponse => {
           if (customResponse.status === "SUCCESS") {

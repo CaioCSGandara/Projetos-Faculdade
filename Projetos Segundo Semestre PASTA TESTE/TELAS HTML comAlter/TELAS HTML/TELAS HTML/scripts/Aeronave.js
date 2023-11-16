@@ -64,27 +64,27 @@ function anoValido(){
   function inserirAeronave(){
 
     if(!selecionouFabricante()){
-      showStatusMessageCadastrar("Selecione o fabricante...", true);  
+      showStatusMessage("Selecione o fabricante...", true, "statusCadastrar");  
       return;
     }
 
     if(!preencheuModelo()){
-      showStatusMessageCadastrar("Preencha o modelo...", true);
+      showStatusMessage("Preencha o modelo...", true, "statusCadastrar");
       return;
     }
 
     if(!preencheuRegistro()){
-      showStatusMessageCadastrar("Preencha o registro da aeronave...", true);
+      showStatusMessage("Preencha o registro da aeronave...", true, "statusCadastrar");
       return;
     }
 
     if(!anoValido()){
-      showStatusMessageCadastrar("Ano deve ser de 1990 até 2026...", true);
+      showStatusMessage("Ano deve ser de 1990 até 2026...", true, "statusCadastrar");
       return;
     }
 
     if(!totalAssentosValido()){
-      showStatusMessageCadastrar("Preencha corretamente o total de assentos.", true);
+      showStatusMessage("Preencha corretamente o total de assentos.", true, "statusCadastrar");
       return;
     }
 
@@ -104,27 +104,16 @@ function anoValido(){
     })
     .then(customResponse => {
       if(customResponse.status === "SUCCESS"){
-        showStatusMessageCadastrar("Aeronave cadastrada... ", false);
+        showStatusMessage("Aeronave cadastrada... ", false, "statusCadastrar");
       } else {
-        showStatusMessageCadastrar("Erro ao cadastrar aeronave...: " + customResponse.message, true);
+        showStatusMessage("Erro ao cadastrar aeronave...: " + customResponse.message, true, "statusCadastrar");
         console.log(customResponse.message);
       }
     })
     .catch((e)=>{
-      showStatusMessageCadastrar("Erro técnico ao cadastrar... Contate o suporte.", true);
+      showStatusMessage("Erro técnico ao cadastrar... Contate o suporte.", true, "statusCadastrar");
       console.log("Falha grave ao cadastrar." + e)
     });
-  }
-
-
-  function showStatusMessageCadastrar(msg, error){
-    var pStatus = document.getElementById("statusCadastrar");
-    if (error === true){
-      pStatus.className = "statusError";
-    } else {
-      pStatus.className = "statusSuccess";
-    }
-    pStatus.textContent = msg;
   }
 
 
@@ -204,32 +193,32 @@ function anoValidoAlterar(){
   function alterarAeronave(){
 
     if(!preencheuCodigoAlterar()){
-      showStatusMessageAlterar("Preencha o código da aeronave...", true);
+      showStatusMessage("Preencha o código da aeronave...", true, "statusAlterar");
       return;
     }
 
     if(!selecionouFabricanteAlterar()){
-      showStatusMessageAlterar("Selecione o fabricante...", true);  
+      showStatusMessage("Selecione o fabricante...", true, "statusAlterar");  
       return;
     }
 
     if(!preencheuModeloAlterar()){
-      showStatusMessageAlterar("Preencha o modelo...", true);
+      showStatusMessage("Preencha o modelo...", true, "statusAlterar");
       return;
     }
 
     if(!preencheuRegistroAlterar()){
-      showStatusMessageAlterar("Preencha o registro da aeronave...", true);
+      showStatusMessage("Preencha o registro da aeronave...", true, "statusAlterar");
       return;
     }
 
     if(!anoValidoAlterar()){
-      showStatusMessageAlterar("Ano deve ser de 1990 até 2026...", true);
+      showStatusMessage("Ano deve ser de 1990 até 2026...", true, "statusAlterar");
       return;
     }
 
     if(!totalAssentosValidoAlterar()){
-      showStatusMessageAlterar("Preencha corretamente o total de assentos.", true);
+      showStatusMessage("Preencha corretamente o total de assentos.", true, "statusAlterar");
       return;
     }
 
@@ -251,43 +240,117 @@ function anoValidoAlterar(){
     })
     .then(customResponse => {
       if(customResponse.status === "SUCCESS"){
-        showStatusMessageAlterar("Aeronave alterada... ", false);
+        showStatusMessage("Aeronave alterada... ", false, "statusAlterar");
       } else {
-        showStatusMessageAlterar("Erro ao alterar aeronave...: " + customResponse.message, true);
+        showStatusMessage("Erro ao alterar aeronave...: " + customResponse.message, true, "statusAlterar");
         console.log(customResponse.message);
       }
     })
     .catch((e)=>{
-      showStatusMessageAlterar("Erro técnico ao cadastrar... Contate o suporte.", true);
+      showStatusMessage("Erro técnico ao cadastrar... Contate o suporte.", true, "statusAlterar");
       console.log("Falha grave ao cadastrar." + e)
     });
   }
 
-  function showStatusMessageAlterar(msg, error){
-    var pStatus = document.getElementById("statusAlterar");
-    if (error === true){
-      pStatus.className = "statusError";
-    } else {
-      pStatus.className = "statusSuccess";
-    }
-    pStatus.textContent = msg;
+  // PREENCHER TABELA DE AERONAVES
+
+  function RequisiçãoGETaeronave() {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    return fetch('http://localhost:3000/listarAeronaves', requestOptions)
+      .then(T => T.json());
   }
-
-
-
-function alternarDivs(divVisivel, divOculta) {
-  var divOne = document.getElementById(divVisivel);
-  var divTwo = document.getElementById(divOculta);
-
-  if (divOne.style.display != 'none') {
-    divOne.style.display = 'none';
-    divTwo.style.display = 'block';
-  }
-
-}
-
-function limparStatus(statusToClean) {
-  var statusClean = document.getElementById(statusToClean);
-  statusClean.textContent = '';
-}
   
+  function preencherAeronaves(aeronave) {
+    const tblBody = document.querySelector("tbody");
+    aeronave.forEach((aeronave) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td class="text-center align-middle padLeft" id="codigo">${aeronave.codigo}</td>
+            <td class="text-center align-middle">${aeronave.fabricante}</td>
+            <td class="text-center align-middle">${aeronave.modelo}</td>
+            <td class="text-center align-middle">${aeronave.anoFabricacao}</td>
+            <td class="text-center align-middle">${aeronave.totalAssentos}</td>
+            <td class="align-middle">${aeronave.referencia}</td>
+            <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelAeronave); exibeCodigo('${aeronave.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${aeronave.codigo}', 'pcodDelete'); popUpDeletar('${aeronave.codigo}')"></td>
+            
+        `;
+      
+        tblBody.appendChild(row);
+    });
+  }
+  
+  function exibirAeronave() {
+    console.log('Entrou no exibir...');
+    RequisiçãoGETaeronave()
+      .then(customResponse => {
+        if (customResponse.status === "SUCCESS") {
+          console.log("Deu certo a busca de dados");
+          console.log('Payload:' + JSON.stringify(customResponse.payload));
+          preencherAeronaves(customResponse.payload); 
+        } else {
+          console.log(customResponse.message);
+        }
+      })
+      .catch((e) => {
+        console.log("Não foi possível exibir." + e);
+      });
+  }
+
+// FUNÇÕES DE DELETAR
+
+function deletarVoo(codigo) {
+  const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ codigo: codigo })
+  };
+
+  fetch('http://localhost:3000/excluirVoo', requestOptions)
+      .then(response => response.json())
+      .then(customResponse => {
+          if (customResponse.status === "SUCCESS") {
+              showStatusMessage("Voo deletado com sucesso.", false, "statusDelete");
+          } else {
+              showStatusMessage("Erro ao deletar Voo: " + customResponse.message, true, "statusDelete");
+              console.log(customResponse.message);
+          }
+      })
+      .catch((e) => {
+          showStatusMessage("Erro técnico ao deletar... Contate o suporte.", true, "statusDelete");
+          console.log("Falha grave ao deletar." + e);
+      });
+}
+
+function deletarAeronave(codigo) {
+  const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ codigo: codigo })
+  };
+
+  fetch('http://localhost:3000/excluirAeronave', requestOptions)
+      .then(response => response.json())
+      .then(customResponse => {
+          if (customResponse.status === "SUCCESS") {
+              showStatusMessage("Aeronave deletada com sucesso.", false, "statusDelete");
+          } 
+          else {
+            if (customResponse.message.includes('ORA-02292')) {
+              showStatusMessage("Você não pode excluir esta aeronave, pois atualmente ela está vinculada à outros registros. Verifique e tente novamente.", true, "statusDelete");
+              console.log("Erro ao deletar aeronave: Restrição de integridade referencial encontrada.");
+              console.log("Ajuda: https://docs.oracle.com/error-help/db/ora-02292/");
+            } else {
+              showStatusMessage("Erro ao deletar aeronave: " + customResponse.message, true, "statusDelete");
+              console.log(customResponse.message);
+            }
+          }
+      })
+      .catch((e) => {
+          showStatusMessage("Erro técnico ao deletar... Contate o suporte.", true, "statusDelete");
+          console.log("Falha grave ao deletar." + e);
+      });
+}
