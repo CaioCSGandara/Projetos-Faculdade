@@ -51,12 +51,12 @@ function fetchInserir(body) {
 function inserirAeroporto(){
 
   if(!nomePreenchido()){
-    showStatusMessage("Preencha o nome do aeroporto.", true,"statusCasdatrar");
+    showStatusMessage("Preencha o nome do aeroporto.", true,"statusCadastrar");
     return;
   }
 
   if(!siglaPreenchida()){
-    showStatusMessage("Preencha a sigla do aeroporto.", true, "statusCasdatrar");
+    showStatusMessage("Preencha a sigla do aeroporto.", true, "statusCadastrar");
     return;
   }
 
@@ -71,14 +71,14 @@ function inserirAeroporto(){
   })
   .then(customResponse => {
     if(customResponse.status === "SUCCESS"){
-      showStatusMessage("Aeroporto cadastrado com sucesso.", false, "statusCasdatrar");
+      showStatusMessage("Aeroporto cadastrado com sucesso.", false, "statusCadastrar");
     } else {
-      showStatusMessage("Erro ao cadastrar aeroporto: " + customResponse.message, true, "statusCasdatrar");
+      showStatusMessage("Erro ao cadastrar aeroporto: " + customResponse.message, true, "statusCadastrar");
       console.log(customResponse.message);
     }
   })
   .catch((e)=>{
-    showStatusMessage("Erro técnico ao cadastrar... Contate o suporte.", true, "statusCasdatrar");
+    showStatusMessage("Erro técnico ao cadastrar... Contate o suporte.", true, "statusCadastrar");
     console.log("Falha grave ao cadastrar." + e)
   });
 
@@ -98,36 +98,24 @@ function RequisiçãoGETcidade() {
 
 function preencherSelectCidades(options, vetor) {
   console.log(vetor[0], vetor[1]);
-  // for(i=0;i<2;i++) {
-  //   const selectDrop = document.getElementById(vetor[i]);
-  //   options.forEach(optionValue => {
-  //     console.log("Código Cidade: " + JSON.stringify(optionValue));
-  //     const option = document.createElement('option');
-  //     option.value = optionValue.codigo;  // Definindo o valor corretamente
-  //     option.innerHTML = optionValue.nome;  // Definindo o texto do option
-  //     selectDrop.appendChild(option);
-  //   });
-  // }
-  const cidadeSelect = document.getElementById('cidadeCadastrar');
+  for(i=0;i<2;i++) {
+    const selectDrop = document.getElementById(vetor[i]);
 
-  options.forEach(optionValue => {
-    console.log("Código Cidade: " + JSON.stringify(optionValue));
-    const option = document.createElement('option');
-    option.value = optionValue.codigo;  // Definindo o valor corretamente
-    option.innerHTML = optionValue.nome;  // Definindo o texto do option
-    cidadeSelect.appendChild(option);
-  });
-
-  const cidadeSelectAlter = document.getElementById('cidadeAlterar');
-
-  options.forEach(optionValue => {
-    console.log("Código Cidade: " + JSON.stringify(optionValue));
-    const option = document.createElement('option');
-    option.value = optionValue.codigo;  // Definindo o valor corretamente
-    option.innerHTML = optionValue.nome;  // Definindo o texto do option
-    cidadeSelectAlter.appendChild(option);
-  });
-
+    if(i==0) {
+    const defaultOption = document.createElement('option');
+    defaultOption.value = ''; 
+    defaultOption.text = 'Selecione uma opção';
+    selectDrop.appendChild(defaultOption);
+    } 
+    
+    options.forEach(optionValue => {
+      console.log("Código Cidade: " + JSON.stringify(optionValue));
+      const option = document.createElement('option');
+      option.value = optionValue.codigo; 
+      option.innerHTML = optionValue.nome;  
+      selectDrop.appendChild(option);
+    });
+  }
 
 }
 
@@ -139,7 +127,7 @@ function exibirCidades() {
       if (customResponse.status === "SUCCESS") {
         console.log("Deu certo a busca de dados");
         console.log('Payload:' + JSON.stringify(customResponse.payload));
-        preencherSelectCidades(customResponse.payload, vetorDropdownAeroporto); // Removido o parse redundante
+        preencherSelectCidades(customResponse.payload, vetorDropdownAeroporto);
       } else {
         console.log(customResponse.message);
       }

@@ -158,10 +158,13 @@ app.get("/listarAeroportos", async(req,res)=>{
 
     // atenção: mudamos a saída para que o oracle entregue um objeto puro em JS no rows.
     // não mais um array dentro de array.
+    // let resultadoConsulta = await connection.execute(`
+    // SELECT AEROPORTOS.CODIGO, AEROPORTOS.NOME, AEROPORTOS.SIGLA, CIDADES.NOME AS NOME_CIDADE
+    // FROM AEROPORTOS
+    // INNER JOIN CIDADES ON AEROPORTOS.CIDADE = CIDADES.CODIGO;`);
     let resultadoConsulta = await connection.execute(`
-    SELECT AEROPORTOS.CODIGO, AEROPORTOS.NOME, AEROPORTOS.SIGLA, CIDADES.NOME AS NOME_CIDADE
-    FROM AEROPORTOS
-    INNER JOIN CIDADES ON AEROPORTOS.CIDADE = CIDADES.CODIGO;`);
+    SELECT CODIGO, NOME, SIGLA, CIDADE FROM AEROPORTOS`);
+  
   
     cr.status = "SUCCESS"; 
     cr.message = "Dados obtidos";

@@ -19,7 +19,7 @@ body { /* Corpo geral da página*/
 
 .titulo { /* div do título do formulário */
     background-color: #FFC107;
-    width: 500px;
+    width: 70%;
     padding: 20px 30px;
     border-radius:50px 50px 0 0;   
     text-align: center;
@@ -27,7 +27,7 @@ body { /* Corpo geral da página*/
 
 .formulario{ /* div do corpo do formulário */
     background-color: #212529;
-    width: 500px;
+    width: 70%;
     padding: 30px;
     border-radius: 0 0 50px 50px;
     margin-bottom: 100px;
@@ -35,6 +35,7 @@ body { /* Corpo geral da página*/
 }
 
 .alteracao {
+    width: 75%;
     margin-top: 10px; /* margem do título do item (fabricante, modelo, etc) até o label */
 }
 
@@ -262,3 +263,14 @@ h1 { /* título do formulário */
     font-weight: bold;
     font-size: 18px;
 }
+
+/* #divCadastrar {
+    text-align: center;
+
+    border: 2px solid red;
+}
+
+.teste {
+    border: 2px solid blue;
+} */
+
