@@ -1,0 +1,7 @@
+Prezados Professores Mateus e Renata,
+
+Esta é a pasta contendo a entrega oficial da primeira parte do PI (do dia 16/10).
+
+Decidimos adicionar este readme hoje (16/11) para evitar possíveis confusões, já que os arquivos da segunda fase (que estamos modificando constantemente) também estão aqui no git.
+
+Obrigado!
