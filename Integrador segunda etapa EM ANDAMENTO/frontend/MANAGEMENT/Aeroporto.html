@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Área - Aeroporto</title>
+    <title>Gerenciar - Aeroportos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../style/style.css">
   </head>
@@ -72,17 +72,17 @@
               <form>
                 <p>
                   <label for="nome">Nome do aeroporto:</label><br/>
-                  <input type="text" id="nome" name="nome" class="alteracao" placeholder="Ex: Viracopos">
+                  <input type="text" id="nome" name="nome" maxlength="20" class="inputTam1" placeholder="Ex: Viracopos">
                 </p>
                 <br>
                 <p>
                   <label for="sigla">Sigla do aeroporto:</label><br/>
-                  <input type="text" id="sigla" name="sigla" class="alteracao" placeholder="Ex: VCP">
+                  <input type="text" id="sigla" name="sigla" maxlength="3" class="inputTam2" placeholder="Ex: VCP">
                 </p>
                 <br>
                 <p>
                   <label for="cidade">Cidade do aeroporto:</label><br/>
-                  <select name="cidades" id="cidadeCadastrar" class="alteracao selectDropdown">
+                  <select name="cidades" id="cidadeCadastrar" class="inputTam1 selectDropdown">
                     <!-- <script>
                       exibirCidades();
                     </script> -->
@@ -119,22 +119,22 @@
             <form>
               <p>
                 <label for="codigoAlterar">Código do aeroporto:</label><br>
-                <input type="number" id="codigoAlterar" name="codigo" class="alteracao" placeholder="Ex: 1234">
+                <input type="text" id="codigoAlterar" name="codigoAlterar" class="inputTam2" placeholder="Ex: 1234">
               </p>
               <br>
               <p>
                 <label for="nomeAlterar">Nome do aeroporto:</label><br>
-                <input type="text" id="nomeAlterar" name="nome" class="alteracao" placeholder="Ex: Viracopos">
+                <input type="text" id="nomeAlterar" name="nome" class="inputTam1" placeholder="Ex: Viracopos">
               </p>
               <br>
               <p>
                 <label for="siglaAlterar">Sigla do aeroporto:</label><br>
-                <input type="text" id="siglaAlterar" name="sigla" class="alteracao" placeholder="Ex: VCP">
+                <input type="text" id="siglaAlterar" name="sigla" class="inputTam2" placeholder="Ex: VCP">
               </p>
               <br>
               <p>
                 <label for="cidadeAlterar">Cidade do aeroporto:</label><br>
-                <select name="cidadeAlterar" id="cidadeAlterar" class="alteracao selectDropdown">
+                <select name="cidadeAlterar" id="cidadeAlterar" class="inputTam1 selectDropdown">
                   <!-- <script>
                     exibirCidades();
                   </script> -->
@@ -153,6 +153,10 @@
                   class="btn btn-secondary" 
                   id="btnCinza"
                   name="btnCinza">Limpar</button>
+                
+                  <button type="button"
+                  class="btn btn-secondary"
+                  onclick="alternarDivs('divAlterar', 'divCadastrar');">Voltar</button>   
       
               </p>
               <p id="status" class="statusError"></p>

@@ -19,7 +19,7 @@ body { /* Corpo geral da página*/
 
 .titulo { /* div do título do formulário */
     background-color: #FFC107;
-    width: 70%;
+    width: 80%;
     padding: 20px 30px;
     border-radius:50px 50px 0 0;   
     text-align: center;
@@ -27,17 +27,13 @@ body { /* Corpo geral da página*/
 
 .formulario{ /* div do corpo do formulário */
     background-color: #212529;
-    width: 70%;
+    width: 80%;
     padding: 30px;
     border-radius: 0 0 50px 50px;
     margin-bottom: 100px;
     text-align: center;
 }
 
-.alteracao {
-    width: 75%;
-    margin-top: 10px; /* margem do título do item (fabricante, modelo, etc) até o label */
-}
 
 label {
     color: #b9b9b9; /* cor do título do item */
@@ -264,13 +260,13 @@ h1 { /* título do formulário */
     font-size: 18px;
 }
 
-/* #divCadastrar {
-    text-align: center;
-
-    border: 2px solid red;
+.inputTam1 {
+    width: 55%;
+    margin-top: 10px; /* margem do título do item (fabricante, modelo, etc) até o label */
 }
 
-.teste {
-    border: 2px solid blue;
-} */
 
+.inputTam2 {
+    width: 30%;
+    margin-top: 10px; /* margem do título do item (fabricante, modelo, etc) até o label */
+}

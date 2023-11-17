@@ -38,7 +38,7 @@ function fetchInserir(body) {
         .then(response => response.json());
 }
 
-function inserirCidade() {
+async function inserirCidade() {
 
     if (!nomePreenchido()) {
         showStatusMessage("Preencha o nome da cidade.", true, "statusCadastrar");
@@ -59,7 +59,7 @@ function inserirCidade() {
     const uf = document.getElementById("uf").options[document.getElementById("uf").selectedIndex].value;
     const pais = document.getElementById("pais").value;
 
-    fetchInserir({
+    await fetchInserir({
         nome: nome,
         uf: uf,
         pais: pais,
@@ -67,6 +67,7 @@ function inserirCidade() {
     .then(customResponse => {
         if (customResponse.status === "SUCCESS") {
             showStatusMessage("Cidade cadastrada com sucesso.", false, "statusCadastrar");
+            exibirCidades();
         } else {
             showStatusMessage("Erro ao cadastrar cidade: " + customResponse.message, true, "statusCadastrar");
             console.log(customResponse.message);
@@ -126,7 +127,7 @@ function fetchAlterar(body) {
       .then(response => response.json());
 }
 
-function alterarCidade() {
+async function alterarCidade() {
 
     
   if (!codigoPreenchidoAlter()) {
@@ -155,7 +156,7 @@ function alterarCidade() {
   const pais = document.getElementById("paisCidade").value;
   const codigo = document.getElementById("codigoCidade").value;
 
-  fetchAlterar({
+  await fetchAlterar({
       nome: nome,
       uf: uf,
       pais: pais,
@@ -164,6 +165,7 @@ function alterarCidade() {
   .then(customResponse => {
       if (customResponse.status === "SUCCESS") {
           showStatusMessage("Cidade alterada com sucesso.", false, "statusAlterar");
+          exibirCidades();
       } else {
           showStatusMessage("Erro ao alterar cidade: " + customResponse.message, true, "statusAlterar");
           console.log(customResponse.message);
@@ -196,15 +198,21 @@ function RequisiçãoGETcidade() {
             <td class="text-center align-middle">${Cidade.uf}</td>
             <td class="text-center align-middle">${Cidade.pais}</td>
             <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelCidade); exibeCodigo('${Cidade.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${Cidade.codigo}', 'pcodDelete'); popUpDeletar('${Cidade.codigo}')"></td>
+            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick="limparStatus('statusCadastrar'); limparStatus('statusAlterar'); exibeCodigo('${Cidade.codigo}', 'pcodDelete'); popUpDeletar('${Cidade.codigo}')"></td>
         `;
         tblBody.appendChild(row);
     });
   }
   
-  function exibirCidades() {
+  function limparTabela() {
+    const tblBody = document.querySelector("tbody");
+    tblBody.innerHTML = ''; // Remove todo o conteúdo da tabela
+  }
+
+  async function exibirCidades() {
+    limparTabela();
     console.log('Entrou no exibir...');
-    RequisiçãoGETcidade()
+    await RequisiçãoGETcidade()
       .then(customResponse => {
         if (customResponse.status === "SUCCESS") {
           console.log("Deu certo a busca de dados");
@@ -221,18 +229,19 @@ function RequisiçãoGETcidade() {
 
   
 // FUNÇÃO PARA DELETAR CIDADE
-  function deletarCidade(codigo) {
+  async function deletarCidade(codigo) {
     const requestOptions = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ codigo: codigo })
     };
   
-    fetch('http://localhost:3000/excluirCidade', requestOptions)
+    await fetch('http://localhost:3000/excluirCidade', requestOptions)
         .then(response => response.json())
         .then(customResponse => {
             if (customResponse.status === "SUCCESS") {
                 showStatusMessage("Cidade deletada com sucesso.", false, "statusDelete");
+                exibirCidades();
             } 
             else {
                 if (customResponse.message.includes('ORA-02292')) {
