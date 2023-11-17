@@ -35,7 +35,7 @@
           <thead>
             <tr>
               <td class class="titlePopUp"><h1>ATENÇÃO</h1></td>
-              <td class="xPopUp"><img class="iconList" src="../images/closeicon.png" onclick="fechaPopUpDeletar(); limparStatus();" ></td>
+              <td class="xPopUp"><img class="iconList" src="../images/closeicon.png" onclick="fechaPopUpDeletar(); limparStatus('statusDelete');" ></td>
             </tr>
           </thead>
         </table>
@@ -71,13 +71,13 @@
             <div class="formulario">
               <form>
                 <p>
-                  <label for="nome">Nome do aeroporto:</label><br/>
-                  <input type="text" id="nome" name="nome" maxlength="20" class="inputTam1" placeholder="Ex: Viracopos">
+                  <label for="nomeCadastrar">Nome do aeroporto:</label><br/>
+                  <input type="text" id="nomeCadastrar" name="nomeCadastrar" maxlength="20" class="inputTam1" placeholder="Ex: Viracopos">
                 </p>
                 <br>
                 <p>
-                  <label for="sigla">Sigla do aeroporto:</label><br/>
-                  <input type="text" id="sigla" name="sigla" maxlength="3" class="inputTam2" placeholder="Ex: VCP">
+                  <label for="siglaCadasstrar">Sigla do aeroporto:</label><br/>
+                  <input type="text" id="siglaCadastrar" name="siglaCadastrar" maxlength="3" class="inputTam2" placeholder="Ex: VCP">
                 </p>
                 <br>
                 <p>
@@ -91,7 +91,7 @@
                 <br>
                 <p>
                   <button 
-                    type="button"
+                    type="reset"
                     class="btn btn-warning" 
                     onclick="inserirAeroporto();"
                     id="btnCadastrar"
@@ -104,7 +104,7 @@
                     name="btnCinza">Limpar</button>
       
                 </p>
-                <p id="status" class="statusError"></p>
+                <p id="statusCadastrar" class="statusError"></p>
               </form>
           </div>  
         </div>
@@ -124,12 +124,12 @@
               <br>
               <p>
                 <label for="nomeAlterar">Nome do aeroporto:</label><br>
-                <input type="text" id="nomeAlterar" name="nome" class="inputTam1" placeholder="Ex: Viracopos">
+                <input type="text" id="nomeAlterar" name="nomeAlterar" class="inputTam1" placeholder="Ex: Viracopos">
               </p>
               <br>
               <p>
                 <label for="siglaAlterar">Sigla do aeroporto:</label><br>
-                <input type="text" id="siglaAlterar" name="sigla" class="inputTam2" placeholder="Ex: VCP">
+                <input type="text" id="siglaAlterar" name="siglaAlterar" class="inputTam2" placeholder="Ex: VCP">
               </p>
               <br>
               <p>
@@ -159,7 +159,7 @@
                   onclick="alternarDivs('divAlterar', 'divCadastrar');">Voltar</button>   
       
               </p>
-              <p id="status" class="statusError"></p>
+              <p id="statusAlterar" class="statusError"></p>
             </form>
             </div>
         </div>

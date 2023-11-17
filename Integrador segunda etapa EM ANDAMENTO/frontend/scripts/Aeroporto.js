@@ -28,12 +28,12 @@ function exibirCidades() {
 
 
 function nomePreenchido(){
-  const nome = document.getElementById("nome").value.trim();
+  const nome = document.getElementById("nomeCadastrar").value.trim();
   return nome.length > 0;
 }
 
 function siglaPreenchida(){
-  const sigla = document.getElementById("sigla").value.trim();
+  const sigla = document.getElementById("siglaCadastrar").value.trim();
   return sigla.length > 0;
 }
 
@@ -48,7 +48,7 @@ function fetchInserir(body) {
       .then(response => response.json());
   }
 
-function inserirAeroporto(){
+async function inserirAeroporto(){
 
   if(!nomePreenchido()){
     showStatusMessage("Preencha o nome do aeroporto.", true,"statusCadastrar");
@@ -60,11 +60,11 @@ function inserirAeroporto(){
     return;
   }
 
-  const nome = document.getElementById("nome").value;
-  const sigla = document.getElementById("sigla").value;
-  const cidade = document.getElementById("cidade").options[document.getElementById("cidade").selectedIndex].value;
+  const nome = document.getElementById("nomeCadastrar").value;
+  const sigla = document.getElementById("siglaCadastrar").value;
+  const cidade = document.getElementById("cidadeCadastrar").options[document.getElementById("cidadeCadastrar").selectedIndex].value;
 
-  fetchInserir({ 
+  await fetchInserir({ 
       nome: nome, 
       sigla: sigla,
       cidade: cidade
@@ -72,6 +72,7 @@ function inserirAeroporto(){
   .then(customResponse => {
     if(customResponse.status === "SUCCESS"){
       showStatusMessage("Aeroporto cadastrado com sucesso.", false, "statusCadastrar");
+      exibirAeroporto();
     } else {
       showStatusMessage("Erro ao cadastrar aeroporto: " + customResponse.message, true, "statusCadastrar");
       console.log(customResponse.message);
@@ -139,12 +140,12 @@ function exibirCidades() {
 
 
 function nomePreenchidoAlter(){
-  const nome = document.getElementById("nomeAlter").value.trim();
+  const nome = document.getElementById("nomeAlterar").value.trim();
   return nome.length > 0;
 }
 
 function siglaPreenchidaAlter(){
-  const sigla = document.getElementById("siglaAlter").value.trim();
+  const sigla = document.getElementById("siglaAlterar").value.trim();
   return sigla.length > 0;
 }
 
@@ -159,7 +160,7 @@ function fetchAlterar(body) {
       .then(response => response.json());
   }
 
-function alterarAeroporto(){
+async function alterarAeroporto(){
 
   if(!nomePreenchido()){
     showStatusMessage("Preencha o nome do aeroporto.", true, "statusAlterar");
@@ -171,12 +172,12 @@ function alterarAeroporto(){
     return;
   }
 
-  const nome = document.getElementById("nomeAlter").value;
-  const sigla = document.getElementById("siglaAlter").value;
-  const cidade = document.getElementById("cidadeAlter").options[document.getElementById("cidadeAlter").selectedIndex].value;
-  const codigo = document.getElementById("codigoAlter").value;
+  const nome = document.getElementById("nomeAlterar").value;
+  const sigla = document.getElementById("siglaAlterar").value;
+  const cidade = document.getElementById("cidadeAlterar").options[document.getElementById("cidadeAlterar").selectedIndex].value;
+  const codigo = document.getElementById("codigoAlterar").value;
   
-  fetchAlterar({ 
+  await fetchAlterar({ 
       nome: nome, 
       sigla: sigla,
       cidade: cidade,
@@ -185,6 +186,7 @@ function alterarAeroporto(){
   .then(customResponse => {
     if(customResponse.status === "SUCCESS"){
       showStatusMessage("Aeroporto alterado com sucesso.", false, "statusAlterar");
+      exibirAeroporto();
     } else {
       showStatusMessage("Erro ao alterar aeroporto: " + customResponse.message, true, "statusAlterar");
       console.log(customResponse.message);
@@ -226,6 +228,7 @@ function preencherAeroportos(aeroporto) {
 }
 
 function exibirAeroporto() {
+  limparTabela();
   console.log('Entrou no exibir...');
   RequisiçãoGETaeroportoTable()
     .then(customResponse => {
@@ -244,25 +247,30 @@ function exibirAeroporto() {
 
 
 //FUNÇÃO PARA DELETAR AEROPORTO
-function deletarAeroporto(codigo) {
+async function deletarAeroporto(codigo) {
   const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ codigo: codigo })
   };
 
-  fetch('http://localhost:3000/excluirAeroporto', requestOptions)
+  await fetch('http://localhost:3000/excluirAeroporto', requestOptions)
       .then(response => response.json())
       .then(customResponse => {
           if (customResponse.status === "SUCCESS") {
-              showStatusMessageDelete("Aeroporto deletada com sucesso.", false);
+              showStatusMessage("Aeroporto deletada com sucesso.", false, "statusDelete");
+              exibirAeroporto();
           } else {
-              showStatusMessageDelete("Erro ao deletar Aeroporto: " + customResponse.message, true);
+            if (customResponse.message.includes('ORA-02292')) {
+              showStatusMessage("Você não pode excluir este aeroporto, pois atualmente ele está vinculado à outro(s) registro(s). Verifique e tente novamente.", true, "statusDelete");
+            } else {
+              showStatusMessage("Erro ao deletar aeroporto: " + customResponse.message, true, "statusDelete");
               console.log(customResponse.message);
+            }
           }
       })
       .catch((e) => {
-          showStatusMessageDelete("Erro técnico ao deletar... Contate o suporte.", true);
+          showStatusMessage("Erro técnico ao deletar... Contate o suporte.", true, "statusDelete");
           console.log("Falha grave ao deletar." + e);
       });
 }

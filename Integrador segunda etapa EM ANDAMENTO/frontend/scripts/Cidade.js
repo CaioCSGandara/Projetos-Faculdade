@@ -204,15 +204,11 @@ function RequisiçãoGETcidade() {
     });
   }
   
-  function limparTabela() {
-    const tblBody = document.querySelector("tbody");
-    tblBody.innerHTML = ''; // Remove todo o conteúdo da tabela
-  }
 
-  async function exibirCidades() {
+function exibirCidades() {
     limparTabela();
     console.log('Entrou no exibir...');
-    await RequisiçãoGETcidade()
+    RequisiçãoGETcidade()
       .then(customResponse => {
         if (customResponse.status === "SUCCESS") {
           console.log("Deu certo a busca de dados");
@@ -245,9 +241,7 @@ function RequisiçãoGETcidade() {
             } 
             else {
                 if (customResponse.message.includes('ORA-02292')) {
-                  showStatusMessage("Você não pode excluir esta cidade, pois atualmente ela está vinculada à outros registros. Verifique e tente novamente.", true, "statusDelete");
-                  console.log("Erro ao deletar aeronave: Restrição de integridade referencial encontrada.");
-                  console.log("Ajuda: https://docs.oracle.com/error-help/db/ora-02292/");
+                  showStatusMessage("Você não pode excluir esta cidade, pois atualmente ela está vinculada à outro(s) registro(s). Verifique e tente novamente.", true, "statusDelete");
                 } else {
                   showStatusMessage("Erro ao deletar cidade: " + customResponse.message, true, "statusDelete");
                   console.log(customResponse.message);

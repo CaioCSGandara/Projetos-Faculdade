@@ -6,6 +6,12 @@ const vetorIdsLabelAeroporto = ["codigoAlterar", "nomeAlterar", "siglaAlterar", 
 const vetorDropdownAeroporto = ["cidadeCadastrar", "cidadeAlterar"];
 // FUNÇÕES GLOBAIS
 
+function limparTabela() {
+  const tblBody = document.querySelector("tbody");
+  tblBody.innerHTML = ''; // Remove todo o conteúdo da tabela
+}
+
+
 function alternarDivs(divVisivel, divOculta) {
     var divOne = document.getElementById(divVisivel);
     var divTwo = document.getElementById(divOculta);

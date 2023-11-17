@@ -61,7 +61,7 @@ function anoValido(){
     .then(response => response.json())
   }
 
-  function inserirAeronave(){
+  async function inserirAeronave(){
 
     if(!selecionouFabricante()){
       showStatusMessage("Selecione o fabricante...", true, "statusCadastrar");  
@@ -95,7 +95,7 @@ function anoValido(){
     const referencia = document.getElementById("referenciaCadastrar").value;
     const totalAssentos = document.getElementById("totalAssentosCadastrar").value;
 
-    fetchInserir({
+    await fetchInserir({
         fabricante: fabricante, 
         modelo: modelo, 
         totalAssentos: totalAssentos,
@@ -105,6 +105,7 @@ function anoValido(){
     .then(customResponse => {
       if(customResponse.status === "SUCCESS"){
         showStatusMessage("Aeronave cadastrada... ", false, "statusCadastrar");
+        exibirAeronave();
       } else {
         showStatusMessage("Erro ao cadastrar aeronave...: " + customResponse.message, true, "statusCadastrar");
         console.log(customResponse.message);
@@ -190,7 +191,7 @@ function anoValidoAlterar(){
     .then(response => response.json())
   }
 
-  function alterarAeronave(){
+  async function alterarAeronave(){
 
     if(!preencheuCodigoAlterar()){
       showStatusMessage("Preencha o código da aeronave...", true, "statusAlterar");
@@ -230,7 +231,7 @@ function anoValidoAlterar(){
     const totalAssentos = document.getElementById("totalAssentosAlterar").value;
     const codigo = document.getElementById("codigoAlterar").value; 
 
-    fetchAlterar({
+    await fetchAlterar({
         fabricante: fabricante, 
         modelo: modelo, 
         totalAssentos: totalAssentos,
@@ -241,6 +242,7 @@ function anoValidoAlterar(){
     .then(customResponse => {
       if(customResponse.status === "SUCCESS"){
         showStatusMessage("Aeronave alterada... ", false, "statusAlterar");
+        exibirAeronave();
       } else {
         showStatusMessage("Erro ao alterar aeronave...: " + customResponse.message, true, "statusAlterar");
         console.log(customResponse.message);
@@ -275,7 +277,7 @@ function anoValidoAlterar(){
             <td class="text-center align-middle">${aeronave.totalAssentos}</td>
             <td class="align-middle">${aeronave.referencia}</td>
             <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelAeronave); exibeCodigo('${aeronave.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${aeronave.codigo}', 'pcodDelete'); popUpDeletar('${aeronave.codigo}')"></td>
+            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar'); exibeCodigo('${aeronave.codigo}', 'pcodDelete'); popUpDeletar('${aeronave.codigo}')"></td>
             
         `;
       
@@ -284,6 +286,7 @@ function anoValidoAlterar(){
   }
   
   function exibirAeronave() {
+    limparTabela();
     console.log('Entrou no exibir...');
     RequisiçãoGETaeronave()
       .then(customResponse => {
@@ -302,47 +305,47 @@ function anoValidoAlterar(){
 
 // FUNÇÕES DE DELETAR
 
-function deletarVoo(codigo) {
+// async function deletarVoo(codigo) {
+//   const requestOptions = {
+//       method: 'DELETE',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({ codigo: codigo })
+//   };
+
+//   await fetch('http://localhost:3000/excluirVoo', requestOptions)
+//       .then(response => response.json())
+//       .then(customResponse => {
+//           if (customResponse.status === "SUCCESS") {
+//               showStatusMessage("Voo deletado com sucesso.", false, "statusDelete");
+//               exibirAeronave();
+//           } else {
+//               showStatusMessage("Erro ao deletar Voo: " + customResponse.message, true, "statusDelete");
+//               console.log(customResponse.message);
+//           }
+//       })
+//       .catch((e) => {
+//           showStatusMessage("Erro técnico ao deletar... Contate o suporte.", true, "statusDelete");
+//           console.log("Falha grave ao deletar." + e);
+//       });
+// }
+
+async function deletarAeronave(codigo) {
   const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ codigo: codigo })
   };
 
-  fetch('http://localhost:3000/excluirVoo', requestOptions)
-      .then(response => response.json())
-      .then(customResponse => {
-          if (customResponse.status === "SUCCESS") {
-              showStatusMessage("Voo deletado com sucesso.", false, "statusDelete");
-          } else {
-              showStatusMessage("Erro ao deletar Voo: " + customResponse.message, true, "statusDelete");
-              console.log(customResponse.message);
-          }
-      })
-      .catch((e) => {
-          showStatusMessage("Erro técnico ao deletar... Contate o suporte.", true, "statusDelete");
-          console.log("Falha grave ao deletar." + e);
-      });
-}
-
-function deletarAeronave(codigo) {
-  const requestOptions = {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ codigo: codigo })
-  };
-
-  fetch('http://localhost:3000/excluirAeronave', requestOptions)
+  await fetch('http://localhost:3000/excluirAeronave', requestOptions)
       .then(response => response.json())
       .then(customResponse => {
           if (customResponse.status === "SUCCESS") {
               showStatusMessage("Aeronave deletada com sucesso.", false, "statusDelete");
+              exibirAeronave();
           } 
           else {
             if (customResponse.message.includes('ORA-02292')) {
-              showStatusMessage("Você não pode excluir esta aeronave, pois atualmente ela está vinculada à outros registros. Verifique e tente novamente.", true, "statusDelete");
-              console.log("Erro ao deletar aeronave: Restrição de integridade referencial encontrada.");
-              console.log("Ajuda: https://docs.oracle.com/error-help/db/ora-02292/");
+              showStatusMessage("Você não pode excluir esta aeronave, pois atualmente ela está vinculada à outro(s) registro(s). Verifique e tente novamente.", true, "statusDelete");
             } else {
               showStatusMessage("Erro ao deletar aeronave: " + customResponse.message, true, "statusDelete");
               console.log(customResponse.message);
