@@ -94,11 +94,6 @@ h1 { /* título do formulário */
     width: 250px;
 }
 
-.tableVoos {
-    width: 100;
-    font-size: 11px;
-}
-
 
 .row {
     margin-top: 100px;
@@ -269,4 +264,34 @@ h1 { /* título do formulário */
 .inputTam2 {
     width: 30%;
     margin-top: 10px; /* margem do título do item (fabricante, modelo, etc) até o label */
+}
+
+.tableVoos thead {
+    height: 40px;
+    background-color: #FFC107;
+    color: #212529;
+    
+}
+
+.tableHover:hover {
+    background-color: rgb(106, 104, 104);
+}
+
+.tableVoos {
+    width: 100%;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: #383b3e;
+}
+
+.padRow{
+    padding: 7px 0;
+}
+
+.zebraOne {
+    background-color: #212529;
+}
+
+.zebraTwo {
+    background-color: #383b3e;
 }
