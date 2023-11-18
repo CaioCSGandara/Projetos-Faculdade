@@ -20,13 +20,13 @@ function alternarDivs(divVisivel, divOculta) {
       divOne.style.display = 'none';
       divTwo.style.display = 'block';
     }
-    defineAlturaTabela('divCadastrar');
+    defineAlturaTabela();
   }
   
   function limparStatus(statusToClean) {
     var statusClean = document.getElementById(statusToClean);
     statusClean.textContent = '';
-    defineAlturaTabela('divCadastrar');
+    defineAlturaTabela();
   }
     
   let codigoToUse = null;
@@ -69,11 +69,11 @@ function alternarDivs(divVisivel, divOculta) {
       pStatus.className = "statusSuccess";
     }
     pStatus.textContent = msg;
-    defineAlturaTabela('divCadastrar');
+    defineAlturaTabela();
   }
 
-  function defineAlturaTabela(divVisivel) {
-    var divOne = document.getElementById(divVisivel);
+  function defineAlturaTabela() {
+    var divOne = document.getElementById('divCadastrar');
     let alturaTitulo = 0;
     let alturaForm = 0;
 
