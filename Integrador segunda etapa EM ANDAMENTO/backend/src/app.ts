@@ -158,19 +158,19 @@ app.get("/listarAeroportos", async(req,res)=>{
 
     // atenção: mudamos a saída para que o oracle entregue um objeto puro em JS no rows.
     // não mais um array dentro de array.
-    // let resultadoConsulta = await connection.execute(`
-    // SELECT AEROPORTOS.CODIGO, AEROPORTOS.NOME, AEROPORTOS.SIGLA, CIDADES.NOME AS NOME_CIDADE
-    // FROM AEROPORTOS
-    // INNER JOIN CIDADES ON AEROPORTOS.CIDADE = CIDADES.CODIGO;`);
     let resultadoConsulta = await connection.execute(`
-    SELECT CODIGO, NOME, SIGLA, CIDADE FROM AEROPORTOS`);
+    SELECT AEROPORTOS.CODIGO, AEROPORTOS.NOME, AEROPORTOS.SIGLA, CIDADES.NOME AS CIDADE
+    FROM AEROPORTOS
+    INNER JOIN CIDADES ON AEROPORTOS.CIDADE = CIDADES.CODIGO`);
+    // let resultadoConsulta = await connection.execute(`
+    // SELECT CODIGO, NOME, SIGLA, CIDADE FROM AEROPORTOS`);
   
   
     cr.status = "SUCCESS"; 
     cr.message = "Dados obtidos";
 
     cr.payload = (rowsToAeroportos(resultadoConsulta.rows));
-
+    console.log("Resultado da consulta:", resultadoConsulta.rows);
 
   }catch(e){
     if(e instanceof Error){
@@ -204,7 +204,7 @@ app.get("/listarDados", async(req,res)=>{
     INNER JOIN TRECHOS ON VOOS.TRECHO = TRECHOS.CODIGO 
     INNER JOIN AEROPORTOS ORIGEM ON TRECHOS.ORIGEM = ORIGEM.CODIGO
     INNER JOIN AEROPORTOS DESTINO ON TRECHOS.DESTINO = DESTINO.CODIGO`);
-  
+
     cr.status = "SUCCESS"; 
     cr.message = "Dados obtidos";
     // agora sempre vamos converter as linhas do oracle em resultados do nosso TIPO.
