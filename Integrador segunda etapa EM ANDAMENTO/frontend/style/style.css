@@ -277,6 +277,12 @@ h1 { /* título do formulário */
     background-color: rgb(106, 104, 104);
 }
 
+.tableVoos th {
+    position: sticky;
+    top: 0px;
+    background-color: #FFC107;  
+}
+
 .tableVoos {
     width: 100%;
     font-size: 15px;
@@ -295,3 +301,11 @@ h1 { /* título do formulário */
 .zebraTwo {
     background-color: #383b3e;
 }
+
+#cadastros {
+    overflow-y: scroll;
+    border:2px solid black;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+

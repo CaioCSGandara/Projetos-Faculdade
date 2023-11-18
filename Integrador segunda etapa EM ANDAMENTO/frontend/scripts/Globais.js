@@ -13,19 +13,20 @@ function limparTabela() {
 
 
 function alternarDivs(divVisivel, divOculta) {
-    var divOne = document.getElementById(divVisivel);
-    var divTwo = document.getElementById(divOculta);
+    let divOne = document.getElementById(divVisivel);
+    let divTwo = document.getElementById(divOculta);
   
     if (divOne.style.display != 'none') {
       divOne.style.display = 'none';
       divTwo.style.display = 'block';
     }
-  
+    defineAlturaTabela('divCadastrar');
   }
   
   function limparStatus(statusToClean) {
     var statusClean = document.getElementById(statusToClean);
     statusClean.textContent = '';
+    defineAlturaTabela('divCadastrar');
   }
     
   let codigoToUse = null;
@@ -68,4 +69,28 @@ function alternarDivs(divVisivel, divOculta) {
       pStatus.className = "statusSuccess";
     }
     pStatus.textContent = msg;
+    defineAlturaTabela('divCadastrar');
   }
+
+  function defineAlturaTabela(divVisivel) {
+    var divOne = document.getElementById(divVisivel);
+    let alturaTitulo = 0;
+    let alturaForm = 0;
+
+    if (divOne.style.display !== 'none') {
+      var titulo = document.getElementById('titleCadastrar');
+      alturaTitulo = titulo.offsetHeight;
+      var formulario = document.getElementById('formCadastrar');
+      alturaForm = formulario.offsetHeight;
+    } else {
+      var titulo = document.getElementById('titleAlterar');
+      alturaTitulo = titulo.offsetHeight;
+      var formulario = document.getElementById('formAlterar');
+      alturaForm = formulario.offsetHeight;
+    }
+    const tabela = document.getElementById('cadastros');
+    tabela.style.maxHeight = alturaTitulo + alturaForm + 'px';
+    console.log(tabela.style.maxHeight);
+  }
+  
+ 

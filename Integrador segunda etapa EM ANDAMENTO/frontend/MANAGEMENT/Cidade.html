@@ -65,12 +65,12 @@
 
 <div class="row">
     <div class="col-md-5" id="divCadastrar">
-        <div class="titulo">
+        <div class="titulo" id="titleCadastrar">
             <h1>Cadastrar Cidade</h1>
             <br>
             <p>Preencha todos os campos abaixo:</p>
         </div>
-        <div class="formulario">
+        <div class="formulario" id="formCadastrar">
           <form>
               <p>
                   <label for="nome">Nome da cidade:</label><br/>
@@ -121,11 +121,11 @@
                   <button 
                   type="reset"
                   class="btn btn-warning"
-                  onclick="inserirCidade();"
+                  onclick= "inserirCidade();"
                   id="btnCadastrar"
                   name="btnCadastrar">Inserir</button>
 
-                  <button type="reset" class="btn btn-secondary" onclick="limparStatus('statusCadastrar');" id="btnCinza" name="btnCinza">Limpar</button>
+                  <button type="reset" class="btn btn-secondary" onclick="limparStatus('statusCadastrar'); " id="btnCinza" name="btnCinza">Limpar</button>
                   
               </p>
               <p id="statusCadastrar" class="statusError"></p>
@@ -133,13 +133,13 @@
       </div>
     </div>
     <div class="col-md-5" id="divAlterar">
-      <div class="titulo">
+      <div class="titulo" id="titleAlterar">
           <h1>Alterar Cidade</h1>
           <br>
           <p class="pInline">Você está alterando a cidade de código: </p> <p class="codStyle pInline" id="pcodAlter"></p>
       </div>
 
-      <div class="formulario">
+      <div class="formulario" id="formAlterar">
           <form>
               <p>
               <label for="codigo">Código da Cidade:</label><br>
@@ -205,7 +205,7 @@
                   name="btnCinza">Limpa</button>
                   <button type="button"
                   class="btn btn-secondary"
-                  onclick="alternarDivs('divAlterar', 'divCadastrar');">Voltar</button>   
+                  onclick="alternarDivs('divAlterar', 'divCadastrar'); defineAlturaTabela('divCadastrar')">Voltar</button>   
 
               </p>
               <p id="statusAlterar" class="statusError"></p>
@@ -215,7 +215,7 @@
 
     <!-- TABELA -->
     <div class="col-md-7">
-          <div id="principal">
+          
             <div id="cadastros">
               <table class="tableVoos">
                 

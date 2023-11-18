@@ -175,6 +175,7 @@ async function alterarCidade() {
       showStatusMessage("Erro técnico ao alterar... Contate o suporte.", true, "statusAlterar");
       console.log("Falha grave ao cadastrar." + e);
   });
+
 }
 
 
@@ -190,6 +191,7 @@ function RequisiçãoGETcidade() {
   
   function preencherCidade(Cidade) {
     let linha = 1;
+    defineAlturaTabela('divCadastrar');
     const tblBody = document.querySelector("tbody");
     Cidade.forEach((Cidade) => {
         const row = document.createElement("tr");
@@ -205,7 +207,7 @@ function RequisiçãoGETcidade() {
             <td class="text-center align-middle">${Cidade.nome}</td>
             <td class="text-center align-middle">${Cidade.uf}</td>
             <td class="text-center align-middle">${Cidade.pais}</td>
-            <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelCidade); exibeCodigo('${Cidade.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+            <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelCidade); exibeCodigo('${Cidade.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar'); defineAlturaTabela('divCadastrar')" ></td>
             <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick="limparStatus('statusCadastrar'); limparStatus('statusAlterar'); exibeCodigo('${Cidade.codigo}', 'pcodDelete'); popUpDeletar('${Cidade.codigo}')"></td>
         `;
         linha = linha +1;
