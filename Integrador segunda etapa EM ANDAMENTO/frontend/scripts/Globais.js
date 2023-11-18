@@ -57,6 +57,7 @@ function alternarDivs(divVisivel, divOculta) {
     let elementoPreencher = null;
     for(i=0;i<tamanhoLinha;i++) {
         elementoPreencher = document.getElementById(vetor[i]);
+        console.log(elementosLinha[i].textContent);
         elementoPreencher.value = elementosLinha[i].textContent;
     }
   }

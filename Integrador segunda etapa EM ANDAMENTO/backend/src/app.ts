@@ -56,8 +56,11 @@ app.get("/listarTrechos", async(req,res)=>{
 
     // atenção: mudamos a saída para que o oracle entregue um objeto puro em JS no rows.
     // não mais um array dentro de array.
-    let resultadoConsulta = await connection.execute(`
-    SELECT CODIGO, NOME, ORIGEM, DESTINO, AERONAVE FROM TRECHOS`);
+    let resultadoConsulta = await connection.execute(`SELECT TRECHOS.CODIGO, TRECHOS.NOME, ORIGEM.NOME AS ORIGEM, DESTINO.NOME AS DESTINO, AERONAVES.REFERENCIA AS AERONAVE
+    FROM TRECHOS 
+    INNER JOIN AEROPORTOS ORIGEM ON TRECHOS.ORIGEM = ORIGEM.CODIGO
+    INNER JOIN AEROPORTOS DESTINO ON TRECHOS.DESTINO = DESTINO.CODIGO
+    INNER JOIN AERONAVES ON TRECHOS.AERONAVE = AERONAVES.CODIGO`);
   
     cr.status = "SUCCESS"; 
     cr.message = "Dados obtidos";
@@ -170,7 +173,6 @@ app.get("/listarAeroportos", async(req,res)=>{
     cr.message = "Dados obtidos";
 
     cr.payload = (rowsToAeroportos(resultadoConsulta.rows));
-    console.log("Resultado da consulta:", resultadoConsulta.rows);
 
   }catch(e){
     if(e instanceof Error){

@@ -37,6 +37,11 @@ function siglaPreenchida(){
   return sigla.length > 0;
 }
 
+function cidadePreenchida() {
+  const cidade = document.getElementById("cidadeCadastrar").value.trim();
+  return cidade.length > 0;
+}
+
 function fetchInserir(body) {
   const requestOptions = {
       method: 'PUT',
@@ -57,6 +62,11 @@ async function inserirAeroporto(){
 
   if(!siglaPreenchida()){
     showStatusMessage("Preencha a sigla do aeroporto.", true, "statusCadastrar");
+    return;
+  }
+
+  if(!cidadePreenchida()){
+    showStatusMessage("Preencha a cidade do aeroporto.", true, "statusCadastrar");
     return;
   }
 
@@ -98,16 +108,14 @@ function RequisiçãoGETcidade() {
 }
 
 function preencherSelectCidades(options, vetor) {
-  console.log(vetor[0], vetor[1]);
   for(i=0;i<2;i++) {
     const selectDrop = document.getElementById(vetor[i]);
 
-    if(i==0) {
     const defaultOption = document.createElement('option');
     defaultOption.value = ''; 
     defaultOption.text = 'Selecione uma opção';
     selectDrop.appendChild(defaultOption);
-    } 
+  
     
     options.forEach(optionValue => {
       console.log("Código Cidade: " + JSON.stringify(optionValue));
@@ -138,6 +146,16 @@ function exibirCidades() {
     });
 }
 
+function preencheuCodigoAlterar(){
+  let resultado = false;
+  var strCodigo = document.getElementById("codigoAlterar").value;
+  const codigo = parseInt(strCodigo);
+  console.log("Código aeronave: " + codigo.toString());
+  if (codigo > 0){
+    resultado = true;
+  }
+  return resultado;
+}
 
 function nomePreenchidoAlter(){
   const nome = document.getElementById("nomeAlterar").value.trim();
@@ -162,12 +180,17 @@ function fetchAlterar(body) {
 
 async function alterarAeroporto(){
 
-  if(!nomePreenchido()){
+  if(!preencheuCodigoAlterar()){
+    showStatusMessage("Preencha o código da aeronave...", true, "statusAlterar");
+    return;
+  }
+
+  if(!nomePreenchidoAlter()){
     showStatusMessage("Preencha o nome do aeroporto.", true, "statusAlterar");
     return;
   }
 
-  if(!siglaPreenchida()){
+  if(!siglaPreenchidaAlter()){
     showStatusMessage("Preencha a sigla do aeroporto.", true, "statusAlterar");
     return;
   }
@@ -210,19 +233,28 @@ function RequisiçãoGETaeroportoTable() {
 }
 
 function preencherAeroportos(aeroporto) {
+  let linha = 1;
+  defineAlturaTabela();
   const tblBody = document.querySelector("tbody");
   aeroporto.forEach((aeroporto) => {
       const row = document.createElement("tr");
+      row.classList.add('tableHover');
+      if(linha%2!=0) {
+          row.classList.add('zebraOne');
+      }
+      else {
+          row.classList.add('zebraTwo');
+      }
       row.innerHTML = `
-          <td class="text-center align-middle padLeft" id="codigo">${aeroporto.codigo}</td>
+          <td class="padRow text-center align-middle padLeft" id="codigo">${aeroporto.codigo}</td>
           <td class="text-center align-middle">${aeroporto.nome}</td>
           <td class="text-center align-middle">${aeroporto.sigla}</td>
           <td class="text-center align-middle">${aeroporto.cidade}</td>
           <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelAeroporto); exibeCodigo('${aeroporto.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-          <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeroporto.codigo}')"></td>
+          <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar');  exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeroporto.codigo}')"></td>
           
       `;
-    
+      linha = linha +1;
       tblBody.appendChild(row);
   });
 }

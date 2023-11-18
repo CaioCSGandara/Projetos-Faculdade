@@ -62,13 +62,13 @@
 
     <div class="row">
       <div class="col-md-5" id="divCadastrar">
-            <div class="titulo">
+            <div class="titulo" id="titleCadastrar">
               <h1>Cadastrar Aeroporto</h1>
               <br>
               <p>Preencha todos os campos abaixo:</p>
             </div>
       
-            <div class="formulario">
+            <div class="formulario" id="formCadastrar">
               <form>
                 <p>
                   <label for="nomeCadastrar">Nome do aeroporto:</label><br/>
@@ -76,13 +76,13 @@
                 </p>
                 <br>
                 <p>
-                  <label for="siglaCadasstrar">Sigla do aeroporto:</label><br/>
+                  <label for="siglaCadastrar">Sigla do aeroporto:</label><br/>
                   <input type="text" id="siglaCadastrar" name="siglaCadastrar" maxlength="3" class="inputTam2" placeholder="Ex: VCP">
                 </p>
                 <br>
                 <p>
-                  <label for="cidade">Cidade do aeroporto:</label><br/>
-                  <select name="cidades" id="cidadeCadastrar" class="inputTam1 selectDropdown">
+                  <label for="cidadeCadastrar">Cidade do aeroporto:</label><br/>
+                  <select name="cidadesCadastrar" id="cidadeCadastrar" class="inputTam1 selectDropdown">
                     <!-- <script>
                       exibirCidades();
                     </script> -->
@@ -97,11 +97,11 @@
                     id="btnCadastrar"
                     name="btnCadastrar">Inserir</button>
       
-                  <button
-                    type="reset" 
-                    class="btn btn-secondary" 
-                    id="btnCinza"
-                    name="btnCinza">Limpar</button>
+                    <button type="reset" 
+                    class="btn btn-secondary"
+                    onclick="limparStatus('statusCadastrar');" 
+                    id="btnCinzaAlterar"
+                    name="btnCinza">Limpa</button>
       
                 </p>
                 <p id="statusCadastrar" class="statusError"></p>
@@ -109,13 +109,13 @@
           </div>  
         </div>
         <div class="col-md-5" id="divAlterar">
-          <div class="titulo">
+          <div class="titulo" id="titleAlterar">
             <h1>Alterar Aeroporto</h1>
             <br>
             <p class="pInline">Você está alterando o aeroporto de código: </p> <p class="codStyle pInline" id="pcodAlter"></p>
           </div>
       
-          <div class="formulario">
+          <div class="formulario" id="formAlterar">
             <form>
               <p>
                 <label for="codigoAlterar">Código do aeroporto:</label><br>
@@ -143,16 +143,17 @@
               <br>
               <p>
                 <button 
-                  type="button"
+                  type="reset"
                   class="btn btn-warning"
                   onclick="alterarAeroporto();"
                   id="btnAlterar"
                   name="btnAlterar">Alterar</button>
                   
                   <button type="reset" 
-                  class="btn btn-secondary" 
-                  id="btnCinza"
-                  name="btnCinza">Limpar</button>
+                  class="btn btn-secondary"
+                  onclick="limparStatus('statusAlterar');" 
+                  id="btnCinzaAlterar"
+                  name="btnCinza">Limpa</button>
                 
                   <button type="button"
                   class="btn btn-secondary"
@@ -163,11 +164,10 @@
             </form>
             </div>
         </div>
-      <div class="col-md-7 teste" >  
-            <div id="principal">
+      <div class="col-md-7 teste" > 
               <div id="cadastros">
-                <table class="tableVoos table table-dark table-striped table-hover rounded-pill">
-                  <thead class="cabecalhoTabela">
+                <table class="tableVoos">
+                  <thead class>
                     <tr>
                       <th class="text-center align-middle">CÓDIGO</th>
                       <th class="text-center align-middle">NOME</th>
@@ -181,7 +181,6 @@
                 </table>
               </div>
             </div>
-          </div>
     </div>
     <div class="footer">
       <p class="copyright">©️ Copyright - AIR PUC 2023</p>
@@ -192,8 +191,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script>
       exibirAeroporto();
-    </script>
-    <script>
       exibirCidades();
     </script>
   </body>

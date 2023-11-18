@@ -266,11 +266,20 @@ function anoValidoAlterar(){
   }
   
   function preencherAeronaves(aeronave) {
+    let linha = 1;
+    defineAlturaTabela();
     const tblBody = document.querySelector("tbody");
     aeronave.forEach((aeronave) => {
         const row = document.createElement("tr");
+        row.classList.add('tableHover');
+        if(linha%2!=0) {
+            row.classList.add('zebraOne');
+        }
+        else {
+            row.classList.add('zebraTwo');
+        }
         row.innerHTML = `
-            <td class="text-center align-middle padLeft" id="codigo">${aeronave.codigo}</td>
+            <td class="padRow text-center align-middle padLeft" id="codigo">${aeronave.codigo}</td>
             <td class="text-center align-middle">${aeronave.fabricante}</td>
             <td class="text-center align-middle">${aeronave.modelo}</td>
             <td class="text-center align-middle">${aeronave.anoFabricacao}</td>
@@ -280,7 +289,7 @@ function anoValidoAlterar(){
             <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar'); exibeCodigo('${aeronave.codigo}', 'pcodDelete'); popUpDeletar('${aeronave.codigo}')"></td>
             
         `;
-      
+        linha = linha +1;
         tblBody.appendChild(row);
     });
   }

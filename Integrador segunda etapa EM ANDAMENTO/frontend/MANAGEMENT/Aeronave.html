@@ -70,12 +70,12 @@
     <div class="row">
       <!-- INÍCIO DA DIV DE CADASTRAR -->
       <div class="col-md-5" id="divCadastrar">
-            <div class="titulo">
+            <div class="titulo" id="titleCadastrar">
               <h1>Cadastrar Aeronave</h1>
               <br>
               <p>Preencha todos os campos abaixo:</p>
           </div>
-          <div class="formulario">
+          <div class="formulario" id="formCadastrar">
               <p>
                 <label for="comboFabricantesCadastrar">Fabricante da aeronave:</label><br>
                 <select name="comboFabricantesCadastrar" id="comboFabricantesCadastrar" class="inputTam1">
@@ -109,10 +109,19 @@
               </p>
               <br>
               <p>
-                <button type="button" class="btn btn-warning" onclick="inserirAeronave();" id="btnCadastrar" name="btnCadastrar">Inserir</button>
-    
-                <button type="reset" class="btn btn-secondary" onclick="limparStatus('statusCadastrar');" id="btnCinza" name="btnCinza">Limpar</button>
-              </p>
+                <button type="reset" 
+                class="btn btn-warning"
+                onclick="inserirAeronave();"
+                id="btnCadastrar"
+                name="btnCadastrar">Inserir</button>
+                
+                <button type="reset" 
+                class="btn btn-secondary"
+                onclick="limparStatus('statusCadastrar');" 
+                id="btnCinzaCadastrar"
+                name="btnCinza">Limpar</button>       
+            </p>
+
               <p id="statusCadastrar" class="statusError"></p>
             </form>
         </div>
@@ -124,13 +133,13 @@
       <!-- INÍCIO DA DIV DE ALTERAR -->
       <div class="col-md-5" id="divAlterar">
 
-        <div class="titulo">
+        <div class="titulo" id="titleAlterar">
           <h1>Alterar Aeronave</h1>
           <br>
           <p class="pInline">Você está alterando o voo de código: </p> <p class="codStyle pInline" id="pcodAlter"></p>
         </div>
   
-        <div class="formulario">
+        <div class="formulario" id="formAlterar">
           <form>
             <p>
               <label for="codigoAlterar">Código da aeronave:</label><br>
@@ -197,10 +206,9 @@
 
         <!-- INÍCIO DA DIV DE MOSTRAR DADOS -->
       <div class="col-md-7">
-        <div id="principal">
             <div id="cadastros">
-              <table class="tableVoos table table-dark table-striped table-hover rounded-pill">
-                <thead class="cabecalhoTabela">
+              <table class="tableVoos">
+                <thead>
                   <tr>
                     <th class="text-center align-middle">Código</th>
                     <th class="text-center align-middle">Fabricante</th>
@@ -214,7 +222,6 @@
                 </thead>
                 <tbody class="dadosTabela"></tbody>
               </table>
-            </div>
           </div>
         </div>
       </div>
