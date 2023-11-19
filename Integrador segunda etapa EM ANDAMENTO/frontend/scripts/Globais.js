@@ -57,10 +57,23 @@ function alternarDivs(divVisivel, divOculta) {
     let elementoPreencher = null;
     for(i=0;i<tamanhoLinha;i++) {
         elementoPreencher = document.getElementById(vetor[i]);
+        if(elementosLinha[i].getAttribute('valorRaiz')!=null) { // uma condição para ver se o elemento(exemplo: codigo, nome, cidade) possui o atributo valorRaiz
+          // POR QUE O ATRIBUTO É NECESSARIO? EXEMPLO:
+          // NA TABELA AEROPORTOS, no campo cidade é exibido o nome da cidade. porém, a atual função de preencher
+          // precisa do código da cidade para realizar o alter, e não do nome. então, adicionamos ao nome
+          // da cidade um atributo que contém seu respectivo código. Assim, na tabela será exibido o nome da cidade,
+          // e o preenchimento do dropdown poderá ser feito com o código (que vem do atributo) para funcionar.
+          console.log(elementosLinha[i].getAttribute('valorRaiz')); // caso tenha, mostrar o valor no console (apenas para testes)
+          elementoPreencher.value = elementosLinha[i].getAttribute('valorRaiz'); // caso tenha, preencher o respectivo input com o valor do atributo
+        }
+        else { // caso o elemento não possua o atributo, 
         console.log(elementosLinha[i].textContent);
         elementoPreencher.value = elementosLinha[i].textContent;
+        }
     }
   }
+
+
 
   function showStatusMessage(msg, error, idStatus){
     var pStatus = document.getElementById(idStatus);

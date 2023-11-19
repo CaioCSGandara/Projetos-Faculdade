@@ -16,7 +16,8 @@ export type Aeroporto = {
     codigo?: number, 
     nome?: string, 
     sigla?: string,
-    cidade?: string, 
+    cidade?: string,
+    cidadeNome?: string, // 099 - teve que ser adicionado um novom campo para pegar o nome da cidade referente ao codigo da tabela aeroporto
   }
 
 export type Cidade = {

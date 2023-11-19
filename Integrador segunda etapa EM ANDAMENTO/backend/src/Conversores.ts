@@ -70,6 +70,7 @@ export function rowsToAeroportos(oracleRows: unknown[] | undefined) : Array<Aero
         nome: registro.NOME,
         sigla: registro.SIGLA,
         cidade: registro.CIDADE,
+        cidadeNome: registro.CIDADE_NOME, // 099 - o novo campo que é o nome da cidade 
       } as Aeroporto;
 
       // inserindo o novo Array convertido.

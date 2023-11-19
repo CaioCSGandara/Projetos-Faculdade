@@ -162,9 +162,12 @@ app.get("/listarAeroportos", async(req,res)=>{
     // atenção: mudamos a saída para que o oracle entregue um objeto puro em JS no rows.
     // não mais um array dentro de array.
     let resultadoConsulta = await connection.execute(`
-    SELECT AEROPORTOS.CODIGO, AEROPORTOS.NOME, AEROPORTOS.SIGLA, CIDADES.NOME AS CIDADE
+    SELECT AEROPORTOS.CODIGO, AEROPORTOS.NOME, AEROPORTOS.SIGLA, AEROPORTOS.CIDADE, CIDADES.NOME AS CIDADE_NOME
     FROM AEROPORTOS
     INNER JOIN CIDADES ON AEROPORTOS.CIDADE = CIDADES.CODIGO`);
+
+    // 099 - OBS: AEROPORTOS.CIDADE teve que ser adicionado ao select acima /\ mesmo que nao apareça na tabela 
+
     // let resultadoConsulta = await connection.execute(`
     // SELECT CODIGO, NOME, SIGLA, CIDADE FROM AEROPORTOS`);
   

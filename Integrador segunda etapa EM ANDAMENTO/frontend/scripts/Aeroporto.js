@@ -232,30 +232,61 @@ function RequisiçãoGETaeroportoTable() {
     .then(T => T.json());
 }
 
-function preencherAeroportos(aeroporto) {
+// function preencherAeroportos(aeroporto) {
+//   let linha = 1;
+//   defineAlturaTabela();
+//   const tblBody = document.querySelector("tbody");
+//   aeroporto.forEach((aeroporto) => {
+//       const row = document.createElement("tr");
+//       row.classList.add('tableHover');
+//       if(linha%2!=0) {
+//           row.classList.add('zebraOne');
+//       }
+//       else {
+//           row.classList.add('zebraTwo');
+//       }
+//       row.innerHTML = `
+//           <td class="padRow text-center align-middle padLeft" id="codigo">${aeroporto.codigo}</td>
+//           <td class="text-center align-middle">${aeroporto.nome}</td>
+//           <td class="text-center align-middle">${aeroporto.sigla}</td>
+//           <td class="text-center align-middle">${aeroporto.cidade}</td>
+//           <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelAeroporto); exibeCodigo('${aeroporto.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+//           <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar');  exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeroporto.codigo}')"></td>
+          
+//       `;
+//       linha = linha +1;
+//       tblBody.appendChild(row);
+//   });
+// }
+
+function preencherAeroportos(aeroportos) {
   let linha = 1;
   defineAlturaTabela();
   const tblBody = document.querySelector("tbody");
-  aeroporto.forEach((aeroporto) => {
-      const row = document.createElement("tr");
-      row.classList.add('tableHover');
-      if(linha%2!=0) {
-          row.classList.add('zebraOne');
-      }
-      else {
-          row.classList.add('zebraTwo');
-      }
-      row.innerHTML = `
-          <td class="padRow text-center align-middle padLeft" id="codigo">${aeroporto.codigo}</td>
-          <td class="text-center align-middle">${aeroporto.nome}</td>
-          <td class="text-center align-middle">${aeroporto.sigla}</td>
-          <td class="text-center align-middle">${aeroporto.cidade}</td>
-          <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelAeroporto); exibeCodigo('${aeroporto.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-          <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar');  exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeroporto.codigo}')"></td>
-          
-      `;
-      linha = linha +1;
-      tblBody.appendChild(row);
+  aeroportos.forEach((aeroporto) => {
+    const row = document.createElement("tr");
+    row.classList.add('tableHover');
+    if (linha % 2 != 0) {
+      row.classList.add('zebraOne');
+    } else {
+      row.classList.add('zebraTwo');
+    }
+
+    // Adiciona cada célula à linha da tabela
+    row.innerHTML += `
+      <td class="padRow text-center align-middle padLeft" id="codigo">${aeroporto.codigo}</td>
+      <td class="text-center align-middle">${aeroporto.nome}</td>
+      <td class="text-center align-middle">${aeroporto.sigla}</td>
+      <td class="text-center align-middle" id="cidade">${aeroporto.cidadeNome}</td>
+      <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelAeroporto); exibeCodigo('${aeroporto.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+      <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar');  exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeroporto.codigo}')"></td>
+    `;
+
+    const tdCidade = row.querySelector("#cidade"); // 099 - procura o ID cidade dentro da nova linha
+    tdCidade.setAttribute('valorRaiz', aeroporto.cidade); // 099 - cria um novo atributo e passa a ele um valor
+
+    linha = linha + 1;
+    tblBody.appendChild(row);
   });
 }
 
