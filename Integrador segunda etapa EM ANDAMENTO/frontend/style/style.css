@@ -90,10 +90,6 @@ h1 { /* título do formulário */
     margin: 10px;
 }
 
-.tamanhoInputNomeTrecho {
-    width: 250px;
-}
-
 
 .row {
     margin-top: 100px;
@@ -285,7 +281,7 @@ h1 { /* título do formulário */
 
 .tableVoos {
     width: 100%;
-    font-size: 15px;
+    font-size: 13px;
     color: #ffffff;
     background-color: #383b3e;
 }

@@ -118,8 +118,8 @@
                 <button type="reset" 
                 class="btn btn-secondary"
                 onclick="limparStatus('statusCadastrar');" 
-                id="btnCinzaCadastrar"
-                name="btnCinza">Limpar</button>       
+                id="btnCinzaAlterar"
+                name="btnCinza">Limpa</button>      
             </p>
 
               <p id="statusCadastrar" class="statusError"></p>
@@ -131,15 +131,15 @@
 
 
       <!-- INÍCIO DA DIV DE ALTERAR -->
-      <div class="col-md-5" id="divAlterar">
+      <div class="col-md-5" id="divAlterar" style="border:5px solid red;">
 
-        <div class="titulo" id="titleAlterar">
+        <div class="titulo" id="titleAlterar" style="border:5px solid blue;">
           <h1>Alterar Aeronave</h1>
           <br>
           <p class="pInline">Você está alterando o voo de código: </p> <p class="codStyle pInline" id="pcodAlter"></p>
         </div>
   
-        <div class="formulario" id="formAlterar">
+        <div class="formulario" id="formAlterar" style="border:5px solid green;">
           <form>
             <p>
               <label for="codigoAlterar">Código da aeronave:</label><br>
@@ -149,6 +149,7 @@
               <p>
                 <label for="comboFabricantesAlterar">Fabricante da aeronave:</label><br>
                 <select name="comboFabricantesAlterar" id="comboFabricantesAlterar" class="inputTam1">
+                  <option value="0" selected>Selecione o fabricante</option>
                   <option value="Airbus">Airbus</option>
                   <option value="Boeing">Boeing</option>
                   <option value="Embraer">Embraer</option>
@@ -185,10 +186,10 @@
               name="btnAlterar">Alterar</button>
               
               <button type="reset" 
-              class="btn btn-secondary"
-              onclick="limparStatus('statusAlterar');" 
-              id="btnCinzaAlterar"
-              name="btnCinza">Limpar</button>
+                class="btn btn-secondary"
+                onclick="limparStatus('statusAlterar');" 
+                id="btnCinzaAlterar"
+                name="btnCinza">Limpa</button>
 
               <button type="button"
               class="btn btn-secondary"

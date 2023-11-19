@@ -232,32 +232,6 @@ function RequisiçãoGETaeroportoTable() {
     .then(T => T.json());
 }
 
-// function preencherAeroportos(aeroporto) {
-//   let linha = 1;
-//   defineAlturaTabela();
-//   const tblBody = document.querySelector("tbody");
-//   aeroporto.forEach((aeroporto) => {
-//       const row = document.createElement("tr");
-//       row.classList.add('tableHover');
-//       if(linha%2!=0) {
-//           row.classList.add('zebraOne');
-//       }
-//       else {
-//           row.classList.add('zebraTwo');
-//       }
-//       row.innerHTML = `
-//           <td class="padRow text-center align-middle padLeft" id="codigo">${aeroporto.codigo}</td>
-//           <td class="text-center align-middle">${aeroporto.nome}</td>
-//           <td class="text-center align-middle">${aeroporto.sigla}</td>
-//           <td class="text-center align-middle">${aeroporto.cidade}</td>
-//           <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelAeroporto); exibeCodigo('${aeroporto.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-//           <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar');  exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeroporto.codigo}')"></td>
-          
-//       `;
-//       linha = linha +1;
-//       tblBody.appendChild(row);
-//   });
-// }
 
 function preencherAeroportos(aeroportos) {
   let linha = 1;

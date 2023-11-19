@@ -30,9 +30,9 @@ export type Cidade = {
 export type Trecho = {
   codigo?: number,
   nome?: string,
-  origem?: number,
-  destino?: number,
-  aeronave?: number,
+  origem?: string,
+  destino?: string,
+  aeronave?: string,
 }
 
 export type Voo =  {

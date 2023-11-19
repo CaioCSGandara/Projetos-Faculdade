@@ -3,6 +3,7 @@
 const vetorIdsLabelAeronave = ["codigoAlterar", "comboFabricantesAlterar", "modeloAlterar", "anoFabAlterar", "totalAssentosAlterar", "referenciaAlterar"];
 const vetorIdsLabelCidade = ["codigoCidade", "nomeCidade", "ufCidade", "paisCidade"];
 const vetorIdsLabelAeroporto = ["codigoAlterar", "nomeAlterar", "siglaAlterar", "cidadeAlterar"];
+const vetorIdsLabelTrecho = ["codAlt", "nomeAlt", "selectOrigemAeroportoAlt", "selectDestinoAeroportoAlt", "selectAeronaveAlt"]
 const vetorDropdownAeroporto = ["cidadeCadastrar", "cidadeAlterar"];
 // FUNÇÕES GLOBAIS
 

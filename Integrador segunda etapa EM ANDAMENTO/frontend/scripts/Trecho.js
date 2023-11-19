@@ -20,92 +20,107 @@
 //     });
 //   }
 
-//   function preencherSelectAeroportosDestino(options) {
-//     const aeroportoSelect = document.getElementById('selectDestinoAeroporto');
+  // function preencherSelectAeroportosDestino(options) {
+  //   const aeroportoSelect = document.getElementById('selectDestinoAeroporto');
 
-//     options.forEach(optionValue => {
-//       console.log("Código Aeroporto: " + JSON.stringify(optionValue));
-//       const option = document.createElement('option');
-//       option.value = optionValue.codigo;  // Definindo o valor corretamente
-//       option.innerHTML = optionValue.sigla;  // Definindo o texto do option
-//       aeroportoSelect.appendChild(option);
-//     });
-//   }
+  //   options.forEach(optionValue => {
+  //     console.log("Código Aeroporto: " + JSON.stringify(optionValue));
+  //     const option = document.createElement('option');
+  //     option.value = optionValue.codigo;  // Definindo o valor corretamente
+  //     option.innerHTML = optionValue.sigla;  // Definindo o texto do option
+  //     aeroportoSelect.appendChild(option);
+  //   });
+  // }
 
-//   function exibirOrigemAeroporto() {
-//     console.log('Entrou no exibir...');
-//     RequisiçãoGETaeroporto()
-//       .then(customResponse => {
-//         if (customResponse.status === "SUCCESS") {
-//           console.log("Deu certo a busca de dados");
-//           console.log('Payload:' + JSON.stringify(customResponse.payload));
-//           preencherSelectAeroportosOrigem(customResponse.payload); 
-//         } else {
-//           console.log(customResponse.message);
-//         }
-//       })
-//       .catch((e) => {
-//         console.log("Não foi possível exibir." + e);
-//       });
-//   }
+  // function exibirOrigemAeroporto() {
+  //   console.log('Entrou no exibir...');
+  //   RequisiçãoGETaeroporto()
+  //     .then(customResponse => {
+  //       if (customResponse.status === "SUCCESS") {
+  //         console.log("Deu certo a busca de dados");
+  //         console.log('Payload:' + JSON.stringify(customResponse.payload));
+  //         preencherSelectAeroportosOrigem(customResponse.payload); 
+  //       } else {
+  //         console.log(customResponse.message);
+  //       }
+  //     })
+  //     .catch((e) => {
+  //       console.log("Não foi possível exibir." + e);
+  //     });
+  // }
 
-//   function exibirDestinoAeroporto() {
-//     console.log('Entrou no exibir...');
-//     RequisiçãoGETaeroporto()
-//       .then(customResponse => {
-//         if (customResponse.status === "SUCCESS") {
-//           console.log("Deu certo a busca de dados");
-//           console.log('Payload:' + JSON.stringify(customResponse.payload));
-//           preencherSelectAeroportosDestino(customResponse.payload); 
-//         } else {
-//           console.log(customResponse.message);
-//         }
-//       })
-//       .catch((e) => {
-//         console.log("Não foi possível exibir." + e);
-//       });
-//   }
+  // function exibirDestinoAeroporto() {
+  //   console.log('Entrou no exibir...');
+  //   RequisiçãoGETaeroporto()
+  //     .then(customResponse => {
+  //       if (customResponse.status === "SUCCESS") {
+  //         console.log("Deu certo a busca de dados");
+  //         console.log('Payload:' + JSON.stringify(customResponse.payload));
+  //         preencherSelectAeroportosDestino(customResponse.payload); 
+  //       } else {
+  //         console.log(customResponse.message);
+  //       }
+  //     })
+  //     .catch((e) => {
+  //       console.log("Não foi possível exibir." + e);
+  //     });
+  // }
 
-//   function RequisiçãoGETaeronave() {
-//     const requestOptions = {
-//       method: 'GET',
-//       headers: { 'Content-Type': 'application/json' },
-//     };
-//     return fetch('http://localhost:3000/listarAeronaves', requestOptions)
-//       .then(T => T.json());
-//   }
+  // function RequisiçãoGETaeronave() {
+  //   const requestOptions = {
+  //     method: 'GET',
+  //     headers: { 'Content-Type': 'application/json' },
+  //   };
+  //   return fetch('http://localhost:3000/listarAeronaves', requestOptions)
+  //     .then(T => T.json());
+  // }
 
-//   function preencherSelectAeronaves(options) {
-//     const aeroSelect = document.getElementById('selectAeronave');
-//     options.forEach(optionValue => {
-//       console.log("Código Aeronave: " + JSON.stringify(optionValue));
-//       const option = document.createElement('option');
-//       option.value = optionValue.codigo;  // Definindo o valor corretamente
-//       option.innerHTML = optionValue.modelo;  // Definindo o texto do option
-//       aeroSelect.appendChild(option);
-//     });
-//   }
+  // function preencherSelectAeronaves(options) {
+  //   const aeroSelect = document.getElementById('selectAeronave');
+  //   options.forEach(optionValue => {
+  //     console.log("Código Aeronave: " + JSON.stringify(optionValue));
+  //     const option = document.createElement('option');
+  //     option.value = optionValue.codigo;  // Definindo o valor corretamente
+  //     option.innerHTML = optionValue.modelo;  // Definindo o texto do option
+  //     aeroSelect.appendChild(option);
+  //   });
+  // }
 
-//   function exibirAeronave() {
-//     console.log('Entrou no exibir...');
-//     RequisiçãoGETaeronave()
-//       .then(customResponse => {
-//         if (customResponse.status === "SUCCESS") {
-//           console.log("Deu certo a busca de dados");
-//           console.log('Payload:' + JSON.stringify(customResponse.payload));
-//           preencherSelectAeronaves(customResponse.payload); 
-//         } else {
-//           console.log(customResponse.message);
-//         }
-//       })
-//       .catch((e) => {
-//         console.log("Não foi possível exibir." + e);
-//       });
-//   }
+  // function exibirAeronave() {
+  //   console.log('Entrou no exibir...');
+  //   RequisiçãoGETaeronave()
+  //     .then(customResponse => {
+  //       if (customResponse.status === "SUCCESS") {
+  //         console.log("Deu certo a busca de dados");
+  //         console.log('Payload:' + JSON.stringify(customResponse.payload));
+  //         preencherSelectAeronaves(customResponse.payload); 
+  //       } else {
+  //         console.log(customResponse.message);
+  //       }
+  //     })
+  //     .catch((e) => {
+  //       console.log("Não foi possível exibir." + e);
+  //     });
+  // }
 
-  function nomePreenchido(){
-    const nome = document.getElementById("nome").value.trim();
+  function nomePreenchidoCad(){
+    const nome = document.getElementById("nomeCad").value.trim();
     return nome.length > 0;
+  }
+
+  function origemPreenchidaCad() {
+    const origem = document.getElementById("selectOrigemAeroportoCad").value.trim();
+    return ci.length > 0;
+  }
+
+  function destinoPreenchidoCad() {
+    const destino = document.getElementById("selectDestinoAeroportoCad").value.trim();
+    return destino.length > 0;
+  }
+
+  function aeronavePreenchidaCad() {
+    const aeronave = document.getElementById("selectAeronaveCad").value.trim();
+    return aeronave.length > 0;
   }
 
   function fetchInserir(body) {
@@ -121,17 +136,32 @@
 
   function inserirTrecho(){
 
-    if(!nomePreenchido()){
-      showStatusMessage("Preencha o nome do trecho.", true);
+    if(!nomePreenchidoCad()){
+      showStatusMessage("Preencha o nome do trecho.", true, "statusCadastrar");
+      return;
+    }
+    
+    if(!origemPreenchidaCad()){
+      showStatusMessage("Preencha o nome da origem.", true, "statusCadastrar");
       return;
     }
 
-    const nome = document.getElementById("nome").value;
-    const origem = document.getElementById("selectOrigemAeroporto").options[document.getElementById("selectOrigemAeroporto").selectedIndex].value;
+    if(!destinoPreenchidoCad()){
+      showStatusMessage("Preencha o nome do destino.", true, "statusCadastrar");
+      return;
+    }
+
+    if(!aeronavePreenchidaCad()){
+      showStatusMessage("Preencha o nome da aeronave.", true, "statusCadastrar");
+      return;
+    }
+
+    const nome = document.getElementById("nomeCad").value;
+    const origem = document.getElementById("selectOrigemAeroportoCad").options[document.getElementById("selectOrigemAeroportoCad").selectedIndex].value;
     console.log(origem)
-    const destino = document.getElementById("selectDestinoAeroporto").options[document.getElementById("selectDestinoAeroporto").selectedIndex].value;
+    const destino = document.getElementById("selectDestinoAeroportoCad").options[document.getElementById("selectDestinoAeroportoCad").selectedIndex].value;
     console.log(destino)
-    const aeronave = document.getElementById("selectAeronave").options[document.getElementById("selectAeronave").selectedIndex].value;
+    const aeronave = document.getElementById("selectAeronaveCad").options[document.getElementById("selectAeronaveCad").selectedIndex].value;
 
     fetchInserir({
         nome: nome, 
@@ -141,30 +171,21 @@
     })
     .then(customResponse => {
       if(customResponse.status === "SUCCESS"){
-        showStatusMessage("Trecho cadastrado com sucesso.", false);
+        showStatusMessage("Trecho cadastrado com sucesso.", false, "statusCadastrar");
       } else {
-        showStatusMessage("Erro ao cadastrar trecho: " + customResponse.message, true);
+        showStatusMessage("Erro ao cadastrar trecho: " + customResponse.message, true, "statusCadastrar");
         console.log(customResponse.message);
       }
     })
     .catch((e)=>{
-      showStatusMessage("Erro técnico ao cadastrar... Contate o suporte.", true);
+      showStatusMessage("Erro técnico ao cadastrar... Contate o suporte.", true, "statusCadastrar");
       console.log("Falha grave ao cadastrar." + e)
     });
 
   }
 
-  function showStatusMessage(msg, error){
-    var pStatus = document.getElementById("status");
-    if (error === true){
-      pStatus.className = "statusError";
-    } else {
-      pStatus.className = "statusSuccess";
-    }
-    pStatus.textContent = msg;
-  }
 
-// Script de exibição da tabela de trechos
+// FUNÇÃO PARA A EXIBIÇÃO DA TABELA
 
 function RequisiçãoGETtrecho() {
   const requestOptions = {
@@ -176,21 +197,31 @@ function RequisiçãoGETtrecho() {
 }
 
 function preencherTrechos(trecho) {
+  let linha = 1;
+  defineAlturaTabela();
   const tblBody = document.querySelector("tbody");
   trecho.forEach((trecho) => {
-      const row = document.createElement("tr");
+    const row = document.createElement("tr");
+    row.classList.add('tableHover');
+    if(linha%2!=0) {
+        row.classList.add('zebraOne');
+    }
+    else {
+        row.classList.add('zebraTwo');
+    }
       row.innerHTML = `
-          <td class="text-center align-middle padLeft" id="codigo">${trecho.codigo}</td>
+          <td class="padRow text-center align-middle padLeft" id="codigo">${trecho.codigo}</td>
           <td class="text-center align-middle">${trecho.nome}</td>
           <td class="text-center align-middle">${trecho.origem}</td>
           <td class="text-center align-middle">${trecho.destino}</td>
           <td class="text-center align-middle">${trecho.aeronave}</td>
-          <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this); exibeCodigo('${trecho.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+          <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelTrecho); exibeCodigo('${trecho.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
           <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${trecho.codigo}', 'pcodDelete'); popUpDeletar('${trecho.codigo}')"></td>
           
       `;
-    
+      linha++;
       tblBody.appendChild(row);
+      
   });
 }
 
@@ -201,7 +232,7 @@ function exibirTrecho() {
       if (customResponse.status === "SUCCESS") {
         console.log("Deu certo a busca de dados");
         console.log('Payload:' + JSON.stringify(customResponse.payload));
-        // preencherSelectTrechos(customResponse.payload); // Removido o parse redundante
+        preencherTrechos(customResponse.payload); 
       } else {
         console.log(customResponse.message);
       }
@@ -211,6 +242,7 @@ function exibirTrecho() {
     });
 }
 
+// FUNÇÃO DE DELEÇÃO DOS TRECHOS
 function deletartrecho(codigo) {
   const requestOptions = {
       method: 'DELETE',
@@ -222,22 +254,58 @@ function deletartrecho(codigo) {
       .then(response => response.json())
       .then(customResponse => {
           if (customResponse.status === "SUCCESS") {
-              showStatusMessageDelete("Trecho deletado com sucesso.", false);
+              showStatusMessage("Trecho deletado com sucesso.", false, "statusDelete");
           } else {
-              showStatusMessageDelete("Erro ao deletar Trecho: " + customResponse.message, true);
+              showStatusMessage("Erro ao deletar Trecho: " + customResponse.message, true, "statusDelete");
               console.log(customResponse.message);
           }
       })
       .catch((e) => {
-          showStatusMessageDelete("Erro técnico ao deletar... Contate o suporte.", true);
+          showStatusMessage("Erro técnico ao deletar... Contate o suporte.", true, "statusDelete");
           console.log("Falha grave ao deletar." + e);
       });
 }
 
-function alterarTrecho(){
+// FUNÇÕES DE ALTERAÇÃO DO TRECHO
+function nomePreenchidoAlt(){
+  const nome = document.getElementById("nomeAlt").value.trim();
+  return nome.length > 0;
+}
 
-  if(!nomePreenchido()){
-    showStatusMessage("Preencha o nome do trecho.", true);
+function origemPreenchidaAlt() {
+  const cidade = document.getElementById("selectOrigemAeroportoAlt").value.trim();
+  return cidade.length > 0;
+}
+
+function destinoPreenchidoAlt() {
+  const cidade = document.getElementById("selectDestinoAeroportoAlt").value.trim();
+  return cidade.length > 0;
+}
+
+function aeronavePreenchidaAlt() {
+  const aeronave = document.getElementById("selectAeronaveAlt").value.trim();
+  return aeronave.length > 0;
+}
+
+function alterarTrecho(){
+    
+  if(!nomePreenchidoAlt()){
+    showStatusMessage("Preencha o nome do trecho.", true, "statusAlterar");
+    return;
+  }
+  
+  if(!origemPreenchidaAlt()){
+    showStatusMessage("Preencha a origem do trecho.", true, "statusAlterar");
+    return;
+  }
+
+  if(!destinoPreenchidoAlt()){
+    showStatusMessage("Preencha o destino do trecho.", true, "statusAlterar");
+    return;
+  }
+
+  if(!aeronavePreenchidaAlt()){
+    showStatusMessage("Preencha a aeronave do trecho.", true, "statusAlterar");
     return;
   }
 
@@ -258,25 +326,139 @@ function alterarTrecho(){
   })
   .then(customResponse => {
     if(customResponse.status === "SUCCESS"){
-      showStatusMessage("Trecho alterado com sucesso.", false);
+      showStatusMessage("Trecho alterado com sucesso.", false, "statusAlterar");
     } else {
-      showStatusMessage("Erro ao alterar trecho: " + customResponse.message, true);
+      showStatusMessage("Erro ao alterar trecho: " + customResponse.message, true, "statusAlterar");
       console.log(customResponse.message);
     }
   })
   .catch((e)=>{
-    showStatusMessage("Erro técnico ao alterar... Contate o suporte.", true);
+    showStatusMessage("Erro técnico ao alterar... Contate o suporte.", true, "statusAlterar");
     console.log("Falha grave ao alterar." + e)
   });
 
 }
 
-function showStatusMessage(msg, error){
-  var pStatus = document.getElementById("status");
-  if (error === true){
-    pStatus.className = "statusError";
-  } else {
-    pStatus.className = "statusSuccess";
-  }
-  pStatus.textContent = msg;
+function RequisiçãoGETaeroporto() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+  return fetch('http://localhost:3000/listarAeroportos', requestOptions)
+    .then(T => T.json());
 }
+
+function preencherSelectAeroportosOrigem(options, dados) {
+  const aeroportoSelect = document.getElementById('selectOrigemAeroporto');
+
+  options.forEach(optionValue => {
+    console.log("Código Aeroporto: " + JSON.stringify(optionValue));
+    const option = document.createElement('option');
+    option.value = optionValue.codigo;  // Definindo o valor corretamente
+    option.innerHTML = optionValue.sigla;  // Definindo o texto do option
+    aeroportoSelect.appendChild(option);
+  });
+}
+
+function preencherSelectAeroportosDestino(options) {
+  const aeroportoSelect = document.getElementById('selectDestinoAeroporto');
+
+  options.forEach(optionValue => {
+    console.log("Código Aeroporto: " + JSON.stringify(optionValue));
+    const option = document.createElement('option');
+    option.value = optionValue.codigo;  // Definindo o valor corretamente
+    option.innerHTML = optionValue.sigla;  // Definindo o texto do option
+    aeroportoSelect.appendChild(option);
+  });
+}
+
+function exibirOrigemAeroporto() {
+  console.log('Entrou no exibir...');
+  RequisiçãoGETaeroporto()
+    .then(customResponse => {
+      if (customResponse.status === "SUCCESS") {
+        console.log("Deu certo a busca de dados");
+        console.log('Payload:' + JSON.stringify(customResponse.payload));
+        preencherSelectAeroportosOrigem(customResponse.payload); 
+      } else {
+        console.log(customResponse.message);
+      }
+    })
+    .catch((e) => {
+      console.log("Não foi possível exibir." + e);
+    });
+}
+
+function exibirDestinoAeroporto() {
+  console.log('Entrou no exibir...');
+  RequisiçãoGETaeroporto()
+    .then(customResponse => {
+      if (customResponse.status === "SUCCESS") {
+        console.log("Deu certo a busca de dados");
+        console.log('Payload:' + JSON.stringify(customResponse.payload));
+        preencherSelectAeroportosDestino(customResponse.payload); 
+      } else {
+        console.log(customResponse.message);
+      }
+    })
+    .catch((e) => {
+      console.log("Não foi possível exibir." + e);
+    });
+}
+
+
+
+function RequisiçãoGETaeronave() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+  return fetch('http://localhost:3000/listarAeronaves', requestOptions)
+    .then(T => T.json());
+}
+
+function preencherSelectAeronaves(options) {
+  const aeroSelect = document.getElementById('selectAeronave');
+  options.forEach(optionValue => {
+    console.log("Código Aeronave: " + JSON.stringify(optionValue));
+    const option = document.createElement('option');
+    option.value = optionValue.codigo;  // Definindo o valor corretamente
+    option.innerHTML = optionValue.registro;  // Definindo o texto do option
+    aeroSelect.appendChild(option);
+  });
+}
+
+function exibirAeronave() {
+  console.log('Entrou no exibir...');
+  RequisiçãoGETaeronave()
+    .then(customResponse => {
+      if (customResponse.status === "SUCCESS") {
+        console.log("Deu certo a busca de dados");
+        console.log('Payload:' + JSON.stringify(customResponse.payload));
+        preencherSelectAeronaves(customResponse.payload); 
+      } else {
+        console.log(customResponse.message);
+      }
+    })
+    .catch((e) => {
+      console.log("Não foi possível exibir." + e);
+    });
+}
+
+function nomePreenchido(){
+  const nome = document.getElementById("nome").value.trim();
+  return nome.length > 0;
+}
+
+function fetchAlterar(body) {
+  const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+  };
+
+  return fetch('http://localhost:3000/alterarTrecho', requestOptions)
+      .then(response => response.json());
+  }
+
+
