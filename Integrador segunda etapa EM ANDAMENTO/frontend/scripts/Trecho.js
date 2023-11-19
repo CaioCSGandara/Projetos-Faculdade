@@ -1,107 +1,118 @@
+function RequisiçãoGETaeronave() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+  return fetch('http://localhost:3000/listarAeronaves', requestOptions)
+    .then(T => T.json());
+}
 
-// function RequisiçãoGETaeroporto() {
-//     const requestOptions = {
-//       method: 'GET',
-//       headers: { 'Content-Type': 'application/json' },
-//     };
-//     return fetch('http://localhost:3000/listarAeroportos', requestOptions)
-//       .then(T => T.json());
-//   }
+function exibirAeronave() {
+  console.log('Entrou no exibir AERONAVE...');
+  RequisiçãoGETaeronave()
+    .then(customResponse => {
+      if (customResponse.status === "SUCCESS") {
+        console.log("Deu certo a busca de dados");
+        console.log('Payload:' + JSON.stringify(customResponse.payload));
+        preencherSelectAeronaves(customResponse.payload, vetorDropdownAeronave); 
+      } else {
+        console.log(customResponse.message);
+      }
+    })
+    .catch((e) => {
+      console.log("Não foi possível exibir." + e);
+    });
+}
 
-//   function preencherSelectAeroportosOrigem(options) {
-//     const aeroportoSelect = document.getElementById('selectOrigemAeroporto');
+function preencherSelectAeronaves(options, vetor) {
+  for(i=0;i<2;i++) {
+    const selectDrop = document.getElementById(vetor[i]);
 
-//     options.forEach(optionValue => {
-//       console.log("Código Aeroporto: " + JSON.stringify(optionValue));
-//       const option = document.createElement('option');
-//       option.value = optionValue.codigo;  // Definindo o valor corretamente
-//       option.innerHTML = optionValue.sigla;  // Definindo o texto do option
-//       aeroportoSelect.appendChild(option);
-//     });
-//   }
+    const defaultOption = document.createElement('option');
+    defaultOption.value = ''; 
+    defaultOption.text = 'Selecione uma opção';
+    selectDrop.appendChild(defaultOption);
+  
+    
+    options.forEach(optionValue => {
+      console.log("Código Cidade: " + JSON.stringify(optionValue));
+      const option = document.createElement('option');
+      option.value = optionValue.codigo; 
+      option.innerHTML = optionValue.modelo;  
+      selectDrop.appendChild(option);
+    });
+  }
+}
+///////////////////////////////////////////////////////////////////////////
 
-  // function preencherSelectAeroportosDestino(options) {
-  //   const aeroportoSelect = document.getElementById('selectDestinoAeroporto');
+function RequisiçãoGETaeroporto() {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    return fetch('http://localhost:3000/listarAeroportos', requestOptions)
+      .then(T => T.json());
+  }
 
-  //   options.forEach(optionValue => {
-  //     console.log("Código Aeroporto: " + JSON.stringify(optionValue));
-  //     const option = document.createElement('option');
-  //     option.value = optionValue.codigo;  // Definindo o valor corretamente
-  //     option.innerHTML = optionValue.sigla;  // Definindo o texto do option
-  //     aeroportoSelect.appendChild(option);
-  //   });
-  // }
+  function preencherSelectAeroportosOrigem(options) {
+    const aeroportoSelect = document.getElementById('selectOrigemAeroportoCad');
 
-  // function exibirOrigemAeroporto() {
-  //   console.log('Entrou no exibir...');
-  //   RequisiçãoGETaeroporto()
-  //     .then(customResponse => {
-  //       if (customResponse.status === "SUCCESS") {
-  //         console.log("Deu certo a busca de dados");
-  //         console.log('Payload:' + JSON.stringify(customResponse.payload));
-  //         preencherSelectAeroportosOrigem(customResponse.payload); 
-  //       } else {
-  //         console.log(customResponse.message);
-  //       }
-  //     })
-  //     .catch((e) => {
-  //       console.log("Não foi possível exibir." + e);
-  //     });
-  // }
+    options.forEach(optionValue => {
+      console.log("Código Aeroporto: " + JSON.stringify(optionValue));
+      const option = document.createElement('option');
+      option.value = optionValue.codigo;  // Definindo o valor corretamente
+      option.innerHTML = optionValue.sigla;  // Definindo o texto do option
+      aeroportoSelect.appendChild(option);
+    });
+  }
 
-  // function exibirDestinoAeroporto() {
-  //   console.log('Entrou no exibir...');
-  //   RequisiçãoGETaeroporto()
-  //     .then(customResponse => {
-  //       if (customResponse.status === "SUCCESS") {
-  //         console.log("Deu certo a busca de dados");
-  //         console.log('Payload:' + JSON.stringify(customResponse.payload));
-  //         preencherSelectAeroportosDestino(customResponse.payload); 
-  //       } else {
-  //         console.log(customResponse.message);
-  //       }
-  //     })
-  //     .catch((e) => {
-  //       console.log("Não foi possível exibir." + e);
-  //     });
-  // }
+  function preencherSelectAeroportosDestino(options) {
+    const aeroportoSelect = document.getElementById('selectDestinoAeroportoCad');
 
-  // function RequisiçãoGETaeronave() {
-  //   const requestOptions = {
-  //     method: 'GET',
-  //     headers: { 'Content-Type': 'application/json' },
-  //   };
-  //   return fetch('http://localhost:3000/listarAeronaves', requestOptions)
-  //     .then(T => T.json());
-  // }
+    options.forEach(optionValue => {
+      console.log("Código Aeroporto: " + JSON.stringify(optionValue));
+      const option = document.createElement('option');
+      option.value = optionValue.codigo;  // Definindo o valor corretamente
+      option.innerHTML = optionValue.sigla;  // Definindo o texto do option
+      aeroportoSelect.appendChild(option);
+    });
+  }
 
-  // function preencherSelectAeronaves(options) {
-  //   const aeroSelect = document.getElementById('selectAeronave');
-  //   options.forEach(optionValue => {
-  //     console.log("Código Aeronave: " + JSON.stringify(optionValue));
-  //     const option = document.createElement('option');
-  //     option.value = optionValue.codigo;  // Definindo o valor corretamente
-  //     option.innerHTML = optionValue.modelo;  // Definindo o texto do option
-  //     aeroSelect.appendChild(option);
-  //   });
-  // }
+  function exibirOrigemAeroporto() {
+    console.log('Entrou no exibir...');
+    RequisiçãoGETaeroporto()
+      .then(customResponse => {
+        if (customResponse.status === "SUCCESS") {
+          console.log("Deu certo a busca de dados");
+          console.log('Payload:' + JSON.stringify(customResponse.payload));
+          preencherSelectAeroportosOrigem(customResponse.payload); 
+        } else {
+          console.log(customResponse.message);
+        }
+      })
+      .catch((e) => {
+        console.log("Não foi possível exibir." + e);
+      });
+  }
 
-  // function exibirAeronave() {
-  //   console.log('Entrou no exibir...');
-  //   RequisiçãoGETaeronave()
-  //     .then(customResponse => {
-  //       if (customResponse.status === "SUCCESS") {
-  //         console.log("Deu certo a busca de dados");
-  //         console.log('Payload:' + JSON.stringify(customResponse.payload));
-  //         preencherSelectAeronaves(customResponse.payload); 
-  //       } else {
-  //         console.log(customResponse.message);
-  //       }
-  //     })
-  //     .catch((e) => {
-  //       console.log("Não foi possível exibir." + e);
-  //     });
-  // }
+  function exibirDestinoAeroporto() {
+    console.log('Entrou no exibir...');
+    RequisiçãoGETaeroporto()
+      .then(customResponse => {
+        if (customResponse.status === "SUCCESS") {
+          console.log("Deu certo a busca de dados");
+          console.log('Payload:' + JSON.stringify(customResponse.payload));
+          preencherSelectAeroportosDestino(customResponse.payload); 
+        } else {
+          console.log(customResponse.message);
+        }
+      })
+      .catch((e) => {
+        console.log("Não foi possível exibir." + e);
+      });
+  }
+
+
 
   function nomePreenchidoCad(){
     const nome = document.getElementById("nomeCad").value.trim();
@@ -267,6 +278,11 @@ function deletartrecho(codigo) {
 }
 
 // FUNÇÕES DE ALTERAÇÃO DO TRECHO
+function codigoPreenchidoAlt(){
+  const codigo = document.getElementById("codAlt").value.trim();
+  return codigo.lengt > 0;
+}
+
 function nomePreenchidoAlt(){
   const nome = document.getElementById("nomeAlt").value.trim();
   return nome.length > 0;
@@ -288,7 +304,11 @@ function aeronavePreenchidaAlt() {
 }
 
 function alterarTrecho(){
-    
+  if(!codigoPreenchidoAlt()){
+    showStatusMessage("Preencha o codigo do trecho.", true, "statusAlterar");
+    return;
+  }  
+  
   if(!nomePreenchidoAlt()){
     showStatusMessage("Preencha o nome do trecho.", true, "statusAlterar");
     return;

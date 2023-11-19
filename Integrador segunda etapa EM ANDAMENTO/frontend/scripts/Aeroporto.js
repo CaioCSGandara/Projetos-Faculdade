@@ -1,31 +1,4 @@
 //FUNÇÃO PARA CADASTRO DO AEROPORTO
-function RequisiçãoGETcidade() {
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  };
-  return fetch('http://localhost:3000/listarCidades', requestOptions)
-    .then(T => T.json());
-}
-
-
-function exibirCidades() {
-  console.log('Entrou no exibir...');
-  RequisiçãoGETcidade()
-    .then(customResponse => {
-      if (customResponse.status === "SUCCESS") {
-        console.log("Deu certo a busca de dados");
-        console.log('Payload:' + JSON.stringify(customResponse.payload));
-        preencherSelectCidades(customResponse.payload, vetorDropdownAeroporto); // Removido o parse redundante
-      } else {
-        console.log(customResponse.message);
-      }
-    })
-    .catch((e) => {
-      console.log("Não foi possível exibir." + e);
-    });
-}
-
 
 function nomePreenchido(){
   const nome = document.getElementById("nomeCadastrar").value.trim();
@@ -107,7 +80,8 @@ function RequisiçãoGETcidade() {
     .then(T => T.json());
 }
 
-function preencherSelectCidades(options, vetor) {
+
+function preencherSelect(options, vetor) {
   for(i=0;i<2;i++) {
     const selectDrop = document.getElementById(vetor[i]);
 
@@ -125,7 +99,6 @@ function preencherSelectCidades(options, vetor) {
       selectDrop.appendChild(option);
     });
   }
-
 }
 
 
@@ -136,7 +109,7 @@ function exibirCidades() {
       if (customResponse.status === "SUCCESS") {
         console.log("Deu certo a busca de dados");
         console.log('Payload:' + JSON.stringify(customResponse.payload));
-        preencherSelectCidades(customResponse.payload, vetorDropdownAeroporto);
+        preencherSelect(customResponse.payload, vetorDropdownAeroporto);
       } else {
         console.log(customResponse.message);
       }

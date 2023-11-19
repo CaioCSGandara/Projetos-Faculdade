@@ -5,6 +5,7 @@ const vetorIdsLabelCidade = ["codigoCidade", "nomeCidade", "ufCidade", "paisCida
 const vetorIdsLabelAeroporto = ["codigoAlterar", "nomeAlterar", "siglaAlterar", "cidadeAlterar"];
 const vetorIdsLabelTrecho = ["codAlt", "nomeAlt", "selectOrigemAeroportoAlt", "selectDestinoAeroportoAlt", "selectAeronaveAlt"]
 const vetorDropdownAeroporto = ["cidadeCadastrar", "cidadeAlterar"];
+const vetorDropdownAeronave = ["selectAeronaveCad", "selectAeronaveAlt" ];
 // FUNÇÕES GLOBAIS
 
 function limparTabela() {
