@@ -47,7 +47,7 @@
           A ação não poderá ser desfeita.
         </p>
         <button class="btn btn-warning botaoExcluirPopUp"
-        onclick="deletarCidade(codigoToUse); alternarDivs('popUpBody', 'popUpDone');">Excluir</button>
+        onclick="deletartrecho(codigoToUse); alternarDivs('popUpBody', 'popUpDone');">Excluir</button>
         <button class="btn btn-secondary"
         onclick="fechaPopUpDeletar(); limparStatus('statusDelete');">Cancelar</button>
         <br>
@@ -206,8 +206,11 @@
     <script>
       exibirTrecho();
       exibirAeronave();
-      // exibirOrigemAeroporto();
-      // exibirDestinoAeroporto();
+      exibirOrigemAeroporto();
+      exibirDestinoAeroporto();
+      exibirAeronaveAlt();
+      exibirOrigemAeroportoAlt();
+      exibirDestinoAeroportoAlt();
     </script>
   </body>
 </html>
