@@ -208,9 +208,7 @@ function RequisiçãoGETaeroporto() {
 
     const nome = document.getElementById("nomeCad").value;
     const origem = document.getElementById("selectOrigemAeroportoCad").options[document.getElementById("selectOrigemAeroportoCad").selectedIndex].value;
-    console.log(origem)
     const destino = document.getElementById("selectDestinoAeroportoCad").options[document.getElementById("selectDestinoAeroportoCad").selectedIndex].value;
-    console.log(destino)
     const aeronave = document.getElementById("selectAeronaveCad").options[document.getElementById("selectAeronaveCad").selectedIndex].value;
 
     fetchInserir({
@@ -321,9 +319,21 @@ function deletartrecho(codigo) {
 }
 
 // FUNÇÕES DE ALTERAÇÃO DO TRECHO
+
+function fetchAlterar(body) {
+  const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+  };
+
+  return fetch('http://localhost:3000/alterarTrecho', requestOptions)
+      .then(response => response.json());
+  }
+  
 function codigoPreenchidoAlt(){
-  const codigo = document.getElementById("codAlt").value.trim();
-  return codigo.lengt > 0;
+  const codigo = document.getElementById("codAlt").value;
+  return codigo.length > 0;
 }
 
 function nomePreenchidoAlt(){
@@ -372,13 +382,12 @@ function alterarTrecho(){
     return;
   }
 
-  const nome = document.getElementById("nome").value;
-  const origem = document.getElementById("selectOrigemAeroporto").options[document.getElementById("selectOrigemAeroporto").selectedIndex].value;
-  console.log(origem)
-  const destino = document.getElementById("selectDestinoAeroporto").options[document.getElementById("selectDestinoAeroporto").selectedIndex].value;
-  console.log(destino)
-  const aeronave = document.getElementById("selectAeronave").options[document.getElementById("selectAeronave").selectedIndex].value;
-  const codigo = document.getElementById("codigo").value;
+  const nome = document.getElementById("nomeAlt").value;
+  const origem = document.getElementById("selectOrigemAeroportoAlt").options[document.getElementById("selectOrigemAeroportoAlt").selectedIndex].value;
+  const destino = document.getElementById("selectDestinoAeroportoAlt").options[document.getElementById("selectDestinoAeroportoAlt").selectedIndex].value;
+  const aeronave = document.getElementById("selectAeronaveAlt").options[document.getElementById("selectAeronaveAlt").selectedIndex].value;
+  const codigo = document.getElementById("codAlt").value;
+
 
   fetchAlterar({
       nome: nome, 
@@ -489,20 +498,5 @@ function exibirAeronaveAlt() {
 }
 
 
-// function nomePreenchido(){
-//   const nome = document.getElementById("nomeAlt").value.trim();
-//   return nome.length > 0;
-// }
-
-function fetchAlterar(body) {
-  const requestOptions = {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-  };
-
-  return fetch('http://localhost:3000/alterarTrecho', requestOptions)
-      .then(response => response.json());
-  }
 
 
