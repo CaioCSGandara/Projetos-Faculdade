@@ -56,12 +56,14 @@ app.get("/listarTrechos", async(req,res)=>{
 
     // atenção: mudamos a saída para que o oracle entregue um objeto puro em JS no rows.
     // não mais um array dentro de array.
-    let resultadoConsulta = await connection.execute(`SELECT TRECHOS.CODIGO, TRECHOS.NOME, ORIGEM.NOME AS ORIGEM, DESTINO.NOME AS DESTINO, AERONAVES.REFERENCIA AS AERONAVE
+    let resultadoConsulta = await connection.execute(`SELECT TRECHOS.CODIGO, TRECHOS.NOME, TRECHOS.ORIGEM, ORIGEM.NOME AS ORIGEM_NOME, DESTINO.NOME AS DESTINO, AERONAVES.REFERENCIA AS AERONAVE
     FROM TRECHOS 
     INNER JOIN AEROPORTOS ORIGEM ON TRECHOS.ORIGEM = ORIGEM.CODIGO
     INNER JOIN AEROPORTOS DESTINO ON TRECHOS.DESTINO = DESTINO.CODIGO
     INNER JOIN AERONAVES ON TRECHOS.AERONAVE = AERONAVES.CODIGO`);
   
+    // 099 - OBS: TRECHOS.ORIGEM teve que ser adicionado ao select acima /\ mesmo que nao apareça na tabela para poder preencher o formulário
+
     cr.status = "SUCCESS"; 
     cr.message = "Dados obtidos";
 

@@ -25,6 +25,7 @@ export function rowsToTrechos(oracleRows: unknown[] | undefined) : Array<Trecho>
         origem: registro.ORIGEM,
         destino: registro.DESTINO,
         aeronave: registro.AERONAVE,
+        origemNome: registro.ORIGEM_NOME, // 099 - o novo campo que é o nome do registro
       } as Trecho;
 
       // inserindo o novo Array convertido.
@@ -60,7 +61,7 @@ export function rowsToCidades(oracleRows: unknown[] | undefined) : Array<Cidade>
 
 export function rowsToAeroportos(oracleRows: unknown[] | undefined) : Array<Aeroporto> {
   // vamos converter um array any (resultados do oracle)
-  // em um array de Aeronave
+  // em um array de Aeroportos
   let aeroportos: Array<Aeroporto> = [];
   let aeroporto;
   if (oracleRows !== undefined){

@@ -1,4 +1,5 @@
 // FUNÇÃO PARA EXIBIR AERONAVES NO FORMULÁRIO E ALTERAÇÃO
+
 function RequisiçãoGETaeronave() {
   const requestOptions = {
     method: 'GET',
@@ -8,25 +9,34 @@ function RequisiçãoGETaeronave() {
     .then(T => T.json());
 }
 
-function preencherSelectAeronaves(options) {
-  const aeroSelect = document.getElementById('selectAeronaveCad');
-  options.forEach(optionValue => {
-    console.log("Código Aeronave: " + JSON.stringify(optionValue));
-    const option = document.createElement('option');
-    option.value = optionValue.codigo;  // Definindo o valor corretamente
-    option.innerHTML = optionValue.referencia;  // Definindo o texto do option
-    aeroSelect.appendChild(option);
-  });
+function preencherSelectAeronaves(options, vetor) {
+  for(i=0;i<2;i++) {
+    const selectDrop = document.getElementById(vetor[i]);
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = ''; 
+    defaultOption.text = 'Selecione uma opção';
+    selectDrop.appendChild(defaultOption);
+  
+    
+    options.forEach(optionValue => {
+      console.log("Código Aeronave: " + JSON.stringify(optionValue));
+      const option = document.createElement('option');
+      option.value = optionValue.codigo; 
+      option.innerHTML = optionValue.modelo;  
+      selectDrop.appendChild(option);
+    });
+  }
 }
 
 function exibirAeronave() {
-  console.log('Entrou no exibir...');
+  console.log('Entrou no exibir AERONAVE...');
   RequisiçãoGETaeronave()
     .then(customResponse => {
       if (customResponse.status === "SUCCESS") {
         console.log("Deu certo a busca de dados");
         console.log('Payload:' + JSON.stringify(customResponse.payload));
-        preencherSelectAeronaves(customResponse.payload); 
+        preencherSelectAeronaves(customResponse.payload, vetorDropdownTrechos);
       } else {
         console.log(customResponse.message);
       }
@@ -35,52 +45,6 @@ function exibirAeronave() {
       console.log("Não foi possível exibir." + e);
     });
 }
-
-// function RequisiçãoGETaeronave() {
-//   const requestOptions = {
-//     method: 'GET',
-//     headers: { 'Content-Type': 'application/json' },
-//   };
-//   return fetch('http://localhost:3000/listarAeronaves', requestOptions)
-//     .then(T => T.json());
-// }
-
-// function preencherSelectAeronaves(options, vetor) {
-//   for(i=0;i<2;i++) {
-//     const selectDrop = document.getElementById(vetor[i]);
-
-//     const defaultOption = document.createElement('option');
-//     defaultOption.value = ''; 
-//     defaultOption.text = 'Selecione uma opção';
-//     selectDrop.appendChild(defaultOption);
-  
-    
-//     options.forEach(optionValue => {
-//       console.log("Código Aeronave: " + JSON.stringify(optionValue));
-//       const option = document.createElement('option');
-//       option.value = optionValue.codigo; 
-//       option.innerHTML = optionValue.modelo;  
-//       selectDrop.appendChild(option);
-//     });
-//   }
-// }
-
-// function exibirAeronave() {
-//   console.log('Entrou no exibir AERONAVE...');
-//   RequisiçãoGETaeronave()
-//     .then(customResponse => {
-//       if (customResponse.status === "SUCCESS") {
-//         console.log("Deu certo a busca de dados");
-//         console.log('Payload:' + JSON.stringify(customResponse.payload));
-//         preencherSelectAeronaves(customResponse.payload, vetor); 
-//       } else {
-//         console.log(customResponse.message);
-//       }
-//     })
-//     .catch((e) => {
-//       console.log("Não foi possível exibir." + e);
-//     });
-// }
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -260,14 +224,17 @@ function preencherTrechos(trecho) {
       row.innerHTML = `
           <td class="padRow text-center align-middle padLeft" id="codigo">${trecho.codigo}</td>
           <td class="text-center align-middle">${trecho.nome}</td>
-          <td class="text-center align-middle">${trecho.origem}</td>
+          <td class="text-center align-middle" id="origem">${trecho.origemNome}</td>
           <td class="text-center align-middle">${trecho.destino}</td>
           <td class="text-center align-middle">${trecho.aeronave}</td>
           <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelTrecho); exibeCodigo('${trecho.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-          <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar');  exibeCodigo('${trecho.codigo}', 'pcodDelete'); popUpDeletar('${trecho.codigo}')"></td>
-          
+          <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar');  exibeCodigo('${trecho.codigo}', 'pcodDelete'); popUpDeletar('${trecho.codigo}')"></td>  
       `;
-      linha++;
+
+      const tdOrigem = row.querySelector("#origem"); // 099 
+      tdOrigem.setAttribute('valorRaiz', trecho.origem); // 099 
+
+      linha = linha + 1;
       tblBody.appendChild(row);
       
   });
@@ -411,7 +378,7 @@ function alterarTrecho(){
 
 }
 
-function preencherSelectAeroportosOrigemAlt(options, dados) {
+function preencherSelectAeroportosOrigemAlt(options) {
   const aeroportoSelect = document.getElementById('selectOrigemAeroportoAlt');
 
   options.forEach(optionValue => {
@@ -469,33 +436,6 @@ function exibirDestinoAeroportoAlt() {
     });
 }
 
-function preencherSelectAeronavesAlt(options) {
-  const aeroSelect = document.getElementById('selectAeronaveAlt');
-  options.forEach(optionValue => {
-    console.log("Código Aeronave: " + JSON.stringify(optionValue));
-    const option = document.createElement('option');
-    option.value = optionValue.codigo;  // Definindo o valor corretamente
-    option.innerHTML = optionValue.referencia;  // Definindo o texto do option
-    aeroSelect.appendChild(option);
-  });
-}
-
-function exibirAeronaveAlt() {
-  console.log('Entrou no exibir...');
-  RequisiçãoGETaeronave()
-    .then(customResponse => {
-      if (customResponse.status === "SUCCESS") {
-        console.log("Deu certo a busca de dados");
-        console.log('Payload:' + JSON.stringify(customResponse.payload));
-        preencherSelectAeronavesAlt(customResponse.payload); 
-      } else {
-        console.log(customResponse.message);
-      }
-    })
-    .catch((e) => {
-      console.log("Não foi possível exibir." + e);
-    });
-}
 
 
 
