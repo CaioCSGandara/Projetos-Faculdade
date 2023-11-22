@@ -185,32 +185,32 @@ function fetchInserir(body) {
 function inserirVoo() {
 
   if (!codigoValidoCad()) {
-      showStatusMessage("O código do voo deve ser um número válido.", true);
+      showStatusMessage("O código do voo deve ser um número válido.", true, "statusCadastrar");
       return;
   }
 
+  if(!dataValidaCad()) {
+    showStatusMessage("Escolha uma data válida.", true, "statusCadastrar")
+    return;
+  }
+
+  if(!saidaValidaCad()) {
+    showStatusMessage("Digite uma hora de saída válida.", true, "statusCadastrar")
+    return;
+  }
+
+  if(!chegadaValidaCad()) {
+    showStatusMessage("Digite uma hora de chegada válida.", true, "statusCadastrar")
+    return;
+  }
+
   if(!valorValidoCad()) {
-    showStatusMessage("Digite um Valor maior que zero para o valor.")
+    showStatusMessage("O valor deve ser um número válido e maior que zero.", true, "statusCadastrar")
     return;
   }
 
   if(!trechoValidoCad()) {
-    showStatusMessage("Digite um trecho válido.")
-    return;
-  }
-
-  if(!hrsSaidaValidaCad()) {
-    showStatusMessage("Digite uma hora de saída válida.")
-    return;
-  }
-
-  if(!hrChegadaValidaCad()) {
-    showStatusMessage("Digite uma hora de chegada válida.")
-    return;
-  }
-
-  if(!dataValidaCad()) {
-    showStatusMessage("Escolha uma data válida.")
+    showStatusMessage("Digite um trecho válido.", true, "statusCadastrar")
     return;
   }
 
@@ -232,25 +232,18 @@ function inserirVoo() {
   })
       .then(customResponse => {
           if (customResponse.status === "SUCCESS") {
-              showStatusMessage("Voo cadastrado com sucesso.", false);
+              showStatusMessage("Voo cadastrado com sucesso.", false, "statusCadastrar");
           } else {
-              showStatusMessage("Erro ao cadastrar voo: " + customResponse.message, true);
+              showStatusMessage("Erro ao cadastrar voo: " + customResponse.message, true, "statusCadastrar");
               console.log(customResponse.message);
           }
       })
       .catch((e) => {
-          showStatusMessage("Erro técnico ao cadastrar... Contate o suporte.", true);
+          showStatusMessage("Erro técnico ao cadastrar... Contate o suporte.", true, "statusCadastrar");
           console.log("Falha grave ao cadastrar." + e);
       });
 
 }
 
-function showStatusMessage(msg, error) {
-  var pStatus = document.getElementById("status");
-  if (error === true) {
-      pStatus.className = "statusError";
-  } else {
-      pStatus.className = "statusSuccess";
-  }
-  pStatus.textContent = msg;
-}
+
+//// ALTERAR 
