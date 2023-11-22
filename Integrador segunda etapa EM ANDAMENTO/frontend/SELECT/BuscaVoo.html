@@ -44,11 +44,31 @@
       <label for="selectDestinoAeroportoAlt">Aeroporto/Cidade Destino:</label><br>
       <select name="selectDestinoAeroportoAlt" id="selectDestinoAeroportoCad" class="inputTam1"></select>
     </p>
-    <button type="submit">Buscar Voos</button>
+    <button type="button" onclick="selecionarVoos();">Buscar Voos</button>
   </form>
 
   <!-- Aqui seria exibida a lista de opções de voo após a busca -->
   <!-- Esta parte pode ser preenchida dinamicamente com JavaScript -->
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Voo</th>
+          <th>Data</th>
+          <th>Trecho</th>
+          <th>Saída</th>
+          <th>Chegada</th>
+          <th>Origem</th>
+          <th>Destino</th>
+          <th>Preço</th>
+          <th>Comprar</th>
+        </tr>
+      </thead>
+      <tbody id="listaVoos">
+        <!-- Aqui serão inseridas as linhas com os voos -->
+      </tbody>
+    </table>
+  </div>
   
   <script type="text/javascript" src="../scripts/BuscaVoo.js"></script>
   <script type="text/javascript" src="../scripts/Globais.js"></script>
