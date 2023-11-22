@@ -9,7 +9,7 @@ const vetorDropdownAeroporto = ["cidadeCadastrar", "cidadeAlterar"];
 const vetorDropdownAeronave = ["selectAeronaveCad", "selectAeronaveAlt" ];
 const vetorDropdownOrigem = ["selectOrigemAeroportoCad","selectOrigemAeroportoAlt"];
 const vetorDropdownDestino = ["selectDestinoAeroportoCad", "selectDestinoAeroportoAlt"];
-const vetorDropdownTrechos = ["selectAeronaveCad", "selectAeronaveAlt","selectOrigemAeroportoCad", "selectOrigemAeroportoAlt", "selectDestinoAeroportoCad", "selectDestinoAeroportoAlt"];
+const vetorDropdownTrechos = ["trechoCadastrar", "trechoAlterar"];
 // FUNÇÕES GLOBAIS
 
 function limparTabela() {

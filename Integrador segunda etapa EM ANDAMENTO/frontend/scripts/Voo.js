@@ -70,43 +70,32 @@ function RequisiçãoGETlistar() {
 }
 
 
-// function RequisiçãoGETtrecho() {
-//     const requestOptions = {
-//       method: 'GET',
-//       headers: { 'Content-Type': 'application/json' },
-//     };
-//     return fetch('http://localhost:3000/listarTrechos', requestOptions)
-//       .then(T => T.json());
-//   }
+function RequisiçãoGETtrecho() {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    return fetch('http://localhost:3000/listarTrechos', requestOptions)
+      .then(T => T.json());
+  }
 
-// function preencherSelectTrechos(options) {
-//   const trechoSelect = document.getElementById('trecho');
 
-//   options.forEach(optionValue => {
-//     console.log("Código Trecho: " + JSON.stringify(optionValue));
-//     const option = document.createElement('option');
-//     option.value = optionValue.codigo;  // Definindo o valor corretamente
-//     option.innerHTML = optionValue.nome;  // Definindo o texto do option
-//     trechoSelect.appendChild(option);
-//   });
-// }
-
-// function exibirTrechos() {
-//   console.log('Entrou no exibir...');
-//   RequisiçãoGETtrecho()
-//     .then(customResponse => {
-//       if (customResponse.status === "SUCCESS") {
-//         console.log("Deu certo a busca de dados");
-//         console.log('Payload:' + JSON.stringify(customResponse.payload));
-//         preencherSelectTrechos(customResponse.payload); // Removido o parse redundante
-//       } else {
-//         console.log(customResponse.message);
-//       }
-//     })
-//     .catch((e) => {
-//       console.log("Não foi possível exibir." + e);
-//     });
-// }
+function exibirTrechos() {
+  console.log('Entrou no exibir...');
+  RequisiçãoGETtrecho()
+    .then(customResponse => {
+      if (customResponse.status === "SUCCESS") {
+        console.log("Deu certo a busca de dados");
+        console.log('Payload:' + JSON.stringify(customResponse.payload));
+        preencherSelect(customResponse.payload); // Removido o parse redundante
+      } else {
+        console.log(customResponse.message);
+      }
+    })
+    .catch((e) => {
+      console.log("Não foi possível exibir." + e);
+    });
+}
 
 function codigoValidoCad() {
   let resultado = false;
