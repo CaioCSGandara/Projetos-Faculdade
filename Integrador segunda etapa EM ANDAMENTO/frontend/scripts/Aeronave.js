@@ -312,31 +312,6 @@ function anoValidoAlterar(){
       });
   }
 
-// FUNÇÕES DE DELETAR
-
-// async function deletarVoo(codigo) {
-//   const requestOptions = {
-//       method: 'DELETE',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify({ codigo: codigo })
-//   };
-
-//   await fetch('http://localhost:3000/excluirVoo', requestOptions)
-//       .then(response => response.json())
-//       .then(customResponse => {
-//           if (customResponse.status === "SUCCESS") {
-//               showStatusMessage("Voo deletado com sucesso.", false, "statusDelete");
-//               exibirAeronave();
-//           } else {
-//               showStatusMessage("Erro ao deletar Voo: " + customResponse.message, true, "statusDelete");
-//               console.log(customResponse.message);
-//           }
-//       })
-//       .catch((e) => {
-//           showStatusMessage("Erro técnico ao deletar... Contate o suporte.", true, "statusDelete");
-//           console.log("Falha grave ao deletar." + e);
-//       });
-// }
 
 async function deletarAeronave(codigo) {
   const requestOptions = {

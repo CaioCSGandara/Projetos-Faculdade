@@ -29,56 +29,75 @@
 </header>
 
 <body>
-    <div class="content">
-        <div class="titulo">
-            <table>
-                <thead>
-                    <tr>
-                    <td class="espacoSetas"><a href="../INSERT/CadastrarTrecho.html"><img class="imgSetas" src="../images/left-arrow.png"></a></td>
-                    <td class="espacoTitulo"><h1>VOOS</h1></td>
-                    <td class="espacoSetas"><a href="../SELECT/TabelaInicial.html"><img class="imgSetas" src="../images/right-arrow.png"></a></td>
-                
-                    </tr>
-                </thead>
-            </table>
-            <br>
-            <p>Preencha todos os campos abaixo:</p>
+    <dialog class="popUpDelete" id="popUpDelete">
+        <div class="popUpHeader">
+          <table>
+            <thead>
+              <tr>
+                <td class class="titlePopUp"><h1>ATENÇÃO</h1></td>
+                <td class="xPopUp"><img class="iconList" src="../images/closeicon.png" onclick="alternarDivs('popUpDone', 'popUpBody'); fechaPopUpDeletar(); limparStatus('statusDelete');" ></td>
+              </tr>
+            </thead>
+          </table>
         </div>
+        <div id="popUpBody">
+          <p class="pInline">Tem certeza que deseja mesmo excluir o aeroporto de código <p class=" pInline codStyle" id="pcodDelete"></p><p class="pInline"> ?</p>
+            <br>
+            <br>
+            A ação não poderá ser desfeita.
+          </p>
+          <button class="btn btn-warning botaoExcluirPopUp"
+          onclick="deletarAeroporto(codigoToUse); alternarDivs('popUpBody', 'popUpDone')">Excluir</button>
+          <button class="btn btn-secondary"
+          onclick="fechaPopUpDeletar(); limparStatus('statusDelete');">Cancelar</button>
+          <br>
+        </div>
+        
+        <div id="popUpDone">
+          <p id="statusDelete" class="statusError"></p>
+          <button class="btn btn-warning"
+          onclick="fechaPopUpDeletar(); limparStatus('statusDelete'); alternarDivs('popUpDone', 'popUpBody')">Sair</button>
+        </div>
+      </dialog>
+  
+    <div class="row">
+        <div class="col-md-5" id="divCadastrar">
+            <div class="titulo" id="titleCadastrar">
+                <h1>Cadastrar Voo</h1>
+                <br>
+                <p>Preencha todos os campos abaixo:</p>
+            </div>
 
-        <div class="formulario">
+        <div class="formulario" id="formCadastrar">
             <form>
                 <p>
-                    <label for="codigo">Código do voo:</label><br>
-                    <input type="number" id="codigo" name="codigo" class="alteracao" placeholder="Ex: 1234"/>
+                    <label for="codigoCadastrar">Código do voo:</label><br>
+                    <input type="text" id="codigoCadastrar" name="codigoCadastrar" class="inputTam2" placeholder="Ex: 1234"/>
                 </p>
                 <br>
                 <p>
-                    <label for="dataVoo">Data:</label><br/>
-                    <input type="date" id="dataVoo" name="dataVoo" class="alteracao">
+                    <label for="dataCadastrar">Data:</label><br/>
+                    <input type="date" id="dataCadastrar" name="dataCadastrar" class="inputTam1">
                 </p>
                 <br>
                 <p>
-                    <label for="hrSaida">Hora de Saída:</label><br>
-                    <input type="text" id="hrSaida" name="hrSaida" class="alteracao" placeholder="Ex: 21:30:00">
+                    <label for="hrSaidaCadastrar">Hora de Saída:</label><br>
+                    <input type="text" id="hrSaidaCadastrar" name="hrSaidaCadastrar" class="inputTam1" placeholder="Ex: 21:30:00">
                 </p>
                 <br>
                 <p>
-                    <label for="hrChegada">Hora de Chegada:</label><br/>
-                    <input type="text" id="hrChegada" name="hrChegada" class="alteracao" placeholder="Ex: 19:45:00">
+                    <label for="hrChegadaCadastrar">Hora de Chegada:</label><br/>
+                    <input type="text" id="hrChegadaCadastrar" name="hrChegadaCadastrar" class="inputTam1" placeholder="Ex: 19:45:00">
                 </p>
                 <br>
                 <p>
-                    <label for="valor">Valor em R$:</label><br>
-                    <input type="text" id="valor" name="valor" class="alteracao" placeholder="Ex: 750">
+                    <label for="valorCadastrar">Valor em R$:</label><br>
+                    <input type="text" id="valorCadastrar" name="valorCadastrar" class="inputTam1" placeholder="Ex: 750">
                 </p>
                 <br>
                 <p>
-                    <label for="trecho">Trecho:</label><br/>
-                    <select name="trechos" id="trecho" class="alteracao">
-                        <option value="0">Selecione o Trecho</option>
-                        <script>
-                            exibirTrechos();
-                        </script>
+                    <label for="trechoCadastrar">Trecho:</label><br/>
+                    <select name="trechoCadastrar" id="trechoCadastrar" class="inputTam1">
                     </select>
                 </p>
                 <br>
@@ -95,15 +114,100 @@
                       id="btnCinza"
                       name="btnCinza">Limpar</button>
                 </p>
-                <p id="status" class="statusError"></p>
+                <p id="statusCadastrar" class="statusError"></p>
             </form>
         </div>
     </div>
+    <div class="col-md-5" id="divAlterar">
+        <div class="titulo" id="titleAlterar">      
+          <h1>Alterar Voo</h1>
+          <br>
+          <p class="pInline">Você está alterando o voo de código: </p> <p class="codStyle pInline" id="pcodAlter"></p>
+        </div>
+    
+        <div class="formulario" id="formAlterar">
+          <form>
+              <p>
+                  <label for="codigoAlterar">Código do voo:</label><br>
+                  <input type="text" id="codigoAlterar" name="codigoAlterar" class="inputTam2" placeholder="Ex: 1234">
+              </p>
+              <br>
+              <p>
+                  <label for="dataAlterar">Data:</label><br>
+                  <input type="date" id="dataAlterar" name="dataAlterar" class="inputTam1">
+              </p>
+              <br>
+              <p>
+                  <label for="hrSaidaAlterar">Hora de Saída:</label><br>
+                  <input type="text" id="hrSaidaAlterar" name="hrSaidaAlterar" class="inputTam1" placeholder="Ex: 12:45:00">
+              </p>
+              <br>
+              <p>
+                  <label for="hrChegadaAlterar">Hora de Chegada:</label><br>
+                  <input type="text" id="hrChegadaAlterar" name="hrChegadaAlterar" class="inputTam1" placeholder="Ex: 22:00:00">
+              </p>
+              <br>
+              <p>
+                  <label for="valorAlterar">Valor em R$:</label><br>
+                  <input type="text" id="valorAlterar" name="valorAlterar" class="inputTam1" placeholder="Ex: 850">
+              </p>
+              <p>
+                  <label for="trechoAlterar">Trecho:</label><br/>
+                  <select name="trechoAlterar" id="trechoAlterar" class="inputTam1">
+                      <option value="0">Selecione o Trecho</option>
+                  </select>
+              </p>
+              <br>
+              <p>  
+                  <button 
+                      type="button" 
+                      class="btn btn-warning"
+                      onclick="alterarVoo();"
+                      id="btnAlterar"
+                      name="btnAlterar">Alterar</button>
+                      <button type="reset" 
+                      class="btn btn-secondary" 
+                      id="btnCinza"
+                      name="btnCinza">Limpar</button>
+
+                      <button type="button"
+                      class="btn btn-secondary"
+                      onclick="alternarDivs('divAlterar', 'divCadastrar');">Voltar</button>  
+              </p>
+              <p id="statusAlterar" class="statusError"></p>
+          </form>
+          </div> 
+      </div>
+      <div class="col-md-7" > 
+        <div id="cadastros">
+          <table class="tableVoos">
+            <thead class>
+              <tr>
+                <th class="text-center align-middle">Código</th>
+                <th class="text-center align-middle">Data</th>
+                <th class="text-center align-middle">Sigla</th>
+                <th class="text-center align-middle">Saída</th>
+                <th class="text-center align-middle">Chegada</th>
+                <th class="text-center align-middle">Origem</th>
+                <th class="text-center align-middle">Destino</th>
+                <th> </th>
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody class="dadosTabela"></tbody>
+          </table>
+        </div>
+      </div>
+</div>
     <div class="footer">
         <p class="copyright">©️ Copyright - AIR PUC 2023</p>
     </div>
-<script type="text/javascript" src="../scripts/cadastrarVoo.js"></script>
+    <script type="text/javascript" src="../scripts/Voo.js"></script>
+    <script type="text/javascript" src="../scripts/Globais.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+<script>
+    exibirVoos();
+</script>
 </body>
 </html>
