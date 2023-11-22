@@ -76,6 +76,7 @@
               <p>Preencha todos os campos abaixo:</p>
           </div>
           <div class="formulario" id="formCadastrar">
+            <form>
               <p>
                 <label for="comboFabricantesCadastrar">Fabricante da aeronave:</label><br>
                 <select name="comboFabricantesCadastrar" id="comboFabricantesCadastrar" class="inputTam1">
@@ -109,37 +110,33 @@
               </p>
               <br>
               <p>
-                <button type="reset" 
-                class="btn btn-warning"
-                onclick="inserirAeronave();"
-                id="btnCadastrar"
-                name="btnCadastrar">Inserir</button>
-                
-                <button type="reset" 
-                class="btn btn-secondary"
-                onclick="limparStatus('statusCadastrar');" 
-                id="btnCinzaAlterar"
-                name="btnCinza">Limpa</button>      
-            </p>
+                <button 
+                  type="reset"
+                  class="btn btn-warning" 
+                  onclick="inserirAeronave();"
+                  id="btnCadastrar"
+                  name="btnCadastrar">Inserir</button>
+    
+                  <button type="reset" 
+                  class="btn btn-secondary"
+                  onclick="limparStatus('statusCadastrar');" 
+                  id="btnCinzaAlterar"
+                  name="btnCinza">Limpa</button>
+    
+              </p>
 
               <p id="statusCadastrar" class="statusError"></p>
             </form>
         </div>
-            </div>
-
-      <!-- FIM DA DIV DE CADASTRAR -->
-
-
-      <!-- INÍCIO DA DIV DE ALTERAR -->
-      <div class="col-md-5" id="divAlterar" style="border:5px solid red;">
-
-        <div class="titulo" id="titleAlterar" style="border:5px solid blue;">
+      </div>
+      <div class="col-md-5" id="divAlterar">
+        <div class="titulo" id="titleAlterar">
           <h1>Alterar Aeronave</h1>
           <br>
           <p class="pInline">Você está alterando o voo de código: </p> <p class="codStyle pInline" id="pcodAlter"></p>
         </div>
   
-        <div class="formulario" id="formAlterar" style="border:5px solid green;">
+        <div class="formulario" id="formAlterar">
           <form>
             <p>
               <label for="codigoAlterar">Código da aeronave:</label><br>
@@ -189,7 +186,7 @@
                 class="btn btn-secondary"
                 onclick="limparStatus('statusAlterar');" 
                 id="btnCinzaAlterar"
-                name="btnCinza">Limpa</button>
+                name="btnCinza">Limpar</button>
 
               <button type="button"
               class="btn btn-secondary"

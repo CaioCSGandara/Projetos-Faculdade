@@ -6,6 +6,8 @@ const vetorIdsLabelAeroporto = ["codigoAlterar", "nomeAlterar", "siglaAlterar", 
 const vetorIdsLabelTrecho = ["codAlt", "nomeAlt", "selectOrigemAeroportoAlt", "selectDestinoAeroportoAlt", "selectAeronaveAlt"]
 const vetorDropdownAeroporto = ["cidadeCadastrar", "cidadeAlterar"];
 const vetorDropdownAeronave = ["selectAeronaveCad", "selectAeronaveAlt" ];
+const vetorDropdownOrigem = ["selectOrigemAeroportoCad","selectOrigemAeroportoAlt"];
+const vetorDropdownDestino = ["selectDestinoAeroportoCad", "selectDestinoAeroportoAlt"];
 const vetorDropdownTrechos = ["selectAeronaveCad", "selectAeronaveAlt","selectOrigemAeroportoCad", "selectOrigemAeroportoAlt", "selectDestinoAeroportoCad", "selectDestinoAeroportoAlt"];
 // FUNÇÕES GLOBAIS
 
@@ -110,4 +112,23 @@ function alternarDivs(divVisivel, divOculta) {
     console.log(tabela.style.maxHeight);
   }
   
+  function preencherSelect(options, vetor, casca) {
+    for(i=0;i<2;i++) {
+      const selectDrop = document.getElementById(vetor[i]);
+  
+      const defaultOption = document.createElement('option');
+      defaultOption.value = ''; 
+      defaultOption.text = 'Selecione uma opção';
+      selectDrop.appendChild(defaultOption);
+    
+      
+      options.forEach(optionValue => {
+        console.log("Código Cidade: " + JSON.stringify(optionValue));
+        const option = document.createElement('option');
+        option.value = optionValue.codigo; 
+        option.innerHTML = optionValue[casca]; 
+        selectDrop.appendChild(option);
+      });
+    }
+  }
  

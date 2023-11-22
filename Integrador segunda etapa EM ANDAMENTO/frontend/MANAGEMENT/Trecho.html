@@ -77,21 +77,18 @@
           <p>
             <label for="selectOrigemAeroportoCad">Aeroporto Origem:</label><br>
             <select name="selectOrigemAeroportoCad" id="selectOrigemAeroportoCad" class="inputTam1">
-              <option value="0" selected>Selecione um Aeroporto</option>
             </select>
           </p>
           <br>
           <p>
             <label for="selectDestinoAeroportoCad">Aeroporto Destino:</label><br>
             <select name="selectDestinoAeroportoCad" id="selectDestinoAeroportoCad" class="inputTam1">
-              <option value="0" selected>Selecione um Aeroporto</option>
             </select>
           </p>
           <br>
           <p>
             <label for="selectAeronaveCad">Aeronave:</label><br>
             <select name="selectAeronaveCad" id="selectAeronaveCad" class="inputTam1">
-              <option value="0" selected>Selecione uma Aeronave</option>
             </select>
           </p>
           <br>
@@ -129,13 +126,12 @@
           </p>
             <p>
               <label for="nomeAlt">Nome do trecho:</label><br>
-              <input type="text" id="nomeAlt" name="nomeAlt" class="inputTam1" placeholder="Ex: São Paulo -> Rio de Janeiro">
+              <input type="text" id="nomeAlt" name="nomeAlt" class="inputTam1" placeholder="Ex: SAO -> RIO">
             </p>
             <br>
             <p>
               <label for="selectOrigemAeroportoAlt">Aeroporto Origem:</label><br>
               <select name="selectOrigemAeroportoAlt" id="selectOrigemAeroportoAlt" class="inputTam1">
-                <option value="0" selected>Selecione Um Aeroporto</option>
 
                 <!-- Adicione mais opções conforme necessário -->
               </select>
@@ -144,7 +140,6 @@
             <p>
               <label for="selectDestinoAeroportoAlt">Aeroporto Destino:</label><br>
               <select name="selectDestinoAeroportoAlt" id="selectDestinoAeroportoAlt" class="inputTam1">
-                <option value="0" selected>Selecione Um Aeroporto</option>
                 <!-- Adicione mais opções conforme necessário -->
               </select>
             </p>
@@ -152,14 +147,13 @@
             <p>
               <label for="selectAeronaveAlt">Aeronave:</label><br/>
               <select name="selectAeronaveAlt" id="selectAeronaveAlt" class="inputTam1">
-                <option value="0">Selecione uma Aeronave</option>
                 <!-- Adicione mais opções conforme necessário -->
               </select>
             </p>
             <br>
             <p>
               <button 
-                type="button"
+                type="reset"
                 class="btn btn-warning" 
                 onclick="alterarTrecho();"
                 id="btnAlterar"
@@ -208,10 +202,7 @@
     <script>
       exibirTrecho();
       exibirAeronave();
-      exibirOrigemAeroporto();
-      exibirDestinoAeroporto();
-      exibirOrigemAeroportoAlt();
-      exibirDestinoAeroportoAlt();
+      exibirAeroporto();
     </script>
   </body>
 </html>

@@ -286,7 +286,7 @@ function anoValidoAlterar(){
             <td class="text-center align-middle">${aeronave.totalAssentos}</td>
             <td class="align-middle">${aeronave.referencia}</td>
             <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelAeronave); exibeCodigo('${aeronave.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar'); exibeCodigo('${aeronave.codigo}', 'pcodDelete'); popUpDeletar('${aeronave.codigo}')"></td>
+            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar'); alternarDivs('divAlterar', 'divCadastrar'); exibeCodigo('${aeronave.codigo}', 'pcodDelete'); popUpDeletar('${aeronave.codigo}')"></td>
             
         `;
         linha = linha +1;

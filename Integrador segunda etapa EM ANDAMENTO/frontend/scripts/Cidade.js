@@ -208,7 +208,7 @@ function RequisiçãoGETcidade() {
             <td class="text-center align-middle">${Cidade.uf}</td>
             <td class="text-center align-middle">${Cidade.pais}</td>
             <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelCidade); exibeCodigo('${Cidade.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar');" ></td>
-            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick="limparStatus('statusCadastrar'); limparStatus('statusAlterar'); exibeCodigo('${Cidade.codigo}', 'pcodDelete'); popUpDeletar('${Cidade.codigo}')"></td>
+            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick="limparStatus('statusCadastrar'); limparStatus('statusAlterar'); alternarDivs('divAlterar', 'divCadastrar'); exibeCodigo('${Cidade.codigo}', 'pcodDelete'); popUpDeletar('${Cidade.codigo}')"></td>
         `;
         linha = linha +1;
         tblBody.appendChild(row);

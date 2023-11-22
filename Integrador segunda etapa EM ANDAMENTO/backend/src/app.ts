@@ -56,11 +56,12 @@ app.get("/listarTrechos", async(req,res)=>{
 
     // atenção: mudamos a saída para que o oracle entregue um objeto puro em JS no rows.
     // não mais um array dentro de array.
-    let resultadoConsulta = await connection.execute(`SELECT TRECHOS.CODIGO, TRECHOS.NOME, TRECHOS.ORIGEM, ORIGEM.NOME AS ORIGEM_NOME, DESTINO.NOME AS DESTINO, AERONAVES.REFERENCIA AS AERONAVE
+    let resultadoConsulta = await connection.execute(`SELECT TRECHOS.CODIGO, TRECHOS.NOME, TRECHOS.ORIGEM, TRECHOS.DESTINO, ORIGEM.NOME AS ORIGEM_NOME, DESTINO.NOME AS DESTINO_NOME, AERONAVES.REFERENCIA AS AERO_NOME, AERONAVES.CODIGO AS AERONAVE
     FROM TRECHOS 
     INNER JOIN AEROPORTOS ORIGEM ON TRECHOS.ORIGEM = ORIGEM.CODIGO
     INNER JOIN AEROPORTOS DESTINO ON TRECHOS.DESTINO = DESTINO.CODIGO
-    INNER JOIN AERONAVES ON TRECHOS.AERONAVE = AERONAVES.CODIGO`);
+    INNER JOIN AERONAVES ON TRECHOS.AERONAVE = AERONAVES.CODIGO
+    ORDER BY LOWER (TRECHOS.NOME) ASC`);
   
     // 099 - OBS: TRECHOS.ORIGEM teve que ser adicionado ao select acima /\ mesmo que nao apareça na tabela para poder preencher o formulário
 
@@ -96,7 +97,8 @@ app.get("/listarCidades", async(req,res)=>{
     // atenção: mudamos a saída para que o oracle entregue um objeto puro em JS no rows.
     // não mais um array dentro de array.
     let resultadoConsulta = await connection.execute(`
-    SELECT CODIGO, NOME, UF, PAIS FROM CIDADES`);
+    SELECT CODIGO, NOME, UF, PAIS FROM CIDADES
+    ORDER BY LOWER (NOME) ASC`);
   
     cr.status = "SUCCESS"; 
     cr.message = "Dados obtidos";
@@ -131,7 +133,8 @@ app.get("/listarAeronaves", async(req,res)=>{
     // atenção: mudamos a saída para que o oracle entregue um objeto puro em JS no rows.
     // não mais um array dentro de array.
     let resultadoConsulta = await connection.execute(`
-    SELECT CODIGO, FABRICANTE, MODELO, ANO_FABRICACAO, TOTAL_ASSENTOS, REFERENCIA FROM AERONAVES`);
+    SELECT CODIGO, FABRICANTE, MODELO, ANO_FABRICACAO, TOTAL_ASSENTOS, REFERENCIA FROM AERONAVES
+    ORDER BY LOWER (REFERENCIA) ASC`);
   
     cr.status = "SUCCESS"; 
     cr.message = "Dados obtidos";
@@ -166,7 +169,8 @@ app.get("/listarAeroportos", async(req,res)=>{
     let resultadoConsulta = await connection.execute(`
     SELECT AEROPORTOS.CODIGO, AEROPORTOS.NOME, AEROPORTOS.SIGLA, AEROPORTOS.CIDADE, CIDADES.NOME AS CIDADE_NOME
     FROM AEROPORTOS
-    INNER JOIN CIDADES ON AEROPORTOS.CIDADE = CIDADES.CODIGO`);
+    INNER JOIN CIDADES ON AEROPORTOS.CIDADE = CIDADES.CODIGO
+    ORDER BY LOWER (AEROPORTOS.NOME) ASC`);
 
     // 099 - OBS: AEROPORTOS.CIDADE teve que ser adicionado ao select acima /\ mesmo que nao apareça na tabela 
 

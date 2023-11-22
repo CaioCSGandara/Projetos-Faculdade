@@ -81,25 +81,25 @@ function RequisiçãoGETcidade() {
 }
 
 
-function preencherSelect(options, vetor) {
-  for(i=0;i<2;i++) {
-    const selectDrop = document.getElementById(vetor[i]);
+// function preencherSelect(options, vetor) {
+//   for(i=0;i<2;i++) {
+//     const selectDrop = document.getElementById(vetor[i]);
 
-    const defaultOption = document.createElement('option');
-    defaultOption.value = ''; 
-    defaultOption.text = 'Selecione uma opção';
-    selectDrop.appendChild(defaultOption);
+//     const defaultOption = document.createElement('option');
+//     defaultOption.value = ''; 
+//     defaultOption.text = 'Selecione uma opção';
+//     selectDrop.appendChild(defaultOption);
   
     
-    options.forEach(optionValue => {
-      console.log("Código Cidade: " + JSON.stringify(optionValue));
-      const option = document.createElement('option');
-      option.value = optionValue.codigo; 
-      option.innerHTML = optionValue.nome;  
-      selectDrop.appendChild(option);
-    });
-  }
-}
+//     options.forEach(optionValue => {
+//       console.log("Código Cidade: " + JSON.stringify(optionValue));
+//       const option = document.createElement('option');
+//       option.value = optionValue.codigo; 
+//       option.innerHTML = optionValue.nome;  
+//       selectDrop.appendChild(option);
+//     });
+//   }
+// }
 
 
 function exibirCidades() {
@@ -109,7 +109,7 @@ function exibirCidades() {
       if (customResponse.status === "SUCCESS") {
         console.log("Deu certo a busca de dados");
         console.log('Payload:' + JSON.stringify(customResponse.payload));
-        preencherSelect(customResponse.payload, vetorDropdownAeroporto);
+        preencherSelect(customResponse.payload, vetorDropdownAeroporto, 'nome');
       } else {
         console.log(customResponse.message);
       }
@@ -224,13 +224,11 @@ function preencherAeroportos(aeroportos) {
       <td class="padRow text-center align-middle padLeft" id="codigo">${aeroporto.codigo}</td>
       <td class="text-center align-middle">${aeroporto.nome}</td>
       <td class="text-center align-middle">${aeroporto.sigla}</td>
-      <td class="text-center align-middle" id="cidade">${aeroporto.cidadeNome}</td>
+      <td class="text-center align-middle" valorRaiz="${aeroporto.cidade}">${aeroporto.cidadeNome}</td>
       <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelAeroporto); exibeCodigo('${aeroporto.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-      <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar');  exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeroporto.codigo}')"></td>
+      <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar'); alternarDivs('divAlterar', 'divCadastrar');  exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeroporto.codigo}')"></td>
     `;
 
-    const tdCidade = row.querySelector("#cidade"); // 099 - procura o ID cidade dentro da nova linha
-    tdCidade.setAttribute('valorRaiz', aeroporto.cidade); // 099 - cria um novo atributo e passa a ele um valor
 
     linha = linha + 1;
     tblBody.appendChild(row);

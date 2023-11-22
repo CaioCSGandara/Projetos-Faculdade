@@ -9,26 +9,6 @@ function RequisiçãoGETaeronave() {
     .then(T => T.json());
 }
 
-function preencherSelectAeronaves(options, vetor) {
-  for(i=0;i<2;i++) {
-    const selectDrop = document.getElementById(vetor[i]);
-
-    const defaultOption = document.createElement('option');
-    defaultOption.value = ''; 
-    defaultOption.text = 'Selecione uma opção';
-    selectDrop.appendChild(defaultOption);
-  
-    
-    options.forEach(optionValue => {
-      console.log("Código Aeronave: " + JSON.stringify(optionValue));
-      const option = document.createElement('option');
-      option.value = optionValue.codigo; 
-      option.innerHTML = optionValue.modelo;  
-      selectDrop.appendChild(option);
-    });
-  }
-}
-
 function exibirAeronave() {
   console.log('Entrou no exibir AERONAVE...');
   RequisiçãoGETaeronave()
@@ -36,7 +16,7 @@ function exibirAeronave() {
       if (customResponse.status === "SUCCESS") {
         console.log("Deu certo a busca de dados");
         console.log('Payload:' + JSON.stringify(customResponse.payload));
-        preencherSelectAeronaves(customResponse.payload, vetorDropdownTrechos);
+        preencherSelect(customResponse.payload, vetorDropdownAeronave, 'modelo');
       } else {
         console.log(customResponse.message);
       }
@@ -44,9 +24,29 @@ function exibirAeronave() {
     .catch((e) => {
       console.log("Não foi possível exibir." + e);
     });
-}
+} 
 
-///////////////////////////////////////////////////////////////////////////
+// function preencherSelectAeronaves(options, vetor) {
+//   for(i=0;i<2;i++) {
+//     const selectDrop = document.getElementById(vetor[i]);
+
+//     const defaultOption = document.createElement('option');
+//     defaultOption.value = ''; 
+//     defaultOption.text = 'Selecione uma opção';
+//     selectDrop.appendChild(defaultOption);
+  
+    
+//     options.forEach(optionValue => {
+//       console.log("Código Aeronave: " + JSON.stringify(optionValue));
+//       const option = document.createElement('option');
+//       option.value = optionValue.codigo; 
+//       option.innerHTML = optionValue.modelo;  
+//       selectDrop.appendChild(option);
+//     });
+//   }
+// }
+
+
 
 function RequisiçãoGETaeroporto() {
     const requestOptions = {
@@ -57,38 +57,39 @@ function RequisiçãoGETaeroporto() {
       .then(T => T.json());
   }
 
-  function preencherSelectAeroportosOrigem(options) {
-    const aeroportoSelect = document.getElementById('selectOrigemAeroportoCad');
+  // function preencherSelectAeroportosOrigem(options) {
+  //   const aeroportoSelect = document.getElementById('selectOrigemAeroportoCad');
 
-    options.forEach(optionValue => {
-      console.log("Código Aeroporto: " + JSON.stringify(optionValue));
-      const option = document.createElement('option');
-      option.value = optionValue.codigo;  // Definindo o valor corretamente
-      option.innerHTML = optionValue.nome;  // Definindo o texto do option
-      aeroportoSelect.appendChild(option);
-    });
-  }
+  //   options.forEach(optionValue => {
+  //     console.log("Código Aeroporto: " + JSON.stringify(optionValue));
+  //     const option = document.createElement('option');
+  //     option.value = optionValue.codigo;  // Definindo o valor corretamente
+  //     option.innerHTML = optionValue.nome;  // Definindo o texto do option
+  //     aeroportoSelect.appendChild(option);
+  //   });
+  // }
 
-  function preencherSelectAeroportosDestino(options) {
-    const aeroportoSelect = document.getElementById('selectDestinoAeroportoCad');
+  // function preencherSelectAeroportosDestino(options) {
+  //   const aeroportoSelect = document.getElementById('selectDestinoAeroportoCad');
 
-    options.forEach(optionValue => {
-      console.log("Código Aeroporto: " + JSON.stringify(optionValue));
-      const option = document.createElement('option');
-      option.value = optionValue.codigo;  // Definindo o valor corretamente
-      option.innerHTML = optionValue.nome;  // Definindo o texto do option
-      aeroportoSelect.appendChild(option);
-    });
-  }
+  //   options.forEach(optionValue => {
+  //     console.log("Código Aeroporto: " + JSON.stringify(optionValue));
+  //     const option = document.createElement('option');
+  //     option.value = optionValue.codigo;  // Definindo o valor corretamente
+  //     option.innerHTML = optionValue.nome;  // Definindo o texto do option
+  //     aeroportoSelect.appendChild(option);
+  //   });
+  // }
 
-  function exibirOrigemAeroporto() {
+  function exibirAeroporto() {
     console.log('Entrou no exibir...');
     RequisiçãoGETaeroporto()
       .then(customResponse => {
         if (customResponse.status === "SUCCESS") {
           console.log("Deu certo a busca de dados");
           console.log('Payload:' + JSON.stringify(customResponse.payload));
-          preencherSelectAeroportosOrigem(customResponse.payload); 
+          preencherSelect(customResponse.payload, vetorDropdownOrigem, 'nome');
+          preencherSelect(customResponse.payload, vetorDropdownDestino, 'nome'); 
         } else {
           console.log(customResponse.message);
         }
@@ -98,22 +99,22 @@ function RequisiçãoGETaeroporto() {
       });
   }
 
-  function exibirDestinoAeroporto() {
-    console.log('Entrou no exibir...');
-    RequisiçãoGETaeroporto()
-      .then(customResponse => {
-        if (customResponse.status === "SUCCESS") {
-          console.log("Deu certo a busca de dados");
-          console.log('Payload:' + JSON.stringify(customResponse.payload));
-          preencherSelectAeroportosDestino(customResponse.payload); 
-        } else {
-          console.log(customResponse.message);
-        }
-      })
-      .catch((e) => {
-        console.log("Não foi possível exibir." + e);
-      });
-  }
+  // function exibirDestinoAeroporto() {
+  //   console.log('Entrou no exibir...');
+  //   RequisiçãoGETaeroporto()
+  //     .then(customResponse => {
+  //       if (customResponse.status === "SUCCESS") {
+  //         console.log("Deu certo a busca de dados");
+  //         console.log('Payload:' + JSON.stringify(customResponse.payload));
+  //         preencherSelectAeroportosDestino(customResponse.payload); 
+  //       } else {
+  //         console.log(customResponse.message);
+  //       }
+  //     })
+  //     .catch((e) => {
+  //       console.log("Não foi possível exibir." + e);
+  //     });
+  // }
 
 
 
@@ -148,7 +149,7 @@ function RequisiçãoGETaeroporto() {
         .then(response => response.json());
     }
 
-  function inserirTrecho(){
+  async function inserirTrecho(){
 
     if(!nomePreenchidoCad()){
       showStatusMessage("Preencha o nome do trecho.", true, "statusCadastrar");
@@ -175,7 +176,7 @@ function RequisiçãoGETaeroporto() {
     const destino = document.getElementById("selectDestinoAeroportoCad").options[document.getElementById("selectDestinoAeroportoCad").selectedIndex].value;
     const aeronave = document.getElementById("selectAeronaveCad").options[document.getElementById("selectAeronaveCad").selectedIndex].value;
 
-    fetchInserir({
+    await fetchInserir({
         nome: nome, 
         origem: origem,
         destino: destino,
@@ -184,6 +185,7 @@ function RequisiçãoGETaeroporto() {
     .then(customResponse => {
       if(customResponse.status === "SUCCESS"){
         showStatusMessage("Trecho cadastrado com sucesso.", false, "statusCadastrar");
+        exibirTrecho();
       } else {
         showStatusMessage("Erro ao cadastrar trecho: " + customResponse.message, true, "statusCadastrar");
         console.log(customResponse.message);
@@ -224,15 +226,12 @@ function preencherTrechos(trecho) {
       row.innerHTML = `
           <td class="padRow text-center align-middle padLeft" id="codigo">${trecho.codigo}</td>
           <td class="text-center align-middle">${trecho.nome}</td>
-          <td class="text-center align-middle" id="origem">${trecho.origemNome}</td>
-          <td class="text-center align-middle">${trecho.destino}</td>
-          <td class="text-center align-middle">${trecho.aeronave}</td>
+          <td class="text-center align-middle" valorRaiz="${trecho.origem}">${trecho.origemNome}</td>
+          <td class="text-center align-middle" valorRaiz="${trecho.destino}">${trecho.destinoNome}</td>
+          <td class="text-center align-middle" valorRaiz="${trecho.aeronave}">${trecho.aeronaveNome}</td>
           <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelTrecho); exibeCodigo('${trecho.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-          <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar');  exibeCodigo('${trecho.codigo}', 'pcodDelete'); popUpDeletar('${trecho.codigo}')"></td>  
+          <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar'); alternarDivs('divAlterar', 'divCadastrar');  exibeCodigo('${trecho.codigo}', 'pcodDelete'); popUpDeletar('${trecho.codigo}')"></td>  
       `;
-
-      const tdOrigem = row.querySelector("#origem"); // 099 
-      tdOrigem.setAttribute('valorRaiz', trecho.origem); // 099 
 
       linha = linha + 1;
       tblBody.appendChild(row);
@@ -241,6 +240,7 @@ function preencherTrechos(trecho) {
 }
 
 function exibirTrecho() {
+  limparTabela();
   console.log('Entrou no exibir TRECHOS...');
   RequisiçãoGETtrecho()
     .then(customResponse => {
@@ -258,18 +258,19 @@ function exibirTrecho() {
 }
 
 // FUNÇÃO DE DELEÇÃO DOS TRECHOS
-function deletartrecho(codigo) {
+async function deletartrecho(codigo) {
   const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ codigo: codigo })
   };
 
-  fetch('http://localhost:3000/excluirTrecho', requestOptions)
+  await fetch('http://localhost:3000/excluirTrecho', requestOptions)
       .then(response => response.json())
       .then(customResponse => {
           if (customResponse.status === "SUCCESS") {
               showStatusMessage("Trecho deletado com sucesso.", false, "statusDelete");
+              exibirTrecho();
           } else {
             if (customResponse.message.includes('ORA-02292')) {
               showStatusMessage("Você não pode excluir este trecho, pois atualmente ele está vinculado à outro(s) registro(s). Verifique e tente novamente.", true, "statusDelete");
@@ -323,7 +324,7 @@ function aeronavePreenchidaAlt() {
   return aeronave.length > 0;
 }
 
-function alterarTrecho(){
+async function alterarTrecho(){
   if(!codigoPreenchidoAlt()){
     showStatusMessage("Preencha o codigo do trecho.", true, "statusAlterar");
     return;
@@ -356,7 +357,7 @@ function alterarTrecho(){
   const codigo = document.getElementById("codAlt").value;
 
 
-  fetchAlterar({
+  await fetchAlterar({
       nome: nome, 
       origem: origem,
       destino: destino,
@@ -366,6 +367,7 @@ function alterarTrecho(){
   .then(customResponse => {
     if(customResponse.status === "SUCCESS"){
       showStatusMessage("Trecho alterado com sucesso.", false, "statusAlterar");
+      exibirTrecho();
     } else {
       showStatusMessage("Erro ao alterar trecho: " + customResponse.message, true, "statusAlterar");
       console.log(customResponse.message);
@@ -378,63 +380,63 @@ function alterarTrecho(){
 
 }
 
-function preencherSelectAeroportosOrigemAlt(options) {
-  const aeroportoSelect = document.getElementById('selectOrigemAeroportoAlt');
+// function preencherSelectAeroportosOrigemAlt(options) {
+//   const aeroportoSelect = document.getElementById('selectOrigemAeroportoAlt');
 
-  options.forEach(optionValue => {
-    console.log("Código Aeroporto: " + JSON.stringify(optionValue));
-    const option = document.createElement('option');
-    option.value = optionValue.codigo;  // Definindo o valor corretamente
-    option.innerHTML = optionValue.nome;  // Definindo o texto do option
-    aeroportoSelect.appendChild(option);
-  });
-}
+//   options.forEach(optionValue => {
+//     console.log("Código Aeroporto: " + JSON.stringify(optionValue));
+//     const option = document.createElement('option');
+//     option.value = optionValue.codigo;  // Definindo o valor corretamente
+//     option.innerHTML = optionValue.nome;  // Definindo o texto do option
+//     aeroportoSelect.appendChild(option);
+//   });
+// }
 
-function preencherSelectAeroportosDestinoAlt(options) {
-  const aeroportoSelect = document.getElementById('selectDestinoAeroportoAlt');
+// function preencherSelectAeroportosDestinoAlt(options) {
+//   const aeroportoSelect = document.getElementById('selectDestinoAeroportoAlt');
 
-  options.forEach(optionValue => {
-    console.log("Código Aeroporto: " + JSON.stringify(optionValue));
-    const option = document.createElement('option');
-    option.value = optionValue.codigo;  // Definindo o valor corretamente
-    option.innerHTML = optionValue.nome;  // Definindo o texto do option
-    aeroportoSelect.appendChild(option);
-  });
-}
+//   options.forEach(optionValue => {
+//     console.log("Código Aeroporto: " + JSON.stringify(optionValue));
+//     const option = document.createElement('option');
+//     option.value = optionValue.codigo;  // Definindo o valor corretamente
+//     option.innerHTML = optionValue.nome;  // Definindo o texto do option
+//     aeroportoSelect.appendChild(option);
+//   });
+// }
 
-function exibirOrigemAeroportoAlt() {
-  console.log('Entrou no exibir...');
-  RequisiçãoGETaeroporto()
-    .then(customResponse => {
-      if (customResponse.status === "SUCCESS") {
-        console.log("Deu certo a busca de dados");
-        console.log('Payload:' + JSON.stringify(customResponse.payload));
-        preencherSelectAeroportosOrigemAlt(customResponse.payload); 
-      } else {
-        console.log(customResponse.message);
-      }
-    })
-    .catch((e) => {
-      console.log("Não foi possível exibir." + e);
-    });
-}
+// function exibirOrigemAeroportoAlt() {
+//   console.log('Entrou no exibir...');
+//   RequisiçãoGETaeroporto()
+//     .then(customResponse => {
+//       if (customResponse.status === "SUCCESS") {
+//         console.log("Deu certo a busca de dados");
+//         console.log('Payload:' + JSON.stringify(customResponse.payload));
+//         preencherSelectAeroportosOrigemAlt(customResponse.payload); 
+//       } else {
+//         console.log(customResponse.message);
+//       }
+//     })
+//     .catch((e) => {
+//       console.log("Não foi possível exibir." + e);
+//     });
+// }
 
-function exibirDestinoAeroportoAlt() {
-  console.log('Entrou no exibir...');
-  RequisiçãoGETaeroporto()
-    .then(customResponse => {
-      if (customResponse.status === "SUCCESS") {
-        console.log("Deu certo a busca de dados");
-        console.log('Payload:' + JSON.stringify(customResponse.payload));
-        preencherSelectAeroportosDestinoAlt(customResponse.payload); 
-      } else {
-        console.log(customResponse.message);
-      }
-    })
-    .catch((e) => {
-      console.log("Não foi possível exibir." + e);
-    });
-}
+// function exibirDestinoAeroportoAlt() {
+//   console.log('Entrou no exibir...');
+//   RequisiçãoGETaeroporto()
+//     .then(customResponse => {
+//       if (customResponse.status === "SUCCESS") {
+//         console.log("Deu certo a busca de dados");
+//         console.log('Payload:' + JSON.stringify(customResponse.payload));
+//         preencherSelectAeroportosDestinoAlt(customResponse.payload); 
+//       } else {
+//         console.log(customResponse.message);
+//       }
+//     })
+//     .catch((e) => {
+//       console.log("Não foi possível exibir." + e);
+//     });
+// }
 
 
 

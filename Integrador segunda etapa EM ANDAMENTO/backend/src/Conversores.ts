@@ -26,6 +26,8 @@ export function rowsToTrechos(oracleRows: unknown[] | undefined) : Array<Trecho>
         destino: registro.DESTINO,
         aeronave: registro.AERONAVE,
         origemNome: registro.ORIGEM_NOME, // 099 - o novo campo que é o nome do registro
+        destinoNome: registro.DESTINO_NOME,
+        aeronaveNome: registro.AERO_NOME,
       } as Trecho;
 
       // inserindo o novo Array convertido.
