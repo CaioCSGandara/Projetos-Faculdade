@@ -97,7 +97,7 @@ app.get("/listarBuscaVoos", async(req,res)=>{
     INNER JOIN TRECHOS ON VOOS.TRECHO = TRECHOS.CODIGO 
     INNER JOIN AEROPORTOS ORIGEM ON TRECHOS.ORIGEM = ORIGEM.CODIGO
     INNER JOIN AEROPORTOS DESTINO ON TRECHOS.DESTINO = DESTINO.CODIGO
-    WHERE TO_CHAR(DATA_VOO, 'dd/mm/yyyy') = :1 AND ORIGEM.NOME = :2 AND DESTINO.NOME = :3`
+    WHERE TO_CHAR(DATA_VOO, 'mm/dd/yyyy') = :1 AND ORIGEM.NOME = :2 AND DESTINO.NOME = :3`
     const dados = [dado.data, dado.origem, dado.destino];
 
     connection = await oracledb.getConnection(oraConnAttribs);
