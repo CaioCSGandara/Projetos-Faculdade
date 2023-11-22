@@ -18,7 +18,7 @@ import cors from "cors";
 
 // aqui vamos importar nossos tipos para organizar melhor (estao em arquivos .ts separados)
 import { CustomResponse } from "./CustomResponse";
-import { Aeronave } from "./Campos";
+import { Aeronave, Dados } from "./Campos";
 import { Trecho } from "./Campos";
 import { Cidade } from "./Campos";
 import { Aeroporto } from "./Campos";
@@ -86,6 +86,42 @@ app.get("/listarTrechos", async(req,res)=>{
   }
 });
 
+app.get("/listarBuscaVoos", async(req,res)=>{
+  const dado: Dados = req.body as Dados;
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined,};
+  let connection;
+  try{
+    
+    const cmdSelectDados = `SELECT VOOS.CODIGO, TO_CHAR(VOOS.DATA_VOO, 'dd/mm/yyyy') AS DATA_VOO, TRECHOS.NOME, TO_CHAR(VOOS.HR_SAIDA, 'HH24:MI') AS HR_SAIDA, TO_CHAR(VOOS.HR_CHEGADA, 'HH24:MI') AS HR_CHEGADA, ORIGEM.NOME AS ORIGEM, DESTINO.NOME AS DESTINO
+    FROM VOOS 
+    INNER JOIN TRECHOS ON VOOS.TRECHO = TRECHOS.CODIGO 
+    INNER JOIN AEROPORTOS ORIGEM ON TRECHOS.ORIGEM = ORIGEM.CODIGO
+    INNER JOIN AEROPORTOS DESTINO ON TRECHOS.DESTINO = DESTINO.CODIGO
+    WHERE TO_CHAR(DATA_VOO, 'dd/mm/yyyy') = :1 AND ORIGEM.NOME = :2 AND DESTINO.NOME = :3`
+    const dados = [dado.data, dado.origem, dado.destino];
+
+    connection = await oracledb.getConnection(oraConnAttribs);
+    let resSelect = await connection.execute(cmdSelectDados, dados);
+    cr.status = "SUCCESS"; 
+    cr.message = "Dados obtidos";
+
+    cr.payload = (rowsToDados(resSelect.rows));
+
+
+  }catch(e){
+    if(e instanceof Error){
+      cr.message = e.message;
+      console.log(e.message);
+    }else{
+      cr.message = "Erro ao conectar ao oracle. Sem detalhes";
+    }
+  } finally {
+    if(connection !== undefined){
+      await connection.close();
+    }
+    res.send(cr);  
+  }
+});
 // Listar Cidades
 app.get("/listarCidades", async(req,res)=>{
 
@@ -215,6 +251,7 @@ app.get("/listarDados", async(req,res)=>{
     INNER JOIN TRECHOS ON VOOS.TRECHO = TRECHOS.CODIGO 
     INNER JOIN AEROPORTOS ORIGEM ON TRECHOS.ORIGEM = ORIGEM.CODIGO
     INNER JOIN AEROPORTOS DESTINO ON TRECHOS.DESTINO = DESTINO.CODIGO`);
+    
 
     cr.status = "SUCCESS"; 
     cr.message = "Dados obtidos";
