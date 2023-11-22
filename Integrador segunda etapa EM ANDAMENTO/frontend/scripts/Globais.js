@@ -113,22 +113,26 @@ function alternarDivs(divVisivel, divOculta) {
   }
   
   function preencherSelect(options, vetor, casca) {
-    for(i=0;i<2;i++) {
+    for(i=0;i<vetor.length;i++) {
       const selectDrop = document.getElementById(vetor[i]);
   
-      const defaultOption = document.createElement('option');
-      defaultOption.value = ''; 
-      defaultOption.text = 'Selecione uma opção';
-      selectDrop.appendChild(defaultOption);
+      if (selectDrop) {
+        // Se o elemento existe, prossiga com a manipulação
+        selectDrop.innerHTML = '';
     
-      
-      options.forEach(optionValue => {
-        console.log("Código Cidade: " + JSON.stringify(optionValue));
-        const option = document.createElement('option');
-        option.value = optionValue.codigo; 
-        option.innerHTML = optionValue[casca]; 
-        selectDrop.appendChild(option);
-      });
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.text = 'Selecione uma opção';
+        selectDrop.appendChild(defaultOption);
+        options.forEach(optionValue => {
+          console.log("Código: " + JSON.stringify(optionValue));
+          const option = document.createElement('option');
+          option.value = optionValue.codigo; 
+          option.innerHTML = optionValue[casca]; 
+          selectDrop.appendChild(option);
+        });
+    } else {
+      console.error(`Elemento com ID ${vetor[i]} não encontrado.`);
     }
-  }
+  }}
  
