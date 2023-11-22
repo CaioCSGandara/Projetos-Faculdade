@@ -108,6 +108,8 @@ function rowsToDados(oracleRows) {
                 hrChegada: registro.HR_CHEGADA,
                 origem: registro.ORIGEM,
                 destino: registro.DESTINO,
+                valor: registro.VALOR,
+                trechoNome: registro.TRECHOS_NOME,
             };
             // inserindo o novo Array convertido.
             dados.push(dado);

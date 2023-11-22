@@ -9,7 +9,7 @@ const vetorDropdownAeroporto = ["cidadeCadastrar", "cidadeAlterar"];
 const vetorDropdownAeronave = ["selectAeronaveCad", "selectAeronaveAlt" ];
 const vetorDropdownOrigem = ["selectOrigemAeroportoCad","selectOrigemAeroportoAlt"];
 const vetorDropdownDestino = ["selectDestinoAeroportoCad", "selectDestinoAeroportoAlt"];
-const vetorDropdownTrechos = ["trechoCadastrar", "trechoAlterar"];
+const vetorDropdownTrecho = ["trechoCadastrar", "trechoAlterar"];
 // FUNÇÕES GLOBAIS
 
 function limparTabela() {
@@ -57,7 +57,7 @@ function alternarDivs(divVisivel, divOculta) {
   function preencherAlterar(elemento, vetor) {
     const tdImagem = elemento.parentNode;
     const linha = tdImagem.parentNode;
-    const tamanhoLinha = linha.cells.length -2 ;
+    const tamanhoLinha = vetor.length;
     console.log(tamanhoLinha);
     const elementosLinha = linha.querySelectorAll('td')
     let elementoPreencher = null;
