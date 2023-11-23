@@ -122,7 +122,7 @@ function alternarDivs(divVisivel, divOculta) {
         selectDrop.innerHTML = '';
     
         const defaultOption = document.createElement('option');
-        defaultOption.value = '';
+        defaultOption.value = '0';
         defaultOption.text = 'Selecione uma opção';
         selectDrop.appendChild(defaultOption);
         options.forEach(optionValue => {

@@ -133,9 +133,8 @@ function trechoValidoCad(){
 
 function saidaValidaCad(){
   let resultado = false; 
-  var hrSaida = document.getElementById("hrSaidaCadastrar");
-  var valorSelecionado = hrSaida.value;
-  if (valorSelecionado !== "0"){
+  const hrSaida = document.getElementById("hrSaidaCadastrar").value;
+  if (hrSaida.length > 0){
     resultado = true;
   }
   return resultado;
@@ -143,9 +142,8 @@ function saidaValidaCad(){
 
 function chegadaValidaCad(){
   let resultado = false; 
-  var hrChegada = document.getElementById("hrChegadaCadastrar");
-  var valorSelecionado = hrChegada.value;
-  if (valorSelecionado !== "0"){
+  const hrChegada = document.getElementById("hrChegadaCadastrar").value;
+  if (hrChegada.length > 0){
     resultado = true;
   }
   return resultado;
@@ -153,9 +151,8 @@ function chegadaValidaCad(){
 
 function dataValidaCad(){
   let resultado = false; 
-  var data = document.getElementById("dataCadastrar");
-  var valorSelecionado = data.value;
-  if (valorSelecionado !== "0"){
+  const data = document.getElementById("dataCadastrar").value;
+  if (data.length > 0){
     resultado = true;
   }
   return resultado;
@@ -172,7 +169,7 @@ function fetchInserir(body) {
       .then(response => response.json());
 }
 
-function inserirVoo() {
+async function inserirVoo() {
 
   if (!codigoValidoCad()) {
       showStatusMessage("O código do voo deve ser um número válido.", true, "statusCadastrar");
@@ -208,11 +205,11 @@ function inserirVoo() {
   const codigo = document.getElementById("codigoCadastrar").value;
   const hrSaida = document.getElementById("hrSaidaCadastrar").value;
   const hrChegada = document.getElementById("hrChegadaCadastrar").value;
-  const dataVoo = document.getElementById("dataVooCadastrar").value;
+  const dataVoo = document.getElementById("dataCadastrar").value;
   const valor = document.getElementById("valorCadastrar").value;
   const trecho = document.getElementById("trechoCadastrar").options[document.getElementById("trechoCadastrar").selectedIndex].value;
 
-  fetchInserir({
+  await fetchInserir({
       codigo: codigo,
       dataVoo: dataVoo,
       hrChegada: hrChegada,
@@ -223,6 +220,7 @@ function inserirVoo() {
       .then(customResponse => {
           if (customResponse.status === "SUCCESS") {
               showStatusMessage("Voo cadastrado com sucesso.", false, "statusCadastrar");
+              exibirVoos();
           } else {
               showStatusMessage("Erro ao cadastrar voo: " + customResponse.message, true, "statusCadastrar");
               console.log(customResponse.message);
@@ -237,3 +235,139 @@ function inserirVoo() {
 
 
 //// ALTERAR 
+
+function codigoValidoAlt() {
+  let resultado = false;
+  var strCodigo = document.getElementById("codigoAlterar").value;
+  const codigo = parseInt(strCodigo);
+
+  if (!isNaN(codigo) && codigo > 0) {
+      resultado = true;
+  }
+  return resultado;
+}
+
+
+function valorValidoAlt() {
+  let resultado = false;
+  var strValor = document.getElementById("valorAlterar").value;
+  const valor = parseInt(strValor);
+
+  if (!isNaN(valor) && valor > 0) {
+      resultado = true;
+  }
+  return resultado;
+}
+
+function trechoValidoAlt(){
+  let resultado = false; 
+  var listaTrechos = document.getElementById("trechoAlterar");
+  var valorSelecionado = listaTrechos.value;
+  if (valorSelecionado !== "0"){
+    resultado = true;
+  }
+  return resultado;
+}
+
+function saidaValidaAlt(){
+  let resultado = false; 
+  const hrSaida = document.getElementById("hrSaidaAlterar").value;
+  if (hrSaida.length > 0){
+    resultado = true;
+  }
+  return resultado;
+}
+
+function chegadaValidaAlt(){
+  let resultado = false; 
+  const hrChegada = document.getElementById("hrChegadaAlterar").value;
+  if (hrChegada.length > 0){
+    resultado = true;
+  }
+  return resultado;
+}
+
+function dataValidaAlt(){
+  let resultado = false; 
+  const data = document.getElementById("dataAlterar").value;
+  if (data.length > 0){
+    resultado = true;
+  }
+  return resultado;
+}
+
+function fetchAlterar(body) {
+  const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+  };
+
+  return fetch('http://localhost:3000/alterarVoo', requestOptions)
+      .then(response => response.json());
+}
+
+async function alterarVoo() {
+
+  if (!codigoValidoAlt()) {
+    showStatusMessage("O código do voo deve ser um número válido.", true, "statusAlterar");
+    return;
+}
+
+if(!dataValidaAlt()) {
+  showStatusMessage("Escolha uma data válida.", true, "statusAlterar")
+  return;
+}
+
+if(!saidaValidaAlt()) {
+  showStatusMessage("Digite uma hora de saída válida.", true, "statusAlterar")
+  return;
+}
+
+if(!chegadaValidaAlt()) {
+  showStatusMessage("Digite uma hora de chegada válida.", true, "statusAlterar")
+  return;
+}
+
+if(!valorValidoAlt()) {
+  showStatusMessage("O valor deve ser um número válido e maior que zero.", true, "statusAlterar")
+  return;
+}
+
+if(!trechoValidoAlt()) {
+  showStatusMessage("Digite um trecho válido.", true, "statusAlterar")
+  return;
+}
+
+
+  const hrSaida = document.getElementById("hrSaidaAlterar").value;
+  const hrChegada = document.getElementById("hrChegadaAlterar").value;
+  const dataVoo = document.getElementById("dataAlterar").value;
+  const valor = document.getElementById("valorAlterar").value;
+  const trecho = document.getElementById("trechoAlterar").options[document.getElementById("trechoAlterar").selectedIndex].value;
+  const codigo = document.getElementById("codigoAlterar").value;
+  console.log(hrSaida, hrChegada, dataVoo, valor, trecho, codigo);        
+  
+  await fetchAlterar({
+      dataVoo: dataVoo,
+      hrChegada: hrChegada,
+      hrSaida: hrSaida,
+      valor: valor,
+      trecho: trecho,
+      codigo: codigo
+  })
+      .then(customResponse => {
+          if (customResponse.status === "SUCCESS") {
+              showStatusMessage("Voo cadastrado com sucesso.", false), "statusAlterar";
+              exibirVoos();
+          } else {
+              showStatusMessage("Erro ao cadastrar voo: " + customResponse.message, true, "statusAlterar");
+              console.log(customResponse.message);
+          }
+      })
+      .catch((e) => {
+          showStatusMessage("Erro técnico ao cadastrar... Contate o suporte.", true, "statusAlterar");
+          console.log("Falha grave ao cadastrar." + e);
+      });
+
+    }
