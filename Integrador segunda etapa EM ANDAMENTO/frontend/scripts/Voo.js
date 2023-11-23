@@ -23,16 +23,16 @@ function RequisiçãoGETlistar() {
             row.classList.add('zebraTwo');
         }
         row.innerHTML = `
-            <td class=" padRow text-center align-middle padLeft" id="codigo">${voo.codigo}</td>
-            <td class="text-center align-middle">${voo.data}</td>
-            <td class="text-center align-middle">${voo.hrSaida}</td>
-            <td class="text-center align-middle">${voo.hrChegada}</td>
-            <td class="text-center align-middle">${voo.valor}</td>
-            <td class="text-center align-middle" valorRaiz="${voo.trechoNome}">${voo.trecho}</td>           
+            <td class=" padRow text-center align-middle " id="codigo">${voo.codigo}</td>
+            <td class="align-middle">${voo.data}</td>
+            <td class="align-middle">${voo.hrSaida}</td>
+            <td class="align-middle">${voo.hrChegada}</td>
+            <td class="align-middle">${voo.valor}</td>
+            <td class="align-middle" valorRaiz="${voo.trechoNome}">${voo.trecho}</td>           
             <td class="align-middle">${voo.origem}</td>
             <td class="align-middle">${voo.destino}</td>
             <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelVoo); exibeCodigo('${voo.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${voo.codigo}', 'pcodDelete'); popUpDeletar('${voo.codigo}')"></td>
+            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" alternarDivs('divAlterar', 'divCadastrar'); exibeCodigo('${voo.codigo}', 'pcodDelete'); popUpDeletar('${voo.codigo}')"></td>
             
         `;
       
@@ -42,6 +42,7 @@ function RequisiçãoGETlistar() {
 }
 
   function exibirVoos() {
+    limparTabela();
     console.log('Entrou no exibir...');
     RequisiçãoGETlistar()
       .then(customResponse => {

@@ -26,26 +26,6 @@ function exibirAeronave() {
     });
 } 
 
-// function preencherSelectAeronaves(options, vetor) {
-//   for(i=0;i<2;i++) {
-//     const selectDrop = document.getElementById(vetor[i]);
-
-//     const defaultOption = document.createElement('option');
-//     defaultOption.value = ''; 
-//     defaultOption.text = 'Selecione uma opção';
-//     selectDrop.appendChild(defaultOption);
-  
-    
-//     options.forEach(optionValue => {
-//       console.log("Código Aeronave: " + JSON.stringify(optionValue));
-//       const option = document.createElement('option');
-//       option.value = optionValue.codigo; 
-//       option.innerHTML = optionValue.modelo;  
-//       selectDrop.appendChild(option);
-//     });
-//   }
-// }
-
 
 
 function RequisiçãoGETaeroporto() {
@@ -57,29 +37,6 @@ function RequisiçãoGETaeroporto() {
       .then(T => T.json());
   }
 
-  // function preencherSelectAeroportosOrigem(options) {
-  //   const aeroportoSelect = document.getElementById('selectOrigemAeroportoCad');
-
-  //   options.forEach(optionValue => {
-  //     console.log("Código Aeroporto: " + JSON.stringify(optionValue));
-  //     const option = document.createElement('option');
-  //     option.value = optionValue.codigo;  // Definindo o valor corretamente
-  //     option.innerHTML = optionValue.nome;  // Definindo o texto do option
-  //     aeroportoSelect.appendChild(option);
-  //   });
-  // }
-
-  // function preencherSelectAeroportosDestino(options) {
-  //   const aeroportoSelect = document.getElementById('selectDestinoAeroportoCad');
-
-  //   options.forEach(optionValue => {
-  //     console.log("Código Aeroporto: " + JSON.stringify(optionValue));
-  //     const option = document.createElement('option');
-  //     option.value = optionValue.codigo;  // Definindo o valor corretamente
-  //     option.innerHTML = optionValue.nome;  // Definindo o texto do option
-  //     aeroportoSelect.appendChild(option);
-  //   });
-  // }
 
   function exibirAeroporto() {
     console.log('Entrou no exibir...');
@@ -98,23 +55,6 @@ function RequisiçãoGETaeroporto() {
         console.log("Não foi possível exibir." + e);
       });
   }
-
-  // function exibirDestinoAeroporto() {
-  //   console.log('Entrou no exibir...');
-  //   RequisiçãoGETaeroporto()
-  //     .then(customResponse => {
-  //       if (customResponse.status === "SUCCESS") {
-  //         console.log("Deu certo a busca de dados");
-  //         console.log('Payload:' + JSON.stringify(customResponse.payload));
-  //         preencherSelectAeroportosDestino(customResponse.payload); 
-  //       } else {
-  //         console.log(customResponse.message);
-  //       }
-  //     })
-  //     .catch((e) => {
-  //       console.log("Não foi possível exibir." + e);
-  //     });
-  // }
 
 
 
@@ -224,13 +164,13 @@ function preencherTrechos(trecho) {
         row.classList.add('zebraTwo');
     }
       row.innerHTML = `
-          <td class="padRow text-center align-middle padLeft" id="codigo">${trecho.codigo}</td>
+          <td class="padRow text-center align-middle">${trecho.codigo}</td>
           <td class="text-center align-middle">${trecho.nome}</td>
           <td class="text-center align-middle" valorRaiz="${trecho.origem}">${trecho.origemNome}</td>
           <td class="text-center align-middle" valorRaiz="${trecho.destino}">${trecho.destinoNome}</td>
           <td class="text-center align-middle" valorRaiz="${trecho.aeronave}">${trecho.aeronaveNome}</td>
           <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelTrecho); exibeCodigo('${trecho.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-          <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar'); alternarDivs('divAlterar', 'divCadastrar');  exibeCodigo('${trecho.codigo}', 'pcodDelete'); popUpDeletar('${trecho.codigo}')"></td>  
+          <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick="alternarDivs('divAlterar', 'divCadastrar');  exibeCodigo('${trecho.codigo}', 'pcodDelete'); popUpDeletar('${trecho.codigo}')"></td>  
       `;
 
       linha = linha + 1;
@@ -379,64 +319,6 @@ async function alterarTrecho(){
   });
 
 }
-
-// function preencherSelectAeroportosOrigemAlt(options) {
-//   const aeroportoSelect = document.getElementById('selectOrigemAeroportoAlt');
-
-//   options.forEach(optionValue => {
-//     console.log("Código Aeroporto: " + JSON.stringify(optionValue));
-//     const option = document.createElement('option');
-//     option.value = optionValue.codigo;  // Definindo o valor corretamente
-//     option.innerHTML = optionValue.nome;  // Definindo o texto do option
-//     aeroportoSelect.appendChild(option);
-//   });
-// }
-
-// function preencherSelectAeroportosDestinoAlt(options) {
-//   const aeroportoSelect = document.getElementById('selectDestinoAeroportoAlt');
-
-//   options.forEach(optionValue => {
-//     console.log("Código Aeroporto: " + JSON.stringify(optionValue));
-//     const option = document.createElement('option');
-//     option.value = optionValue.codigo;  // Definindo o valor corretamente
-//     option.innerHTML = optionValue.nome;  // Definindo o texto do option
-//     aeroportoSelect.appendChild(option);
-//   });
-// }
-
-// function exibirOrigemAeroportoAlt() {
-//   console.log('Entrou no exibir...');
-//   RequisiçãoGETaeroporto()
-//     .then(customResponse => {
-//       if (customResponse.status === "SUCCESS") {
-//         console.log("Deu certo a busca de dados");
-//         console.log('Payload:' + JSON.stringify(customResponse.payload));
-//         preencherSelectAeroportosOrigemAlt(customResponse.payload); 
-//       } else {
-//         console.log(customResponse.message);
-//       }
-//     })
-//     .catch((e) => {
-//       console.log("Não foi possível exibir." + e);
-//     });
-// }
-
-// function exibirDestinoAeroportoAlt() {
-//   console.log('Entrou no exibir...');
-//   RequisiçãoGETaeroporto()
-//     .then(customResponse => {
-//       if (customResponse.status === "SUCCESS") {
-//         console.log("Deu certo a busca de dados");
-//         console.log('Payload:' + JSON.stringify(customResponse.payload));
-//         preencherSelectAeroportosDestinoAlt(customResponse.payload); 
-//       } else {
-//         console.log(customResponse.message);
-//       }
-//     })
-//     .catch((e) => {
-//       console.log("Não foi possível exibir." + e);
-//     });
-// }
 
 
 

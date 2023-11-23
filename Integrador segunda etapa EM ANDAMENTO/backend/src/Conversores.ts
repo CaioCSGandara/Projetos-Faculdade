@@ -122,6 +122,7 @@ export function rowsToDados(oracleRows: unknown[] | undefined) : Array<Dados>{
         origem: registro.ORIGEM,
         destino: registro.DESTINO,
         valor: registro.VALOR,
+        trechoNome: registro.TRECHOS_NOME,
       } as Dados;
 
       // inserindo o novo Array convertido.

@@ -201,12 +201,12 @@ function preencherAeroportos(aeroportos) {
 
     // Adiciona cada célula à linha da tabela
     row.innerHTML += `
-      <td class="padRow text-center align-middle padLeft" id="codigo">${aeroporto.codigo}</td>
+      <td class="padRow text-center align-middle">${aeroporto.codigo}</td>
       <td class="text-center align-middle">${aeroporto.nome}</td>
       <td class="text-center align-middle">${aeroporto.sigla}</td>
       <td class="text-center align-middle" valorRaiz="${aeroporto.cidade}">${aeroporto.cidadeNome}</td>
       <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelAeroporto); exibeCodigo('${aeroporto.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-      <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar'); alternarDivs('divAlterar', 'divCadastrar');  exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeroporto.codigo}')"></td>
+      <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick="alternarDivs('divAlterar', 'divCadastrar');  exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeroporto.codigo}')"></td>
     `;
 
 
