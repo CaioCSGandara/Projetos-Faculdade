@@ -5,44 +5,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="../style/stylePG.css">
     <link rel="icon" href="../images/Logo Transparente.png" type="image/x-icon">
+=======
+    <link rel="stylesheet" type="text/css" href="../style/styleCliente.css">
+>>>>>>> 12db71c8463f161588f62c1eeabafcfb636e65c2
 </head>
 
-<header style="background-color: #343A40; color: #343A40; height: 50px;";></header>
+<header></header>
 
 <body>
-    <div class="container text-center" style="width: 10000px;">
-        <div class="row align-items-start">
-            <div class="d-flex flex-column" style="align-items: center;justify-content: center; font-size: 25px;">
-                
-                <h1 class="tituloPagamento">Realize seu pagamento</h1>
-                <img src="../images/Logo Transparente.png" class="LogoPrincipal" style="width: 300px;">
+    <div class="container text-center">
+        <h1 class="tituloPagamento">Realize seu pagamento</h1>  
+        <div class="d-flex flex-column; CPagamento">
+        
+            <img src="../images/Logo Transparente.png">
 
-                <p class="tipoPagamento" style="margin-top: 30px;">SELECIONE A FORMA DE PAGAMENTO</p>
-                <div style="display: flex;">
-                    <div>
-                        <input class="form-check-input" type="radio" name="payment" id="pix" value="pix" checked>
-                        <label class="form-check-label text-white" for="pix" style="padding-right: 50px;">
-                            PIX
-                        </label>
-                    </div>
-                    <div>
-                        <input class="form-check-input" type="radio" name="payment" id="credit" value="credit">
-                        <label class="form-check-label text-white" for="credit" style="padding-right: 10px;">
-                            Cartao de Crédito
-                        </label>
-                    </div>
+            <p class="tipoPagamento">SELECIONE A FORMA DE PAGAMENTO</p>
+            <div class="corpo">
+                <div>
+                    <input class="form-check-input" type="radio" name="payment" id="pix" value="pix" checked>
+                    <label class="form-check-label text-white; PIX" for="pix">
+                        PIX
+                    </label>
                 </div>
-
-                <div style="display: flex; gap: 10px;" >
-                    <input style="margin-top: 5px; width: 200px;" type="text" id="full-name" placeholder="Nome Completo" >
-                    <input style="margin-top: 5px; width: 200px;" type="text" id="email" placeholder="Email">
+                <div>
+                    <input class="form-check-input" type="radio" name="payment" id="credit" value="credit">
+                    <label class="form-check-label text-white; CREDITO">
+                        Cartao de Crédito
+                    </label>
                 </div>
-
-                <button class="btn btn-outline-warning btn-lg" style="margin-top: 30px; margin-bottom: 30px;" onclick="processPayment()">Realizar Pagamento</button>
-                <p id="payment-message"></p>
             </div>
+
+            <div class="Dinfo" >
+                <input class="BOXform" type="text" id="full-name" placeholder="Nome Completo" >
+                <input class="BOXform" type="text" id="email" placeholder="Email">
+            </div>
+
+            <button class="btn btn-outline-warning btn-lg; BPagamento" onclick="processPayment()">Realizar Pagamento</button>
+            <p id="payment-message"></p>
         </div>
     </div>
 

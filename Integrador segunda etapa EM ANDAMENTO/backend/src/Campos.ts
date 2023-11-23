@@ -58,4 +58,5 @@ export type Dados = {
   hrChegada?: string,
   origem?: string,
   destino?: string,
+  valor?: number,
 }

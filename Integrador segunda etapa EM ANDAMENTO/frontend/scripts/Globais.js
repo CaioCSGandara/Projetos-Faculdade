@@ -4,11 +4,12 @@ const vetorIdsLabelAeronave = ["codigoAlterar", "comboFabricantesAlterar", "mode
 const vetorIdsLabelCidade = ["codigoCidade", "nomeCidade", "ufCidade", "paisCidade"];
 const vetorIdsLabelAeroporto = ["codigoAlterar", "nomeAlterar", "siglaAlterar", "cidadeAlterar"];
 const vetorIdsLabelTrecho = ["codAlt", "nomeAlt", "selectOrigemAeroportoAlt", "selectDestinoAeroportoAlt", "selectAeronaveAlt"]
+const vetorIdsLabelVoo = ["codigoAlterar", "dataAlterar", "hrSaidaAlterar", "hrChegadaAlterar", "valorAlterar", "trechoAlterar"];
 const vetorDropdownAeroporto = ["cidadeCadastrar", "cidadeAlterar"];
 const vetorDropdownAeronave = ["selectAeronaveCad", "selectAeronaveAlt" ];
 const vetorDropdownOrigem = ["selectOrigemAeroportoCad","selectOrigemAeroportoAlt"];
 const vetorDropdownDestino = ["selectDestinoAeroportoCad", "selectDestinoAeroportoAlt"];
-const vetorDropdownTrechos = ["selectAeronaveCad", "selectAeronaveAlt","selectOrigemAeroportoCad", "selectOrigemAeroportoAlt", "selectDestinoAeroportoCad", "selectDestinoAeroportoAlt"];
+const vetorDropdownTrecho = ["trechoCadastrar", "trechoAlterar"];
 // FUNÇÕES GLOBAIS
 
 function limparTabela() {
@@ -56,7 +57,7 @@ function alternarDivs(divVisivel, divOculta) {
   function preencherAlterar(elemento, vetor) {
     const tdImagem = elemento.parentNode;
     const linha = tdImagem.parentNode;
-    const tamanhoLinha = linha.cells.length -2 ;
+    const tamanhoLinha = vetor.length;
     console.log(tamanhoLinha);
     const elementosLinha = linha.querySelectorAll('td')
     let elementoPreencher = null;
@@ -113,22 +114,26 @@ function alternarDivs(divVisivel, divOculta) {
   }
   
   function preencherSelect(options, vetor, casca) {
-    for(i=0;i<2;i++) {
+    for(i=0;i<vetor.length;i++) {
       const selectDrop = document.getElementById(vetor[i]);
   
-      const defaultOption = document.createElement('option');
-      defaultOption.value = ''; 
-      defaultOption.text = 'Selecione uma opção';
-      selectDrop.appendChild(defaultOption);
+      if (selectDrop) {
+        // Se o elemento existe, prossiga com a manipulação
+        selectDrop.innerHTML = '';
     
-      
-      options.forEach(optionValue => {
-        console.log("Código Cidade: " + JSON.stringify(optionValue));
-        const option = document.createElement('option');
-        option.value = optionValue.codigo; 
-        option.innerHTML = optionValue[casca]; 
-        selectDrop.appendChild(option);
-      });
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '0';
+        defaultOption.text = 'Selecione uma opção';
+        selectDrop.appendChild(defaultOption);
+        options.forEach(optionValue => {
+          console.log("Código: " + JSON.stringify(optionValue));
+          const option = document.createElement('option');
+          option.value = optionValue.codigo; 
+          option.innerHTML = optionValue[casca]; 
+          selectDrop.appendChild(option);
+        });
+    } else {
+      console.error(`Elemento com ID ${vetor[i]} não encontrado.`);
     }
-  }
+  }}
  
