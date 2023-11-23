@@ -81,26 +81,6 @@ function RequisiçãoGETcidade() {
 }
 
 
-// function preencherSelect(options, vetor) {
-//   for(i=0;i<2;i++) {
-//     const selectDrop = document.getElementById(vetor[i]);
-
-//     const defaultOption = document.createElement('option');
-//     defaultOption.value = ''; 
-//     defaultOption.text = 'Selecione uma opção';
-//     selectDrop.appendChild(defaultOption);
-  
-    
-//     options.forEach(optionValue => {
-//       console.log("Código Cidade: " + JSON.stringify(optionValue));
-//       const option = document.createElement('option');
-//       option.value = optionValue.codigo; 
-//       option.innerHTML = optionValue.nome;  
-//       selectDrop.appendChild(option);
-//     });
-//   }
-// }
-
 
 function exibirCidades() {
   console.log('Entrou no exibir...');

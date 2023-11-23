@@ -358,16 +358,47 @@ if(!trechoValidoAlt()) {
   })
       .then(customResponse => {
           if (customResponse.status === "SUCCESS") {
-              showStatusMessage("Voo cadastrado com sucesso.", false), "statusAlterar";
+              showStatusMessage("Voo alterado com sucesso.", false, "statusAlterar");
               exibirVoos();
           } else {
-              showStatusMessage("Erro ao cadastrar voo: " + customResponse.message, true, "statusAlterar");
+              showStatusMessage("Erro ao alterar voo: " + customResponse.message, true, "statusAlterar");
               console.log(customResponse.message);
           }
       })
       .catch((e) => {
-          showStatusMessage("Erro técnico ao cadastrar... Contate o suporte.", true, "statusAlterar");
+          showStatusMessage("Erro técnico ao alterar... Contate o suporte.", true, "statusAlterar");
           console.log("Falha grave ao cadastrar." + e);
       });
 
     }
+
+
+// SCRIPT DE DELEÇÃO DE VOOS DA TABELA DE EXIBIÇÃO
+
+async function deletarVoo(codigo) {
+  const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ codigo: codigo })
+  };
+
+  await fetch('http://localhost:3000/excluirVoo', requestOptions)
+      .then(response => response.json())
+      .then(customResponse => {
+          if (customResponse.status === "SUCCESS") {
+              showStatusMessage("Voo deletado com sucesso.", false, "statusDelete");
+              exibirVoos();
+          } else {
+            if (customResponse.message.includes('ORA-02292')) {
+              showStatusMessage("Você não pode excluir este voo, pois atualmente ele está vinculado à outro(s) registro(s). Verifique e tente novamente.", true, "statusDelete");
+            } else {
+              showStatusMessage("Erro ao deletar voo: " + customResponse.message, true, "statusDelete");
+              console.log(customResponse.message);
+            }
+          }
+      })
+      .catch((e) => {
+          showStatusMessage("Erro técnico ao deletar... Contate o suporte.", true, "statusDelete");
+          console.log("Falha grave ao deletar." + e);
+      });
+}
