@@ -112,6 +112,35 @@ app.post("/listarBuscaVoos", (req, res) => __awaiter(void 0, void 0, void 0, fun
         res.send(cr);
     }
 }));
+app.post("/listarAssentos", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const assento = req.body;
+    let cr = { status: "ERROR", message: "", payload: undefined, };
+    let connection;
+    try {
+        const cmdSelectDados = `SELECT CODIGO, NUMERO, OCUPADO, VOO FROM ASSENTOS WHERE VOO = :1`;
+        const assentos = [assento.voo];
+        connection = yield oracledb_1.default.getConnection(OracleConnAtribs_1.oraConnAttribs);
+        let resSelect = yield connection.execute(cmdSelectDados, assentos);
+        cr.status = "SUCCESS";
+        cr.message = "Dados obtidos";
+        cr.payload = ((0, Conversores_1.rowsToAssentos)(resSelect.rows));
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            cr.message = e.message;
+            console.log(e.message);
+        }
+        else {
+            cr.message = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+    }
+    finally {
+        if (connection !== undefined) {
+            yield connection.close();
+        }
+        res.send(cr);
+    }
+}));
 // Listar Cidades
 app.get("/listarCidades", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     let cr = { status: "ERROR", message: "", payload: undefined, };
@@ -728,53 +757,6 @@ app.delete("/excluirCidade", (req, res) => __awaiter(void 0, void 0, void 0, fun
         res.send(cr);
     }
 }));
-app.delete("/excluirAssento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // excluindo a cidade pelo código dela:
-    const codigo = req.body.codigo;
-    console.log('Codigo recebido: ' + codigo);
-    // definindo um objeto de resposta.
-    let cr = {
-        status: "ERROR",
-        message: "",
-        payload: undefined,
-    };
-    // conectando 
-    let connection;
-    try {
-        connection = yield oracledb_1.default.getConnection(OracleConnAtribs_1.oraConnAttribs);
-        const cmdDeleteAss = `DELETE ASSENTOS WHERE codigo = :1`;
-        const dados = [codigo];
-        let resDelete = yield connection.execute(cmdDeleteAss, dados);
-        // importante: efetuar o commit para gravar no Oracle.
-        yield connection.commit();
-        // obter a informação de quantas linhas foram inseridas. 
-        // neste caso precisa ser exatamente 1
-        const rowsDeleted = resDelete.rowsAffected;
-        if (rowsDeleted !== undefined && rowsDeleted === 1) {
-            cr.status = "SUCCESS";
-            cr.message = "Assento excluído.";
-        }
-        else {
-            cr.message = "Assento não excluído. Verifique se o código informado está correto.";
-        }
-    }
-    catch (e) {
-        if (e instanceof Error) {
-            cr.message = e.message;
-            console.log(e.message);
-        }
-        else {
-            cr.message = "Erro ao conectar ao oracle. Sem detalhes";
-        }
-    }
-    finally {
-        // fechando a conexao
-        if (connection !== undefined)
-            yield connection.close();
-        // devolvendo a resposta da requisição.
-        res.send(cr);
-    }
-}));
 app.put("/alterarAeronave", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const aero = req.body;
     console.log(aero);
@@ -958,57 +940,6 @@ app.put("/alterarVoo", (req, res) => __awaiter(void 0, void 0, void 0, function*
             if (rowsInserted !== undefined && rowsInserted === 1) {
                 cr.status = "SUCCESS";
                 cr.message = "Voo alterado.";
-            }
-        }
-        catch (e) {
-            if (e instanceof Error) {
-                cr.message = e.message;
-                console.log(e.message);
-            }
-            else {
-                cr.message = "Erro ao conectar ao oracle. Sem detalhes";
-            }
-        }
-        finally {
-            //fechar a conexao.
-            if (connection !== undefined) {
-                yield connection.close();
-            }
-            res.send(cr);
-        }
-    }
-}));
-app.put("/alterarAssento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const assento = req.body;
-    console.log(assento);
-    // correção: verificar se tudo chegou para prosseguir com o cadastro.
-    // verificar se chegaram os parametros
-    // VALIDAR se estão bons (de acordo com os critérios - exemplo: 
-    // não pode qtdeAssentos ser número e ao mesmo tempo o valor ser -5)
-    // definindo um objeto de resposta.
-    let cr = {
-        status: "ERROR",
-        message: "",
-        payload: undefined,
-    };
-    let [valida, mensagem] = (0, Validadores_1.assentoValida)(assento);
-    if (!valida) {
-        // já devolvemos a resposta com o erro e terminamos o serviço.
-        cr.message = mensagem;
-        res.send(cr);
-    }
-    else {
-        let connection;
-        try {
-            const cmdUpdateAssento = `UPDATE ASSENTOS SET AERONAVE=(:1), VOO=(:2) WHERE CODIGO=(:3) `;
-            const dados = [assento.aeronave, assento.voo, assento.codigo];
-            connection = yield oracledb_1.default.getConnection(OracleConnAtribs_1.oraConnAttribs);
-            let resUpdate = yield connection.execute(cmdUpdateAssento, dados);
-            yield connection.commit();
-            const rowsInserted = resUpdate.rowsAffected;
-            if (rowsInserted !== undefined && rowsInserted === 1) {
-                cr.status = "SUCCESS";
-                cr.message = "Assento alterado.";
             }
         }
         catch (e) {
