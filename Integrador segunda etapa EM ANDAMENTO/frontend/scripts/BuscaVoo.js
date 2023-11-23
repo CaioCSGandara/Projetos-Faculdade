@@ -126,8 +126,8 @@ function preencherTabela(voos) {
     <td>${voo.hrChegada}</td>
     <td>${voo.origem}</td>
     <td>${voo.destino}</td>
-    <td>${voo.valor}</td>`;
-    tblBody.appendChild(row);
+    <td>${voo.valor}</td>
+    <td><a href="/frontend/MANAGEMENT/Assentos.html?codigo=${voo.codigo}"><img src="/frontend/images/carrinho-de-compras.png"></a></td>`;    tblBody.appendChild(row);
   });
 }
 
