@@ -78,7 +78,7 @@ app.get("/listarTrechos", (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.send(cr);
     }
 }));
-app.get("/listarBuscaVoos", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post("/listarBuscaVoos", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const dado = req.body;
     let cr = { status: "ERROR", message: "", payload: undefined, };
     let connection;
@@ -88,7 +88,7 @@ app.get("/listarBuscaVoos", (req, res) => __awaiter(void 0, void 0, void 0, func
     INNER JOIN TRECHOS ON VOOS.TRECHO = TRECHOS.CODIGO 
     INNER JOIN AEROPORTOS ORIGEM ON TRECHOS.ORIGEM = ORIGEM.CODIGO
     INNER JOIN AEROPORTOS DESTINO ON TRECHOS.DESTINO = DESTINO.CODIGO
-    WHERE TO_CHAR(DATA_VOO, 'mm/dd/yyyy') = :1 AND ORIGEM.NOME = :2 AND DESTINO.NOME = :3`;
+    WHERE TO_CHAR(DATA_VOO, 'dd/mm/yyyy') = :1 AND ORIGEM.NOME = :2 AND DESTINO.NOME = :3`;
         const dados = [dado.data, dado.origem, dado.destino];
         connection = yield oracledb_1.default.getConnection(OracleConnAtribs_1.oraConnAttribs);
         let resSelect = yield connection.execute(cmdSelectDados, dados);
