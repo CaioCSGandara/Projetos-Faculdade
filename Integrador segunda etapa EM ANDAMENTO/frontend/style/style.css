@@ -306,6 +306,10 @@ h1 { /* título do formulário */
     border-bottom-left-radius: 30px;
 }
 
+.locked {
+    background-color: #777474;
+}
+
 
 
 

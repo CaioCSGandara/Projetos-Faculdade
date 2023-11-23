@@ -25,7 +25,6 @@
       <li><a class="dropdown-item" href="../MANAGEMENT/Cidade.html">Cidades</a></li>
       <li><a class="dropdown-item" href="../MANAGEMENT/Trecho.html">Trechos</a></li>
       <li><a class="dropdown-item" href="../MANAGEMENT/Voo.html">Voos</a></li>
-      <li><a class="dropdown-item" href="../MANAGEMENT/Assentos.html">Assentos</a></li>
   </div>
   </nav>
 </header>
@@ -74,13 +73,13 @@
         <div class="formulario" id="formCadastrar">
           <form>
               <p>
-                  <label for="nome">Nome da cidade:</label><br/>
-                  <input type="text" id="nome" name="nomeCidade" max="20" class="inputTam1" placeholder="Ex: Campinas">
+                  <label for="nomeCidade">Nome da cidade:</label><br/>
+                  <input type="text" id="nomeCidade" name="nomeCidade" max="20" class="inputTam1" placeholder="Ex: Campinas">
               </p>
               <br>
               <p>
                   <label for="uf">Estado:</label><br>
-                  <select id="uf" name="estado" class="inputTam1">
+                  <select id="uf" name="uf" class="inputTam1">
                       <option value="0" selected>Selecione um estado</option>
                       <option value="AC">Acre</option>
                       <option value="AL">Alagoas</option>
@@ -120,7 +119,7 @@
               <br>
               <p>
                   <button 
-                  type="reset"
+                  type="button"
                   class="btn btn-warning"
                   onclick= "inserirCidade();"
                   id="btnCadastrar"
@@ -143,18 +142,18 @@
       <div class="formulario" id="formAlterar">
           <form>
               <p>
-              <label for="codigo">Código da Cidade:</label><br>
-              <input type="text" id="codigoCidade" name="codigoCidade" class="inputTam2" placeholder="Ex: 974">
+              <label for="codigoCidade">Código da Cidade:</label><br>
+              <input type="text" id="codigoCidade" name="codigoCidade" class="inputTam2 locked" placeholder="Ex: 974">
               </p>
               <br> 
               <p>
-                  <label for="nome">Nome da cidade:</label><br>
+                  <label for="nomeCidade">Nome da cidade:</label><br>
                   <input type="text" id="nomeCidade" name="nomeCidade" maxlength="20" class="inputTam1" placeholder="Ex: Campinas">
               </p>
               <br>
               <p>
                   <label for="ufCidade">Estado:</label><br>
-                  <select id="ufCidade" name="estado" class="inputTam1">
+                  <select id="ufCidade" name="ufCidade" class="inputTam1">
                       <option value="0" selected>Selecione um estado</option>
                       <option value="AC">Acre</option>
                       <option value="AL">Alagoas</option>
@@ -194,7 +193,7 @@
               <br>
               <p>
                   <button 
-                  type="reset" 
+                  type="button" 
                   class="btn btn-warning"
                   onclick="alterarCidade();"
                   id="btnAlterar"

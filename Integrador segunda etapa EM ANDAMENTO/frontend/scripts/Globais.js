@@ -79,9 +79,8 @@ function alternarDivs(divVisivel, divOculta) {
         elementoPreencher.value = elementosLinha[i].textContent;
         }
     }
+
   }
-
-
 
   function showStatusMessage(msg, error, idStatus){
     var pStatus = document.getElementById(idStatus);
@@ -138,4 +137,9 @@ function alternarDivs(divVisivel, divOculta) {
       console.error(`Elemento com ID ${vetor[i]} não encontrado.`);
     }
   }}
+
+  function lockInput(nomeId) {
+    const campo = document.getElementById(nomeId);
+    campo.setAttribute('readonly', 'true');
+  }
  

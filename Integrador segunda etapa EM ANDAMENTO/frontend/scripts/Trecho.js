@@ -169,7 +169,7 @@ function preencherTrechos(trecho) {
           <td class="text-center align-middle" valorRaiz="${trecho.origem}">${trecho.origemNome}</td>
           <td class="text-center align-middle" valorRaiz="${trecho.destino}">${trecho.destinoNome}</td>
           <td class="text-center align-middle" valorRaiz="${trecho.aeronave}">${trecho.aeronaveNome}</td>
-          <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelTrecho); exibeCodigo('${trecho.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+          <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelTrecho); lockInput('codAlt'); exibeCodigo('${trecho.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
           <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick="alternarDivs('divAlterar', 'divCadastrar');  exibeCodigo('${trecho.codigo}', 'pcodDelete'); popUpDeletar('${trecho.codigo}')"></td>  
       `;
 

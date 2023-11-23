@@ -30,7 +30,6 @@
         <li><a class="dropdown-item" href="../MANAGEMENT/Cidade.html">Cidades</a></li>
         <li><a class="dropdown-item" href="../MANAGEMENT/Trecho.html">Trechos</a></li>
         <li><a class="dropdown-item" href="../MANAGEMENT/Voo.html">Voos</a></li>
-        <li><a class="dropdown-item" href="../MANAGEMENT/Assentos.html">Assentos</a></li>
     </div>
     </nav>
   </header>
@@ -141,7 +140,7 @@
           <form>
             <p>
               <label for="codigoAlterar">Código da aeronave:</label><br>
-              <input type="text" id="codigoAlterar" name="codigoAlterar" class="inputTam2" placeholder="Ex: 1">
+              <input type="text" id="codigoAlterar" name="codigoAlterar" class="inputTam2 locked" placeholder="Ex: 1">
             </p>
             <br>
               <p>
@@ -177,7 +176,7 @@
               </p>
               <br>
               <p>
-              <button type="reset" 
+              <button type="button" 
               class="btn btn-warning"
               onclick="alterarAeronave();"
               id="btnAlterar"
