@@ -30,10 +30,10 @@ import { Assento } from "./Campos";
 import { oraConnAttribs } from "./OracleConnAtribs";
 
 // conversores para facilitar o trabalho de conversão dos resultados Oracle para vetores de tipos nossos.
-import { rowsToAeronaves, rowsToAeroportos, rowsToCidades, rowsToDados, rowsToTrechos } from "./Conversores";
+import { rowsToAeronaves, rowsToAeroportos, rowsToAssentos, rowsToCidades, rowsToDados, rowsToTrechos } from "./Conversores";
 
 // validadores para facilitar o trabalho de validação.
-import { aeronaveValida, aeroportoValida, assentoValida, trechoValida, vooValida, cidadeValida } from "./Validadores";
+import { aeronaveValida, aeroportoValida, trechoValida, vooValida, cidadeValida } from "./Validadores";
 
 
 // preparar o servidor web de backend na porta 3000
@@ -107,6 +107,35 @@ app.post("/listarBuscaVoos", async(req,res)=>{
     cr.payload = (rowsToDados(resSelect.rows));
 
 
+  }catch(e){
+    if(e instanceof Error){
+      cr.message = e.message;
+      console.log(e.message);
+    }else{
+      cr.message = "Erro ao conectar ao oracle. Sem detalhes";
+    }
+  } finally {
+    if(connection !== undefined){
+      await connection.close();
+    }
+    res.send(cr);  
+  }
+});
+
+app.post("/listarAssentos", async(req,res)=>{
+  const assento = req.body as Assento;
+  let cr: CustomResponse = {status: "ERROR", message: "", payload: undefined,};
+  let connection;
+  try{
+    const cmdSelectDados = `SELECT CODIGO, NUMERO, OCUPADO, VOO FROM ASSENTOS WHERE VOO = :1`;
+    const assentos = [assento.voo];
+
+    connection = await oracledb.getConnection(oraConnAttribs);
+    let resSelect = await connection.execute(cmdSelectDados, assentos);
+    cr.status = "SUCCESS";
+    cr.message = "Dados obtidos";
+
+    cr.payload = (rowsToAssentos(resSelect.rows));
   }catch(e){
     if(e instanceof Error){
       cr.message = e.message;
@@ -810,57 +839,6 @@ app.delete("/excluirCidade", async(req,res)=>{
   }
 });
 
-app.delete("/excluirAssento", async(req,res)=>{
-  // excluindo a cidade pelo código dela:
-  const codigo = req.body.codigo as number;
- 
-  console.log('Codigo recebido: ' + codigo);
-
-  // definindo um objeto de resposta.
-  let cr: CustomResponse = {
-    status: "ERROR",
-    message: "",
-    payload: undefined,
-  };
-
-  // conectando 
-  let connection;
-  try{
-    connection = await oracledb.getConnection(oraConnAttribs);
-    const cmdDeleteAss = `DELETE ASSENTOS WHERE codigo = :1`
-    const dados = [codigo];
-
-    let resDelete = await connection.execute(cmdDeleteAss, dados);
-    
-    // importante: efetuar o commit para gravar no Oracle.
-    await connection.commit();
-    
-    // obter a informação de quantas linhas foram inseridas. 
-    // neste caso precisa ser exatamente 1
-    const rowsDeleted = resDelete.rowsAffected
-    if(rowsDeleted !== undefined &&  rowsDeleted === 1) {
-      cr.status = "SUCCESS"; 
-      cr.message = "Assento excluído.";
-    }else{
-      cr.message = "Assento não excluído. Verifique se o código informado está correto.";
-    }
-
-  }catch(e){
-    if(e instanceof Error){
-      cr.message = e.message;
-      console.log(e.message);
-    }else{
-      cr.message = "Erro ao conectar ao oracle. Sem detalhes";
-    }
-  } finally {
-    // fechando a conexao
-    if(connection!==undefined)
-      await connection.close();
-
-    // devolvendo a resposta da requisição.
-    res.send(cr);  
-  }
-});
 
 app.put("/alterarAeronave", async(req,res)=> { // servico de alterar 
 
@@ -1068,63 +1046,6 @@ app.put("/alterarAeronave", async(req,res)=> { // servico de alterar
           if(rowsInserted !== undefined &&  rowsInserted === 1) {
             cr.status = "SUCCESS"; 
             cr.message = "Voo alterado.";
-          }
-      
-        }catch(e){
-          if(e instanceof Error){
-            cr.message = e.message;
-            console.log(e.message);
-          }else{
-            cr.message = "Erro ao conectar ao oracle. Sem detalhes";
-          }
-        } finally {
-          //fechar a conexao.
-          if(connection!== undefined){
-            await connection.close();
-          }
-          res.send(cr);  
-        }
-    }
-  });
-
-
-  app.put("/alterarAssento", async(req,res)=> { // servico de alterar 
-
-    const assento: Assento = req.body as Assento;
-    console.log(assento);
-  
-    // correção: verificar se tudo chegou para prosseguir com o cadastro.
-    // verificar se chegaram os parametros
-    // VALIDAR se estão bons (de acordo com os critérios - exemplo: 
-    // não pode qtdeAssentos ser número e ao mesmo tempo o valor ser -5)
-  
-    // definindo um objeto de resposta.
-    let cr: CustomResponse = {
-      status: "ERROR",
-      message: "",
-      payload: undefined,
-    };
-    
-    let [valida, mensagem] = assentoValida(assento);
-    if(!valida) {
-    // já devolvemos a resposta com o erro e terminamos o serviço.
-    cr.message = mensagem;
-    res.send(cr);
-    } else {
-        let connection;
-        try {
-          const cmdUpdateAssento = `UPDATE ASSENTOS SET AERONAVE=(:1), VOO=(:2) WHERE CODIGO=(:3) `
-          const dados = [assento.aeronave, assento.voo, assento.codigo];
-        
-          connection = await oracledb.getConnection(oraConnAttribs);
-          let resUpdate = await connection.execute(cmdUpdateAssento, dados);
-        
-          await connection.commit();
-        
-          const rowsInserted = resUpdate.rowsAffected
-          if(rowsInserted !== undefined &&  rowsInserted === 1) {
-            cr.status = "SUCCESS"; 
-            cr.message = "Assento alterado.";
           }
       
         }catch(e){

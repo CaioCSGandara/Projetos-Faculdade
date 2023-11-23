@@ -155,29 +155,7 @@ export function vooValida(voo: Voo) {
   return [valida, mensagem] as const;
 }
 
-//Validação de assentos
-export function assentoValida(assento: Assento) {
-  let valida = false;
-  let mensagem = "";
 
-  if (assento.codigo !== undefined) {
-    mensagem = "O codigo do assento não foi informado."
-  }
-  
-  if (assento.aeronave === undefined) {
-    mensagem = "Aeronave não informada para o assento";
-  }
-
-  if (assento.voo === undefined) {
-    mensagem = "Voo não informado para o assento";
-  }
-
-  if(mensagem === ""){
-    valida = true;
-  }
-
-  return [valida, mensagem] as const;
-}
 
 //Validação de cidades
 export function cidadeValida(cidade: Cidade) {

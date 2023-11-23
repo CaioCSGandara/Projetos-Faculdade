@@ -46,7 +46,8 @@ export type Voo =  {
 
 export type Assento = {
   codigo?: number,
-  aeronave?: number,
+  numero?: number,
+  ocupado?: string,
   voo?: number,
 }
 

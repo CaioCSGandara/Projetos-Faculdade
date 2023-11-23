@@ -10,6 +10,26 @@ import { Trecho } from "./Campos";
 import { Voo } from "./Campos";
 import { Dados } from "./Campos";
 import { Cidade } from "./Campos"
+import { Assento } from "./Campos";
+
+export function rowsToAssentos(oracleRows: unknown[] | undefined) : Array<Assento> {
+  let assentos: Array<Assento> = [];
+  let assento;
+  if (oracleRows !== undefined){
+    oracleRows.forEach((registro: any) => {
+      assento = {
+        codigo: registro.CODIGO,
+        numero: registro.NUMERO,
+        ocupado: registro.OCUPADO,
+        voo: registro.VOO,
+      } as Assento;
+
+      // inserindo o novo Array convertido.
+      assentos.push(assento);
+    })
+  }
+  return assentos;
+}
 
 
 export function rowsToTrechos(oracleRows: unknown[] | undefined) : Array<Trecho> {
