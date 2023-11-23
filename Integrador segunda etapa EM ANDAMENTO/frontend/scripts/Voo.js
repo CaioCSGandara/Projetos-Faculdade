@@ -32,7 +32,7 @@ function RequisiçãoGETlistar() {
             <td class="align-middle">${voo.origem}</td>
             <td class="align-middle">${voo.destino}</td>
             <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelVoo); exibeCodigo('${voo.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" exibeCodigo('${voo.codigo}', 'pcodDelete'); popUpDeletar('${voo.codigo}')"></td>
+            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" limparStatus('statusCadastrar'); limparStatus('statusAlterar'); alternarDivs('divAlterar', 'divCadastrar'); exibeCodigo('${voo.codigo}', 'pcodDelete'); popUpDeletar('${voo.codigo}')"></td>
             
         `;
       
@@ -42,6 +42,7 @@ function RequisiçãoGETlistar() {
 }
 
   function exibirVoos() {
+    limparTabela();
     console.log('Entrou no exibir...');
     RequisiçãoGETlistar()
       .then(customResponse => {
