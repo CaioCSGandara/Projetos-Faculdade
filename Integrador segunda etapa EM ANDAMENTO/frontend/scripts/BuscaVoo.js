@@ -66,72 +66,74 @@ function exibirAeroporto() {
 //    }
 //  }
 
-function RequisiçãoGETDados() {
+function RequisiçãoPOSTDados(body) {
   const requestOptions = {
-    method: 'GET',
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   };
   return fetch('http://localhost:3000/listarBuscaVoos', requestOptions)
-    .then(T => T.json());
+    .then(response => response.json());
 }
 
 async function selecionarVoos() {
   const data = document.getElementById('dataIda').value;
-  const origem = document.getElementById('selectOrigemAeroportoCad').options[document.getElementById('selectOrigemAeroportoCad').selectedIndex].value;
-  const destino = document.getElementById('selectDestinoAeroportoCad').options[document.getElementById('selectDestinoAeroportoCad').selectedIndex].value;
+  const origem = document.getElementById('selectOrigemAeroportoCad').options[document.getElementById('selectOrigemAeroportoCad').selectedIndex].text;
+  const destino = document.getElementById('selectDestinoAeroportoCad').options[document.getElementById('selectDestinoAeroportoCad').selectedIndex].text;
+  // Formatar a data antes de enviar para o backend
+  const dataFormatada = new Date(data + "T00:00:00").toLocaleDateString();
 
-  await RequisiçãoGETDados({
-    data: data,
+  console.log(dataFormatada);
+  console.log(origem);
+  console.log(destino);
+  await RequisiçãoPOSTDados({
+    data: dataFormatada,
     origem: origem,
     destino: destino
   })
   .then(customResponse => {
     if (customResponse.status === "SUCCESS") {
-      showStatusMessage("Busca realizada com sucesso.", false, "statusBusca");
-      exibirVoos();
-    } else{
-      showStatusMessage("Erro ao buscar voos: " + customResponse.message, true, "statusBusca");
+      //showStatusMessage("Busca realizada com sucesso.", false, "statusBusca");
+      exibirVoos(customResponse.payload);
+    } else {
+      //showStatusMessage("Erro ao buscar voos: " + customResponse.message, true, "statusBusca");
       console.log(customResponse.message);
     }
   })
   .catch((e) => {
-    showStatusMessage("Erro técnico ao Buscar... Contate o suporte.", true, "statusBusca");
+    //showStatusMessage("Erro técnico ao Buscar... Contate o suporte.", true, "statusBusca");
     console.log("Não foi possível buscar." + e);
   });
 }
 
-function exibirVoos() {
+function exibirVoos(voos) {
   console.log('Entrou no exibir...');
-  RequisiçãoGETDados()
-    .then(customResponse => {
-      if (customResponse.status === "SUCCESS") {
-        console.log("Deu certo a busca de dados");
-        console.log('Payload:' + JSON.stringify(customResponse.payload));
-        preencherTabela(customResponse.payload, vetorTabela, 'nome');
-      } else {
-        console.log(customResponse.message);
-      }
-    })
-    .catch((e) => {
-      console.log("Não foi possível exibir." + e);
-    });
+  preencherTabela(voos);
 }
-  
-function preencherTabela(options, vetor, casca) {
-  const tblBody = document.getElementById('tBody');
-  Voo.forEach((Voo)=> {
+
+function preencherTabela(voos) {
+  const tblBody = document.getElementById('listaVoos');
+  tblBody.innerHTML = ""; // Limpar a tabela antes de preenchê-la novamente
+
+  voos.forEach((voo) => {
     const row = document.createElement('tr');
     row.classList.add('tableHover');
     row.innerHTML = `
-    <td id="codigo">${Voo.codigo}</td>
-    <td>${Voo.data}</td>
-    <td>${Voo.trecho}</td>
-    <td>${Voo.hr_saida}</td>
-    <td>${Voo.hr_chegada}</td>
-    <td>${Voo.origem}</td>
-    <td>${Voo.destino}</td>
-    <td>${Voo.valor}</td>`;
+    <td id="codigo">${voo.codigo}</td>
+    <td>${voo.data}</td>
+    <td>${voo.trecho}</td>
+    <td>${voo.hrSaida}</td>
+    <td>${voo.hrChegada}</td>
+    <td>${voo.origem}</td>
+    <td>${voo.destino}</td>
+    <td>${voo.valor}</td>`;
     tblBody.appendChild(row);
-  })
+  });
+}
+
+function formatarData(data) {
+  const dia = String(data.getDate()).padStart(2, '0');
+  const mes = String(data.getMonth() + 1).padStart(2, '0');
+  const ano = data.getFullYear();
+  return `${dia}/${mes}/${ano}`;
 }
