@@ -413,7 +413,7 @@ app.put("/inserirVoo", (req, res) => __awaiter(void 0, void 0, void 0, function*
         const cmdInsertAero = `INSERT INTO VOOS
         (CODIGO, DATA_VOO, HR_CHEGADA, HR_SAIDA, VALOR, TRECHO)
         VALUES
-        (:1, TO_DATE(:2, 'yyyy-mm-dd'), TO_DATE(:3, 'hh24:mi:ss'),  
+        (:1, TO_DATE(:2, 'dd/mm/yyyy'), TO_DATE(:3, 'hh24:mi:ss'),  
         TO_DATE(:4, 'hh24:mi:ss'), :5, :6)`;
         const dados = [voo.codigo, voo.dataVoo, voo.hrChegada, voo.hrSaida, voo.valor, voo.trecho];
         connection = yield oracledb_1.default.getConnection(OracleConnAtribs_1.oraConnAttribs);

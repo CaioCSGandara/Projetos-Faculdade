@@ -26,6 +26,8 @@ function alternarDivs(divVisivel, divOculta) {
       divOne.style.display = 'none';
       divTwo.style.display = 'block';
     }
+    limparStatus('statusCadastrar');
+    limparStatus('statusAlterar');
     defineAlturaTabela();
   }
   
