@@ -127,7 +127,7 @@ function preencherTabela(voos) {
     <td>${voo.origem}</td>
     <td>${voo.destino}</td>
     <td>${voo.valor}</td>
-    <td><a href="/frontend/MANAGEMENT/Assentos.html?codigo=${voo.codigo}"><img src="/frontend/images/carrinho-de-compras.png"></a></td>`;    tblBody.appendChild(row);
+    <td><a href="/frontend/MANAGEMENT/Assentos.html?codigo=${voo.codigo}"><img src="../../assets/images/carrinho-de-compras.png"></a></td>`;    tblBody.appendChild(row);
   });
 }
 

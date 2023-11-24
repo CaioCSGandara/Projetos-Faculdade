@@ -125,8 +125,8 @@ function preencherAeroportos(aeroportos) {
       <td class="text-center align-middle">${aeroporto.nome}</td>
       <td class="text-center align-middle">${aeroporto.sigla}</td>
       <td class="text-center align-middle" valorRaiz="${aeroporto.cidade}">${aeroporto.cidadeNome}</td>
-      <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelAeroporto); lockInput('codigoAlterar'); exibeCodigo('${aeroporto.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-      <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick="alternarDivs('divAlterar', 'divCadastrar');  exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeroporto.codigo}')"></td>
+      <td class="align-middle"><img class="iconList" src="../../assets/images/lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelAeroporto); lockInput('codigoAlterar'); exibeCodigo('${aeroporto.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+      <td class="align-middle"><img class="iconList" src="../../assets/images/lixeiraicon.png" onclick="alternarDivs('divAlterar', 'divCadastrar');  exibeCodigo('${aeroporto.codigo}', 'pcodDelete'); popUpDeletar('${aeroporto.codigo}')"></td>
     `;
 
 

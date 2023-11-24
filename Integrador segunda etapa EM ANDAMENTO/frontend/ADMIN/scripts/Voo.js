@@ -183,8 +183,8 @@ function preencherVoos(dados) {
           <td class="align-middle" valorRaiz="${voo.trechoNome}">${voo.trecho}</td>           
           <td class="align-middle">${voo.origem}</td>
           <td class="align-middle">${voo.destino}</td>
-          <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelVoo); exibeCodigo('${voo.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
-          <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick=" alternarDivs('divAlterar', 'divCadastrar'); exibeCodigo('${voo.codigo}', 'pcodDelete'); popUpDeletar('${voo.codigo}')"></td>
+          <td class="align-middle"><img class="iconList" src="../../assets/images/lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelVoo); exibeCodigo('${voo.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar')" ></td>
+          <td class="align-middle"><img class="iconList" src="../../assets/images/lixeiraicon.png" onclick=" alternarDivs('divAlterar', 'divCadastrar'); exibeCodigo('${voo.codigo}', 'pcodDelete'); popUpDeletar('${voo.codigo}')"></td>
           
       `;
     

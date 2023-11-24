@@ -22,14 +22,14 @@
          }
              const seat = document.createElement('div');
              seat.classList.add('my-seat');
-             seat.innerHTML = `<img id="${seatCounter}" class="my-img" src="/frontend/images/assento-cinza.png">`;
+             seat.innerHTML = `<img id="${seatCounter}" class="my-img" src="../../assets/images/assento-cinza.png">`;
              seatCounter--;
-             
+            
              // Verifica se o assento está ocupado
              if (occupiedSeats.some(seatData => seatData.row === row && seatData.col === col)) {
                  seat.classList.add('occupied');
                  const seatImage = seat.querySelector('img');
-                 seatImage.src = "/frontend/images/assento-vermelho.png"; // Altere o caminho para a imagem ocupada
+                 seatImage.src = "../../assets/images/assento-vermelho.png"; // Altere o caminho para a imagem ocupada
          }
              seat.addEventListener('click', () => toggleSeatSelection(seat));
              seatRow.appendChild(seat);
@@ -42,9 +42,9 @@
          seat.classList.toggle('selected');
          const seatImage = seat.querySelector('img');
          if (seat.classList.contains('selected')) {
-             seatImage.src = "/frontend/images/assento-amarelo.png"; // Altere o caminho para a imagem selecionada
+             seatImage.src = "../../assets/images/assento-amarelo.png"; // Altere o caminho para a imagem selecionada
          } else {
-             seatImage.src = "/frontend/images/assento-cinza.png"; // Altere o caminho para a imagem desselecionada
+             seatImage.src = "../../assets/images/assento-cinza.png"; // Altere o caminho para a imagem desselecionada
          }
          updateSelectedSeat();
      }
