@@ -41,30 +41,30 @@ function exibirAeroporto() {
 }
 
 
-//function preencherSelect(options, vetor, casca) {
-//    for (let i = 0; i < vetor.length; i++) {
-//        const selectDrop = document.getElementById(vetor[i]);
-//        // Verifique se o elemento foi encontrado
-//        if (!selectDrop) {
-//            console.error(`Elemento com ID ${vetor[i]} não encontrado.`);
-//            continue; // Pule para a próxima iteração do loop
-//        }
-//        
-//      const defaultOption = document.createElement('option');
-//      defaultOption.value = ''; 
-//      defaultOption.text = 'Selecione uma opção';
-//      selectDrop.appendChild(defaultOption);
-//    
-//      
-//      options.forEach(optionValue => {
-//        console.log("Código Aeroporto: " + JSON.stringify(optionValue));
-//        const option = document.createElement('option');
-//        option.value = optionValue.codigo; 
-//        option.innerHTML = optionValue[casca]; 
-//        selectDrop.appendChild(option);
-//      });
-//    }
-//  }
+function preencherSelect(options, vetor, casca) {
+  for(i=0;i<vetor.length;i++) {
+    const selectDrop = document.getElementById(vetor[i]);
+
+    if (selectDrop) {
+      // Se o elemento existe, prossiga com a manipulação
+      selectDrop.innerHTML = '';
+  
+      const defaultOption = document.createElement('option');
+      defaultOption.value = '0';
+      defaultOption.text = 'Selecione uma opção';
+      selectDrop.appendChild(defaultOption);
+      options.forEach(optionValue => {
+        console.log("Código: " + JSON.stringify(optionValue));
+        const option = document.createElement('option');
+        option.value = optionValue.codigo; 
+        option.innerHTML = optionValue[casca]; 
+        selectDrop.appendChild(option);
+      });
+  } else {
+    console.error(`Elemento com ID ${vetor[i]} não encontrado.`);
+  }
+}}
+
 
 function RequisiçãoPOSTDados(body) {
   const requestOptions = {
