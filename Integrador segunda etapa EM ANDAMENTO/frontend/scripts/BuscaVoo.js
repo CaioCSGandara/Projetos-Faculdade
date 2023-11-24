@@ -137,3 +137,40 @@ function formatarData(data) {
   const ano = data.getFullYear();
   return `${dia}/${mes}/${ano}`;
 }
+
+function formatarData(data) {
+  const dia = String(data.getDate()).padStart(2, '0');
+  const mes = String(data.getMonth() + 1).padStart(2, '0');
+  const ano = data.getFullYear();
+  return `${dia}/${mes}/${ano}`;
+}
+
+function naoEncontrouVoos() {
+  const listaVoos = document.getElementById('listaVoos');
+  const data = document.getElementById('dataIda').value;
+  const origem = document.getElementById('selectOrigemAeroportoCad').options[document.getElementById('selectOrigemAeroportoCad').selectedIndex].text;
+  const destino = document.getElementById('selectDestinoAeroportoCad').options[document.getElementById('selectDestinoAeroportoCad').selectedIndex].text;
+
+  const mensagemExistente = document.getElementById('mensagemNaoEncontrado');
+  if (mensagemExistente) {
+    mensagemExistente.remove();
+  }
+
+  if (!origem || !destino || !data ) {
+    const mensagem = document.createElement('p');
+    mensagem.textContent = 'Preencha os campos de origem e destino';
+    mensagem.style.color = 'purple';
+    mensagem.id = 'mensagemNaoEncontrado';
+
+    document.body.appendChild(mensagem);
+  } else if (!listaVoos || listaVoos.children.length === 0) {
+    const mensagem = document.createElement('p');
+    mensagem.textContent = 'Nenhum voo encontrado para os critérios selecionados.';
+    mensagem.style.color = 'red';
+    mensagem.id = 'mensagemNaoEncontrado';
+
+    document.body.appendChild(mensagem);
+  }
+
+}
+
