@@ -1,82 +1,4 @@
-// FUNÇÃO PARA EXIBIR AERONAVES NO FORMULÁRIO E ALTERAÇÃO
-
-function RequisiçãoGETaeronave() {
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  };
-  return fetch('http://localhost:3000/listarAeronaves', requestOptions)
-    .then(T => T.json());
-}
-
-function exibirAeronave() {
-  console.log('Entrou no exibir AERONAVE...');
-  RequisiçãoGETaeronave()
-    .then(customResponse => {
-      if (customResponse.status === "SUCCESS") {
-        console.log("Deu certo a busca de dados");
-        console.log('Payload:' + JSON.stringify(customResponse.payload));
-        preencherSelect(customResponse.payload, vetorDropdownAeronave, 'modelo');
-      } else {
-        console.log(customResponse.message);
-      }
-    })
-    .catch((e) => {
-      console.log("Não foi possível exibir." + e);
-    });
-} 
-
-
-
-function RequisiçãoGETaeroporto() {
-    const requestOptions = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    };
-    return fetch('http://localhost:3000/listarAeroportos', requestOptions)
-      .then(T => T.json());
-  }
-
-
-  function exibirAeroporto() {
-    console.log('Entrou no exibir...');
-    RequisiçãoGETaeroporto()
-      .then(customResponse => {
-        if (customResponse.status === "SUCCESS") {
-          console.log("Deu certo a busca de dados");
-          console.log('Payload:' + JSON.stringify(customResponse.payload));
-          preencherSelect(customResponse.payload, vetorDropdownOrigem, 'nome');
-          preencherSelect(customResponse.payload, vetorDropdownDestino, 'nome'); 
-        } else {
-          console.log(customResponse.message);
-        }
-      })
-      .catch((e) => {
-        console.log("Não foi possível exibir." + e);
-      });
-  }
-
-
-
-  function nomePreenchidoCad(){
-    const nome = document.getElementById("nomeCad").value.trim();
-    return nome.length > 0;
-  }
-
-  function origemPreenchidaCad() {
-    const origem = document.getElementById("selectOrigemAeroportoCad").value.trim();
-    return origem.length > 0;
-  }
-
-  function destinoPreenchidoCad() {
-    const destino = document.getElementById("selectDestinoAeroportoCad").value.trim();
-    return destino.length > 0;
-  }
-
-  function aeronavePreenchidaCad() {
-    const aeronave = document.getElementById("selectAeronaveCad").value.trim();
-    return aeronave.length > 0;
-  }
+//CADASTRAR0
 
   function fetchInserir(body) {
     const requestOptions = {
@@ -89,34 +11,22 @@ function RequisiçãoGETaeroporto() {
         .then(response => response.json());
     }
 
-  async function inserirTrecho(){
+  function inserirTrecho(){
 
-    if(!nomePreenchidoCad()){
-      showStatusMessage("Preencha o nome do trecho.", true, "statusCadastrar");
-      return;
-    }
-    
-    if(!origemPreenchidaCad()){
-      showStatusMessage("Preencha o nome da origem.", true, "statusCadastrar");
-      return;
-    }
+    let msg = validaTrecho(vetorTrechoCad);
+  
+    if(msg!=undefined) {
+        showStatusMessage(msg, true, "statusCadastrar");
+        return;
+  }
 
-    if(!destinoPreenchidoCad()){
-      showStatusMessage("Preencha o nome do destino.", true, "statusCadastrar");
-      return;
-    }
-
-    if(!aeronavePreenchidaCad()){
-      showStatusMessage("Preencha o nome da aeronave.", true, "statusCadastrar");
-      return;
-    }
 
     const nome = document.getElementById("nomeCad").value;
     const origem = document.getElementById("selectOrigemAeroportoCad").options[document.getElementById("selectOrigemAeroportoCad").selectedIndex].value;
     const destino = document.getElementById("selectDestinoAeroportoCad").options[document.getElementById("selectDestinoAeroportoCad").selectedIndex].value;
     const aeronave = document.getElementById("selectAeronaveCad").options[document.getElementById("selectAeronaveCad").selectedIndex].value;
 
-    await fetchInserir({
+    fetchInserir({
         nome: nome, 
         origem: origem,
         destino: destino,
@@ -139,7 +49,60 @@ function RequisiçãoGETaeroporto() {
   }
 
 
-// FUNÇÃO PARA A EXIBIÇÃO DA TABELA
+//ALTERAR0
+
+function fetchAlterar(body) {
+  const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+  };
+
+  return fetch('http://localhost:3000/alterarTrecho', requestOptions)
+      .then(response => response.json());
+  }
+
+
+function alterarTrecho(){
+
+  let msg = validaTrecho(vetorTrechoAlt);
+  
+  if(msg!=undefined) {
+      showStatusMessage(msg, true, "statusAlterar");
+      return;
+}
+
+  const nome = document.getElementById("nomeAlt").value;
+  const origem = document.getElementById("selectOrigemAeroportoAlt").options[document.getElementById("selectOrigemAeroportoAlt").selectedIndex].value;
+  const destino = document.getElementById("selectDestinoAeroportoAlt").options[document.getElementById("selectDestinoAeroportoAlt").selectedIndex].value;
+  const aeronave = document.getElementById("selectAeronaveAlt").options[document.getElementById("selectAeronaveAlt").selectedIndex].value;
+  const codigo = document.getElementById("codAlt").value;
+
+
+  fetchAlterar({
+      nome: nome, 
+      origem: origem,
+      destino: destino,
+      aeronave: aeronave,
+      codigo: codigo
+  })
+  .then(customResponse => {
+    if(customResponse.status === "SUCCESS"){
+      showStatusMessage("Trecho alterado com sucesso.", false, "statusAlterar");
+      exibirTrecho();
+    } else {
+      showStatusMessage("Erro ao alterar trecho: " + customResponse.message, true, "statusAlterar");
+      console.log(customResponse.message);
+    }
+  })
+  .catch((e)=>{
+    showStatusMessage("Erro técnico ao alterar... Contate o suporte.", true, "statusAlterar");
+    console.log("Falha grave ao alterar." + e)
+  });
+
+}
+
+//EXIBIR0
 
 function RequisiçãoGETtrecho() {
   const requestOptions = {
@@ -197,15 +160,16 @@ function exibirTrecho() {
     });
 }
 
-// FUNÇÃO DE DELEÇÃO DOS TRECHOS
-async function deletartrecho(codigo) {
+
+//DELETAR0
+function deletartrecho(codigo) {
   const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ codigo: codigo })
   };
 
-  await fetch('http://localhost:3000/excluirTrecho', requestOptions)
+  fetch('http://localhost:3000/excluirTrecho', requestOptions)
       .then(response => response.json())
       .then(customResponse => {
           if (customResponse.status === "SUCCESS") {
@@ -226,99 +190,64 @@ async function deletartrecho(codigo) {
       });
 }
 
-// FUNÇÕES DE ALTERAÇÃO DO TRECHO
 
-function fetchAlterar(body) {
+//SELECT0
+
+function RequisiçãoGETaeronave() {
   const requestOptions = {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
   };
-
-  return fetch('http://localhost:3000/alterarTrecho', requestOptions)
-      .then(response => response.json());
-  }
-  
-function codigoPreenchidoAlt(){
-  const codigo = document.getElementById("codAlt").value;
-  return codigo.length > 0;
+  return fetch('http://localhost:3000/listarAeronaves', requestOptions)
+    .then(T => T.json());
 }
 
-function nomePreenchidoAlt(){
-  const nome = document.getElementById("nomeAlt").value.trim();
-  return nome.length > 0;
-}
+function exibirAeronave() {
+  console.log('Entrou no exibir AERONAVE...');
+  RequisiçãoGETaeronave()
+    .then(customResponse => {
+      if (customResponse.status === "SUCCESS") {
+        console.log("Deu certo a busca de dados");
+        console.log('Payload:' + JSON.stringify(customResponse.payload));
+        preencherSelect(customResponse.payload, vetorDropdownAeronave, 'modelo');
+      } else {
+        console.log(customResponse.message);
+      }
+    })
+    .catch((e) => {
+      console.log("Não foi possível exibir." + e);
+    });
+} 
 
-function origemPreenchidaAlt() {
-  const cidade = document.getElementById("selectOrigemAeroportoAlt").value.trim();
-  return cidade.length > 0;
-}
 
-function destinoPreenchidoAlt() {
-  const cidade = document.getElementById("selectDestinoAeroportoAlt").value.trim();
-  return cidade.length > 0;
-}
 
-function aeronavePreenchidaAlt() {
-  const aeronave = document.getElementById("selectAeronaveAlt").value.trim();
-  return aeronave.length > 0;
-}
-
-async function alterarTrecho(){
-  if(!codigoPreenchidoAlt()){
-    showStatusMessage("Preencha o codigo do trecho.", true, "statusAlterar");
-    return;
-  }  
-  
-  if(!nomePreenchidoAlt()){
-    showStatusMessage("Preencha o nome do trecho.", true, "statusAlterar");
-    return;
-  }
-  
-  if(!origemPreenchidaAlt()){
-    showStatusMessage("Preencha a origem do trecho.", true, "statusAlterar");
-    return;
+function RequisiçãoGETaeroporto() {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    return fetch('http://localhost:3000/listarAeroportos', requestOptions)
+      .then(T => T.json());
   }
 
-  if(!destinoPreenchidoAlt()){
-    showStatusMessage("Preencha o destino do trecho.", true, "statusAlterar");
-    return;
+
+  function exibirAeroporto() {
+    console.log('Entrou no exibir...');
+    RequisiçãoGETaeroporto()
+      .then(customResponse => {
+        if (customResponse.status === "SUCCESS") {
+          console.log("Deu certo a busca de dados");
+          console.log('Payload:' + JSON.stringify(customResponse.payload));
+          preencherSelect(customResponse.payload, vetorDropdownOrigem, 'nome');
+          preencherSelect(customResponse.payload, vetorDropdownDestino, 'nome'); 
+        } else {
+          console.log(customResponse.message);
+        }
+      })
+      .catch((e) => {
+        console.log("Não foi possível exibir." + e);
+      });
   }
-
-  if(!aeronavePreenchidaAlt()){
-    showStatusMessage("Preencha a aeronave do trecho.", true, "statusAlterar");
-    return;
-  }
-
-  const nome = document.getElementById("nomeAlt").value;
-  const origem = document.getElementById("selectOrigemAeroportoAlt").options[document.getElementById("selectOrigemAeroportoAlt").selectedIndex].value;
-  const destino = document.getElementById("selectDestinoAeroportoAlt").options[document.getElementById("selectDestinoAeroportoAlt").selectedIndex].value;
-  const aeronave = document.getElementById("selectAeronaveAlt").options[document.getElementById("selectAeronaveAlt").selectedIndex].value;
-  const codigo = document.getElementById("codAlt").value;
-
-
-  await fetchAlterar({
-      nome: nome, 
-      origem: origem,
-      destino: destino,
-      aeronave: aeronave,
-      codigo: codigo
-  })
-  .then(customResponse => {
-    if(customResponse.status === "SUCCESS"){
-      showStatusMessage("Trecho alterado com sucesso.", false, "statusAlterar");
-      exibirTrecho();
-    } else {
-      showStatusMessage("Erro ao alterar trecho: " + customResponse.message, true, "statusAlterar");
-      console.log(customResponse.message);
-    }
-  })
-  .catch((e)=>{
-    showStatusMessage("Erro técnico ao alterar... Contate o suporte.", true, "statusAlterar");
-    console.log("Falha grave ao alterar." + e)
-  });
-
-}
 
 
 

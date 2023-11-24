@@ -1,19 +1,4 @@
-//FUNÇÃO PARA CADASTRO DO AEROPORTO
-
-function nomePreenchido(){
-  const nome = document.getElementById("nomeCadastrar").value.trim();
-  return nome.length > 0;
-}
-
-function siglaPreenchida(){
-  const sigla = document.getElementById("siglaCadastrar").value.trim();
-  return sigla.length > 0;
-}
-
-function cidadePreenchida() {
-  const cidade = document.getElementById("cidadeCadastrar").value.trim();
-  return cidade.length > 0;
-}
+//CADASTRAR0
 
 function fetchInserir(body) {
   const requestOptions = {
@@ -26,28 +11,20 @@ function fetchInserir(body) {
       .then(response => response.json());
   }
 
-async function inserirAeroporto(){
+function inserirAeroporto(){
 
-  if(!nomePreenchido()){
-    showStatusMessage("Preencha o nome do aeroporto.", true,"statusCadastrar");
-    return;
-  }
-
-  if(!siglaPreenchida()){
-    showStatusMessage("Preencha a sigla do aeroporto.", true, "statusCadastrar");
-    return;
-  }
-
-  if(!cidadePreenchida()){
-    showStatusMessage("Preencha a cidade do aeroporto.", true, "statusCadastrar");
-    return;
-  }
+  let msg = validaAeroporto(vetorAeroportoCad);
+  console.log(msg);
+  if(msg!=undefined) {
+      showStatusMessage(msg, true, "statusCadastrar");
+      return;
+}
 
   const nome = document.getElementById("nomeCadastrar").value;
   const sigla = document.getElementById("siglaCadastrar").value;
   const cidade = document.getElementById("cidadeCadastrar").options[document.getElementById("cidadeCadastrar").selectedIndex].value;
 
-  await fetchInserir({ 
+  fetchInserir({ 
       nome: nome, 
       sigla: sigla,
       cidade: cidade
@@ -68,57 +45,7 @@ async function inserirAeroporto(){
 
 }
 
-
-// FUNÇÃO PARA ALTERAÇÃO DE AEROPOROTOS
-
-function RequisiçãoGETcidade() {
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  };
-  return fetch('http://localhost:3000/listarCidades', requestOptions)
-    .then(T => T.json());
-}
-
-
-
-function exibirCidades() {
-  console.log('Entrou no exibir...');
-  RequisiçãoGETcidade()
-    .then(customResponse => {
-      if (customResponse.status === "SUCCESS") {
-        console.log("Deu certo a busca de dados");
-        console.log('Payload:' + JSON.stringify(customResponse.payload));
-        preencherSelect(customResponse.payload, vetorDropdownAeroporto, 'nome');
-      } else {
-        console.log(customResponse.message);
-      }
-    })
-    .catch((e) => {
-      console.log("Não foi possível exibir." + e);
-    });
-}
-
-function preencheuCodigoAlterar(){
-  let resultado = false;
-  var strCodigo = document.getElementById("codigoAlterar").value;
-  const codigo = parseInt(strCodigo);
-  console.log("Código aeronave: " + codigo.toString());
-  if (codigo > 0){
-    resultado = true;
-  }
-  return resultado;
-}
-
-function nomePreenchidoAlter(){
-  const nome = document.getElementById("nomeAlterar").value.trim();
-  return nome.length > 0;
-}
-
-function siglaPreenchidaAlter(){
-  const sigla = document.getElementById("siglaAlterar").value.trim();
-  return sigla.length > 0;
-}
+//ALTERAR0
 
 function fetchAlterar(body) {
   const requestOptions = {
@@ -131,29 +58,21 @@ function fetchAlterar(body) {
       .then(response => response.json());
   }
 
-async function alterarAeroporto(){
+function alterarAeroporto(){
 
-  if(!preencheuCodigoAlterar()){
-    showStatusMessage("Preencha o código da aeronave...", true, "statusAlterar");
-    return;
-  }
-
-  if(!nomePreenchidoAlter()){
-    showStatusMessage("Preencha o nome do aeroporto.", true, "statusAlterar");
-    return;
-  }
-
-  if(!siglaPreenchidaAlter()){
-    showStatusMessage("Preencha a sigla do aeroporto.", true, "statusAlterar");
-    return;
-  }
+  let msg = validaAeroporto(vetorAeroportoAlt);
+  console.log(msg);
+  if(msg!=undefined) {
+      showStatusMessage(msg, true, "statusAlterar");
+      return;
+}
 
   const nome = document.getElementById("nomeAlterar").value;
   const sigla = document.getElementById("siglaAlterar").value;
   const cidade = document.getElementById("cidadeAlterar").options[document.getElementById("cidadeAlterar").selectedIndex].value;
   const codigo = document.getElementById("codigoAlterar").value;
   
-  await fetchAlterar({ 
+  fetchAlterar({ 
       nome: nome, 
       sigla: sigla,
       cidade: cidade,
@@ -175,7 +94,8 @@ async function alterarAeroporto(){
 
 }
 
-  // PREENCHER TABELA DE AEROPORTOS
+//EXIBIR0
+
 function RequisiçãoGETaeroportoTable() {
   const requestOptions = {
     method: 'GET',
@@ -199,7 +119,7 @@ function preencherAeroportos(aeroportos) {
       row.classList.add('zebraTwo');
     }
 
-    // Adiciona cada célula à linha da tabela
+
     row.innerHTML += `
       <td class="padRow text-center align-middle">${aeroporto.codigo}</td>
       <td class="text-center align-middle">${aeroporto.nome}</td>
@@ -234,15 +154,15 @@ function exibirAeroporto() {
 }
 
 
-//FUNÇÃO PARA DELETAR AEROPORTO
-async function deletarAeroporto(codigo) {
+//DELETAR0
+function deletarAeroporto(codigo) {
   const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ codigo: codigo })
   };
 
-  await fetch('http://localhost:3000/excluirAeroporto', requestOptions)
+  fetch('http://localhost:3000/excluirAeroporto', requestOptions)
       .then(response => response.json())
       .then(customResponse => {
           if (customResponse.status === "SUCCESS") {
@@ -261,4 +181,34 @@ async function deletarAeroporto(codigo) {
           showStatusMessage("Erro técnico ao deletar... Contate o suporte.", true, "statusDelete");
           console.log("Falha grave ao deletar." + e);
       });
+}
+
+//SELECT0
+
+function RequisiçãoGETcidade() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+  return fetch('http://localhost:3000/listarCidades', requestOptions)
+    .then(T => T.json());
+}
+
+
+
+function exibirCidades() {
+  console.log('Entrou no exibir...');
+  RequisiçãoGETcidade()
+    .then(customResponse => {
+      if (customResponse.status === "SUCCESS") {
+        console.log("Deu certo a busca de dados");
+        console.log('Payload:' + JSON.stringify(customResponse.payload));
+        preencherSelect(customResponse.payload, vetorDropdownAeroporto, 'nome');
+      } else {
+        console.log(customResponse.message);
+      }
+    })
+    .catch((e) => {
+      console.log("Não foi possível exibir." + e);
+    });
 }

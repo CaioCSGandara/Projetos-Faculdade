@@ -1,31 +1,4 @@
-// FUNÇÕES PARA CADASTRO DE CIDADE
-function nomePreenchido() {
-    let resultado = false;
-    const nome = document.getElementById("nome").value;
-    if(nome.length>0) {
-        resultado = true;
-    }
-    return resultado;
-}
-
-function paisPreenchido() {
-    let resultado = false;
-    const pais = document.getElementById("pais").value;
-    if(pais.length > 0){
-        resultado = true;
-    }
-    return resultado;
-}
-
-function ufValida(){
-    let resultado = false; 
-    var listaEstados = document.getElementById("uf");
-    var valorSelecionado = listaEstados.value;
-    if (valorSelecionado !== "0"){
-      resultado = true;
-    }
-    return resultado;
-}
+//CADASTRAR0
 
 function fetchInserir(body) {
     const requestOptions = {
@@ -38,28 +11,19 @@ function fetchInserir(body) {
         .then(response => response.json());
 }
 
-async function inserirCidade() {
+function inserirCidade() {
 
-    if (!nomePreenchido()) {
-        showStatusMessage("Preencha o nome da cidade.", true, "statusCadastrar");
+    let msg = validaCidade(vetorCidadeCad);
+    if(msg!=undefined) {
+        showStatusMessage(msg, true, "statusCadastrar");
         return;
-    }
-
-    if (!paisPreenchido()) {
-        showStatusMessage("Preencha o país.", true, "statusCadastrar");
-        return;
-    }
-
-    if (!ufValida()) {
-        showStatusMessage("Selecione um Estado.", true, "statusCadastrar");
-        return;
-    }
+  }
 
     const nome = document.getElementById("nome").value;
     const uf = document.getElementById("uf").options[document.getElementById("uf").selectedIndex].value;
     const pais = document.getElementById("pais").value;
 
-    await fetchInserir({
+    fetchInserir({
         nome: nome,
         uf: uf,
         pais: pais,
@@ -80,41 +44,8 @@ async function inserirCidade() {
 }
 
 
-// FUNÇÃO PARA ALTERAÇÃO DE CIDADE
+//ALTERAR0
 
-function codigoPreenchidoAlter() {
-    const codigo = document.getElementById("codigoCidade").value;
-    return codigo.length > 0;
-}
-
-function nomePreenchidoAlter() {
-    let resultado = false;
-    const nome = document.getElementById("nomeCidade").value;
-    if(nome.length>0) {
-        resultado = true;
-    }
-    return resultado;
-}
-
-
-function paisPreenchidoAlter() {
-    let resultado = false;
-    const pais = document.getElementById("paisCidade").value;
-    if(pais.length > 0){
-        resultado = true;
-    }
-    return resultado;
-}
-
-function ufValidaAlter(){
-    let resultado = false; 
-    var listaEstados = document.getElementById("ufCidade");
-    var valorSelecionado = listaEstados.value;
-    if (valorSelecionado !== "0"){
-      resultado = true;
-    }
-    return resultado;
-}
 
 function fetchAlterar(body) {
   const requestOptions = {
@@ -127,36 +58,20 @@ function fetchAlterar(body) {
       .then(response => response.json());
 }
 
-async function alterarCidade() {
+function alterarCidade() {
 
-    
-  if (!codigoPreenchidoAlter()) {
-        showStatusMessage("Preencha o código da cidade.", true, "statusAlterar");
+    let msg = validaCidade(vetorCidadeAlt);
+    if(msg!=undefined) {
+        showStatusMessage(msg, true, "statusAlterar");
         return;
   }
-
-   if (!nomePreenchidoAlter()) {
-       showStatusMessage("Preencha o nome(alterar).", true, "statusAlterar");
-       return;
-   }
-
-  if (!ufValidaAlter()) {
-    showStatusMessage("Selecione um Estado.", true, "statusAlterar");
-    return;
-
-}
-  if (!paisPreenchidoAlter()) {
-      showStatusMessage("Preencha o país.", true, "statusAlterar");
-      return;
-  }
-
 
   const nome = document.getElementById("nomeCidade").value;
   const uf = document.getElementById("ufCidade").options[document.getElementById("ufCidade").selectedIndex].value;
   const pais = document.getElementById("paisCidade").value;
   const codigo = document.getElementById("codigoCidade").value;
 
-  await fetchAlterar({
+  fetchAlterar({
       nome: nome,
       uf: uf,
       pais: pais,
@@ -179,7 +94,7 @@ async function alterarCidade() {
 }
 
 
-// SCRIPT PARA GERAR TABELA
+//EXIBIR0
 function RequisiçãoGETcidade() {
     const requestOptions = {
       method: 'GET',
@@ -208,7 +123,7 @@ function RequisiçãoGETcidade() {
             <td class="text-center align-middle">${Cidade.uf}</td>
             <td class="text-center align-middle">${Cidade.pais}</td>
             <td class="align-middle"><img class="iconList" src="../images//lapisicon.png" onclick=" preencherAlterar(this, vetorIdsLabelCidade); lockInput('codigoCidade'); exibeCodigo('${Cidade.codigo}', 'pcodAlter'); alternarDivs('divCadastrar', 'divAlterar');" ></td>
-            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png"alternarDivs('divAlterar', 'divCadastrar'); exibeCodigo('${Cidade.codigo}', 'pcodDelete'); popUpDeletar('${Cidade.codigo}')"></td>
+            <td class="align-middle"><img class="iconList" src="../images//lixeiraicon.png" onclick="alternarDivs('divAlterar', 'divCadastrar'); exibeCodigo('${Cidade.codigo}', 'pcodDelete'); popUpDeletar('${Cidade.codigo}')"></td>
         `;
         linha = linha +1;
         tblBody.appendChild(row);
@@ -235,15 +150,15 @@ function exibirCidades() {
   }
 
   
-// FUNÇÃO PARA DELETAR CIDADE
-  async function deletarCidade(codigo) {
+//DELETAR0
+  function deletarCidade(codigo) {
     const requestOptions = {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ codigo: codigo })
     };
   
-    await fetch('http://localhost:3000/excluirCidade', requestOptions)
+    fetch('http://localhost:3000/excluirCidade', requestOptions)
         .then(response => response.json())
         .then(customResponse => {
             if (customResponse.status === "SUCCESS") {

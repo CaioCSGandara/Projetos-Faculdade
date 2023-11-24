@@ -5,12 +5,16 @@ const vetorIdsLabelCidade = ["codigoCidade", "nomeCidade", "ufCidade", "paisCida
 const vetorIdsLabelAeroporto = ["codigoAlterar", "nomeAlterar", "siglaAlterar", "cidadeAlterar"];
 const vetorIdsLabelTrecho = ["codAlt", "nomeAlt", "selectOrigemAeroportoAlt", "selectDestinoAeroportoAlt", "selectAeronaveAlt"]
 const vetorIdsLabelVoo = ["codigoAlterar", "dataAlterar", "hrSaidaAlterar", "hrChegadaAlterar", "valorAlterar", "trechoAlterar"];
+
+// VETORES DE ID DOS LABELS QUE POSSUEM SELECT 
+
 const vetorDropdownAeroporto = ["cidadeCadastrar", "cidadeAlterar"];
 const vetorDropdownAeronave = ["selectAeronaveCad", "selectAeronaveAlt" ];
 const vetorDropdownOrigem = ["selectOrigemAeroportoCad","selectOrigemAeroportoAlt"];
 const vetorDropdownDestino = ["selectDestinoAeroportoCad", "selectDestinoAeroportoAlt"];
 const vetorDropdownTrecho = ["trechoCadastrar", "trechoAlterar"];
-// FUNÇÕES GLOBAIS
+
+/////////////////////////////////////////////////////////////
 
 function limparTabela() {
   const tblBody = document.querySelector("tbody");
@@ -111,7 +115,6 @@ function alternarDivs(divVisivel, divOculta) {
     }
     const tabela = document.getElementById('cadastros');
     tabela.style.maxHeight = alturaTitulo + alturaForm + 'px';
-    console.log(tabela.style.maxHeight);
   }
   
   function preencherSelect(options, vetor, casca) {

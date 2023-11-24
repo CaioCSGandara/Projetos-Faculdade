@@ -1,55 +1,5 @@
-// FUNÇÕES PARA CADASTRO DE AERONAVE
+//CADASTRAR0
 
-function anoValido(){
-    let resultado = false;
-    var strAno = document.getElementById("anoFabCadastrar").value;
-    const ano = parseInt(strAno);
-    console.log("Ano aeronave: " + ano.toString());
-    if (ano >= 1990 && ano <= 2026){
-      resultado = true;
-    }
-    return resultado; 
-  }
-
-  function totalAssentosValido(){
-    let resultado = false;
-    const strAssentos = document.getElementById("totalAssentosCadastrar").value;
-    const assentos = parseInt(strAssentos);
-    if (assentos > 0){
-      resultado = true;
-    }
-    return resultado; 
-  }
-
-  function selecionouFabricante(){
-    let resultado = false; 
-    var listaFabricantes = document.getElementById("comboFabricantesCadastrar");
-    var valorSelecionado = listaFabricantes.value;
-    if (valorSelecionado !== "0"){
-      resultado = true;
-    }
-    return resultado;
-  }
-
-  function preencheuModelo(){
-    let resultado = false;
-    const modeloInformado = document.getElementById("modeloCadastrar").value;
-    if(modeloInformado.length > 0){
-      resultado = true;
-    }
-    return resultado;
-  }
-
-  function preencheuRegistro(){
-    let resultado = false;
-    const registroReferencia = document.getElementById("referenciaCadastrar").value;
-    if(registroReferencia.length > 0){
-      resultado = true;
-    }
-    return resultado;
-  }
-
-  // Função que puxa o método HTTP PUT do backend 
   function fetchInserir(body) {
     const requestOptions = {
       method: 'PUT',
@@ -59,52 +9,33 @@ function anoValido(){
 
     return fetch('http://localhost:3000/inserirAeronave', requestOptions)
     .then(response => response.json())
+    
   }
 
-  async function inserirAeronave(){
+  function inserirAeronave(){
 
-    if(!selecionouFabricante()){
-      showStatusMessage("Selecione o fabricante...", true, "statusCadastrar");  
-      return;
-    }
+    let msg = validaAeronave(vetorAeronaveCad);
+    if(msg!=undefined) {
+        showStatusMessage(msg, true, "statusCadastrar");
+        return;
+  }
 
-    if(!preencheuModelo()){
-      showStatusMessage("Preencha o modelo...", true, "statusCadastrar");
-      return;
-    }
-
-    if(!preencheuRegistro()){
-      showStatusMessage("Preencha o registro da aeronave...", true, "statusCadastrar");
-      return;
-    }
-
-    if(!anoValido()){
-      showStatusMessage("Ano deve ser de 1990 até 2026...", true, "statusCadastrar");
-      return;
-    }
-
-    if(!totalAssentosValido()){
-      showStatusMessage("Preencha corretamente o total de assentos.", true, "statusCadastrar");
-      return;
-    }
-
-    // Corrigido para obter o valor selecionado do combobox
     const fabricante = document.getElementById("comboFabricantesCadastrar").options[document.getElementById("comboFabricantesCadastrar").selectedIndex].value;
     const modelo = document.getElementById("modeloCadastrar").value;
     const anoFab = document.getElementById("anoFabCadastrar").value;
     const referencia = document.getElementById("referenciaCadastrar").value;
     const totalAssentos = document.getElementById("totalAssentosCadastrar").value;
 
-    await fetchInserir({
+    fetchInserir({
         fabricante: fabricante, 
         modelo: modelo, 
         totalAssentos: totalAssentos,
         anoFabricacao: anoFab,
-        referencia: referencia 
+        referencia: referencia
     })
     .then(customResponse => {
       if(customResponse.status === "SUCCESS"){
-        showStatusMessage("Aeronave cadastrada... ", false, "statusCadastrar");
+        showStatusMessage("Aeronave cadastrada com sucesso! ", false, "statusCadastrar");
         exibirAeronave();
       } else {
         showStatusMessage("Erro ao cadastrar aeronave...: " + customResponse.message, true, "statusCadastrar");
@@ -118,67 +49,8 @@ function anoValido(){
   }
 
 
-// FUNÇÕES PARA ALTERAÇÃO DE AERONAVE
+//ALTERAR0
 
-function preencheuCodigoAlterar(){
-    let resultado = false;
-    var strCodigo = document.getElementById("codigoAlterar").value;
-    const codigo = parseInt(strCodigo);
-    console.log("Código aeronave: " + codigo.toString());
-    if (codigo > 0){
-      resultado = true;
-    }
-    return resultado;
-}
-
-function anoValidoAlterar(){
-    let resultado = false;
-    var strAno = document.getElementById("anoFabAlterar").value;
-    const ano = parseInt(strAno);
-    console.log("Ano aeronave: " + ano.toString());
-    if (ano >= 1990 && ano <= 2026){
-      resultado = true;
-    }
-    return resultado; 
-  }
-
-  function totalAssentosValidoAlterar(){
-    let resultado = false;
-    const strAssentos = document.getElementById("totalAssentosAlterar").value;
-    const assentos = parseInt(strAssentos);
-    if (assentos > 0){
-      resultado = true;
-    }
-    return resultado; 
-  }
-
-  function selecionouFabricanteAlterar(){
-    let resultado = false; 
-    var listaFabricantes = document.getElementById("comboFabricantesAlterar");
-    var valorSelecionado = listaFabricantes.value;
-    if (valorSelecionado !== "0"){
-      resultado = true;
-    }
-    return resultado;
-  }
-
-  function preencheuModeloAlterar(){
-    let resultado = false;
-    const modeloInformado = document.getElementById("modeloAlterar").value;
-    if(modeloInformado.length > 0){
-      resultado = true;
-    }
-    return resultado;
-  }
-
-  function preencheuRegistroAlterar(){
-    let resultado = false;
-    const registroReferencia = document.getElementById("referenciaAlterar").value;
-    if(registroReferencia.length > 0){
-      resultado = true;
-    }
-    return resultado;
-  }
 
   function fetchAlterar(body) {
     const requestOptions = {
@@ -191,39 +63,15 @@ function anoValidoAlterar(){
     .then(response => response.json())
   }
 
-  async function alterarAeronave(){
+  function alterarAeronave(){
 
-    if(!preencheuCodigoAlterar()){
-      showStatusMessage("Preencha o código da aeronave...", true, "statusAlterar");
-      return;
-    }
+    let msg = validaAeronave(vetorAeronaveAlt);
+    if(msg!=undefined) {
+        showStatusMessage(msg, true, "statusAlterar");
+        return;
+  }
 
-    if(!selecionouFabricanteAlterar()){
-      showStatusMessage("Selecione o fabricante...", true, "statusAlterar");  
-      return;
-    }
 
-    if(!preencheuModeloAlterar()){
-      showStatusMessage("Preencha o modelo...", true, "statusAlterar");
-      return;
-    }
-
-    if(!preencheuRegistroAlterar()){
-      showStatusMessage("Preencha o registro da aeronave...", true, "statusAlterar");
-      return;
-    }
-
-    if(!anoValidoAlterar()){
-      showStatusMessage("Ano deve ser de 1990 até 2026...", true, "statusAlterar");
-      return;
-    }
-
-    if(!totalAssentosValidoAlterar()){
-      showStatusMessage("Preencha corretamente o total de assentos.", true, "statusAlterar");
-      return;
-    }
-
-    // Corrigido para obter o valor selecionado do combobox
     const fabricante = document.getElementById("comboFabricantesAlterar").options[document.getElementById("comboFabricantesAlterar").selectedIndex].value;
     const modelo = document.getElementById("modeloAlterar").value;
     const anoFab = document.getElementById("anoFabAlterar").value;
@@ -231,7 +79,7 @@ function anoValidoAlterar(){
     const totalAssentos = document.getElementById("totalAssentosAlterar").value;
     const codigo = document.getElementById("codigoAlterar").value; 
 
-    await fetchAlterar({
+    fetchAlterar({
         fabricante: fabricante, 
         modelo: modelo, 
         totalAssentos: totalAssentos,
@@ -254,7 +102,7 @@ function anoValidoAlterar(){
     });
   }
 
-  // PREENCHER TABELA DE AERONAVES
+//EXIBIR0
 
   function RequisiçãoGETaeronave() {
     const requestOptions = {
@@ -313,14 +161,16 @@ function anoValidoAlterar(){
   }
 
 
-async function deletarAeronave(codigo) {
+//DELETAR0
+
+function deletarAeronave(codigo) {
   const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ codigo: codigo })
   };
 
-  await fetch('http://localhost:3000/excluirAeronave', requestOptions)
+  fetch('http://localhost:3000/excluirAeronave', requestOptions)
       .then(response => response.json())
       .then(customResponse => {
           if (customResponse.status === "SUCCESS") {
