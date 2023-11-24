@@ -20,3 +20,28 @@ function processPayment() {
         sendVoucherByEmail(email);
     }
 }
+
+// Função para obter o valor de um parâmetro da URL
+function obterParametroDaURL(parametro) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(parametro);
+}
+
+// Função para verificar os parâmetros da URL e realizar a lógica necessária
+function verificarParametrosDaURL() {
+    // Obter os parâmetros da URL
+    const codigoVoo = obterParametroDaURL('codigoVoo');
+    const valorVoo = obterParametroDaURL('valorVoo');
+    const assentosSelecionados = obterParametroDaURL('assentos');
+
+    // Exibir os parâmetros no console para verificação
+    console.log('Código do Voo:', codigoVoo);
+    console.log('Valor do Voo:', valorVoo);
+    console.log('Assentos Selecionados:', assentosSelecionados);
+
+    // Adicionar lógica adicional conforme necessário, por exemplo, exibir os parâmetros na página
+    // ...
+
+    // Realizar o restante da lógica da página de pagamento, se necessário
+    // ...
+}
