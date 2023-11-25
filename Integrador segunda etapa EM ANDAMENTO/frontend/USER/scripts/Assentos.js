@@ -45,7 +45,7 @@
      }
 }
  // Função para alternar a seleção de assento
- function toggleSeatSelection(seat) {
+function toggleSeatSelection(seat){
      if (!seat.classList.contains('space')) {
          seat.classList.toggle('selected');
          const seatImage = seat.querySelector('img');

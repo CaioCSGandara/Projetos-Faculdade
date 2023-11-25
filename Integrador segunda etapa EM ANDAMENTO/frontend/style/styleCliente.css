@@ -241,10 +241,8 @@ img {
 
 .Conteudo {
     width: 100%;
-    border: 2px solid red;
     align-items: center;
     justify-content: center;
-    border: 2px solid blue;
 }
 
 .tituloInicial{
@@ -253,3 +251,47 @@ img {
     margin-top: 80px;
 }
 
+.corpoFormulario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.exibeVoo{
+    max-width: 1000px;
+    margin: auto;
+    display: flex;
+    color:white;
+    flex-direction: column;
+    background-color:   #212529;;
+    border: solid #FFC107 2px;
+    border-radius: 10px;
+    padding : 10px;
+}
+
+.exibeVoo td {
+    text-align: center;
+}
+
+.exibeVoo th {
+    font-size: 18px;
+}
+
+
+.exibeVooCabecalho{
+    text-align: center;
+    justify-content: center;
+}
+.vooformulario{ /* div do corpo do formulário da busca de voos */
+    background-color: #212529;
+    width: 500px;
+    padding: 30px;
+    border-radius: 0 0 50px 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}

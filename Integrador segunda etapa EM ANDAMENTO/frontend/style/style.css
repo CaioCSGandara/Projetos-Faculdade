@@ -206,15 +206,6 @@ h1 { /* título do formulário */
     text-align: right;
 }
 
-/* CODIGO THIAGO PARA O MENU - transferir para o outro css */
-/* header {
-    background-color: #343A40;
-    color: #343A40;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
 
 
 /* Estilos específicos para AIR-PUC */
@@ -310,7 +301,8 @@ h1 { /* título do formulário */
     background-color: #777474;
 }
 
-
-
+.mensagem{
+    color: white;
+}
 
 
