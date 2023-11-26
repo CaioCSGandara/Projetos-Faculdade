@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
     <div class="container text-center">
         <div class="row">
             <div class="col">
@@ -20,6 +19,10 @@
 
                 <p class="tipoPagamento">SELECIONE A FORMA DE PAGAMENTO</p>
                 <div class="corpo">
+                    <p id="codigoVoo" class="TextSecundario"></p>
+                    <p id="valorVoo" class="TextSecundario"></p>
+                    <p id="assentosSelecionados" class="TextSecundario"></p>
+                    <p id="valorTotal" class="TextSecundario"></p>
                     <div>
                         <input class="form-check-input" type="radio" name="payment" id="pix" value="pix" checked>
                         <label class="form-check-label text-white; PIX" for="pix">
@@ -70,8 +73,8 @@
                         </p>
                         <br>
                         
-                        <button class="btn btn-outline-warning btn-lg BPagamento" id="sexo1" type="button" onclick="processPayment()">Realizar Pagamento</button>
-                        <button class="btn btn-outline-warning btn-lg BPagamento" id="sexo2" type="button" onclick="limparFormulario()">Limpar</button>
+                        <button class="btn btn-outline-warning btn-lg BPagamento" id="buy" type="button" onclick="processPayment()">Realizar Pagamento</button>
+                        <button class="btn btn-outline-warning btn-lg BPagamento" id="limpa" type="button" onclick="limparFormulario()">Limpar</button>
                         <p id="mensagemPagamento" class="mensagem"></p>
 
                     </form>
@@ -97,11 +100,10 @@
     </footer>
 
     <script>
-
-
+        exibirParametrosNaPagina();
     </script>
 
-    <script src="../scripts/pagamento.js"></script>
+    <script src="/frontend/USER/scripts/pagamento.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath

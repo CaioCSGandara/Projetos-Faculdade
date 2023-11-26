@@ -55,6 +55,7 @@ function toggleSeatSelection(seat){
              seatImage.src = "/frontend/assets/images/assento-cinza.png"; // Altere o caminho para a imagem desselecionada
          }
          updateSelectedSeats();
+         obterAssentosSelecionados();
      }
 }
 // Função para atualizar o assento selecionado na página
@@ -76,6 +77,17 @@ function updateSelectedSeats() {
  function obterParametroDaURL(parametro) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(parametro);
+}
+
+function obterAssentosSelecionados() {
+  // Exemplo: retorna uma lista de IDs de assentos selecionados
+  const assentosSelecionadosIds = document.querySelectorAll('.my-seat.selected');
+  const idsSelecionados = Array.from(assentosSelecionadosIds).map(seat => seat.querySelector('img').id);
+
+  // Adiciona um console.log para exibir os IDs no console
+  console.log('IDs dos assentos selecionados:', idsSelecionados);
+
+  return idsSelecionados;
 }
 
 // Obter o valor do parâmetro 'nome' da URL
@@ -132,10 +144,10 @@ document.getElementById('buy').addEventListener('click', function() {
     const codigoVoo = obterParametroDaURL('codigo'); 
     const valorVoo = obterParametroDaURL('valor'); 
     const assentosSelecionados = updateSelectedSeats();
-    console.log('Assentos selecionados:', assentosSelecionados); 
+    const assentosIds = obterAssentosSelecionados();
 
     // Construir a URL da página de pagamentos com os parâmetros desejados
-    const urlPagamento = `/frontend/USER/screens/pagamento.html?codigoVoo=${codigoVoo}&valorVoo=${valorVoo}&assentos=${assentosSelecionados.join(',')}`;
+    const urlPagamento = `/frontend/USER/screens/pagamento.html?codigoVoo=${codigoVoo}&valorVoo=${valorVoo}&assentos=${assentosSelecionados}&assentosIds=${assentosIds}`;
 
     // Redirecionar para a página de pagamentos
     window.location.href = urlPagamento;

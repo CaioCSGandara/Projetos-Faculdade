@@ -32,7 +32,10 @@ header {
     justify-content: center;
     align-items: center;
 }
-
+.icon-carrinho{
+    width: 30px;
+    height: auto;
+}
 .statusError {
    color: red;
 }
@@ -147,6 +150,7 @@ header {
     margin-top: 180px;
     font-size: 30px;
 }
+
 
 .LogoHeader {
     align-items: center;

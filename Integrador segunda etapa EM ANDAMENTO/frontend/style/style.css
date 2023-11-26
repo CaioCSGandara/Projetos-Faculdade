@@ -151,6 +151,13 @@ h1 { /* título do formulário */
     font-size: 30px;
 }
 
+.TextSecundario{
+    color:white;
+    font-size: 20px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
 .LogoHeader {
     align-items: center;
     justify-content: center;    
@@ -304,5 +311,6 @@ h1 { /* título do formulário */
 .mensagem{
     color: white;
 }
+
 
 

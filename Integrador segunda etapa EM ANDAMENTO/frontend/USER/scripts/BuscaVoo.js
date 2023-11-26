@@ -130,7 +130,7 @@ function preencherTabela(voos) {
     <td>${voo.origem}</td>
     <td>${voo.destino}</td>
     <td>${voo.valor}</td>
-    <td><a href="/frontend/USER/screens/Assentos.html?codigo=${voo.codigo}&valor=${encodeURIComponent(voo.valor)}"><img src="/frontend/assets/images/carrinho-de-compras.png"></a></td>`;    
+    <td><a href="/frontend/USER/screens/Assentos.html?codigo=${voo.codigo}&valor=${encodeURIComponent(voo.valor)}"><img class="icon-carrinho" src="/frontend/assets/images/carrinho-de-compras.png"></a></td>`;    
     tblBody.appendChild(row);
   });
 }

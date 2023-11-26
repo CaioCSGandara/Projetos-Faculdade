@@ -1,29 +1,4 @@
 
-// Função para obter o valor de um parâmetro da URL
-function obterParametroDaURL(parametro) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(parametro);
-}
-
-// Função para verificar os parâmetros da URL e realizar a lógica necessária
-function verificarParametrosDaURL() {
-    // Obter os parâmetros da URL
-    const codigoVoo = obterParametroDaURL('codigoVoo');
-    const valorVoo = obterParametroDaURL('valorVoo');
-    const assentosSelecionados = obterParametroDaURL('assentos');
-
-    // Exibir os parâmetros no console para verificação
-    console.log('Código do Voo:', codigoVoo);
-    console.log('Valor do Voo:', valorVoo);
-    console.log('Assentos Selecionados:', assentosSelecionados);
-
-    // Adicionar lógica adicional conforme necessário, por exemplo, exibir os parâmetros na página
-    // ...
-
-    // Realizar o restante da lógica da página de pagamento, se necessário
-    // ...
-}
-
 function alternarDivsPagamento() {
     let divOne1 = document.getElementById('divFormularioPagamento');
     let divOne2 = document.getElementById('divFormularioPix');
@@ -70,6 +45,8 @@ function processPayment() {
             mensagem.innerText = "Ocorreu um erro com o pagamento, tente novamente com outro cartão";
         } else if (n === numeroAleatorio) {
             mensagem.innerText = `Pagamento concluído com sucesso! Um voucher está sendo enviado para o seu email: ${email.value}`;
+            alterarAssentos();
+            inserirPassagem();
             return;
         } 
     } else {
@@ -114,3 +91,122 @@ function ValidaFormCred() {
     return mensagem;
 }
 
+
+// Função para obter o valor de um parâmetro da URL
+function obterParametroDaURL(parametro) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(parametro);
+}
+
+// Função para verificar os parâmetros da URL e realizar a lógica necessária
+function exibirParametrosNaPagina() {
+    // Obter os parâmetros da URL
+    const codigoVoo = obterParametroDaURL('codigoVoo');
+    const valorVoo = obterParametroDaURL('valorVoo');
+    const assentosSelecionadosParam = obterParametroDaURL('assentos');
+    const assentosSelecionados = assentosSelecionadosParam ? assentosSelecionadosParam.split(',') : [];
+    const quantidadeAssentos = assentosSelecionados.length
+    const valorTotal = calcularValorTotal(quantidadeAssentos, valorVoo);
+
+    // Exibir os parâmetros no HTML
+    document.getElementById('codigoVoo').textContent = `Código do Voo: ${codigoVoo}`;
+    document.getElementById('valorVoo').textContent = `Valor do Voo: ${valorVoo}`;
+    document.getElementById('assentosSelecionados').textContent = `Assentos Selecionados: ${assentosSelecionados.join(', ')}`;
+    document.getElementById('valorTotal').textContent = `Valor Total: ${valorTotal.toFixed(2)}`; // Arredondar para 2 casas decimais (centavos)
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    exibirParametrosNaPagina();
+});
+
+// Função para calcular o valor total da compra
+function calcularValorTotal(quantidadeAssentos, valorVoo) {
+    return quantidadeAssentos * valorVoo;
+}
+
+function fetchAlterarAssento(body) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    };
+  
+    return fetch('http://localhost:3000/alterarAssento', requestOptions)
+        .then(response => response.json());
+  }
+
+  function alterarAssentos() {
+    const codigoVoo = obterParametroDaURL('codigoVoo');
+    const assentosSelecionadosParam = obterParametroDaURL('assentos');
+    const assentosSelecionados = assentosSelecionadosParam ? assentosSelecionadosParam.split(',') : [];
+
+    // Mapeia os assentosSelecionados para um array de promessas
+    const promessasAlteracao = assentosSelecionados.map(numeroAssento => {
+        return fetchAlterarAssento({
+            voo: codigoVoo,
+            numero: numeroAssento,
+        });
+    });
+
+    // Executa todas as promessas em paralelo
+    Promise.all(promessasAlteracao)
+        .then(respostas => {
+            // Processa as respostas
+            respostas.forEach((customResponse, index) => {
+                if (customResponse.status === "SUCCESS") {
+                    console.log(`Assento ${assentosSelecionados[index]} alterado com sucesso.`);
+                } else {
+                    console.error(`Erro ao alterar assento ${assentosSelecionados[index]}: ${customResponse.message}`);
+                }
+            });
+        })
+        .catch((e) => {
+            console.error("Erro técnico ao alterar assentos. Contate o suporte.", e);
+        });
+}
+
+function fetchInserirPassagem(body) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    };
+
+    return fetch('http://localhost:3000/inserirPassagem', requestOptions)
+        .then(response => response.json());
+}
+
+function inserirPassagem() {
+    
+    const codigoVoo = obterParametroDaURL('codigoVoo');
+    const assentosIdsParam = obterParametroDaURL('assentosIds');
+    const assentosIds = assentosIdsParam ? assentosIdsParam.split(',') : [];
+    const nome = document.getElementById("cardholder-name").value;
+    const email = document.getElementById("cardholder-email").value;
+
+
+    const passagemInsert= assentosIds.map(idAssento => {
+        return fetchInserirPassagem({
+            nome: nome,
+            email: email,
+            voo: codigoVoo,
+            assento: idAssento,
+        });
+    });
+
+    // Executa todas as promessas em paralelo
+    Promise.all(passagemInsert)
+        .then(respostas => {
+            // Processa as respostas
+            respostas.forEach((customResponse, index) => {
+                if (customResponse.status === "SUCCESS") {
+                    console.log(`Passagem inserida do assento ${assentosIds[index]}: com sucesso.`);
+                } else {
+                    console.error(`Erro ao inserir passagem ${assentosIds[index]}: ${customResponse.message}`);
+                }
+            });
+        })
+        .catch((e) => {
+            console.error("Erro técnico ao alterar assentos. Contate o suporte.", e);
+        });
+}
