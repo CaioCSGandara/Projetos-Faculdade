@@ -3,6 +3,14 @@
 // para usarmos esse tipo em qualquer outro código devemos exportá-lo usando a palavra
 // export, veja: 
 
+export type Passagem = {
+  codigo? : number,
+  nome? : string,
+  email? : string,
+  voo? : number,
+  assento? : number,
+}
+
 export type Aeronave = {
     codigo?: number, 
     fabricante?: string, 

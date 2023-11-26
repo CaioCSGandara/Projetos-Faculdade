@@ -5,7 +5,26 @@
 // que convertam de "linha do oracle" para um array javascript onde
 // cada elemento represente um elemento de um tipo. 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.rowsToDados = exports.rowsToAeronaves = exports.rowsToAeroportos = exports.rowsToCidades = exports.rowsToTrechos = exports.rowsToAssentos = void 0;
+exports.rowsToDados = exports.rowsToAeronaves = exports.rowsToAeroportos = exports.rowsToCidades = exports.rowsToTrechos = exports.rowsToAssentos = exports.rowsToPassagens = void 0;
+function rowsToPassagens(oracleRows) {
+    let passagens = [];
+    let passagem;
+    if (oracleRows !== undefined) {
+        oracleRows.forEach((registro) => {
+            passagem = {
+                codigo: registro.CODIGO,
+                nome: registro.NOME,
+                email: registro.EMAIL,
+                voo: registro.VOO,
+                assento: registro.ASSENTO,
+            };
+            // inserindo o novo Array convertido.
+            passagens.push(passagem);
+        });
+    }
+    return passagens;
+}
+exports.rowsToPassagens = rowsToPassagens;
 function rowsToAssentos(oracleRows) {
     let assentos = [];
     let assento;

@@ -11,6 +11,27 @@ import { Voo } from "./Campos";
 import { Dados } from "./Campos";
 import { Cidade } from "./Campos"
 import { Assento } from "./Campos";
+import { Passagem } from "./Campos";
+
+export function rowsToPassagens(oracleRows: unknown[] | undefined) : Array<Passagem> {
+  let passagens: Array<Passagem> = [];
+  let passagem;
+  if (oracleRows !== undefined){
+    oracleRows.forEach((registro: any) => {
+      passagem = {
+        codigo: registro.CODIGO,
+        nome: registro.NOME,
+        email: registro.EMAIL,
+        voo: registro.VOO,
+        assento: registro.ASSENTO,
+      } as Passagem;
+
+      // inserindo o novo Array convertido.
+      passagens.push(passagem);
+    })
+  }
+  return passagens;
+}
 
 export function rowsToAssentos(oracleRows: unknown[] | undefined) : Array<Assento> {
   let assentos: Array<Assento> = [];

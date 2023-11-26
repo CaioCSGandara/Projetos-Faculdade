@@ -18,7 +18,7 @@ import cors from "cors";
 
 // aqui vamos importar nossos tipos para organizar melhor (estao em arquivos .ts separados)
 import { CustomResponse } from "./CustomResponse";
-import { Aeronave, Dados } from "./Campos";
+import { Aeronave, Dados, Passagem } from "./Campos";
 import { Trecho } from "./Campos";
 import { Cidade } from "./Campos";
 import { Aeroporto } from "./Campos";
@@ -30,7 +30,7 @@ import { Assento } from "./Campos";
 import { oraConnAttribs } from "./OracleConnAtribs";
 
 // conversores para facilitar o trabalho de conversão dos resultados Oracle para vetores de tipos nossos.
-import { rowsToAeronaves, rowsToAeroportos, rowsToAssentos, rowsToCidades, rowsToDados, rowsToTrechos } from "./Conversores";
+import { rowsToAeronaves, rowsToAeroportos, rowsToAssentos, rowsToCidades, rowsToDados, rowsToTrechos, rowsToPassagens } from "./Conversores";
 
 // validadores para facilitar o trabalho de validação.
 import { aeronaveValida, aeroportoValida, trechoValida, vooValida, cidadeValida } from "./Validadores";
@@ -398,6 +398,55 @@ app.put("/inserirAeroporto", async(req,res)=>{
         if(rowsInserted !== undefined &&  rowsInserted === 1) {
           cr.status = "SUCCESS"; 
           cr.message = "Aeroporto inserido.";
+        }
+    
+      }catch(e){
+        if(e instanceof Error){
+          cr.message = e.message;
+          console.log(e.message);
+        }else{
+          cr.message = "Erro ao conectar ao oracle. Sem detalhes";
+        }
+      } finally {
+        //fechar a conexao.
+        if(connection!== undefined){
+          await connection.close();
+        }
+        res.send(cr);  
+      }  
+  });
+
+  app.put("/inserirPassagem", async(req,res)=>{
+  
+    // definindo um objeto de resposta.
+    let cr: CustomResponse = {
+      status: "ERROR",
+      message: "",
+      payload: undefined,
+    };
+  
+    // UAU! Agora com um tipo definido podemos simplesmente converter tudo que 
+    // chega na requisição para um tipo nosso!
+    const ticket: Passagem = req.body as Passagem;
+    console.log(ticket);
+      let connection;
+      try{
+        const cmdInsertTicket = `INSERT INTO PASSAGENS (CODIGO, NOME, EMAIL, VOO, ASSENTO)
+        VALUES (SEQ_PASSAGENS.NEXTVAL, :1, :2, :3, :4)`
+        const dados = [ticket.nome, ticket.email, ticket.voo, ticket.assento];
+    
+        connection = await oracledb.getConnection(oraConnAttribs);
+        let resInsert = await connection.execute(cmdInsertTicket, dados);
+        
+        // importante: efetuar o commit para gravar no Oracle.
+        await connection.commit();
+      
+        // obter a informação de quantas linhas foram inseridas. 
+        // neste caso precisa ser exatamente 1
+        const rowsInserted = resInsert.rowsAffected
+        if(rowsInserted !== undefined &&  rowsInserted === 1) {
+          cr.status = "SUCCESS"; 
+          cr.message = "Passagem inserida.";
         }
     
       }catch(e){
@@ -1119,6 +1168,55 @@ app.put("/alterarAeronave", async(req,res)=> { // servico de alterar
           res.send(cr);  
         }
     }
+  });
+
+  app.put("/alterarAssento", async(req,res)=> { // servico de alterar 
+
+    const assento: Assento = req.body as Assento;
+    console.log(assento);
+  
+    // correção: verificar se tudo chegou para prosseguir com o cadastro.
+    // verificar se chegaram os parametros
+    // VALIDAR se estão bons (de acordo com os critérios - exemplo: 
+    // não pode qtdeAssentos ser número e ao mesmo tempo o valor ser -5)
+  
+    // definindo um objeto de resposta.
+    let cr: CustomResponse = {
+      status: "ERROR",
+      message: "",
+      payload: undefined,
+    };
+    
+        let connection;
+        try {
+          const cmdUpdateAssento = `UPDATE ASSENTOS SET OCUPADO = '1' WHERE VOO = :1 AND NUMERO = :2`
+          const dados = [assento.voo, assento.numero];
+        
+          connection = await oracledb.getConnection(oraConnAttribs);
+          let resUpdate = await connection.execute(cmdUpdateAssento, dados);
+        
+          await connection.commit();
+        
+          const rowsInserted = resUpdate.rowsAffected
+          if(rowsInserted !== undefined &&  rowsInserted === 1) {
+            cr.status = "SUCCESS"; 
+            cr.message = "Assento alterada.";
+          }
+      
+        }catch(e){
+          if(e instanceof Error){
+            cr.message = e.message;
+            console.log(e.message);
+          }else{
+            cr.message = "Erro ao conectar ao oracle. Sem detalhes";
+          }
+        } finally {
+          //fechar a conexao.
+          if(connection!== undefined){
+            await connection.close();
+          }
+          res.send(cr);  
+        }
   });
 
 app.listen(port,()=>{
