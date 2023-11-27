@@ -303,4 +303,9 @@ img {
 #notFound {
     display: none;
     color: white;
+    text-align: center;
+}
+
+#tabelaVoos {
+    width: 100%;
 }
