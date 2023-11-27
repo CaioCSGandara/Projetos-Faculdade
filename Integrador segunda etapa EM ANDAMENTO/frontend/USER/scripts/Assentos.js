@@ -23,7 +23,7 @@
              const assentoIndex = (row - 1) * cols + col - 1;
 
              if(assentos && assentos[assentoIndex]) {
-             seat.innerHTML = `<img id="${assentos[assentoIndex].codigo}" class="my-img" src="/frontend/assets/images/assento-cinza.png">`;
+             seat.innerHTML = `<img id="${assentos[assentoIndex].codigo}" class="my-img" src="../../assets/images/assento-cinza.png">`;
              console.log(`Assento gerado com ID: ${assentos[assentoIndex].codigo}`);
              
              // Adicionar informações do assento como atributos do banco
@@ -34,12 +34,12 @@
              if (assentos[assentoIndex].ocupado === '1') {
                 seat.classList.add('occupied');
                 const seatImage = seat.querySelector('img');
-                seatImage.src = "/frontend/assets/images/assento-vermelho.png";
+                seatImage.src = "../../assets/images/assento-vermelho.png";
              }
              seat.addEventListener('click', () => toggleSeatSelection(seat));
              seatRow.appendChild(seat);
             } else {
-                seat.innerHTML = `<img class="my-img" src="/frontend/assets/images/assento-cinza.png">`;
+                seat.innerHTML = `<img class="my-img" src="../../assets/images/assento-cinza.png">`;
             }
          }
      }
@@ -50,9 +50,9 @@ function toggleSeatSelection(seat){
          seat.classList.toggle('selected');
          const seatImage = seat.querySelector('img');
          if (seat.classList.contains('selected')) {
-             seatImage.src = "/frontend/assets/images/assento-amarelo.png"; // Altere o caminho para a imagem selecionada
+             seatImage.src = "../../assets/images/assento-amarelo.png"; // Altere o caminho para a imagem selecionada
          } else {
-             seatImage.src = "/frontend/assets/images/assento-cinza.png"; // Altere o caminho para a imagem desselecionada
+             seatImage.src = "../../assets/images/assento-cinza.png"; // Altere o caminho para a imagem desselecionada
          }
          updateSelectedSeats();
          obterAssentosSelecionados();
@@ -130,7 +130,7 @@ function RequisiçãoPOSTAssentos(body) {
 
 document.getElementById('voltar').addEventListener('click', function() {
     // Redirecionar para a página BuscaVoo.html
-    window.location.href = '/frontend/USER/screens/BuscaVoo.html';
+    window.location.href = '../screens/BuscaVoo.html';
 });
 
 document.getElementById('buy').addEventListener('click', function() {
@@ -140,7 +140,7 @@ document.getElementById('buy').addEventListener('click', function() {
     const assentosSelecionados = updateSelectedSeats();
     const assentosIds = obterAssentosSelecionados();
 
-    const urlPagamento = `/frontend/USER/screens/pagamento.html?codigoVoo=${codigoVoo}&valorVoo=${valorVoo}&assentos=${assentosSelecionados}&assentosIds=${assentosIds}`;
+    const urlPagamento = `../screens/pagamento.html?codigoVoo=${codigoVoo}&valorVoo=${valorVoo}&assentos=${assentosSelecionados}&assentosIds=${assentosIds}`;
 
     window.location.href = urlPagamento;
 });
