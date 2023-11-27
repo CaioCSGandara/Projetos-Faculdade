@@ -49,7 +49,7 @@ function preencherSelect(options, vetor, casca) {
     const selectDrop = document.getElementById(vetor[i]);
 
     if (selectDrop) {
-      // Se o elemento existe, prossiga com a manipulação
+      // Se o elemento existe, prossegue com a manipulação
       selectDrop.innerHTML = '';
   
       const defaultOption = document.createElement('option');
@@ -96,15 +96,12 @@ async function selecionarVoos() {
   })
   .then(customResponse => {
     if (customResponse.status === "SUCCESS") {
-      //showStatusMessage("Busca realizada com sucesso.", false, "statusBusca");
       exibirVoos(customResponse.payload);
     } else {
-      //showStatusMessage("Erro ao buscar voos: " + customResponse.message, true, "statusBusca");
       console.log(customResponse.message);
     }
   })
   .catch((e) => {
-    //showStatusMessage("Erro técnico ao Buscar... Contate o suporte.", true, "statusBusca");
     console.log("Não foi possível buscar." + e);
   });
 }

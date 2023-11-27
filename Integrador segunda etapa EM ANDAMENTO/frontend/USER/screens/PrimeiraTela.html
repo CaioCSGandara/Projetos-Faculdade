@@ -15,25 +15,21 @@
     <div class="container text-center" style="width: 100000px;">
         <div class="row align-items-start">
             <div class="d-flex flex-column" style="align-items: center;justify-content: center;  ">
-                <h1 class="text-white" style="font-size: 90px; margin-bottom: 30px; margin-top: -80px;">BEM VINDO A AIR-PUC</h1><!-- Mensagem Principal-->
+                <h1 class="text-white" style="font-size: 90px; margin-bottom: 30px; margin-top: -80px;">BEM VINDO À AIR-PUC</h1><!-- Mensagem Principal-->
                 
                 <img src="../../assets/images/Logo Transparente.png" class="LogoPrincipal" style="width: 300px">
                 <p class="TextPrincipal">Plataforma de transporte aéreo da Companhia de Transportes Aéreos AIR-PUC</p><!-- Descritivo-->
-
-                <a href=" ">
-                    <button class="btn btn-outline-warning btn-lg TextPrinci" >ENTRAR</button>
-                </a>      
-                <h1 class="fundadoresT" style="margin-top: 95px;">Fundadores</h1>
-                <p class="fundadores">Filipe Mota - Thiago Fossa - Caio Gandara - Melissa Seleghin - João Pedro Giaretta</p>
+                <button type="button" id="entrar" class="btn btn-outline-warning btn-lg TextPrinci" >ENTRAR</button>
             </div>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
-
+        document.getElementById('entrar').addEventListener('click', function() {
+            window.location.href = '/frontend/USER/screens/BuscaVoo.html';
+        });
     </script>
     <Footer class="footer">
         <p class="copyright">©️ Copyright - AIR PUC 2023</p>

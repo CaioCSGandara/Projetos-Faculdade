@@ -26,7 +26,7 @@
              seat.innerHTML = `<img id="${assentos[assentoIndex].codigo}" class="my-img" src="/frontend/assets/images/assento-cinza.png">`;
              console.log(`Assento gerado com ID: ${assentos[assentoIndex].codigo}`);
              
-             // Adicionar informações do assento como atributos de dados
+             // Adicionar informações do assento como atributos do banco
              seat.setAttribute('data-codigo', assentos[assentoIndex].codigo);
              seat.setAttribute('data-numero', assentos[assentoIndex].numero);
              seat.setAttribute('data-ocupado', assentos[assentoIndex].ocupado);
@@ -34,7 +34,7 @@
              if (assentos[assentoIndex].ocupado === '1') {
                 seat.classList.add('occupied');
                 const seatImage = seat.querySelector('img');
-                seatImage.src = "/frontend/assets/images/assento-vermelho.png"; // Altere o caminho para a imagem ocupada
+                seatImage.src = "/frontend/assets/images/assento-vermelho.png";
              }
              seat.addEventListener('click', () => toggleSeatSelection(seat));
              seatRow.appendChild(seat);
@@ -80,7 +80,6 @@ function updateSelectedSeats() {
 }
 
 function obterAssentosSelecionados() {
-  // Exemplo: retorna uma lista de IDs de assentos selecionados
   const assentosSelecionadosIds = document.querySelectorAll('.my-seat.selected');
   const idsSelecionados = Array.from(assentosSelecionadosIds).map(seat => seat.querySelector('img').id);
 
@@ -93,8 +92,6 @@ function obterAssentosSelecionados() {
 // Obter o valor do parâmetro 'nome' da URL
 const codigo = obterParametroDaURL('codigo');
 const valor = decodeURIComponent(obterParametroDaURL('valor'));
-
-// Fazer algo com o valor (exibindo no console neste exemplo)
 console.log('Codigo:', codigo);
 console.log('Valor do voo:', valor);
 
@@ -116,15 +113,12 @@ function RequisiçãoPOSTAssentos(body) {
     })
     .then(customResponse => {
       if (customResponse.status === "SUCCESS") {
-        //showStatusMessage("Busca realizada com sucesso.", false, "statusBusca");
         exibirAssentos(customResponse.payload);
       } else {
-        //showStatusMessage("Erro ao buscar voos: " + customResponse.message, true, "statusBusca");
         console.log(customResponse.message);
       }
     })
     .catch((e) => {
-      //showStatusMessage("Erro técnico ao Buscar... Contate o suporte.", true, "statusBusca");
       console.log("Não foi possível buscar." + e);
     });
   }
@@ -146,10 +140,8 @@ document.getElementById('buy').addEventListener('click', function() {
     const assentosSelecionados = updateSelectedSeats();
     const assentosIds = obterAssentosSelecionados();
 
-    // Construir a URL da página de pagamentos com os parâmetros desejados
     const urlPagamento = `/frontend/USER/screens/pagamento.html?codigoVoo=${codigoVoo}&valorVoo=${valorVoo}&assentos=${assentosSelecionados}&assentosIds=${assentosIds}`;
 
-    // Redirecionar para a página de pagamentos
     window.location.href = urlPagamento;
 });
 
