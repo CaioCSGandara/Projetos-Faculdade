@@ -299,3 +299,8 @@ img {
     display: flex;
     flex-direction: column;
 }
+
+#notFound {
+    display: none;
+    color: white;
+}

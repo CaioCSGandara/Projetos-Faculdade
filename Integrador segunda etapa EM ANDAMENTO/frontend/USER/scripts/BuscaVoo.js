@@ -130,7 +130,24 @@ function preencherTabela(voos) {
     <td><a href="../screens/Assentos.html?codigo=${voo.codigo}&valor=${encodeURIComponent(voo.valor)}"><img class="icon-carrinho" src="../../assets/images/carrinho-de-compras.png"></a></td>`;    
     tblBody.appendChild(row);
   });
+
+  if(tblBody.innerHTML == "") {
+    alternarDivs('retornoBusca', 'notFound');
 }
+  else {
+    alternarDivs('notFound', 'retornoBusca');
+  }
+
+function alternarDivs(divVisivel, divOculta) {
+  let divOne = document.getElementById(divVisivel);
+  let divTwo = document.getElementById(divOculta);
+
+  if (divOne.style.display != 'none') {
+    divOne.style.display = 'none';
+    divTwo.style.display = 'block';
+  }
+}
+
 
 function formatarData(data) {
   const dia = String(data.getDate()).padStart(2, '0');
@@ -176,4 +193,4 @@ function naoEncontrouVoos() {
 }
 
 
-
+}
