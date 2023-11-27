@@ -623,8 +623,6 @@ app.put("/inserirAeroporto", async(req,res)=>{
       }  
   });
 
-
-
   app.delete("/excluirVoo", async(req,res)=>{
   // excluindo o voo pelo código dele:
   const codigo = req.body.codigo as number;
