@@ -30,19 +30,24 @@ let numeroAleatorio = Math.floor(Math.random() * 10) + 1;
 console.log(numeroAleatorio);
 
 let n = 0;
+let lastCardNumber = ""; 
 
 function processPayment() {
-
     let email = document.getElementById('cardholder-email');
     let mensagem = document.getElementById('mensagemPagamento');
 
     let mensagemValidacao = ValidaFormCred();
+
+    let nCartao = document.getElementById('card-number');
+    let buyButton = document.getElementById('buy');
 
     if (mensagemValidacao === "") {
         n++;
 
         if (n < numeroAleatorio) {
             mensagem.innerText = "Ocorreu um erro com o pagamento, tente novamente com outro cartão";
+            disableButton(buyButton);
+
         } else if (n === numeroAleatorio) {
             mensagem.innerText = `Pagamento concluído com sucesso! Um voucher está sendo enviado para o seu email: ${email.value}`;
             alterarAssentos();
@@ -52,6 +57,19 @@ function processPayment() {
     } else {
         mensagem.innerText = mensagemValidacao;
     }
+
+    if (nCartao.value !== lastCardNumber) {
+        enableButton(buyButton);
+        lastCardNumber = nCartao.value;
+    }
+}
+
+function disableButton(button) {
+    button.disabled = true;
+}
+
+function enableButton(button) {
+    button.disabled = false;
 }
 
 function ValidaFormCred() {
