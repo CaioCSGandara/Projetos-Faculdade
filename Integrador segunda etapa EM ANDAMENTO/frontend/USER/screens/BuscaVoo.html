@@ -24,6 +24,7 @@
       <form class = "vooformulario">
         <label for="tipoPassagem">Tipo de Passagem:</label>
         <select id="tipoPassagem" name="tipoPassagem">
+          <option value="0" selected>Tipo de passagem</option>
           <option value="idaVolta">Ida e Volta</option>
           <option value="somenteIda">Somente Ida</option>
         </select>
@@ -42,7 +43,8 @@
           <label for="selectDestinoAeroportoAlt">Aeroporto/Cidade Destino:</label><br>
           <select name="selectDestinoAeroportoAlt" id="selectDestinoAeroportoCad" class="inputTam1"></select>
         </p>
-        <button type="button" onclick="selecionarVoos();">Buscar Voos</button>
+        <button type="button" class="btn btn-warning" onclick="selecionarVoos();">Buscar Voos</button>
+        <button type="reset" class="btn btn-secondary">Limpar</button>
       </form>
     </div>
   </div>
@@ -68,7 +70,8 @@
       </tbody>
     </table>
   </div>
-  <div id="notFound"><h1>Nenhum voo encontrado para os campos preenchidos acima.</h1></div>
+  <div id="notFound"><p id="pMensagem"></p></div>
+
   <div class="footer">
     <p class="copyright">©️ Copyright - AIR PUC 2023</p>
   </div>

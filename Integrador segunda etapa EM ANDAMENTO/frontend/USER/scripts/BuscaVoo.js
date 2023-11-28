@@ -133,6 +133,7 @@ function preencherTabela(voos) {
 
   if(tblBody.innerHTML == "") {
     alternarDivs('retornoBusca', 'notFound');
+    validaCampos();
 }
   else {
     alternarDivs('notFound', 'retornoBusca');
@@ -163,34 +164,50 @@ function formatarData(data) {
   return `${dia}/${mes}/${ano}`;
 }
 
-function naoEncontrouVoos() {
-  const listaVoos = document.getElementById('listaVoos');
-  const data = document.getElementById('dataIda').value;
-  const origem = document.getElementById('selectOrigemAeroportoCad').options[document.getElementById('selectOrigemAeroportoCad').selectedIndex].text;
-  const destino = document.getElementById('selectDestinoAeroportoCad').options[document.getElementById('selectDestinoAeroportoCad').selectedIndex].text;
-
-  const mensagemExistente = document.getElementById('mensagemNaoEncontrado');
-  if (mensagemExistente) {
-    mensagemExistente.remove();
-  }
-
-  if (!origem || !destino || !data ) {
-    const mensagem = document.createElement('p');
-    mensagem.textContent = 'Preencha os campos de origem e destino';
-    mensagem.style.color = 'purple';
-    mensagem.id = 'mensagemNaoEncontrado';
-
-    document.body.appendChild(mensagem);
-  } else if (!listaVoos || listaVoos.children.length === 0) {
-    const mensagem = document.createElement('p');
-    mensagem.textContent = 'Nenhum voo encontrado para os critérios selecionados.';
-    mensagem.style.color = 'red';
-    mensagem.id = 'mensagemNaoEncontrado';
-
-    document.body.appendChild(mensagem);
-  }
 
 }
 
+function validaCampos() {
+  let msg = "";
+  const pMensagem = document.getElementById('pMensagem');
+  pMensagem.textContent = "";
+
+  const tipoPass = document.getElementById('tipoPassagem').value;
+  console.log(tipoPass);
+  if(tipoPass=="0") {
+    msg = "Selecione o tipo de passagem.";
+    pMensagem.textContent = msg;
+    return;
+  }
+
+  const dataSaida = document.getElementById('dataIda').value;
+  if(dataSaida=='') {
+    msg = "Escolha a data de ida para realizar a busca.";
+    pMensagem.textContent = msg;
+    return;
+  }
+
+  const dataChegada = document.getElementById('dataVolta').value;
+  if(dataChegada=='' && tipoPass=="idaVolta") {
+    msg = "Escolha a data de volta para realizar a busca.";
+    pMensagem.textContent = msg;
+    return;
+  }
+
+  const cidOrigem = document.getElementById('selectOrigemAeroportoCad').value;
+  if(cidOrigem=="0") {
+    msg = "Selecione a cidade de origem.";
+    pMensagem.textContent = msg;
+    return;
+  }
+
+  const cidDestino = document.getElementById('selectDestinoAeroportoCad').value;
+  if(cidDestino=="0") {
+    msg = "Selecione a cidade de destino.";
+    pMensagem.textContent = msg;
+    return;
+  }
+
+  pMensagem.textContent = "Nenhum voo encontrado para a busca acima."
 
 }
