@@ -26,7 +26,7 @@ function limparFormulario() { // type = reset nao funcionou
     }
 }
 
-let numeroAleatorio = Math.floor(Math.random() * 10) + 1;
+let numeroAleatorio = Math.floor(Math.random() * 3) + 1;
 console.log(numeroAleatorio);
 
 let n = 0;
