@@ -2,6 +2,7 @@ package br.edu.puccampinas.requests
 
 import android.os.AsyncTask
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.edu.puccampinas.requests.databinding.ActivityMainBinding
 import com.google.gson.Gson
@@ -23,11 +24,19 @@ class MainActivity : AppCompatActivity() {
             TaskRequestAllItems().execute()
         }
 
+        binding.btnAdd.setOnClickListener {
+            TaskAddNewItem().execute()
+        }
+
     }
 
     private fun showResultsAsyncTask(result: List<Item?>?){
         val gson = Gson()
         binding.tvResultado.text = gson.toJson(result)
+    }
+
+    private fun showStatusMessage(result: String) {
+        Toast.makeText(applicationContext, result, Toast.LENGTH_SHORT).show()
     }
 
 
@@ -43,6 +52,21 @@ class MainActivity : AppCompatActivity() {
             // aqui sim podemos interagir com a Thread de UI pois não está mais bloqueada.
             showResultsAsyncTask(result)
         }
+
+    }
+
+    inner class TaskAddNewItem: AsyncTask<String, String, String>() {
+
+        override fun doInBackground(vararg params: String?): String {
+            val api = ItemsApi()
+            return api.addNewItem(binding.etnovoItem.text.toString())
+        }
+
+        override fun onPostExecute(result: String) {
+            super.onPostExecute(result)
+            showStatusMessage(result)
+        }
+
 
     }
 
